@@ -6,16 +6,25 @@ import Link from "next/link";
 import Image from "next/image";
 import PageTransition from "@/components/PageTransition";
 
-const heroVideos = [
-  "/videos/live-commerce/tokfashion.mp4",
-  "/videos/live-commerce/her-hyness.mp4",
-  "/videos/live-commerce/fitflop.mp4",
-  "/videos/live-commerce/sunnies.mp4",
-  "/videos/live-commerce/dmd-live.mp4",
-  "/videos/live-commerce/nestle.mp4",
+type HeroSlide =
+  | { type: "video"; src: string }
+  | { type: "image"; src: string; alt: string };
+
+const heroSlides: HeroSlide[] = [
+  { type: "video", src: "/videos/live-commerce/tokfashion.mp4" },
+  { type: "image", src: "/images/woven-memories/01.jpg", alt: "Woven Memories" },
+  { type: "video", src: "/videos/live-commerce/her-hyness.mp4" },
+  { type: "image", src: "/images/knack-factory/01.jpg", alt: "Knack Factory" },
+  { type: "video", src: "/videos/live-commerce/fitflop.mp4" },
+  { type: "image", src: "/images/bakao/01.jpg", alt: "BAKAO" },
+  { type: "video", src: "/videos/live-commerce/sunnies.mp4" },
+  { type: "image", src: "/images/khun-chang-khian/01.jpg", alt: "Khun Chang Khian" },
+  { type: "video", src: "/videos/live-commerce/dmd-live.mp4" },
+  { type: "image", src: "/images/podcast/01.jpg", alt: "Podcast & Studio" },
+  { type: "video", src: "/videos/live-commerce/nestle.mp4" },
 ];
 
-const HERO_INTERVAL = 7000;
+const HERO_INTERVAL = 6000;
 
 const projects = [
   {
@@ -55,7 +64,7 @@ function HeroSection() {
 
   useEffect(() => {
     const id = setInterval(() => {
-      setActive((i) => (i + 1) % heroVideos.length);
+      setActive((i) => (i + 1) % heroSlides.length);
     }, HERO_INTERVAL);
     return () => clearInterval(id);
   }, []);
@@ -78,24 +87,38 @@ function HeroSection() {
       style={{ opacity }}
       className="relative h-screen overflow-hidden bg-[#0D0D0D]"
     >
-      {heroVideos.map((src, i) => (
-        <video
-          key={src}
-          ref={(el) => {
-            videoRefs.current[i] = el;
-          }}
-          src={src}
-          poster="/images/woven-memories/01.jpg"
-          autoPlay={i === 0}
-          muted
-          loop
-          playsInline
-          preload={i === 0 ? "auto" : "metadata"}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1200ms] ease-out ${
-            i === active ? "opacity-100" : "opacity-0"
-          }`}
-        />
-      ))}
+      {heroSlides.map((slide, i) =>
+        slide.type === "video" ? (
+          <video
+            key={slide.src}
+            ref={(el) => {
+              videoRefs.current[i] = el;
+            }}
+            src={slide.src}
+            poster="/images/woven-memories/01.jpg"
+            autoPlay={i === 0}
+            muted
+            loop
+            playsInline
+            preload={i === 0 ? "auto" : "metadata"}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1200ms] ease-out ${
+              i === active ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ) : (
+          <Image
+            key={slide.src}
+            src={slide.src}
+            alt={slide.alt}
+            fill
+            sizes="100vw"
+            priority={i <= 2}
+            className={`object-cover transition-opacity duration-[1200ms] ease-out ${
+              i === active ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        )
+      )}
       <div className="absolute inset-0 bg-[#0D0D0D]/55" />
 
       <motion.div
@@ -127,7 +150,7 @@ function HeroSection() {
             Production. Photography.
           </p>
           <span className="font-body text-[9px] tracking-[0.2em] uppercase text-[#9A9087] tabular-nums">
-            {String(active + 1).padStart(2, "0")} / {String(heroVideos.length).padStart(2, "0")}
+            {String(active + 1).padStart(2, "0")} / {String(heroSlides.length).padStart(2, "0")}
           </span>
         </div>
       </motion.div>
