@@ -39,3 +39,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local IDE / agent config
+/.vscode
+/.claude
+
+# source assets (originals, not for deploy — public/ holds web-ready copies)
+/Assets
+
+# debug screenshots at repo root
+/audit-*.png
+/desktop-*.png
+/final-*.png
+/mobile-*.png
+/preview-*.png
+/screenshot-*.png
+/ss-*.png

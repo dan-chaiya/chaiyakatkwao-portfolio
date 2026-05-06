@@ -1,0 +1,34 @@
+# dependencies & build
+node_modules
+.next
+.pnp
+.pnp.*
+.yarn
+
+# source assets — only public/ ships, originals stay local
+Assets
+
+# local config & editor
+.vscode
+.claude
+.DS_Store
+
+# debug junk
+audit-*.png
+desktop-*.png
+final-*.png
+mobile-*.png
+preview-*.png
+screenshot-*.png
+ss-*.png
+*.bak
+Basic.terminal
+Terminal*.txt
+capture.mjs
+screenshot.mjs
+
+# env
+.env*
+
+# typescript
+*.tsbuildinfo
