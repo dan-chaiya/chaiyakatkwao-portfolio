@@ -5,12 +5,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
-const links = [
-  { href: "/", label: "Work" },
+const navLinks = [
+  { href: "/", label: "Home" },
   { href: "/commercial", label: "Commercial" },
   { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
+  { href: "/cv", label: "CV" },
+  { href: "/chat", label: "Chat" },
 ];
+
+const MONO: React.CSSProperties = {
+  fontFamily: "var(--font-jakarta)",
+  fontSize: "0.58rem",
+  letterSpacing: "0.22em",
+  textTransform: "uppercase" as const,
+  textDecoration: "none",
+};
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -18,91 +28,144 @@ export default function Navigation() {
 
   return (
     <>
-      <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6"
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:bg-[var(--color-surface)] focus:px-4 focus:py-2"
+        style={{ ...MONO, color: "var(--color-text)" }}
       >
-        <Link
-          href="/"
-          className="font-heading text-sm tracking-[0.15em] uppercase text-[#F2F0EB]"
-          style={{ fontWeight: 900 }}
-        >
-          CK
-        </Link>
+        Skip to content
+      </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-10">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="relative font-body text-[10px] tracking-[0.2em] uppercase text-[#F2F0EB] transition-opacity duration-300 hover:opacity-60"
+      <motion.header
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+        className="sticky top-0 left-0 right-0 z-50"
+        style={{
+          borderBottom: "1px solid rgba(249,249,249,0.07)",
+        }}
+      >
+        {/* Child 1: Logo | Child 2: Nav links — logo far left, links far right */}
+        <div className="w-full flex justify-between items-center py-[14px] px-8">
+
+          {/* Child 1 — Logo (left) */}
+          <Link
+            href="/"
+            style={{
+              fontFamily: "var(--font-jakarta)",
+              fontWeight: 800,
+              fontSize: "0.85rem",
+              letterSpacing: "-0.02em",
+              color: "var(--color-text)",
+              textDecoration: "none",
+            }}
+          >
+            CK
+          </Link>
+
+          {/* Child 2 — Nav links + contact (right) */}
+          <div className="hidden md:flex items-center gap-x-8">
+            <nav className="flex items-center gap-x-8" aria-label="Primary">
+              {navLinks.map((link) => {
+                const active = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    style={{
+                      ...MONO,
+                      color: active ? "var(--color-text)" : "var(--color-text-muted)",
+                      transition: "color 180ms ease",
+                      position: "relative",
+                      paddingBottom: "1px",
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = active ? "var(--color-text)" : "var(--color-text-muted)"; }}
+                  >
+                    {link.label}
+                    {active && (
+                      <span style={{
+                        position: "absolute", bottom: 0, left: 0, right: 0,
+                        height: "1px", backgroundColor: "var(--color-text)",
+                      }} />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <a
+              href="mailto:chaiyakatkwao@gmail.com"
+              style={{
+                ...MONO,
+                color: "var(--color-text-muted)",
+                transition: "color 180ms ease",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-text-muted)"; }}
             >
-              {link.label}
-              {pathname === link.href && (
-                <motion.span
-                  layoutId="nav-indicator"
-                  className="absolute -bottom-1 left-0 right-0 h-px bg-[#F2F0EB]"
-                />
-              )}
-            </Link>
-          ))}
-        </nav>
+              Contact
+            </a>
+          </div>
 
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setOpen((v) => !v)}
-          className="md:hidden flex flex-col justify-center gap-[5px] w-8 h-8 text-[#F2F0EB]"
-          aria-label={open ? "Close menu" : "Open menu"}
-        >
-          <span
-            className="block h-px bg-current transition-all duration-300 origin-center"
-            style={{ width: "20px", transform: open ? "rotate(45deg) translateY(7px)" : "none" }}
-          />
-          <span
-            className="block h-px bg-current transition-all duration-300"
-            style={{ width: "20px", opacity: open ? 0 : 1 }}
-          />
-          <span
-            className="block h-px bg-current transition-all duration-300 origin-center"
-            style={{ width: "20px", transform: open ? "rotate(-45deg) translateY(-7px)" : "none" }}
-          />
-        </button>
+          {/* Hamburger — mobile only */}
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="flex md:hidden h-10 w-10 flex-col justify-center gap-[5px]"
+            style={{ color: "var(--color-text)" }}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
+            <span className="block h-px bg-current transition-all duration-300 origin-center"
+              style={{ width: "18px", transform: open ? "rotate(45deg) translateY(6px)" : "none" }} />
+            <span className="block h-px bg-current transition-all duration-300"
+              style={{ width: "18px", opacity: open ? 0 : 1 }} />
+            <span className="block h-px bg-current transition-all duration-300 origin-center"
+              style={{ width: "18px", transform: open ? "rotate(-45deg) translateY(-6px)" : "none" }} />
+          </button>
+        </div>
       </motion.header>
 
-      {/* Mobile full-screen menu */}
+      {/* Mobile full-screen overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-[#0D0D0D] flex flex-col justify-center px-8"
+            transition={{ duration: 0.15 }}
+            className="fixed inset-0 z-40 flex flex-col justify-center px-8"
+            style={{ backgroundColor: "#000" }}
           >
-            <nav className="flex flex-col gap-0">
-              {links.map((link, i) => (
+            <nav className="flex flex-col">
+              {[...navLinks, { href: "mailto:chaiyakatkwao@gmail.com", label: "Contact" }].map((link, i) => (
                 <motion.div
                   key={link.href}
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: i * 0.07,
-                    duration: 0.5,
-                    ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-                  }}
+                  transition={{ delay: i * 0.05, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="font-heading text-[#F2F0EB] uppercase block py-3 border-b border-[#1E1C1A] hover:text-[#9A9087] transition-colors duration-300"
                     style={{
-                      fontSize: "clamp(2.5rem, 10vw, 4.5rem)",
-                      lineHeight: 0.92,
-                      letterSpacing: "-0.02em",
+                      display: "block",
+                      fontFamily: "var(--font-jakarta)",
+                      fontWeight: 800,
+                      textTransform: "uppercase",
+                      color: "var(--color-text)",
+                      letterSpacing: "-0.03em",
+                      lineHeight: 0.9,
+                      fontSize: "clamp(2.5rem, 10vw, 5rem)",
+                      padding: "14px 0",
+                      borderBottom: "1px solid rgba(249,249,249,0.06)",
+                      textDecoration: "none",
+                      transition: "opacity 180ms ease",
                     }}
+                    onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.4"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
                   >
                     {link.label}
                   </Link>
@@ -110,11 +173,12 @@ export default function Navigation() {
               ))}
             </nav>
 
-            <div className="absolute bottom-12 left-8 right-8 flex items-center justify-between">
-              <p className="font-body text-[9px] tracking-[0.25em] uppercase text-[#2A2826]">
-                Creative Producer — Bangkok
-              </p>
-            </div>
+            <p
+              className="absolute bottom-10 left-8"
+              style={{ ...MONO, color: "var(--color-text-muted)" }}
+            >
+              Chaiya Katkwao — Creative Producer
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
