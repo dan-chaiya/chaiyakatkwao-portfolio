@@ -83,7 +83,7 @@ export default function ChatInterface() {
       >
         {/* Left — identity */}
         <div
-          style={{ flexShrink: 0, paddingBottom: "24px", marginBottom: "24px", borderBottom: "1px solid #1E1C1A" }}
+          style={{ flexShrink: 0, paddingBottom: "24px", marginBottom: "24px", borderBottom: "1px solid #2A2826" }}
           className="lg:w-72 lg:pr-10 lg:border-r lg:border-b-0 lg:pb-0 lg:mb-0"
         >
           <p style={{ ...mono, marginBottom: "12px" }}>Speaking with</p>
