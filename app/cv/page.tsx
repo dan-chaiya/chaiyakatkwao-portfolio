@@ -191,8 +191,9 @@ export default function CVPage() {
                 <hr style={rule} />
                 <p style={{ ...bodyLine, marginBottom: "2mm" }}>
                   <span style={{ color: "#9A9087", fontWeight: 600 }}>Creative</span>
-                  {" — "}Art Direction, Visual Identity, Storyboarding,
-                  Lighting Design, Creative Execution
+                  {" — "}Art Direction, Creative Direction, Photography,
+                  Video Editing & Color Grading, Styling, Lighting Design,
+                  Storyboarding, Visual Identity, Creative Execution
                 </p>
                 <p style={{ ...bodyLine, marginBottom: "2mm" }}>
                   <span style={{ color: "#9A9087", fontWeight: 600 }}>Technical</span>

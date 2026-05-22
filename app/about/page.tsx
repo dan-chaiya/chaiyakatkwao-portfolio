@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import PageTransition from "@/components/PageTransition";
+import FadeIn, { fadeUp, stagger } from "@/components/FadeIn";
+import Footer from "@/components/Footer";
 
 const experience = [
   {
@@ -27,20 +29,26 @@ const experience = [
 
 const capabilities = [
   "Art Direction",
+  "Creative Direction",
+  "Photography",
+  "Video Editing & Color Grading",
+  "Styling",
   "Multi-camera Production",
+  "Lighting Design",
+  "Live Commerce Production",
   "Live Content Systems",
   "Studio Production",
   "Visual Storytelling",
-  "Production Workflows",
-  "Photography",
   "Audio-Visual Engineering",
 ];
 
 const clients = [
   "Dutchmil Delivery",
   "Fitflop",
+  "Guess",
   "Her Hyness",
   "Nestlé Health Science",
+  "Rojukiss",
   "Sunnies Studio Thailand",
   "Tokfashion",
   "Knack Factory",
@@ -50,36 +58,54 @@ const clients = [
 export default function About() {
   return (
     <PageTransition>
-      <section className="pt-36 px-8 pb-32">
+      <section className="pt-16 px-8 pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
           {/* Left column */}
           <div className="lg:col-span-7">
-            <p className="font-body text-[10px] tracking-[0.3em] uppercase text-[#6B6560] mb-8">
+            <motion.p
+              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 12 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="font-body text-[10px] tracking-[0.3em] uppercase text-[#6B6560] mb-8"
+            >
               About
-            </p>
+            </motion.p>
 
-            <h1
+            <motion.h1
+              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 32 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.1, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="font-heading text-[#F2F0EB] leading-[0.92] mb-16"
               style={{
                 fontSize: "clamp(3rem, 8vw, 7rem)",
                 letterSpacing: "-0.02em",
               }}
             >
-              Dan /
+              Chaiya /
               <br />
               Katkwao.
-            </h1>
+            </motion.h1>
 
-            <div className="space-y-8 max-w-xl">
-              <p
+            <motion.div
+              variants={stagger}
+              whileInView="show"
+              initial="hidden"
+              viewport={{ once: true, margin: "-5%" }}
+              className="space-y-8 max-w-xl"
+            >
+              <motion.p
+                variants={fadeUp}
                 className="font-body text-sm leading-relaxed tracking-wide text-[#C8C4BC]"
                 style={{ fontWeight: 300 }}
               >
-                Dan is a Bangkok-based Creative Producer working at the
+                Chaiya is a Bangkok-based Creative Producer working at the
                 intersection of art direction and technical execution.
-              </p>
+              </motion.p>
 
-              <p
+              <motion.p
+                variants={fadeUp}
                 className="font-body text-sm leading-relaxed tracking-wide text-[#6B6560]"
                 style={{ fontWeight: 300 }}
               >
@@ -89,49 +115,57 @@ export default function About() {
                 where his practice culminated in Woven Memories (2025), a
                 photographic project tracing identity, memory, and everyday
                 life.
-              </p>
+              </motion.p>
 
-              <p
+              <motion.p
+                variants={fadeUp}
                 className="font-body text-sm leading-relaxed tracking-wide text-[#6B6560]"
                 style={{ fontWeight: 300 }}
               >
                 Now at Ad The Top Agency, he develops multi-camera productions
                 and live content systems — translating visual ideas into
                 structured workflows that hold up at scale.
-              </p>
+              </motion.p>
 
-              <p
+              <motion.p
+                variants={fadeUp}
                 className="font-body text-sm leading-relaxed tracking-wide text-[#C8C4BC]"
                 style={{ fontWeight: 400, fontStyle: "italic" }}
               >
                 He is interested in one thing: making creative work that
                 functions as well as it looks.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
-            <div className="mt-16">
+            <FadeIn delay={0.1} className="mt-16">
               <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-2">
                 Education
               </p>
               <p className="font-body text-[#C8C4BC] text-xs tracking-wide">
                 BFA Photography — Chiang Mai University, 2020–2025
               </p>
-            </div>
+            </FadeIn>
           </div>
 
           {/* Right column */}
           <div className="lg:col-span-5 lg:pl-16">
             {/* Portrait */}
-            <div className="relative aspect-[3/4] overflow-hidden bg-[#161514] mb-12">
+            <motion.div
+              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 1.03 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
+              className="relative aspect-[3/4] overflow-hidden bg-[#161514] mb-12"
+            >
               <Image
                 src="/images/portrait/dan.jpg"
-                alt="Dan Katkwao"
+                alt="Chaiya Katkwao"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 priority
               />
-            </div>
+            </motion.div>
 
             {/* Experience timeline */}
             <div>
@@ -171,23 +205,28 @@ export default function About() {
 
             {/* Capabilities */}
             <div className="mt-12">
-              <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-6">
-                Capabilities
-              </p>
-              <div>
-                {capabilities.map((cap, i) => (
-                  <div
+              <FadeIn>
+                <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-6">
+                  Capabilities
+                </p>
+              </FadeIn>
+              <motion.div
+                variants={stagger}
+                whileInView="show"
+                initial="hidden"
+                viewport={{ once: true, margin: "-5%" }}
+              >
+                {capabilities.map((cap) => (
+                  <motion.div
                     key={cap}
-                    className="border-t border-[#2A2826] py-3 flex items-center justify-between"
+                    variants={fadeUp}
+                    className="border-t border-[#2A2826] py-3"
                   >
                     <p className="font-body text-[#9A9087] text-xs tracking-wide">{cap}</p>
-                    <span className="font-body text-[9px] text-[#2A2826] tracking-[0.1em]">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
+                  </motion.div>
                 ))}
                 <div className="border-t border-[#2A2826]" />
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -225,6 +264,7 @@ export default function About() {
                       fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)",
                       lineHeight: 1.05,
                       letterSpacing: "-0.02em",
+                      fontWeight: 800,
                     }}
                   >
                     {name}
@@ -265,36 +305,28 @@ export default function About() {
             <br />
             new work.
           </h2>
-          <a
-            href="mailto:chaiyakatkwao@gmail.com"
-            className="font-body inline-block text-xs tracking-[0.2em] uppercase text-[#F2F0EB] border border-[#F2F0EB] px-8 py-4 hover:bg-[#F2F0EB] hover:text-[#0D0D0D] transition-all duration-500"
-          >
-            chaiyakatkwao@gmail.com
-          </a>
+          <div className="flex flex-wrap items-center gap-4">
+            <motion.a
+              href="mailto:chaiyakatkwao@gmail.com"
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="font-body inline-block text-xs tracking-[0.2em] uppercase text-[#F2F0EB] border border-[#F2F0EB] px-8 py-4 hover:bg-[#F2F0EB] hover:text-[#0D0D0D] transition-all duration-500"
+            >
+              chaiyakatkwao@gmail.com
+            </motion.a>
+            <motion.a
+              href="/cv"
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="font-body inline-block text-xs tracking-[0.2em] uppercase text-[#6B6560] border border-[#2A2826] px-8 py-4 hover:border-[#F2F0EB] hover:text-[#F2F0EB] transition-all duration-500"
+            >
+              View CV →
+            </motion.a>
+          </div>
         </motion.div>
       </section>
 
-      <footer className="border-t border-[#1E1C1A] px-8 py-8 flex items-center justify-between">
-        <p className="font-body text-[9px] tracking-[0.2em] uppercase text-[#6B6560]">
-          © 2026 Chaiya Katkwao
-        </p>
-        <div className="flex items-center gap-10">
-          <a
-            href="https://www.instagram.com/chaiya.a/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-body text-[9px] tracking-[0.2em] uppercase text-[#6B6560] hover:text-[#C8C4BC] transition-colors duration-300"
-          >
-            Instagram
-          </a>
-          <a
-            href="mailto:chaiyakatkwao@gmail.com"
-            className="font-body text-[9px] tracking-[0.2em] uppercase text-[#6B6560] hover:text-[#C8C4BC] transition-colors duration-300"
-          >
-            Email
-          </a>
-        </div>
-      </footer>
+      <Footer />
     </PageTransition>
   );
 }
