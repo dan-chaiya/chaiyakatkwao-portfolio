@@ -9,7 +9,7 @@ type Props = {
 
 export default function YouTubeEmbed({ id, title }: Props) {
   const [active, setActive] = useState(false);
-  const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+  const thumb = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
 
   return (
     <div className="relative w-full overflow-hidden bg-[#111]" style={{ aspectRatio: "16 / 9" }}>
@@ -36,7 +36,7 @@ export default function YouTubeEmbed({ id, title }: Props) {
             loading="lazy"
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
           />
-          <div className="absolute inset-0 bg-[#0D0D0D]/40 group-hover:bg-[#0D0D0D]/20 transition-colors duration-500" />
+          <div className="absolute inset-0 bg-[#0D0D0D]/60 group-hover:bg-[#0D0D0D]/40 transition-colors duration-500" />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-16 h-16 md:w-20 md:h-20 border border-[#F2F0EB] rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-[#F2F0EB]/10 group-hover:scale-105">
               <div

@@ -8,15 +8,12 @@ import { notFound } from "next/navigation";
 import PageTransition from "@/components/PageTransition";
 import Lightbox from "@/components/Lightbox";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
+import Footer from "@/components/Footer";
 import { getProject, projects } from "@/data/commercial";
 import { selectedEpisodes } from "@/data/youtube";
 
-type LightboxState = {
-  src: string;
-  alt: string;
-  title?: string;
-  series?: string;
-} | null;
+type LbImage = { src: string; alt: string; title?: string; series?: string };
+type LightboxState = { images: LbImage[]; index: number } | null;
 
 export default function CaseStudy({
   params,
@@ -29,13 +26,29 @@ export default function CaseStudy({
   if (!project) notFound();
 
   const [lightbox, setLightbox] = useState<LightboxState>(null);
+  const activeLbImg = lightbox ? lightbox.images[lightbox.index] : null;
+
+  const uniqueImages = project.images.filter(
+    (src, index, self) => self.indexOf(src) === index
+  );
+  const galleryImages = uniqueImages.filter((src) => src !== project.cover);
+
+  const allImages: LbImage[] = [
+    { src: project.cover, alt: project.title, title: project.title, series: project.subtitle },
+    ...galleryImages.map((src, i) => ({
+      src,
+      alt: `${project.title} — ${i + 2}`,
+      title: project.title,
+      series: project.subtitle,
+    })),
+  ];
 
   const currentIndex = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(currentIndex + 1) % projects.length];
 
   return (
     <PageTransition>
-      <div className="pt-32 px-8 pb-8">
+      <div className="pt-16 px-8 pb-8">
         {/* Breadcrumb */}
         <div className="mb-12">
           <Link
@@ -106,7 +119,7 @@ export default function CaseStudy({
           </div>
         </div>
 
-        {/* Hero image */}
+        {/* Hero image — capped at 80vh so portrait images don't dominate the scroll */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -115,14 +128,8 @@ export default function CaseStudy({
             ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
           className="relative w-full overflow-hidden bg-[#111] mb-4 cursor-pointer group"
-          onClick={() =>
-            setLightbox({
-              src: project.cover,
-              alt: project.title,
-              title: project.title,
-              series: project.subtitle,
-            })
-          }
+          style={{ maxHeight: "80vh" }}
+          onClick={() => setLightbox({ images: allImages, index: 0 })}
         >
           <Image
             src={project.cover}
@@ -130,10 +137,16 @@ export default function CaseStudy({
             width={0}
             height={0}
             sizes="100vw"
-            className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+            className="img-natural transition-transform duration-700 ease-out group-hover:scale-[1.01]"
             priority
           />
           <div className="absolute inset-0 bg-[#0D0D0D]/0 group-hover:bg-[#0D0D0D]/20 transition-colors duration-500" />
+          {/* Hint that clicking opens the full image */}
+          <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span className="font-body text-[9px] tracking-[0.2em] uppercase text-[#F2F0EB] border border-[#F2F0EB]/50 px-3 py-2">
+              View full ↗
+            </span>
+          </div>
         </motion.div>
 
         {/* Brief — long-form context */}
@@ -173,9 +186,9 @@ export default function CaseStudy({
           </motion.section>
         )}
 
-        {/* Supporting images — full-bleed natural ratio */}
-        <div className="space-y-4 md:space-y-6">
-          {project.images.map((src, i) => (
+        {/* Supporting images — natural aspect ratios, no cropping */}
+        <div className="space-y-2">
+          {galleryImages.map((src, i) => (
             <motion.div
               key={src}
               whileInView={{ opacity: 1, y: 0 }}
@@ -187,14 +200,7 @@ export default function CaseStudy({
                 ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
               }}
               className="relative w-full overflow-hidden bg-[#111] cursor-pointer group"
-              onClick={() =>
-                setLightbox({
-                  src,
-                  alt: `${project.title} — ${i + 2}`,
-                  title: project.title,
-                  series: project.subtitle,
-                })
-              }
+              onClick={() => setLightbox({ images: allImages, index: i + 1 })}
             >
               <Image
                 src={src}
@@ -202,7 +208,7 @@ export default function CaseStudy({
                 width={0}
                 height={0}
                 sizes="100vw"
-                className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+                className="img-natural transition-transform duration-700 ease-out group-hover:scale-[1.01]"
               />
               <div className="absolute inset-0 bg-[#0D0D0D]/0 group-hover:bg-[#0D0D0D]/20 transition-colors duration-500" />
             </motion.div>
@@ -278,31 +284,25 @@ export default function CaseStudy({
         </section>
       </div>
 
-      <footer className="border-t border-[#1E1C1A] px-8 py-8 mt-32 flex items-center justify-between">
-        <p className="font-body text-[9px] tracking-[0.2em] uppercase text-[#6B6560]">
-          © 2026 Chaiya Katkwao
-        </p>
-        <div className="flex items-center gap-10">
-          <a
-            href="https://www.instagram.com/chaiya.a/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-body text-[9px] tracking-[0.2em] uppercase text-[#6B6560] hover:text-[#C8C4BC] transition-colors duration-300"
-          >
-            Instagram
-          </a>
-          <a
-            href="mailto:chaiyakatkwao@gmail.com"
-            className="font-body text-[9px] tracking-[0.2em] uppercase text-[#6B6560] hover:text-[#C8C4BC] transition-colors duration-300"
-          >
-            Email
-          </a>
-        </div>
-      </footer>
+      <div className="mt-32">
+        <Footer />
+      </div>
 
       <AnimatePresence>
-        {lightbox && (
-          <Lightbox {...lightbox} onClose={() => setLightbox(null)} />
+        {lightbox && activeLbImg && (
+          <Lightbox
+            src={activeLbImg.src}
+            alt={activeLbImg.alt}
+            title={activeLbImg.title}
+            series={activeLbImg.series}
+            index={lightbox.index + 1}
+            total={lightbox.images.length}
+            hasPrev={lightbox.index > 0}
+            hasNext={lightbox.index < lightbox.images.length - 1}
+            onClose={() => setLightbox(null)}
+            onPrev={() => setLightbox((lb) => lb && { ...lb, index: lb.index - 1 })}
+            onNext={() => setLightbox((lb) => lb && { ...lb, index: lb.index + 1 })}
+          />
         )}
       </AnimatePresence>
     </PageTransition>

@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import PageTransition from "@/components/PageTransition";
 import Lightbox from "@/components/Lightbox";
+import FadeIn from "@/components/FadeIn";
+import Footer from "@/components/Footer";
 
 const wovenMemories = Array.from({ length: 12 }, (_, i) => ({
   id: i + 1,
@@ -23,32 +25,30 @@ const somethingBut = Array.from({ length: 7 }, (_, i) => ({
 }));
 
 const artGallery = [
-  { id: 101, title: "Portrait I",    series: "Portraits",  year: "2024", src: "/images/gallery/portrait-01.jpg" },
-  { id: 102, title: "Portrait II",   series: "Portraits",  year: "2024", src: "/images/gallery/portrait-02.jpg" },
-  { id: 112, title: "Form I",        series: "Forms",      year: "2024", src: "/images/gallery/forms-01.jpg" },
-  { id: 103, title: "Portrait III",  series: "Portraits",  year: "2024", src: "/images/gallery/portrait-03.jpg" },
-  { id: 105, title: "Rust",          series: "Studies",    year: "2024", src: "/images/gallery/misc-01.jpg" },
-  { id: 113, title: "Form II",       series: "Forms",      year: "2024", src: "/images/gallery/forms-02.jpg" },
-  { id: 104, title: "Portrait IV",   series: "Portraits",  year: "2024", src: "/images/gallery/portrait-04.jpg" },
-  { id: 115, title: "Form IV",       series: "Forms",      year: "2024", src: "/images/gallery/forms-04.jpg" },
-  { id: 106, title: "Study II",      series: "Studies",    year: "2024", src: "/images/gallery/misc-02.jpg" },
-  { id: 116, title: "Form V",        series: "Forms",      year: "2024", src: "/images/gallery/forms-05.jpg" },
-  { id: 114, title: "Form III",      series: "Forms",      year: "2024", src: "/images/gallery/forms-03.jpg" },
-  { id: 117, title: "Form VI",       series: "Forms",      year: "2024", src: "/images/gallery/forms-06.jpg" },
-  { id: 108, title: "Still Life",    series: "Still Life", year: "2024", src: "/images/gallery/product-01.jpg" },
-  { id: 118, title: "Portrait V",    series: "Portraits",  year: "2024", src: "/images/gallery/portrait-05.jpg" },
-  { id: 107, title: "Study III",     series: "Studies",    year: "2024", src: "/images/gallery/misc-03.jpg" },
-  { id: 119, title: "Portrait VI",   series: "Portraits",  year: "2024", src: "/images/gallery/portrait-06.jpg" },
-  { id: 109, title: "The 101",       series: "Film",       year: "2024", src: "/images/gallery/the101-01.jpg" },
-  { id: 110, title: "Film I",        series: "Film",       year: "2024", src: "/images/gallery/film-01.jpg" },
-  { id: 111, title: "Film II",       series: "Film",       year: "2024", src: "/images/gallery/film-02.jpg" },
+  { id: 116, title: "Form V",        series: "Forms",      year: "2024", src: "/images/gallery/forms-05.jpg" },   // P 3:4
+  { id: 101, title: "Portrait I",    series: "Portraits",  year: "2024", src: "/images/gallery/portrait-01.jpg" }, // L 3:2
+  { id: 117, title: "Form VI",       series: "Forms",      year: "2024", src: "/images/gallery/forms-06.jpg" },   // P 3:4
+  { id: 103, title: "Portrait III",  series: "Portraits",  year: "2024", src: "/images/gallery/portrait-03.jpg" }, // S 1:1
+  { id: 105, title: "Rust",          series: "Studies",    year: "2024", src: "/images/gallery/misc-01.jpg" },     // L 3:2
+  { id: 110, title: "Film I",        series: "Film",       year: "2024", src: "/images/gallery/film-01.jpg" },     // P 2:3
+  { id: 112, title: "Form I",        series: "Forms",      year: "2024", src: "/images/gallery/forms-01.jpg" },   // S 1:1
+  { id: 106, title: "Study II",      series: "Studies",    year: "2024", src: "/images/gallery/misc-02.jpg" },     // L 3:2
+  { id: 118, title: "Portrait V",    series: "Portraits",  year: "2024", src: "/images/gallery/portrait-05.jpg" }, // P 4:5
+  { id: 102, title: "Portrait II",   series: "Portraits",  year: "2024", src: "/images/gallery/portrait-02.jpg" }, // L 3:2
+  { id: 113, title: "Form II",       series: "Forms",      year: "2024", src: "/images/gallery/forms-02.jpg" },   // S 1:1
+  { id: 119, title: "Portrait VI",   series: "Portraits",  year: "2024", src: "/images/gallery/portrait-06.jpg" }, // P 2:3
+  { id: 104, title: "Portrait IV",   series: "Portraits",  year: "2024", src: "/images/gallery/portrait-04.jpg" }, // S 1:1
+  { id: 109, title: "The 101",       series: "Film",       year: "2024", src: "/images/gallery/the101-01.jpg" },   // L 3:2
+  { id: 115, title: "Form IV",       series: "Forms",      year: "2024", src: "/images/gallery/forms-04.jpg" },   // P 3:4
+  { id: 107, title: "Study III",     series: "Studies",    year: "2024", src: "/images/gallery/misc-03.jpg" },     // L 3:2
+  { id: 114, title: "Form III",      series: "Forms",      year: "2024", src: "/images/gallery/forms-03.jpg" },   // S 1:1
+  { id: 108, title: "Still Life",    series: "Still Life", year: "2024", src: "/images/gallery/product-01.jpg" }, // P 3:4
+  { id: 111, title: "Film II",       series: "Film",       year: "2024", src: "/images/gallery/film-02.jpg" },     // L 3:2
 ];
 
 type LightboxState = {
-  src: string;
-  alt: string;
-  title?: string;
-  series?: string;
+  items: GalleryItem[];
+  index: number;
 } | null;
 
 type GalleryItem = {
@@ -65,41 +65,41 @@ function MasonryGrid({
   sizes,
 }: {
   items: GalleryItem[];
-  onOpen: (item: GalleryItem) => void;
+  onOpen: (item: GalleryItem, index: number) => void;
   sizes: string;
 }) {
   return (
-    <div className="columns-1 md:columns-2 gap-4 md:gap-6">
+    <div className="masonry">
       {items.map((item, index) => (
         <motion.div
           key={item.id}
-          whileInView={{ opacity: 1, y: 0 }}
-          initial={{ opacity: 0, y: 16 }}
-          viewport={{ once: true, margin: "-5%" }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
-            duration: 1,
+            duration: 0.9,
             ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-            delay: (index % 2) * 0.1,
+            delay: Math.min(index * 0.05, 0.5),
           }}
-          className="break-inside-avoid mb-4 md:mb-6 group cursor-pointer"
-          onClick={() => onOpen(item)}
+          className="masonry-item group cursor-pointer"
+          onClick={() => onOpen(item, index)}
         >
-          <div className="relative overflow-hidden bg-[#111]">
+          <div className="relative overflow-hidden bg-[var(--color-surface-elevated)]">
             <Image
               src={item.src}
               alt={item.title}
               width={0}
               height={0}
               sizes={sizes}
+              priority={index < 2}
               className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             />
-            <div className="absolute inset-0 bg-[#0D0D0D]/0 group-hover:bg-[#0D0D0D]/50 transition-colors duration-500 flex items-end p-5">
+            <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/50 transition-colors duration-500 flex items-end p-5">
               <div className="opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-                <p className="font-body text-[9px] tracking-[0.25em] uppercase text-[#9A9087] mb-1">
+                <p className="font-body text-[9px] tracking-[0.25em] uppercase text-[var(--color-grey-400)] mb-1">
                   {item.series}
                 </p>
                 <p
-                  className="font-heading text-[#F2F0EB] uppercase"
+                  className="font-heading text-[var(--color-warm)] uppercase"
                   style={{ fontSize: "0.95rem", fontWeight: 600 }}
                 >
                   {item.title}
@@ -108,8 +108,8 @@ function MasonryGrid({
             </div>
           </div>
           <div className="mt-2 flex items-baseline justify-between">
-            <p className="font-body text-[10px] tracking-[0.08em] text-[#9A9087]">{item.title}</p>
-            <span className="font-body text-[9px] tracking-[0.1em] text-[#2A2826]">{item.year}</span>
+            <p className="font-body text-[10px] tracking-[0.08em] text-[var(--color-grey-400)]">{item.title}</p>
+            <span className="font-body text-[9px] tracking-[0.1em] text-[var(--color-grey-700)]">{item.year}</span>
           </div>
         </motion.div>
       ))}
@@ -120,25 +120,32 @@ function MasonryGrid({
 export default function Gallery() {
   const [lightbox, setLightbox] = useState<LightboxState>(null);
 
-  const openLightbox = (item: GalleryItem) => {
-    setLightbox({
-      src: item.src,
-      alt: item.title,
-      title: item.title,
-      series: item.series,
-    });
-  };
+  const openLightbox = useCallback((seriesItems: GalleryItem[]) => (item: GalleryItem, index: number) => {
+    setLightbox({ items: seriesItems, index });
+  }, []);
+
+  const activeLbItem = lightbox ? lightbox.items[lightbox.index] : null;
 
   return (
     <PageTransition>
-      <div className="pt-32 px-8 pb-8">
+      <div className="pt-16 px-8 pb-8">
         {/* Header */}
         <div className="mb-20">
-          <p className="font-body text-[9px] tracking-[0.35em] uppercase text-[#6B6560] mb-5">
+          <motion.p
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 12 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="font-body text-[9px] tracking-[0.35em] uppercase text-[var(--color-grey-500)] mb-5"
+          >
             Gallery
-          </p>
-          <h1
-            className="font-heading text-[#F2F0EB]"
+          </motion.p>
+          <motion.h1
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 32 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.1, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="font-heading text-[var(--color-warm)]"
             style={{
               fontSize: "clamp(3rem, 8vw, 7rem)",
               lineHeight: 0.9,
@@ -148,83 +155,81 @@ export default function Gallery() {
             Photographs /
             <br />
             &amp; prints.
-          </h1>
+          </motion.h1>
         </div>
 
         {/* Woven Memories series */}
         <div className="mb-28">
-          <div className="flex items-center gap-8 mb-12">
-            <span className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560]">
-              Woven Memories
-            </span>
-            <div className="flex-1 h-px bg-[#1E1C1A]" />
-            <span className="font-body text-[9px] tracking-[0.2em] text-[#2A2826]">2025</span>
-          </div>
+          <FadeIn>
+            <div className="flex items-center gap-8 mb-12">
+              <span className="font-body text-[9px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">
+                Woven Memories
+              </span>
+              <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
+              <span className="font-body text-[9px] tracking-[0.2em] text-[var(--color-grey-700)]">2025</span>
+            </div>
+          </FadeIn>
           <MasonryGrid
             items={wovenMemories}
-            onOpen={openLightbox}
-            sizes="(max-width: 768px) 100vw, 50vw"
+            onOpen={openLightbox(wovenMemories)}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
 
         {/* Something But series */}
         <div className="mb-28">
-          <div className="flex items-center gap-8 mb-12">
-            <span className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560]">
-              Something But
-            </span>
-            <div className="flex-1 h-px bg-[#1E1C1A]" />
-            <span className="font-body text-[9px] tracking-[0.2em] text-[#2A2826]">2024</span>
-          </div>
+          <FadeIn>
+            <div className="flex items-center gap-8 mb-12">
+              <span className="font-body text-[9px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">
+                Something But
+              </span>
+              <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
+              <span className="font-body text-[9px] tracking-[0.2em] text-[var(--color-grey-700)]">2024</span>
+            </div>
+          </FadeIn>
           <MasonryGrid
             items={somethingBut}
-            onOpen={openLightbox}
-            sizes="(max-width: 768px) 100vw, 50vw"
+            onOpen={openLightbox(somethingBut)}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
 
-        {/* Art Gallery series */}
+        {/* Selected Works series */}
         <div className="mb-28">
-          <div className="flex items-center gap-8 mb-12">
-            <span className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560]">
-              Art Gallery
-            </span>
-            <div className="flex-1 h-px bg-[#1E1C1A]" />
-            <span className="font-body text-[9px] tracking-[0.2em] text-[#2A2826]">2024</span>
-          </div>
+          <FadeIn>
+            <div className="flex items-center gap-8 mb-12">
+              <span className="font-body text-[9px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">
+                Selected Works
+              </span>
+              <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
+              <span className="font-body text-[9px] tracking-[0.2em] text-[var(--color-grey-700)]">2024</span>
+            </div>
+          </FadeIn>
           <MasonryGrid
             items={artGallery}
-            onOpen={openLightbox}
-            sizes="(max-width: 768px) 100vw, 50vw"
+            onOpen={openLightbox(artGallery)}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
       </div>
 
-      <footer className="border-t border-[#1E1C1A] px-8 py-8 flex items-center justify-between">
-        <p className="font-body text-[9px] tracking-[0.2em] uppercase text-[#6B6560]">
-          © 2026 Chaiya Katkwao
-        </p>
-        <div className="flex items-center gap-10">
-          <a
-            href="https://www.instagram.com/chaiya.a/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-body text-[9px] tracking-[0.2em] uppercase text-[#6B6560] hover:text-[#C8C4BC] transition-colors duration-300"
-          >
-            Instagram
-          </a>
-          <a
-            href="mailto:chaiyakatkwao@gmail.com"
-            className="font-body text-[9px] tracking-[0.2em] uppercase text-[#6B6560] hover:text-[#C8C4BC] transition-colors duration-300"
-          >
-            Email
-          </a>
-        </div>
-      </footer>
+      <Footer />
 
       <AnimatePresence>
-        {lightbox && (
-          <Lightbox {...lightbox} onClose={() => setLightbox(null)} />
+        {lightbox && activeLbItem && (
+          <Lightbox
+            src={activeLbItem.src}
+            alt={activeLbItem.title}
+            title={activeLbItem.title}
+            series={activeLbItem.series}
+            index={lightbox.index + 1}
+            total={lightbox.items.length}
+            hasPrev={lightbox.index > 0}
+            hasNext={lightbox.index < lightbox.items.length - 1}
+            onClose={() => setLightbox(null)}
+            onPrev={() => setLightbox((lb) => lb && { ...lb, index: lb.index - 1 })}
+            onNext={() => setLightbox((lb) => lb && { ...lb, index: lb.index + 1 })}
+          />
         )}
       </AnimatePresence>
     </PageTransition>

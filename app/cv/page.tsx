@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PrintButton from "@/components/PrintButton";
 
 export const metadata: Metadata = {
   title: "CV — Chaiya Katkwao",
@@ -10,14 +11,14 @@ const eyebrow: React.CSSProperties = {
   fontSize: "6.5pt",
   letterSpacing: "0.32em",
   textTransform: "uppercase",
-  color: "#6B6560",
+  color: "var(--color-grey-500)",
   fontWeight: 400,
   marginBottom: "2.5mm",
 };
 
 const rule: React.CSSProperties = {
   height: "1px",
-  background: "#1E1C1A",
+  background: "var(--color-border-muted)",
   border: "none",
   marginBottom: "3.5mm",
 };
@@ -25,8 +26,8 @@ const rule: React.CSSProperties = {
 const bodyLine: React.CSSProperties = {
   fontFamily: "var(--font-jakarta)",
   fontSize: "8.5pt",
-  lineHeight: 1.6,
-  color: "#C8C4BC",
+  lineHeight: 1.5,
+  color: "var(--color-grey-300)",
   fontWeight: 400,
 };
 
@@ -34,7 +35,7 @@ const roleTitle: React.CSSProperties = {
   fontFamily: "var(--font-jakarta)",
   fontSize: "8.5pt",
   letterSpacing: "0",
-  color: "#F2F0EB",
+  color: "var(--color-warm)",
   fontWeight: 700,
 };
 
@@ -43,12 +44,12 @@ const yearLabel: React.CSSProperties = {
   fontSize: "6.5pt",
   letterSpacing: "0.12em",
   textTransform: "uppercase",
-  color: "#6B6560",
+  color: "var(--color-grey-500)",
   whiteSpace: "nowrap",
   marginLeft: "4mm",
 };
 
-const sectionGap: React.CSSProperties = { marginBottom: "7mm" };
+const sectionGap: React.CSSProperties = { marginBottom: "5mm" };
 
 const clients = [
   "Dutchmil Delivery", "Fitflop", "Guess", "Her Hyness",
@@ -69,13 +70,14 @@ export default function CVPage() {
           header { display: none !important; }
           .cv-screen-container { padding: 0; }
           .cv-wrap { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          .cv-print-btn { display: none !important; }
         }
         .cv-list { list-style: none; padding: 0; margin: 0; }
         .cv-list li {
           font-family: var(--font-jakarta);
           font-size: 8.5pt;
-          line-height: 1.6;
-          color: #C8C4BC;
+          line-height: 1.5;
+          color: var(--color-grey-300);
           font-weight: 400;
           padding-left: 10pt;
           position: relative;
@@ -84,37 +86,40 @@ export default function CVPage() {
           content: "—";
           position: absolute;
           left: 0;
-          color: #2A2826;
+          color: var(--color-grey-700);
           font-size: 7pt;
         }
       `}</style>
 
-      <div className="cv-screen-container" style={{ backgroundColor: "#0D0D0D" }}>
+      <div className="cv-screen-container" style={{ backgroundColor: "var(--color-surface-chat)" }}>
+        <div style={{ width: "210mm", margin: "0 auto", paddingBottom: "12px", display: "flex", justifyContent: "flex-end" }}>
+          <PrintButton />
+        </div>
         <div
           className="cv-wrap"
           style={{
             width: "210mm",
-            minHeight: "297mm",
+            height: "297mm",
             margin: "0 auto",
-            backgroundColor: "#0D0D0D",
-            color: "#F2F0EB",
-            padding: "13mm 14mm 11mm",
+            backgroundColor: "var(--color-surface-chat)",
+            color: "var(--color-warm)",
+            padding: "11mm 14mm 10mm",
             boxSizing: "border-box",
           }}
         >
           {/* HEADER */}
-          <div style={{ marginBottom: "8mm", paddingBottom: "8mm", borderBottom: "1px solid #1E1C1A" }}>
-            <p style={{ ...eyebrow, marginBottom: "5mm" }}>
+          <div style={{ marginBottom: "6mm", paddingBottom: "6mm", borderBottom: "1px solid var(--color-border-muted)" }}>
+            <p style={{ ...eyebrow, marginBottom: "4mm" }}>
               Creative Producer — Bangkok, Thailand
             </p>
             <h1
               style={{
                 fontFamily: "var(--font-jakarta)",
                 fontWeight: 800,
-                fontSize: "18mm",
+                fontSize: "13mm",
                 lineHeight: 0.88,
                 letterSpacing: "-0.04em",
-                color: "#F2F0EB",
+                color: "var(--color-warm)",
                 textTransform: "uppercase",
               }}
             >
@@ -141,7 +146,7 @@ export default function CVPage() {
                 <hr style={rule} />
                 <p style={bodyLine}>B.F.A. in Fine Art</p>
                 <p style={bodyLine}>Chiang Mai University</p>
-                <p style={{ ...bodyLine, color: "#6B6560", marginTop: "1mm" }}>2020 – 2025</p>
+                <p style={{ ...bodyLine, color: "var(--color-grey-500)", marginTop: "1mm" }}>2020 – 2025</p>
               </section>
 
               <section style={sectionGap}>
@@ -168,13 +173,13 @@ export default function CVPage() {
 
             {/* ── RIGHT COLUMN ── */}
             <div>
-              <section style={{ marginBottom: "7mm" }}>
+              <section style={{ marginBottom: "5mm" }}>
                 <p
                   style={{
                     fontFamily: "var(--font-jakarta)",
-                    fontSize: "10pt",
-                    lineHeight: 1.65,
-                    color: "#9A9087",
+                    fontSize: "9pt",
+                    lineHeight: 1.5,
+                    color: "var(--color-grey-400)",
                     fontWeight: 400,
                     fontStyle: "italic",
                   }}
@@ -190,19 +195,19 @@ export default function CVPage() {
                 <p style={eyebrow}>Skills</p>
                 <hr style={rule} />
                 <p style={{ ...bodyLine, marginBottom: "2mm" }}>
-                  <span style={{ color: "#9A9087", fontWeight: 600 }}>Creative</span>
+                  <span style={{ color: "var(--color-grey-400)", fontWeight: 600 }}>Creative</span>
                   {" — "}Art Direction, Creative Direction, Photography,
                   Video Editing & Color Grading, Styling, Lighting Design,
                   Storyboarding, Visual Identity, Creative Execution
                 </p>
                 <p style={{ ...bodyLine, marginBottom: "2mm" }}>
-                  <span style={{ color: "#9A9087", fontWeight: 600 }}>Technical</span>
+                  <span style={{ color: "var(--color-grey-400)", fontWeight: 600 }}>Technical</span>
                   {" — "}Technical Direction, Full-Scale Media Production,
                   Multi-Camera System Design, Advanced Streaming Architecture,
                   Visual & Audio Engineering
                 </p>
                 <p style={bodyLine}>
-                  <span style={{ color: "#9A9087", fontWeight: 600 }}>AI</span>
+                  <span style={{ color: "var(--color-grey-400)", fontWeight: 600 }}>AI</span>
                   {" — "}Claude, Claude Code, Agentic Workflows,
                   AI-Assisted Creative Production & Research
                 </p>
@@ -212,9 +217,9 @@ export default function CVPage() {
                 <p style={eyebrow}>Experience</p>
                 <hr style={rule} />
 
-                <div style={{ marginBottom: "5.5mm" }}>
+                <div style={{ marginBottom: "4mm" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "1.5mm" }}>
-                    <p style={roleTitle}>Live Producer — Ad The Top</p>
+                    <p style={roleTitle}>Live Production Lead — Ad The Top</p>
                     <p style={yearLabel}>2026 – Present</p>
                   </div>
                   <ul className="cv-list">
@@ -226,7 +231,7 @@ export default function CVPage() {
                   </ul>
                 </div>
 
-                <div style={{ marginBottom: "5.5mm" }}>
+                <div style={{ marginBottom: "4mm" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "1.5mm" }}>
                     <p style={roleTitle}>A/V Engineer — Modal Creative Studio</p>
                     <p style={yearLabel}>2025 – 2026</p>
@@ -265,7 +270,7 @@ export default function CVPage() {
           </div>
 
           {/* FOOTER */}
-          <div style={{ marginTop: "8mm", borderTop: "1px solid #1E1C1A", paddingTop: "4mm", display: "flex", justifyContent: "space-between" }}>
+          <div style={{ marginTop: "5mm", borderTop: "1px solid var(--color-border-muted)", paddingTop: "3mm", display: "flex", justifyContent: "space-between" }}>
             <p style={{ ...eyebrow, marginBottom: 0 }}>© 2026 Chaiya Katkwao</p>
             <p style={{ ...eyebrow, marginBottom: 0 }}>Updated — May 2026</p>
           </div>

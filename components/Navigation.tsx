@@ -16,8 +16,8 @@ const navLinks = [
 
 const MONO: React.CSSProperties = {
   fontFamily: "var(--font-jakarta)",
-  fontSize: "0.58rem",
-  letterSpacing: "0.22em",
+  fontSize: "0.8rem",
+  letterSpacing: "0.18em",
   textTransform: "uppercase" as const,
   textDecoration: "none",
 };
@@ -48,23 +48,39 @@ export default function Navigation() {
         {/* Child 1: Logo | Child 2: Nav links — logo far left, links far right */}
         <div className="w-full flex justify-between items-center py-[14px] px-8">
 
-          {/* Child 1 — Logo (left) */}
-          <Link
-            href="/"
-            style={{
-              fontFamily: "var(--font-jakarta)",
-              fontWeight: 800,
-              fontSize: "0.85rem",
-              letterSpacing: "-0.02em",
-              color: "var(--color-text)",
-              textDecoration: "none",
-            }}
-          >
-            CK
-          </Link>
+          {/* Child 1 — Logo + optional page label (left) */}
+          <div className="flex items-center gap-4">
+            <Link
+              href="/"
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontWeight: 400,
+                fontSize: "1.15rem",
+                letterSpacing: "-0.02em",
+                color: "var(--color-text)",
+                textDecoration: "none",
+              }}
+            >
+              CK
+            </Link>
+            {pathname !== "/" && (
+              <span
+                className="hidden lg:block"
+                style={{
+                  fontFamily: "var(--font-jakarta)",
+                  fontSize: "0.62rem",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: "var(--color-text-muted)",
+                }}
+              >
+                / {navLinks.find((l) => pathname.startsWith(l.href) && l.href !== "/")?.label}
+              </span>
+            )}
+          </div>
 
           {/* Child 2 — Nav links + contact (right) */}
-          <div className="hidden md:flex items-center gap-x-8">
+          <div className="hidden lg:flex items-center gap-x-8">
             <nav className="flex items-center gap-x-8" aria-label="Primary">
               {navLinks.map((link) => {
                 const active = pathname === link.href;
@@ -74,19 +90,19 @@ export default function Navigation() {
                     href={link.href}
                     style={{
                       ...MONO,
-                      color: active ? "var(--color-text)" : "var(--color-text-muted)",
+                      color: active ? "var(--color-text)" : "var(--color-grey-300)",
                       transition: "color 180ms ease",
                       position: "relative",
                       paddingBottom: "1px",
                     }}
                     onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.color = active ? "var(--color-text)" : "var(--color-text-muted)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = active ? "var(--color-text)" : "var(--color-grey-300)"; }}
                   >
                     {link.label}
                     {active && (
                       <span style={{
                         position: "absolute", bottom: 0, left: 0, right: 0,
-                        height: "1px", backgroundColor: "var(--color-text)",
+                        height: "1px", backgroundColor: "var(--color-accent)",
                       }} />
                     )}
                   </Link>
@@ -98,11 +114,11 @@ export default function Navigation() {
               href="mailto:chaiyakatkwao@gmail.com"
               style={{
                 ...MONO,
-                color: "var(--color-text-muted)",
+                color: "var(--color-grey-300)",
                 transition: "color 180ms ease",
               }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-text-muted)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-grey-300)"; }}
             >
               Contact
             </a>
@@ -111,7 +127,7 @@ export default function Navigation() {
           {/* Hamburger — mobile only */}
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex md:hidden h-10 w-10 flex-col justify-center gap-[5px]"
+            className="flex lg:hidden h-10 w-10 flex-col justify-center gap-[5px]"
             style={{ color: "var(--color-text)" }}
             aria-expanded={open}
             aria-controls="mobile-menu"
@@ -137,7 +153,7 @@ export default function Navigation() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
             className="fixed inset-0 z-40 flex flex-col justify-center px-8"
-            style={{ backgroundColor: "#000" }}
+            style={{ backgroundColor: "var(--color-bg)" }}
           >
             <nav className="flex flex-col">
               {[...navLinks, { href: "mailto:chaiyakatkwao@gmail.com", label: "Contact" }].map((link, i) => (
@@ -152,8 +168,8 @@ export default function Navigation() {
                     onClick={() => setOpen(false)}
                     style={{
                       display: "block",
-                      fontFamily: "var(--font-jakarta)",
-                      fontWeight: 800,
+                      fontFamily: "var(--font-heading)",
+                      fontWeight: 400,
                       textTransform: "uppercase",
                       color: "var(--color-text)",
                       letterSpacing: "-0.03em",
@@ -177,7 +193,7 @@ export default function Navigation() {
               className="absolute bottom-10 left-8"
               style={{ ...MONO, color: "var(--color-text-muted)" }}
             >
-              Chaiya Katkwao — Creative Producer
+              Chaiya Katkwao / Creative Producer
             </p>
           </motion.div>
         )}

@@ -1,66 +1,87 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Archivo } from "next/font/google";
+import { Archivo, Archivo_Black, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+
+const archivo = Archivo({
+  variable: "--font-jakarta",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+});
 
 const archivoBlack = Archivo_Black({
   variable: "--font-archivo-black",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400"],
+  display: "swap",
 });
 
-const archivo = Archivo({
-  variable: "--font-archivo",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://chaiyakatkwao.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Chaiya Katkwao — Creative Producer",
+  title: "Chaiya Katkwao / Creative Producer",
   description:
     "Bangkok-based Creative Producer. Art direction, multi-camera production, and live content systems.",
   openGraph: {
-    title: "Chaiya Katkwao — Creative Producer",
+    title: "Chaiya Katkwao / Creative Producer",
     description:
       "Bangkok-based Creative Producer. Art direction, multi-camera production, and live content systems.",
     siteName: "Chaiya Katkwao",
     type: "website",
     locale: "en_US",
-    images: [
-      {
-        url: "/images/woven-memories/01.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Chaiya Katkwao — Creative Producer",
-      },
-    ],
+    images: [{ url: "/images/woven-memories/01.jpg", width: 1200, height: 630, alt: "Chaiya Katkwao" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chaiya Katkwao — Creative Producer",
-    description:
-      "Bangkok-based Creative Producer. Art direction, multi-camera production, and live content systems.",
+    title: "Chaiya Katkwao / Creative Producer",
+    description: "Bangkok-based Creative Producer. Art direction, multi-camera production, and live content systems.",
     images: ["/images/woven-memories/01.jpg"],
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      data-scroll-behavior="smooth"
-      className={`${archivoBlack.variable} ${archivo.variable}`}
-    >
+    <html lang="en" className={`${archivo.variable} ${archivoBlack.variable} ${jetbrainsMono.variable}`}>
       <body>
         <Navigation />
+        {/* Editorial spine — fixed left edge, hidden on small screens */}
+        <div
+          aria-hidden
+          className="hidden md:flex"
+          style={{
+            position: "fixed",
+            left: "18px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 50,
+            pointerEvents: "none",
+            userSelect: "none",
+          }}
+        >
+          <p
+            style={{
+              writingMode: "vertical-rl",
+              textOrientation: "mixed",
+              transform: "rotate(180deg)",
+              fontFamily: "var(--font-jetbrains-mono)",
+              fontSize: "9px",
+              letterSpacing: "0.3em",
+              textTransform: "uppercase",
+              color: "rgba(249,249,249,0.18)",
+            }}
+          >
+            Chaiya Katkwao / Creative Producer
+          </p>
+        </div>
         {children}
       </body>
     </html>

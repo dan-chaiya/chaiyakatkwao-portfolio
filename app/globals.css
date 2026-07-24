@@ -1,16 +1,50 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-ink: #0D0D0D;
-  --color-ink-soft: #1A1A1A;
-  --color-warm-grey: #9A9087;
-  --color-mid-grey: #6B6560;
-  --color-light: #F2F0EB;
-  --color-light-dim: #C8C4BC;
-  --color-border: #2A2826;
+  /* === COLOR SYSTEM — INK BLACK / GALLERY WHITE / ARCHITECTURAL GREY === */
+  --color-bg:               #000000;
+  --color-surface:          #0A0A0A;
+  --color-surface-elevated: #111111;
+  --color-surface-hover:    #161616;
 
+  --color-text:             #F9F9F9;
+  --color-text-muted:       #8B857F; /* B2: raised from #6B6560 for WCAG AA on #000 */
+  --color-text-dim:         #4A4744; /* B2: raised from #3D3A37 */
+  --color-text-inverse:     #000000;
+
+  --color-border:           rgba(249, 249, 249, 0.09);
+  --color-border-strong:    rgba(249, 249, 249, 0.22);
+
+  --color-grey-100: #F9F9F9;
+  --color-grey-200: #E5E5E3;
+  --color-grey-300: #C8C4BC;
+  --color-grey-400: #9A9087;
+  --color-grey-500: #6B6560;
+  --color-grey-600: #3D3A37;
+  --color-grey-700: #2A2826;
+  --color-grey-800: #1A1816;
+  --color-grey-900: #0D0B0A;
+
+  /* === WARM SURFACES (toned toward hue 35, used in hero, info panels, CV) === */
+  --color-warm:         #F2F0EB;
+  --color-surface-chat: #0D0D0D;
+  --color-surface-dark: #161514;
+  --color-border-muted: #1E1C1A;
+
+  /* === SELECTION / FOCUS === */
+  --color-focus-ring:       rgba(249, 249, 249, 0.55);
+  --color-selection-bg:     #F9F9F9;
+  --color-selection-text:   #000000;
+
+  /* === ACCENT === */
+  --color-accent: oklch(72% 0.18 35);
+  --color-accent-dim: oklch(72% 0.18 35 / 0.3);
+
+  /* === TYPOGRAPHY === */
+  --font-display: var(--font-archivo-black);
+  --font-body:    var(--font-jakarta);
+  --font-mono:    var(--font-jetbrains-mono);
   --font-heading: var(--font-archivo-black);
-  --font-body: var(--font-archivo);
 }
 
 * {
@@ -24,27 +58,124 @@ html {
 }
 
 body {
-  background-color: #0D0D0D;
-  color: #F2F0EB;
-  font-family: var(--font-archivo), sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  font-size: clamp(1rem, 1.8vw, 1.15rem); /* B2: body floor 16px */
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
+/* Subtle grain overlay — barely visible, purely tactile */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.038;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
 ::selection {
-  background-color: #F2F0EB;
-  color: #0D0D0D;
+  background-color: var(--color-selection-bg);
+  color: var(--color-selection-text);
 }
 
-::-webkit-scrollbar {
-  width: 2px;
+/* Scrollbar — architectural minimal */
+::-webkit-scrollbar { width: 1px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-grey-700); }
+
+*:focus-visible {
+  outline: 1px solid var(--color-focus-ring);
+  outline-offset: 3px;
 }
 
-::-webkit-scrollbar-track {
-  background: #0D0D0D;
+/* Layout shell */
+.section-shell {
+  margin-inline: auto;
+  width: min(1280px, calc(100% - 3rem));
 }
 
-::-webkit-scrollbar-thumb {
-  background: #6B6560;
+/* Bauhaus architectural rule — 0.5px visual weight via opacity */
+.bauhaus-rule {
+  border-top: 1px solid var(--color-border);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* ── 12-COLUMN BAUHAUS GRID ──────────────────────────
+   All gutter values are multiples of 8px.
+   The 0.5px rules align to column edges exactly.
+   ─────────────────────────────────────────────────── */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0;               /* gaps expressed via padding, not grid-gap */
+  column-gap: 24px;     /* 3 × 8px */
+}
+
+/* Masonry grid for art gallery — natural aspect ratios, no cropping */
+.masonry {
+  columns: 1;
+  column-gap: 16px; /* B5: raised from 3px so gallery sets no longer merge */
+}
+@media (min-width: 640px)  { .masonry { columns: 2; } }
+@media (min-width: 1024px) { .masonry { columns: 3; } }
+
+.masonry-item {
+  break-inside: avoid;
+  display: block;
+  margin-bottom: 16px; /* B5: raised from 3px */
+}
+
+/* Natural AR image — never crops */
+.img-natural {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Mono label — the system's label infrastructure */
+.mono-label {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;        /* B2: raised from 9px so labels are legible */
+  font-weight: 500;       /* B2: 500 per type scale */
+  letter-spacing: 0.18em; /* B2: eased from 0.25em at the larger size */
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  line-height: 1;
+}
+
+/* Heading weight — Plus Jakarta Sans ExtraBold for strong hierarchy */
+h1, h2 { font-weight: 800; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Gentle, non-destructive Ken-Burns for pristine art in the hero.
+   Presentation only — the source image file is never modified. */
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+.kenburns {
+  animation: kenburns 7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .kenburns { animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

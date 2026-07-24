@@ -10,12 +10,18 @@ const OPENING: Message = {
   content: "Hey — I'm Chaiya. Ask me anything about my work, or just say hi.",
 };
 
+const SUGGESTIONS = [
+  "What's your background?",
+  "Tell me about the Knack Factory project",
+  "What are you available for?",
+];
+
 const mono: React.CSSProperties = {
   fontFamily: "var(--font-jetbrains-mono)",
-  fontSize: "6.5pt",
-  letterSpacing: "0.32em",
+  fontSize: "11px",
+  letterSpacing: "0.28em",
   textTransform: "uppercase",
-  color: "#6B6560",
+  color: "var(--color-grey-400)",
 };
 
 export default function ChatInterface() {
@@ -23,6 +29,7 @@ export default function ChatInterface() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const hasUserMessages = messages.some(m => m.role === "user");
   const idRef = useRef(0);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -74,7 +81,7 @@ export default function ChatInterface() {
   }
 
   return (
-    <div style={{ backgroundColor: "#0D0D0D", minHeight: "100vh", paddingTop: "64px" }}>
+    <div style={{ backgroundColor: "var(--color-surface-chat)", minHeight: "100vh", paddingTop: "64px" }}>
       <p style={{ ...mono, padding: "24px 32px 0" }}>Chat</p>
 
       <div
@@ -83,15 +90,18 @@ export default function ChatInterface() {
       >
         {/* Left — identity */}
         <div
-          style={{ flexShrink: 0, paddingBottom: "24px", marginBottom: "24px", borderBottom: "1px solid #2A2826" }}
+          style={{ flexShrink: 0, paddingBottom: "24px", marginBottom: "24px", borderBottom: "1px solid var(--color-grey-700)" }}
           className="lg:w-72 lg:pr-10 lg:border-r lg:border-b-0 lg:pb-0 lg:mb-0"
         >
           <p style={{ ...mono, marginBottom: "12px" }}>Speaking with</p>
-          <h1 style={{ fontFamily: "var(--font-jakarta)", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 0.92, letterSpacing: "-0.03em", color: "#F2F0EB", textTransform: "uppercase", marginBottom: "16px" }}>
+          <h1 style={{ fontFamily: "var(--font-heading)", fontWeight: 400, fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 0.92, letterSpacing: "-0.03em", color: "var(--color-warm)", textTransform: "uppercase", marginBottom: "16px" }}>
             Chaiya /<br />Katkwao.
           </h1>
-          <p style={{ fontFamily: "var(--font-jakarta)", fontSize: "8.5pt", color: "#6B6560", lineHeight: 1.6 }}>
+          <p style={{ fontFamily: "var(--font-jakarta)", fontSize: "13px", color: "var(--color-grey-400)", lineHeight: 1.6 }}>
             Creative Producer<br />Bangkok, Thailand
+          </p>
+          <p style={{ fontFamily: "var(--font-jakarta)", fontSize: "12px", color: "var(--color-grey-600)", lineHeight: 1.5, marginTop: "10px" }}>
+            Ask me about my work, clients, or process.
           </p>
         </div>
 
@@ -100,32 +110,58 @@ export default function ChatInterface() {
           <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: "12px", paddingBottom: "16px" }}>
             {messages.map(m => (
               <div key={m.id} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
-                <div style={{ maxWidth: "80%", padding: "10px 14px", backgroundColor: m.role === "user" ? "#F2F0EB" : "#161514", border: m.role === "user" ? "none" : "1px solid #1E1C1A", color: m.role === "user" ? "#0D0D0D" : "#C8C4BC", fontFamily: "var(--font-jakarta)", fontSize: "8.5pt", lineHeight: 1.7 }}>
+                <div style={{ maxWidth: "80%", padding: "12px 16px", backgroundColor: m.role === "user" ? "var(--color-warm)" : "var(--color-surface-dark)", border: m.role === "user" ? "none" : "1px solid var(--color-border-muted)", color: m.role === "user" ? "var(--color-surface-chat)" : "var(--color-grey-200)", fontFamily: "var(--font-jakarta)", fontSize: "14px", lineHeight: 1.7 }}>
                   {m.content || (
-                    <span style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "8pt", color: "#6B6560" }}>...</span>
+                    <span style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "11px", color: "var(--color-grey-500)" }}>...</span>
                   )}
                 </div>
               </div>
             ))}
+            {!hasUserMessages && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "8px" }}>
+                {SUGGESTIONS.map(s => (
+                  <button
+                    key={s}
+                    onClick={() => { setInput(s); inputRef.current?.focus(); }}
+                    style={{
+                      fontFamily: "var(--font-jetbrains-mono)",
+                      fontSize: "11px",
+                      letterSpacing: "0.08em",
+                      color: "var(--color-grey-300)",
+                      background: "transparent",
+                      border: "1px solid var(--color-border-muted)",
+                      padding: "8px 14px",
+                      cursor: "pointer",
+                      textAlign: "left",
+                      transition: "border-color 180ms ease, color 180ms ease",
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--color-grey-500)"; e.currentTarget.style.color = "var(--color-text)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--color-border-muted)"; e.currentTarget.style.color = "var(--color-grey-300)"; }}
+                  >
+                    {s} →
+                  </button>
+                ))}
+              </div>
+            )}
             {error && (
               <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                <div style={{ padding: "10px 14px", backgroundColor: "#161514", border: "1px solid #1E1C1A", color: "#6B6560", fontFamily: "var(--font-jakarta)", fontSize: "8.5pt" }}>Something went wrong — try again.</div>
+                <div style={{ padding: "12px 16px", backgroundColor: "var(--color-surface-dark)", border: "1px solid var(--color-border-muted)", color: "var(--color-grey-400)", fontFamily: "var(--font-jakarta)", fontSize: "14px" }}>Something went wrong — try again.</div>
               </div>
             )}
             <div ref={bottomRef} />
           </div>
 
           <form onSubmit={handleSubmit}>
-            <div style={{ border: "1px solid #2A2826", display: "flex", alignItems: "center" }}>
+            <div style={{ border: "1px solid var(--color-grey-700)", display: "flex", alignItems: "center" }}>
               <input
                 ref={inputRef}
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 placeholder="Ask something..."
                 disabled={isLoading}
-                style={{ flex: 1, background: "transparent", border: "none", outline: "none", padding: "12px 16px", fontFamily: "var(--font-jakarta)", fontSize: "8.5pt", color: "#F2F0EB", caretColor: "#F2F0EB" }}
+                style={{ flex: 1, background: "transparent", border: "none", outline: "none", padding: "14px 16px", fontFamily: "var(--font-jakarta)", fontSize: "14px", color: "var(--color-warm)", caretColor: "var(--color-warm)" }}
               />
-              <button type="submit" disabled={isLoading || !input.trim()} style={{ padding: "12px 16px", color: isLoading || !input.trim() ? "#3A3836" : "#6B6560", fontFamily: "var(--font-jetbrains-mono)", fontSize: "10pt", background: "transparent", border: "none", cursor: isLoading || !input.trim() ? "not-allowed" : "pointer", transition: "color 0.15s" }}>↵</button>
+              <button type="submit" disabled={isLoading || !input.trim()} style={{ padding: "12px 16px", color: isLoading || !input.trim() ? "var(--color-grey-600)" : "var(--color-grey-500)", fontFamily: "var(--font-jetbrains-mono)", fontSize: "10pt", background: "transparent", border: "none", cursor: isLoading || !input.trim() ? "not-allowed" : "pointer", transition: "color 0.15s" }}>↵</button>
             </div>
           </form>
         </div>

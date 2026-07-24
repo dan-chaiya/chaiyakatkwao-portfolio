@@ -43,11 +43,12 @@ const capabilities = [
 ];
 
 const clients = [
+  "Colgate",
   "Dutchmil Delivery",
   "Fitflop",
   "Guess",
   "Her Hyness",
-  "Nestlé Health Science",
+  "Nestlé",
   "Rojukiss",
   "Sunnies Studio Thailand",
   "Tokfashion",
@@ -67,7 +68,7 @@ export default function About() {
               initial={{ opacity: 0, y: 12 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="font-body text-[10px] tracking-[0.3em] uppercase text-[#6B6560] mb-8"
+              className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8"
             >
               About
             </motion.p>
@@ -77,7 +78,7 @@ export default function About() {
               initial={{ opacity: 0, y: 32 }}
               viewport={{ once: true }}
               transition={{ duration: 1.1, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="font-heading text-[#F2F0EB] leading-[0.92] mb-16"
+              className="font-heading text-[var(--color-warm)] leading-[0.92] mb-16"
               style={{
                 fontSize: "clamp(3rem, 8vw, 7rem)",
                 letterSpacing: "-0.02em",
@@ -97,7 +98,7 @@ export default function About() {
             >
               <motion.p
                 variants={fadeUp}
-                className="font-body text-sm leading-relaxed tracking-wide text-[#C8C4BC]"
+                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-grey-300)]"
                 style={{ fontWeight: 300 }}
               >
                 Chaiya is a Bangkok-based Creative Producer working at the
@@ -106,7 +107,7 @@ export default function About() {
 
               <motion.p
                 variants={fadeUp}
-                className="font-body text-sm leading-relaxed tracking-wide text-[#6B6560]"
+                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-grey-400)]"
                 style={{ fontWeight: 300 }}
               >
                 Raised between the rhythms of rural Udon Thani and the density
@@ -119,7 +120,7 @@ export default function About() {
 
               <motion.p
                 variants={fadeUp}
-                className="font-body text-sm leading-relaxed tracking-wide text-[#6B6560]"
+                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-grey-400)]"
                 style={{ fontWeight: 300 }}
               >
                 Now at Ad The Top Agency, he develops multi-camera productions
@@ -129,7 +130,7 @@ export default function About() {
 
               <motion.p
                 variants={fadeUp}
-                className="font-body text-sm leading-relaxed tracking-wide text-[#C8C4BC]"
+                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-grey-300)]"
                 style={{ fontWeight: 400, fontStyle: "italic" }}
               >
                 He is interested in one thing: making creative work that
@@ -138,10 +139,10 @@ export default function About() {
             </motion.div>
 
             <FadeIn delay={0.1} className="mt-16">
-              <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-2">
+              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-2">
                 Education
               </p>
-              <p className="font-body text-[#C8C4BC] text-xs tracking-wide">
+              <p className="font-body text-[var(--color-grey-300)] text-[13px] tracking-wide">
                 BFA Photography — Chiang Mai University, 2020–2025
               </p>
             </FadeIn>
@@ -155,7 +156,7 @@ export default function About() {
               initial={{ opacity: 0, scale: 1.03 }}
               viewport={{ once: true }}
               transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-[3/4] overflow-hidden bg-[#161514] mb-12"
+              className="relative aspect-[3/4] overflow-hidden bg-[var(--color-surface-dark)] mb-12"
             >
               <Image
                 src="/images/portrait/dan.jpg"
@@ -169,7 +170,7 @@ export default function About() {
 
             {/* Experience timeline */}
             <div>
-              <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-6">
+              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
                 Experience
               </p>
               <div className="space-y-px">
@@ -184,29 +185,29 @@ export default function About() {
                       delay: i * 0.1,
                       ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                     }}
-                    className="border-t border-[#2A2826] py-4"
+                    className="border-t border-[var(--color-grey-700)] py-4"
                   >
                     <div className="flex items-start justify-between mb-1">
-                      <p className="font-body text-[#C8C4BC] text-xs tracking-wide flex-1 min-w-0 pr-4">
+                      <p className="font-body text-[var(--color-grey-300)] text-[13px] tracking-wide flex-1 min-w-0 pr-4">
                         {item.role}
                       </p>
-                      <span className="font-body text-[9px] text-[#6B6560] tracking-[0.05em] shrink-0 whitespace-nowrap">
+                      <span className="font-body text-[11px] text-[var(--color-grey-400)] tracking-[0.05em] shrink-0 whitespace-nowrap">
                         {item.period}
                       </span>
                     </div>
-                    <p className="font-body text-[#6B6560] text-[10px] tracking-[0.1em]">
+                    <p className="font-body text-[var(--color-grey-400)] text-[12px] tracking-[0.08em]">
                       {item.company} — {item.location}
                     </p>
                   </motion.div>
                 ))}
-                <div className="border-t border-[#2A2826]" />
+                <div className="border-t border-[var(--color-grey-700)]" />
               </div>
             </div>
 
             {/* Capabilities */}
             <div className="mt-12">
               <FadeIn>
-                <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-6">
+                <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
                   Capabilities
                 </p>
               </FadeIn>
@@ -220,12 +221,12 @@ export default function About() {
                   <motion.div
                     key={cap}
                     variants={fadeUp}
-                    className="border-t border-[#2A2826] py-3"
+                    className="border-t border-[var(--color-grey-700)] py-3"
                   >
-                    <p className="font-body text-[#9A9087] text-xs tracking-wide">{cap}</p>
+                    <p className="font-body text-[var(--color-grey-300)] text-[13px] tracking-wide">{cap}</p>
                   </motion.div>
                 ))}
-                <div className="border-t border-[#2A2826]" />
+                <div className="border-t border-[var(--color-grey-700)]" />
               </motion.div>
             </div>
           </div>
@@ -233,13 +234,13 @@ export default function About() {
       </section>
 
       {/* Selected clients */}
-      <section className="border-t border-[#2A2826] px-8 py-24">
+      <section className="border-t border-[var(--color-grey-700)] px-8 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-3">
-            <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-2">
+            <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-2">
               Selected
             </p>
-            <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560]">
+            <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)]">
               Clients
             </p>
           </div>
@@ -256,20 +257,20 @@ export default function About() {
                     delay: i * 0.04,
                     ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                   }}
-                  className="border-t border-[#2A2826] py-4 flex items-baseline justify-between last:border-b"
+                  className="border-t border-[var(--color-grey-700)] py-4 flex items-baseline justify-between last:border-b"
                 >
                   <span
-                    className="font-heading text-[#F2F0EB]"
+                    className="font-heading text-[var(--color-warm)]"
                     style={{
                       fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)",
                       lineHeight: 1.05,
                       letterSpacing: "-0.02em",
-                      fontWeight: 800,
+                      fontWeight: 400,
                     }}
                   >
                     {name}
                   </span>
-                  <span className="font-body text-[9px] tracking-[0.2em] text-[#2A2826]">
+                  <span className="font-body text-[11px] tracking-[0.18em] text-[var(--color-grey-400)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </motion.li>
@@ -280,7 +281,7 @@ export default function About() {
       </section>
 
       {/* Contact section */}
-      <section className="border-t border-[#2A2826] px-8 py-24">
+      <section className="border-t border-[var(--color-grey-700)] px-8 py-24">
         <motion.div
           whileInView={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: 20 }}
@@ -291,11 +292,11 @@ export default function About() {
           }}
           className="max-w-3xl"
         >
-          <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-8">
+          <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8">
             Contact
           </p>
           <h2
-            className="font-heading text-[#F2F0EB] leading-[0.92] mb-10"
+            className="font-heading text-[var(--color-warm)] leading-[0.92] mb-10"
             style={{
               fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
               letterSpacing: "-0.02em",
@@ -310,7 +311,7 @@ export default function About() {
               href="mailto:chaiyakatkwao@gmail.com"
               whileHover={{ y: -3 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="font-body inline-block text-xs tracking-[0.2em] uppercase text-[#F2F0EB] border border-[#F2F0EB] px-8 py-4 hover:bg-[#F2F0EB] hover:text-[#0D0D0D] transition-all duration-500"
+              className="font-body inline-block text-xs tracking-[0.05em] sm:tracking-[0.2em] uppercase text-[var(--color-warm)] border border-[var(--color-warm)] px-4 sm:px-8 py-4 hover:bg-[var(--color-warm)] hover:text-[var(--color-surface-chat)] transition-all duration-500"
             >
               chaiyakatkwao@gmail.com
             </motion.a>
@@ -318,7 +319,7 @@ export default function About() {
               href="/cv"
               whileHover={{ y: -3 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="font-body inline-block text-xs tracking-[0.2em] uppercase text-[#6B6560] border border-[#2A2826] px-8 py-4 hover:border-[#F2F0EB] hover:text-[#F2F0EB] transition-all duration-500"
+              className="font-body inline-block text-xs tracking-[0.2em] uppercase text-[var(--color-grey-500)] border border-[var(--color-grey-700)] px-8 py-4 hover:border-[var(--color-warm)] hover:text-[var(--color-warm)] transition-all duration-500"
             >
               View CV →
             </motion.a>

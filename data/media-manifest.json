@@ -1,0 +1,151 @@
+{
+  "version": "1.0.0-real",
+  "generatedAt": "2026-07-24",
+  "note": "Motion policy: original artworks are NEVER altered — art sets are pristine stills (kind:'still', real /images paths). The only moving assets are real live-commerce video footage (kind:'hero-loop'), trimmed/muted/looped with ffmpeg into /videos/motion. No AI-generated motion is applied to any artwork. UI motion (scroll reveals, parallax, hover, transitions) lives in components, not here.",
+  "assets": [
+    {
+      "id": "live-fitflop-may",
+      "set": "live-commerce",
+      "kind": "hero-loop",
+      "flagged": ["hero", "reel"],
+      "poster": "/videos/motion/live-fitflop-may.poster.jpg",
+      "sources": [
+        { "src": "/videos/motion/live-fitflop-may.webm", "type": "video/webm" },
+        { "src": "/videos/motion/live-fitflop-may.mp4", "type": "video/mp4" }
+      ],
+      "still": [],
+      "alt": "Live commerce production — Fitflop",
+      "aspect": 0.5625,
+      "durationS": 6,
+      "treatment": ["hero-loop", "poster"]
+    },
+    {
+      "id": "live-guess",
+      "set": "live-commerce",
+      "kind": "hero-loop",
+      "flagged": ["hero", "reel"],
+      "poster": "/videos/motion/live-guess.poster.jpg",
+      "sources": [
+        { "src": "/videos/motion/live-guess.webm", "type": "video/webm" },
+        { "src": "/videos/motion/live-guess.mp4", "type": "video/mp4" }
+      ],
+      "still": [],
+      "alt": "Live commerce production — Guess",
+      "aspect": 0.5625,
+      "durationS": 6,
+      "treatment": ["hero-loop", "poster"]
+    },
+    {
+      "id": "live-sunnies",
+      "set": "live-commerce",
+      "kind": "hero-loop",
+      "flagged": ["reel"],
+      "poster": "/videos/motion/live-sunnies.poster.jpg",
+      "sources": [
+        { "src": "/videos/motion/live-sunnies.webm", "type": "video/webm" },
+        { "src": "/videos/motion/live-sunnies.mp4", "type": "video/mp4" }
+      ],
+      "still": [],
+      "alt": "Live commerce production — Sunnies",
+      "aspect": 0.5625,
+      "durationS": 6,
+      "treatment": ["hero-loop", "poster"]
+    },
+    {
+      "id": "live-nestle",
+      "set": "live-commerce",
+      "kind": "hero-loop",
+      "flagged": ["reel"],
+      "poster": "/videos/motion/live-nestle.poster.jpg",
+      "sources": [
+        { "src": "/videos/motion/live-nestle.webm", "type": "video/webm" },
+        { "src": "/videos/motion/live-nestle.mp4", "type": "video/mp4" }
+      ],
+      "still": [],
+      "alt": "Live commerce production — Nestlé",
+      "aspect": 0.5625,
+      "durationS": 6,
+      "treatment": ["hero-loop", "poster"]
+    },
+    {
+      "id": "live-rojukiss-may",
+      "set": "live-commerce",
+      "kind": "hero-loop",
+      "flagged": ["reel"],
+      "poster": "/videos/motion/live-rojukiss-may.poster.jpg",
+      "sources": [
+        { "src": "/videos/motion/live-rojukiss-may.webm", "type": "video/webm" },
+        { "src": "/videos/motion/live-rojukiss-may.mp4", "type": "video/mp4" }
+      ],
+      "still": [],
+      "alt": "Live commerce production — Rojukiss",
+      "aspect": 0.5625,
+      "durationS": 6,
+      "treatment": ["hero-loop", "poster"]
+    },
+    {
+      "id": "live-dutchmil-may",
+      "set": "live-commerce",
+      "kind": "hero-loop",
+      "flagged": ["reel"],
+      "poster": "/videos/motion/live-dutchmil-may.poster.jpg",
+      "sources": [
+        { "src": "/videos/motion/live-dutchmil-may.webm", "type": "video/webm" },
+        { "src": "/videos/motion/live-dutchmil-may.mp4", "type": "video/mp4" }
+      ],
+      "still": [],
+      "alt": "Live commerce production — Dutchie Milk",
+      "aspect": 0.5625,
+      "durationS": 6,
+      "treatment": ["hero-loop", "poster"]
+    },
+    {
+      "id": "woven-01",
+      "set": "woven-memories",
+      "kind": "still",
+      "flagged": ["hero"],
+      "poster": "/images/woven-memories/01.jpg",
+      "sources": [],
+      "still": [{ "src": "/images/woven-memories/01.jpg", "w": 2400, "h": 1600 }],
+      "alt": "Woven Memories, 2025 — woven-textile fashion portrait",
+      "aspect": 1.5,
+      "treatment": ["original"]
+    },
+    {
+      "id": "knack-75",
+      "set": "knack-factory",
+      "kind": "still",
+      "flagged": [],
+      "poster": "/work-assets/Knack Factory Fashion show, 2024/Knack-75.jpg",
+      "sources": [],
+      "still": [{ "src": "/work-assets/Knack Factory Fashion show, 2024/Knack-75.jpg", "w": 2065, "h": 2581 }],
+      "alt": "Knack Factory Fashion Show, 2024 — beaded runway look",
+      "aspect": 0.8,
+      "treatment": ["original"]
+    },
+    {
+      "id": "kck-01",
+      "set": "khun-chang-khian",
+      "kind": "still",
+      "flagged": [],
+      "poster": "/images/khun-chang-khian/01.jpg",
+      "sources": [],
+      "still": [{ "src": "/images/khun-chang-khian/01.jpg", "w": 1800, "h": 2400 }],
+      "alt": "Khun Chang Khian, 2024 — documentary portrait, Northern Thailand",
+      "aspect": 0.75,
+      "treatment": ["original"]
+    },
+    {
+      "id": "podcast-mg8860",
+      "set": "podcast",
+      "kind": "still",
+      "flagged": ["hero"],
+      "poster": "/work-assets/Pocast Producer at Modal Creative Studio, 2025-2026/_MG_8860.JPG",
+      "sources": [],
+      "still": [{ "src": "/work-assets/Pocast Producer at Modal Creative Studio, 2025-2026/_MG_8860.JPG", "w": 6000, "h": 3368 }],
+      "alt": "Podcast Producer at Modal Creative Studio, 2025–2026",
+      "aspect": 1.7815,
+      "treatment": ["original"]
+    }
+  ]
+}
