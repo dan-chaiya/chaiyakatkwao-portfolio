@@ -53,7 +53,7 @@ export default function CaseStudy({
         <div className="mb-12">
           <Link
             href="/commercial"
-            className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] hover:text-[#F2F0EB] transition-colors duration-300"
+            className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] hover:text-[var(--color-warm)] transition-colors duration-300"
           >
             ← Commercial
           </Link>
@@ -62,16 +62,16 @@ export default function CaseStudy({
         {/* Header */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-16">
           <div className="md:col-span-1">
-            <span className="font-body text-[9px] tracking-[0.2em] text-[#2A2826]">
+            <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">
               {project.id}
             </span>
           </div>
           <div className="md:col-span-7">
-            <p className="font-body text-[9px] tracking-[0.35em] uppercase text-[#6B6560] mb-5">
+            <p className="font-body text-[11px] tracking-[0.35em] uppercase text-[var(--color-grey-500)] mb-5">
               {project.subtitle}
             </p>
             <h1
-              className="font-heading text-[#F2F0EB] mb-8"
+              className="font-heading text-[var(--color-warm)] mb-8"
               style={{
                 fontSize: "clamp(2.5rem, 7vw, 6rem)",
                 lineHeight: 0.92,
@@ -80,36 +80,36 @@ export default function CaseStudy({
             >
               {project.title}.
             </h1>
-            <p className="font-body text-[#C8C4BC] text-sm leading-relaxed tracking-wide max-w-xl">
+            <p className="font-body text-[var(--color-grey-300)] text-sm leading-relaxed tracking-wide max-w-xl">
               {project.description}
             </p>
           </div>
           <div className="md:col-span-4 md:pl-8 flex flex-col gap-6 md:gap-8 mt-4 md:mt-0">
             <div>
-              <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-2">
+              <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
                 Role
               </p>
-              <p className="font-body text-[#C8C4BC] text-xs tracking-wide">
+              <p className="font-body text-[var(--color-grey-300)] text-xs tracking-wide">
                 {project.role}
               </p>
             </div>
             <div>
-              <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-2">
+              <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
                 Year
               </p>
-              <p className="font-body text-[#C8C4BC] text-xs tracking-wide">
+              <p className="font-body text-[var(--color-grey-300)] text-xs tracking-wide">
                 {project.year}
               </p>
             </div>
             <div>
-              <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-2">
+              <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
                 Discipline
               </p>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="font-body text-[9px] tracking-[0.15em] uppercase text-[#6B6560] border border-[#1E1C1A] px-2 py-1"
+                    className="font-body text-[11px] tracking-[0.15em] uppercase text-[var(--color-grey-500)] border border-[var(--color-border)] px-2 py-1"
                   >
                     {tag}
                   </span>
@@ -127,7 +127,7 @@ export default function CaseStudy({
             duration: 1,
             ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
-          className="relative w-full overflow-hidden bg-[#111] mb-4 cursor-pointer group"
+          className="relative w-full overflow-hidden bg-[var(--color-surface)] mb-4 cursor-pointer group"
           style={{ maxHeight: "80vh" }}
           onClick={() => setLightbox({ images: allImages, index: 0 })}
         >
@@ -140,10 +140,10 @@ export default function CaseStudy({
             className="img-natural transition-transform duration-700 ease-out group-hover:scale-[1.01]"
             priority
           />
-          <div className="absolute inset-0 bg-[#0D0D0D]/0 group-hover:bg-[#0D0D0D]/20 transition-colors duration-500" />
+          <div className="absolute inset-0 bg-[var(--color-bg)]/0 group-hover:bg-[var(--color-bg)]/20 transition-colors duration-500" />
           {/* Hint that clicking opens the full image */}
           <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="font-body text-[9px] tracking-[0.2em] uppercase text-[#F2F0EB] border border-[#F2F0EB]/50 px-3 py-2">
+            <span className="font-body text-[11px] tracking-[0.2em] uppercase text-[var(--color-warm)] border border-[var(--color-border-strong)] px-3 py-2">
               View full ↗
             </span>
           </div>
@@ -163,7 +163,7 @@ export default function CaseStudy({
           >
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
               <div className="md:col-span-3">
-                <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560]">
+                <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">
                   The Brief
                 </p>
               </div>
@@ -171,7 +171,7 @@ export default function CaseStudy({
                 {project.brief.map((para, i) => (
                   <p
                     key={i}
-                    className="font-body leading-relaxed tracking-wide text-[#C8C4BC]"
+                    className="font-body leading-relaxed tracking-wide text-[var(--color-grey-300)]"
                     style={{
                       fontSize: "clamp(1rem, 1.4vw, 1.25rem)",
                       fontWeight: 300,
@@ -199,7 +199,7 @@ export default function CaseStudy({
                 delay: 0.05,
                 ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
               }}
-              className="relative w-full overflow-hidden bg-[#111] cursor-pointer group"
+              className="relative w-full overflow-hidden bg-[var(--color-surface)] cursor-pointer group"
               onClick={() => setLightbox({ images: allImages, index: i + 1 })}
             >
               <Image
@@ -210,7 +210,7 @@ export default function CaseStudy({
                 sizes="100vw"
                 className="img-natural transition-transform duration-700 ease-out group-hover:scale-[1.01]"
               />
-              <div className="absolute inset-0 bg-[#0D0D0D]/0 group-hover:bg-[#0D0D0D]/20 transition-colors duration-500" />
+              <div className="absolute inset-0 bg-[var(--color-bg)]/0 group-hover:bg-[var(--color-bg)]/20 transition-colors duration-500" />
             </motion.div>
           ))}
         </div>
@@ -225,14 +225,14 @@ export default function CaseStudy({
               duration: 1,
               ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
             }}
-            className="mt-32 pt-16 border-t border-[#1E1C1A]"
+            className="mt-32 pt-16 border-t border-[var(--color-border)]"
           >
             <div className="flex items-center gap-8 mb-12">
-              <span className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560]">
+              <span className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">
                 Selected Episodes
               </span>
-              <div className="flex-1 h-px bg-[#1E1C1A]" />
-              <span className="font-body text-[9px] tracking-[0.2em] text-[#2A2826]">
+              <div className="flex-1 h-px bg-[var(--color-border)]" />
+              <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">
                 {String(project.youtubeIds.length).padStart(2, "0")}
               </span>
             </div>
@@ -244,10 +244,10 @@ export default function CaseStudy({
                   <div key={id}>
                     <YouTubeEmbed id={id} title={meta.title} />
                     <div className="mt-3 flex items-baseline justify-between gap-4">
-                      <p className="font-body text-[10px] tracking-[0.08em] text-[#9A9087] line-clamp-2">
+                      <p className="font-body text-[11px] tracking-[0.08em] text-[var(--color-grey-400)] line-clamp-2">
                         {meta.title}
                       </p>
-                      <span className="font-body text-[9px] tracking-[0.15em] uppercase text-[#2A2826] shrink-0">
+                      <span className="font-body text-[11px] tracking-[0.15em] uppercase text-[var(--color-grey-500)] shrink-0">
                         {meta.show}
                       </span>
                     </div>
@@ -259,8 +259,8 @@ export default function CaseStudy({
         )}
 
         {/* Next project */}
-        <section className="mt-32 pt-16 border-t border-[#1E1C1A]">
-          <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[#6B6560] mb-6">
+        <section className="mt-32 pt-16 border-t border-[var(--color-border)]">
+          <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-6">
             Next
           </p>
           <Link
@@ -268,7 +268,7 @@ export default function CaseStudy({
             className="group block"
           >
             <h2
-              className="font-heading text-[#F2F0EB] transition-opacity duration-300 group-hover:opacity-60"
+              className="font-heading text-[var(--color-warm)] transition-opacity duration-300 group-hover:opacity-60"
               style={{
                 fontSize: "clamp(2.5rem, 7vw, 5.5rem)",
                 lineHeight: 0.92,
@@ -277,7 +277,7 @@ export default function CaseStudy({
             >
               {next.title} →
             </h2>
-            <p className="font-body text-[9px] tracking-[0.2em] uppercase text-[#6B6560] mt-3">
+            <p className="font-body text-[11px] tracking-[0.2em] uppercase text-[var(--color-grey-500)] mt-3">
               {next.subtitle} — {next.year}
             </p>
           </Link>

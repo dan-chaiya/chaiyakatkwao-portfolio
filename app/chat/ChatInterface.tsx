@@ -100,7 +100,7 @@ export default function ChatInterface() {
           <p style={{ fontFamily: "var(--font-jakarta)", fontSize: "13px", color: "var(--color-grey-400)", lineHeight: 1.6 }}>
             Creative Producer<br />Bangkok, Thailand
           </p>
-          <p style={{ fontFamily: "var(--font-jakarta)", fontSize: "12px", color: "var(--color-grey-600)", lineHeight: 1.5, marginTop: "10px" }}>
+          <p style={{ fontFamily: "var(--font-jakarta)", fontSize: "12px", color: "var(--color-grey-500)", lineHeight: 1.5, marginTop: "10px" }}>
             Ask me about my work, clients, or process.
           </p>
         </div>
@@ -161,7 +161,7 @@ export default function ChatInterface() {
                 disabled={isLoading}
                 style={{ flex: 1, background: "transparent", border: "none", outline: "none", padding: "14px 16px", fontFamily: "var(--font-jakarta)", fontSize: "14px", color: "var(--color-warm)", caretColor: "var(--color-warm)" }}
               />
-              <button type="submit" disabled={isLoading || !input.trim()} style={{ padding: "12px 16px", color: isLoading || !input.trim() ? "var(--color-grey-600)" : "var(--color-grey-500)", fontFamily: "var(--font-jetbrains-mono)", fontSize: "10pt", background: "transparent", border: "none", cursor: isLoading || !input.trim() ? "not-allowed" : "pointer", transition: "color 0.15s" }}>↵</button>
+              <button type="submit" disabled={isLoading || !input.trim()} style={{ padding: "12px 16px", color: isLoading || !input.trim() ? "var(--color-grey-600)" : "var(--color-grey-500)", fontFamily: "var(--font-jetbrains-mono)", fontSize: "13px", background: "transparent", border: "none", cursor: isLoading || !input.trim() ? "not-allowed" : "pointer", transition: "color 0.15s" }}>↵</button>
             </div>
           </form>
         </div>

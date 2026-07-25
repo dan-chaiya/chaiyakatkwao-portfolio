@@ -11,7 +11,7 @@ const links = [
 ];
 
 const MONO: React.CSSProperties = {
-  fontFamily: "var(--font-jakarta)",
+  fontFamily: "var(--font-jetbrains-mono)",
   fontSize: "11px",
   letterSpacing: "0.18em",
   textTransform: "uppercase" as const,

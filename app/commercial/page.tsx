@@ -201,7 +201,7 @@ export default function Commercial() {
               {/* Metadata row */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-8">
                 <div className="md:col-span-1">
-                  <span className="font-body text-[9px] tracking-[0.2em] text-[var(--color-grey-700)]">
+                  <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">
                     {project.id}
                   </span>
                 </div>
@@ -309,7 +309,7 @@ export default function Commercial() {
         >
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
             <div className="md:col-span-1">
-              <span className="font-body text-[9px] tracking-[0.2em] text-[var(--color-grey-700)]">05</span>
+              <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">05</span>
             </div>
             <div className="md:col-span-4">
               <h2
@@ -368,12 +368,11 @@ export default function Commercial() {
           className="mt-24"
         >
           <div style={{ borderTop: "1px solid rgba(249,249,249,0.18)", paddingTop: "20px", marginBottom: "48px", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-            <p className="font-body text-[9px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">Live Commerce</p>
-            <p className="font-body text-[9px] tracking-[0.2em] text-[var(--color-grey-700)]">2026</p>
+            <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">Live Commerce</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
             <div className="md:col-span-1">
-              <span className="font-body text-[9px] tracking-[0.2em] text-[var(--color-grey-700)]">06</span>
+              <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">06</span>
             </div>
             <div className="md:col-span-4">
               <h2
@@ -427,9 +426,6 @@ export default function Commercial() {
                 }}>
                   <span className="font-heading" style={{ fontSize: "0.85rem", letterSpacing: "-0.01em", color: "var(--color-warm)" }}>
                     {video.brand}
-                  </span>
-                  <span className="font-body" style={{ fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-grey-500)", whiteSpace: "nowrap" }}>
-                    Live Commerce
                   </span>
                 </div>
               </div>

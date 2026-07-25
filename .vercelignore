@@ -32,3 +32,21 @@ screenshot.mjs
 
 # typescript
 *.tsbuildinfo
+
+# heavy non-app junk (not needed for the build/site)
+.git
+.agents
+.cursor
+.impeccable
+.superpowers
+Bugs and errors
+Slide Decks
+Website
+docs
+*.zip
+Certificates.pdf
+/CV/
+FRONTEND_SPEC.md
+DESIGN.md
+PORTFOLIO_UI_IMPLEMENTATION.md
+HANDOFF.md

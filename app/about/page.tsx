@@ -130,8 +130,8 @@ export default function About() {
 
               <motion.p
                 variants={fadeUp}
-                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-grey-300)]"
-                style={{ fontWeight: 400, fontStyle: "italic" }}
+                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-warm)]"
+                style={{ fontWeight: 500 }}
               >
                 He is interested in one thing: making creative work that
                 functions as well as it looks.
@@ -302,9 +302,9 @@ export default function About() {
               letterSpacing: "-0.02em",
             }}
           >
-            Available for /
+            Let&apos;s /
             <br />
-            new work.
+            connect.
           </h2>
           <div className="flex flex-wrap items-center gap-4">
             <motion.a

@@ -184,10 +184,10 @@ export default function CVPage() {
                     fontStyle: "italic",
                   }}
                 >
-                  Creative Producer specialising in studio production,
-                  systems, and branded content. Translates complex briefs into
-                  scalable, broadcast-quality output — from multi-camera
-                  podcasts to full live commerce broadcasts.
+                  Creative Producer and AI-native systems builder. Turns complex
+                  briefs into scalable, broadcast-quality output — from multi-camera
+                  podcasts to full live commerce — and designs the AI agents,
+                  knowledge systems, and automation pipelines that run the studio.
                 </p>
               </section>
 
@@ -207,9 +207,11 @@ export default function CVPage() {
                   Visual & Audio Engineering
                 </p>
                 <p style={bodyLine}>
-                  <span style={{ color: "var(--color-grey-400)", fontWeight: 600 }}>AI</span>
-                  {" — "}Claude, Claude Code, Agentic Workflows,
-                  AI-Assisted Creative Production & Research
+                  <span style={{ color: "var(--color-grey-400)", fontWeight: 600 }}>AI Systems</span>
+                  {" — "}Claude & Claude Code, agentic assistants with tool use
+                  & persistent memory (SQLite), MCP & Vercel AI SDK; creative
+                  automation with self-hosted n8n + Obsidian; AI video pipelines
+                  (Higgsfield, ElevenLabs)
                 </p>
               </section>
 
@@ -226,7 +228,6 @@ export default function CVPage() {
                     <li>Led multi-brand live commerce production across TikTok and social platforms</li>
                     <li>Translated brand briefs into structured visual execution</li>
                     <li>Designed lighting and camera setups scalable across client brand formats</li>
-                    <li>Managed full-cycle production from brief to live broadcast</li>
                     <li>Built reusable SOPs that reduced setup time across sessions</li>
                   </ul>
                 </div>
@@ -272,7 +273,7 @@ export default function CVPage() {
           {/* FOOTER */}
           <div style={{ marginTop: "5mm", borderTop: "1px solid var(--color-border-muted)", paddingTop: "3mm", display: "flex", justifyContent: "space-between" }}>
             <p style={{ ...eyebrow, marginBottom: 0 }}>© 2026 Chaiya Katkwao</p>
-            <p style={{ ...eyebrow, marginBottom: 0 }}>Updated — May 2026</p>
+            <p style={{ ...eyebrow, marginBottom: 0 }}>Updated — July 2026</p>
           </div>
         </div>
       </div>

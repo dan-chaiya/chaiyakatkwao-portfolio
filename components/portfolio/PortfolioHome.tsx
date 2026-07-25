@@ -100,8 +100,8 @@ export default function PortfolioHome() {
                     pointerEvents: "none",
                   }}
                 >
-                  <p style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(249,249,249,0.32)" }}>
-                    Selected Work — 01
+                  <p style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(249,249,249,0.62)" }}>
+                    Selected Work
                   </p>
                   <div>
                     <h2
@@ -119,8 +119,8 @@ export default function PortfolioHome() {
                       <br />
                       Fashion Show, 2024
                     </h2>
-                    <p style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(249,249,249,0.4)" }}>
-                      Commercial Production — View Work →
+                    <p style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(249,249,249,0.62)" }}>
+                      Commercial Production
                     </p>
                   </div>
                 </div>
@@ -187,7 +187,7 @@ export default function PortfolioHome() {
                   display: "inline-block",
                   marginTop: "28px",
                   fontFamily: "var(--font-jetbrains-mono)",
-                  fontSize: "9px",
+                  fontSize: "11px",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   color: "var(--color-text-muted)",
@@ -239,14 +239,14 @@ export default function PortfolioHome() {
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "6px",
+                    gap: "7px",
                     fontFamily: "var(--font-jetbrains-mono)",
-                    fontSize: "8px",
-                    letterSpacing: "0.2em",
+                    fontSize: "11px",
+                    letterSpacing: "0.18em",
                     textTransform: "uppercase",
                     color: "var(--color-accent)",
                     border: "1px solid var(--color-accent-dim)",
-                    padding: "3px 8px",
+                    padding: "3px 9px",
                   }}
                 >
                   <span style={{
@@ -255,9 +255,9 @@ export default function PortfolioHome() {
                     borderRadius: "50%",
                     backgroundColor: "var(--color-accent)",
                     display: "inline-block",
-                    animation: "pulse 2s ease-in-out infinite",
+                    animation: reduced ? "none" : "pulse 2s ease-in-out infinite",
                   }} />
-                  Available now
+                  Available
                 </motion.span>
               </div>
               <motion.h2
@@ -275,9 +275,9 @@ export default function PortfolioHome() {
                   marginTop: "20px",
                 }}
               >
-                Available for /
+                Let&apos;s /
                 <br />
-                new work.
+                connect.
               </motion.h2>
             </div>
 
@@ -329,10 +329,6 @@ export default function PortfolioHome() {
               >
                 View CV →
               </Link>
-              <div style={{ display: "flex", justifyContent: "space-between", paddingTop: "4px" }}>
-                <span style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--color-text-dim)" }}>Bangkok, TH</span>
-                <span style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--color-text-dim)" }}>Open globally</span>
-              </div>
             </motion.div>
           </div>
         </section>
@@ -377,8 +373,8 @@ function DisciplineRow({ label, index: i, total, reduced }: { label: string; ind
       </span>
       <span style={{
         fontFamily: "var(--font-jetbrains-mono)",
-        fontSize: "9px",
-        color: hovered ? "var(--color-text-muted)" : "var(--color-text-dim)",
+        fontSize: "11px",
+        color: hovered ? "var(--color-text)" : "var(--color-text-muted)",
         letterSpacing: "0.15em",
         transition: "color 200ms ease",
       }}>
@@ -440,8 +436,8 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
                 {s.index}
               </p>
               <p style={{
-                fontFamily: "var(--font-jakarta)",
-                fontWeight: 800,
+                fontFamily: "var(--font-heading)",
+                fontWeight: 400,
                 fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
                 letterSpacing: "-0.02em",
                 color: "#F9F9F9",
@@ -450,20 +446,6 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
                 {s.title}
               </p>
             </div>
-            {/* View arrow — appears on hover */}
-            <span style={{
-              fontFamily: "var(--font-jetbrains-mono)",
-              fontSize: "9px",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "rgba(249,249,249,0.9)",
-              opacity: hovered ? 1 : 0,
-              transform: hovered ? "translateY(0)" : "translateY(6px)",
-              transition: "opacity 300ms ease, transform 300ms ease",
-              paddingBottom: "2px",
-            }}>
-              View →
-            </span>
           </div>
         </div>
       </div>
@@ -481,7 +463,7 @@ function FadeLabel({ children }: { children: string }) {
       transition={{ duration: 0.6 }}
       style={{
         fontFamily: "var(--font-jetbrains-mono)",
-        fontSize: "10px",
+        fontSize: "11px",
         letterSpacing: "0.22em",
         textTransform: "uppercase",
         color: "var(--color-text-muted)",

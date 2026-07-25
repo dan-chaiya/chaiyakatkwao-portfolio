@@ -15,7 +15,7 @@ const navLinks = [
 ];
 
 const MONO: React.CSSProperties = {
-  fontFamily: "var(--font-jakarta)",
+  fontFamily: "var(--font-jetbrains-mono)",
   fontSize: "0.8rem",
   letterSpacing: "0.18em",
   textTransform: "uppercase" as const,

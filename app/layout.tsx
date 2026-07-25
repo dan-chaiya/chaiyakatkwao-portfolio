@@ -53,35 +53,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={`${archivo.variable} ${archivoBlack.variable} ${jetbrainsMono.variable}`}>
       <body>
         <Navigation />
-        {/* Editorial spine — fixed left edge, hidden on small screens */}
-        <div
-          aria-hidden
-          className="hidden md:flex"
-          style={{
-            position: "fixed",
-            left: "18px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            zIndex: 50,
-            pointerEvents: "none",
-            userSelect: "none",
-          }}
-        >
-          <p
-            style={{
-              writingMode: "vertical-rl",
-              textOrientation: "mixed",
-              transform: "rotate(180deg)",
-              fontFamily: "var(--font-jetbrains-mono)",
-              fontSize: "9px",
-              letterSpacing: "0.3em",
-              textTransform: "uppercase",
-              color: "rgba(249,249,249,0.18)",
-            }}
-          >
-            Chaiya Katkwao / Creative Producer
-          </p>
-        </div>
         {children}
       </body>
     </html>
