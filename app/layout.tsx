@@ -28,13 +28,14 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://chaiyakatkwao.com"
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Chaiya Katkwao / Creative Producer",
+  title: "Chaiya Katkwao | Creative Producer - Bangkok",
   description:
-    "Bangkok-based Creative Producer. Art direction, multi-camera production, and live content systems.",
+    "Chaiya Katkwao (CK) Creative Producer ในกรุงเทพฯ ที่เชี่ยวชาญด้าน Art Direction, AV Engineering, Live Commerce และ Production",
   openGraph: {
-    title: "Chaiya Katkwao / Creative Producer",
+    title: "Chaiya Katkwao | Creative Producer - Bangkok",
     description:
-      "Bangkok-based Creative Producer. Art direction, multi-camera production, and live content systems.",
+      "Chaiya Katkwao (CK) Creative Producer ในกรุงเทพฯ ที่เชี่ยวชาญด้าน Art Direction, AV Engineering, Live Commerce และ Production",
+    url: SITE_URL,
     siteName: "Chaiya Katkwao",
     type: "website",
     locale: "en_US",
@@ -42,15 +43,41 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chaiya Katkwao / Creative Producer",
-    description: "Bangkok-based Creative Producer. Art direction, multi-camera production, and live content systems.",
+    title: "Chaiya Katkwao | Creative Producer - Bangkok",
+    description: "Chaiya Katkwao (CK) Creative Producer ในกรุงเทพฯ ที่เชี่ยวชาญด้าน Art Direction, AV Engineering, Live Commerce และ Production",
     images: ["/images/woven-memories/01.jpg"],
   },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Chaiya Katkwao",
+    "jobTitle": "Creative Producer",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bangkok",
+      "addressCountry": "TH"
+    },
+    "url": SITE_URL,
+    "knowsAbout": [
+      "Art Direction",
+      "Creative Production",
+      "AV Engineering",
+      "Live Commerce",
+      "Multi-camera Production"
+    ]
+  };
+
   return (
     <html lang="en" className={`${archivo.variable} ${archivoBlack.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <Navigation />
         {children}

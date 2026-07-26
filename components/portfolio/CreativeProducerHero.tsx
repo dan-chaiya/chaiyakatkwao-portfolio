@@ -27,7 +27,7 @@ const heroSlides: HeroSlide[] = [
   {
     type: "image",
     src: workAssets.knack("Knack-75.jpg"),
-    alt: "Knack Factory Fashion Show",
+    alt: "Knack Factory Fashion Show - Creative Producer",
     portrait: true,
     info: { index: "02", title: "Knack Factory\nFashion Show", client: "Knack Factory", year: "2024", href: "/commercial/knack-factory", disciplines: ["Art Direction", "Production", "Photography"] },
   },
@@ -41,7 +41,7 @@ const heroSlides: HeroSlide[] = [
   {
     type: "image",
     src: workAssets.woven("0.jpg"),
-    alt: "Woven Memories",
+    alt: "Woven Memories - Creative Producer",
     portrait: true,
     info: { index: "04", title: "Woven Memories", client: "Personal Work", year: "2024", href: "/gallery", disciplines: ["Art Direction", "Visual Storytelling", "Creative Production"] },
   },
@@ -55,7 +55,7 @@ const heroSlides: HeroSlide[] = [
   {
     type: "image",
     src: workAssets.podcast("_MG_8860.JPG"),
-    alt: "Podcast & Studio",
+    alt: "Podcast & Studio - Creative Producer",
     portrait: true,
     info: { index: "06", title: "Podcast & Studio", client: "Independent", year: "2025–2026", href: "/commercial/podcast-studio", disciplines: ["Sound Design", "Audio Engineering", "Show Hosting & Production"] },
   },

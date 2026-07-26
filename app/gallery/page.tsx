@@ -98,7 +98,7 @@ function MasonryGrid({
           <div className="relative overflow-hidden bg-[var(--color-surface-elevated)]">
             <Image
               src={item.src}
-              alt={item.title}
+              alt={`${item.title} - ${item.series} - Chaiya Katkwao Creative Producer`}
               width={0}
               height={0}
               sizes={sizes}

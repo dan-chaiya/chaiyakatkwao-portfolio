@@ -72,7 +72,7 @@ export default function CommercialList({ projects }: { projects: Project[] }) {
             className="pointer-events-none absolute right-24 top-1/2 z-10 hidden -translate-y-1/2 overflow-hidden opacity-0 shadow-2xl transition-all duration-300 ease-out lg:block group-hover:opacity-100 group-focus-visible:opacity-100"
             style={{ width: "92px", height: "120px", transform: "translateY(-50%) scale(0.96)" }}
           >
-            <Image src={project.cover} alt="" fill sizes="92px" className="object-cover" />
+            <Image src={project.cover} alt={`${project.title} - Creative Producer Portfolio`} fill sizes="92px" className="object-cover" />
           </span>
         </Link>
       ))}

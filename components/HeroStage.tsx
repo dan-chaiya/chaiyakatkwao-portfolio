@@ -20,7 +20,7 @@ type Slide =
 
 // Verified assets: art originals via workAssets (never altered) + the optimized live loops.
 const SLIDES: Slide[] = [
-  { kind: "image", src: workAssets.woven("0.jpg"), alt: "Woven Memories, 2025" },
+  { kind: "image", src: workAssets.woven("0.jpg"), alt: "Woven Memories, 2025 - Creative Producer" },
   {
     kind: "video",
     sources: [
@@ -28,9 +28,9 @@ const SLIDES: Slide[] = [
       { src: "/videos/motion/live-fitflop-may.mp4", type: "video/mp4" },
     ],
     poster: "/videos/motion/live-fitflop-may.poster.jpg",
-    alt: "Fitflop live commerce production",
+    alt: "Fitflop live commerce production - Creative Producer",
   },
-  { kind: "image", src: workAssets.knack("Knack-75.jpg"), alt: "Knack Factory Fashion Show, 2024" },
+  { kind: "image", src: workAssets.knack("Knack-75.jpg"), alt: "Knack Factory Fashion Show, 2024 - Creative Producer" },
   {
     kind: "video",
     sources: [
@@ -38,9 +38,9 @@ const SLIDES: Slide[] = [
       { src: "/videos/motion/live-rojukiss-may.mp4", type: "video/mp4" },
     ],
     poster: "/videos/motion/live-rojukiss-may.poster.jpg",
-    alt: "Rojukiss live commerce production",
+    alt: "Rojukiss live commerce production - Creative Producer",
   },
-  { kind: "image", src: workAssets.podcast("_MG_8860.JPG"), alt: "Podcast Producer at Modal Creative Studio" },
+  { kind: "image", src: workAssets.podcast("_MG_8860.JPG"), alt: "Podcast Producer at Modal Creative Studio - Creative Producer" },
   {
     kind: "video",
     sources: [
@@ -48,7 +48,7 @@ const SLIDES: Slide[] = [
       { src: "/videos/motion/live-nestle.mp4", type: "video/mp4" },
     ],
     poster: "/videos/motion/live-nestle.poster.jpg",
-    alt: "Nestlé live commerce production",
+    alt: "Nestlé live commerce production - Creative Producer",
   },
 ];
 

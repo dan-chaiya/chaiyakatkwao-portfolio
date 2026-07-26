@@ -183,7 +183,7 @@ export default function Commercial() {
               >
                 <Image
                   src={project.cover}
-                  alt={project.title}
+                  alt={`${project.title} - Creative Producer`}
                   width={0}
                   height={0}
                   sizes="100vw"
@@ -263,7 +263,7 @@ export default function Commercial() {
                           setLightbox({
                             images: project.images.map((s, k) => ({
                               src: s,
-                              alt: `${project.title} — ${k + 2}`,
+                              alt: `${project.title} — ${k + 2} - Creative Producer`,
                               title: project.title,
                               series: project.subtitle,
                             })),
@@ -274,7 +274,7 @@ export default function Commercial() {
                         {isPodcast ? (
                           <Image
                             src={src}
-                            alt={`${project.title} ${j + 2}`}
+                            alt={`${project.title} ${j + 2} - Creative Producer`}
                             fill
                             sizes="(max-width: 768px) 33vw, 20vw"
                             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
@@ -282,7 +282,7 @@ export default function Commercial() {
                         ) : (
                           <Image
                             src={src}
-                            alt={`${project.title} ${j + 2}`}
+                            alt={`${project.title} ${j + 2} - Creative Producer`}
                             width={0}
                             height={0}
                             sizes="(max-width: 768px) 33vw, 20vw"

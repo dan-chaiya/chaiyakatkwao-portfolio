@@ -160,7 +160,7 @@ export default function About() {
             >
               <Image
                 src="/images/portrait/dan.jpg"
-                alt="Chaiya Katkwao"
+                alt="Chaiya Katkwao | Creative Producer in Bangkok"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 40vw"

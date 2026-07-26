@@ -34,10 +34,10 @@ export default function CaseStudy({
   const galleryImages = uniqueImages.filter((src) => src !== project.cover);
 
   const allImages: LbImage[] = [
-    { src: project.cover, alt: project.title, title: project.title, series: project.subtitle },
+    { src: project.cover, alt: `${project.title} - Creative Producer`, title: project.title, series: project.subtitle },
     ...galleryImages.map((src, i) => ({
       src,
-      alt: `${project.title} — ${i + 2}`,
+      alt: `${project.title} — ${i + 2} - Creative Producer`,
       title: project.title,
       series: project.subtitle,
     })),
@@ -133,7 +133,7 @@ export default function CaseStudy({
         >
           <Image
             src={project.cover}
-            alt={project.title}
+            alt={`${project.title} - Creative Producer`}
             width={0}
             height={0}
             sizes="100vw"
@@ -204,7 +204,7 @@ export default function CaseStudy({
             >
               <Image
                 src={src}
-                alt={`${project.title} ${i + 2}`}
+                alt={`${project.title} ${i + 2} - Creative Producer`}
                 width={0}
                 height={0}
                 sizes="100vw"

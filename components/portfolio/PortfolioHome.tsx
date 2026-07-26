@@ -14,21 +14,21 @@ const sections = [
     title: "Commercial",
     href: "/commercial",
     cover: workAssets.knack("Knack-75.jpg"),
-    coverAlt: "Knack Factory fashion show",
+    coverAlt: "Knack Factory fashion show - Creative Producer",
   },
   {
     index: "02",
     title: "Gallery",
     href: "/gallery",
     cover: workAssets.woven("1.jpg"),
-    coverAlt: "Woven Memories",
+    coverAlt: "Woven Memories - Creative Producer",
   },
   {
     index: "03",
     title: "About",
     href: "/about",
     cover: workAssets.podcast("Dan.jpg"),
-    coverAlt: "Portrait",
+    coverAlt: "Chaiya Katkwao Portrait - Creative Producer",
   },
 ];
 
@@ -69,7 +69,7 @@ export default function PortfolioHome() {
               <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "var(--color-surface)" }}>
                 <Image
                   src={workAssets.knack("Knack-14.jpg")}
-                  alt="Knack Factory Fashion Show 2024 — commercial production"
+                  alt="Knack Factory Fashion Show 2024 — Creative Producer Portfolio"
                   fill
                   sizes="100vw"
                   className="object-cover"
