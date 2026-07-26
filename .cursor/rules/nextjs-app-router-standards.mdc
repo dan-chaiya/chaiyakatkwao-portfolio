@@ -1,0 +1,14 @@
+---
+description: Next.js App Router standards for TSX files
+globs: **/*.tsx
+alwaysApply: false
+---
+
+# Next.js App Router Standards
+
+- Treat this codebase as a non-standard Next.js setup; do not assume legacy patterns.
+- Before implementing framework-level changes, read relevant docs in `node_modules/next/dist/docs/` and follow deprecation guidance.
+- Prefer App Router conventions (`app/` routes, server-first components, explicit client boundaries).
+- Keep components accessible by default (semantic structure, keyboard support, visible focus, readable text contrast).
+- Use concise, maintainable TSX and avoid over-abstracting one-off UI logic.
+- Preserve existing project patterns before introducing new conventions.

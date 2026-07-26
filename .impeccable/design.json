@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-09T00:00:00Z",
+  "title": "Design System: Chaiya Katkwao Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "bg": {
+        "role": "neutral",
+        "displayName": "Production Dark",
+        "canonical": "oklch(0.18 0.01 250)",
+        "tonalRamp": [
+          "oklch(0.06 0.004 250)",
+          "oklch(0.10 0.006 250)",
+          "oklch(0.18 0.010 250)",
+          "oklch(0.23 0.012 250)",
+          "oklch(0.27 0.014 250)",
+          "oklch(0.34 0.010 250)",
+          "oklch(0.50 0.010 250)",
+          "oklch(0.72 0.010 250)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Studio Surface",
+        "canonical": "oklch(0.23 0.012 250)",
+        "tonalRamp": [
+          "oklch(0.06 0.004 250)",
+          "oklch(0.10 0.006 250)",
+          "oklch(0.18 0.010 250)",
+          "oklch(0.23 0.012 250)",
+          "oklch(0.27 0.014 250)",
+          "oklch(0.34 0.010 250)",
+          "oklch(0.50 0.010 250)",
+          "oklch(0.72 0.010 250)"
+        ]
+      },
+      "surface-elevated": {
+        "role": "neutral",
+        "displayName": "Elevated Surface",
+        "canonical": "oklch(0.27 0.014 250)",
+        "tonalRamp": [
+          "oklch(0.06 0.004 250)",
+          "oklch(0.10 0.006 250)",
+          "oklch(0.18 0.010 250)",
+          "oklch(0.23 0.012 250)",
+          "oklch(0.27 0.014 250)",
+          "oklch(0.34 0.010 250)",
+          "oklch(0.50 0.010 250)",
+          "oklch(0.72 0.010 250)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Primary Text",
+        "canonical": "oklch(0.95 0.01 250)",
+        "tonalRamp": [
+          "oklch(0.18 0.010 250)",
+          "oklch(0.34 0.010 250)",
+          "oklch(0.50 0.010 250)",
+          "oklch(0.62 0.010 250)",
+          "oklch(0.72 0.010 250)",
+          "oklch(0.82 0.010 250)",
+          "oklch(0.90 0.010 250)",
+          "oklch(0.95 0.010 250)"
+        ]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Muted Text",
+        "canonical": "oklch(0.72 0.01 250)",
+        "tonalRamp": [
+          "oklch(0.18 0.010 250)",
+          "oklch(0.34 0.010 250)",
+          "oklch(0.50 0.010 250)",
+          "oklch(0.62 0.010 250)",
+          "oklch(0.72 0.010 250)",
+          "oklch(0.82 0.010 250)",
+          "oklch(0.90 0.010 250)",
+          "oklch(0.95 0.010 250)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Structural Line",
+        "canonical": "oklch(0.34 0.01 250)",
+        "tonalRamp": [
+          "oklch(0.18 0.010 250)",
+          "oklch(0.23 0.012 250)",
+          "oklch(0.27 0.014 250)",
+          "oklch(0.34 0.010 250)",
+          "oklch(0.42 0.010 250)",
+          "oklch(0.54 0.010 250)",
+          "oklch(0.68 0.010 250)",
+          "oklch(0.80 0.010 250)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Warm Signal",
+        "canonical": "oklch(0.72 0.16 35)",
+        "tonalRamp": [
+          "oklch(0.20 0.06 35)",
+          "oklch(0.30 0.10 35)",
+          "oklch(0.42 0.14 35)",
+          "oklch(0.55 0.17 35)",
+          "oklch(0.66 0.19 35)",
+          "oklch(0.72 0.16 35)",
+          "oklch(0.82 0.12 35)",
+          "oklch(0.92 0.06 35)"
+        ]
+      },
+      "accent-strong": {
+        "role": "primary",
+        "displayName": "Warm Signal Strong",
+        "canonical": "oklch(0.66 0.19 35)",
+        "tonalRamp": [
+          "oklch(0.20 0.06 35)",
+          "oklch(0.30 0.10 35)",
+          "oklch(0.42 0.14 35)",
+          "oklch(0.55 0.17 35)",
+          "oklch(0.66 0.19 35)",
+          "oklch(0.72 0.16 35)",
+          "oklch(0.82 0.12 35)",
+          "oklch(0.92 0.06 35)"
+        ]
+      },
+      "focus-ring": {
+        "role": "primary",
+        "displayName": "Focus Ring",
+        "canonical": "oklch(0.78 0.16 35)",
+        "tonalRamp": [
+          "oklch(0.20 0.06 35)",
+          "oklch(0.30 0.10 35)",
+          "oklch(0.42 0.14 35)",
+          "oklch(0.55 0.17 35)",
+          "oklch(0.66 0.19 35)",
+          "oklch(0.72 0.16 35)",
+          "oklch(0.78 0.16 35)",
+          "oklch(0.92 0.06 35)"
+        ]
+      },
+      "selection-text": {
+        "role": "neutral",
+        "displayName": "Selection Text",
+        "canonical": "oklch(0.20 0.01 250)",
+        "tonalRamp": [
+          "oklch(0.10 0.006 250)",
+          "oklch(0.15 0.008 250)",
+          "oklch(0.20 0.010 250)",
+          "oklch(0.30 0.010 250)",
+          "oklch(0.40 0.010 250)",
+          "oklch(0.55 0.010 250)",
+          "oklch(0.72 0.010 250)",
+          "oklch(0.88 0.010 250)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headlines and mobile navigation overlay. Compressed line-height — these letters are architectural."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles, project names. Light weight at large size creates contrast without visual mass."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Subtitles, project categories, secondary section labels."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text. Line length capped at 65–75ch. Italic available for emphasis — avoid bold."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Navigation links, button text, category chips. Uppercase with wide tracking for legibility at small sizes."
+      },
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "Series labels, index counters, footer credits. Information infrastructure — these identify, they do not express."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-expo-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Universal easing for all entrances and transitions. Arrives fast, lands clean. Used at 0.5–0.9s for reveals, 0.2–0.3s for state changes."
+      },
+      {
+        "name": "stagger-children",
+        "value": "0.07s delay between siblings",
+        "purpose": "Staggered entrance for list items (mobile nav links). Applied as Framer Motion stagger."
+      },
+      {
+        "name": "spring-image",
+        "value": "damping: 30, stiffness: 250",
+        "purpose": "Spring animation for Lightbox image transitions only. Not used elsewhere."
+      }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px", "purpose": "Mobile nav collapses to full-screen overlay below this." },
+      { "name": "shell-max", "value": "1200px", "purpose": "section-shell max-width. Content centers and adds 1rem gutter each side below this." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary CTA Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The only call-to-action button in the system. Fully rounded, Warm Signal background. Appears in the navigation header and contact sections.",
+      "html": "<button class=\"ds-btn-primary\">Let&apos;s work together</button>",
+      "css": ".ds-btn-primary { background: var(--color-accent); color: var(--color-selection-text); padding: 8px 16px; border-radius: 9999px; border: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.02em; text-transform: none; cursor: pointer; transition: background 200ms cubic-bezier(0.16, 1, 0.3, 1); font-family: inherit; } .ds-btn-primary:hover { background: var(--color-accent-strong); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Desktop navigation links. Uppercase label scale. Muted at rest, full text on hover.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Projects</a><a class=\"ds-nav-link\" href=\"#\">Gallery</a><a class=\"ds-nav-link\" href=\"#\">About</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 32px; align-items: center; } .ds-nav-link { color: var(--color-text-muted); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; transition: color 200ms ease; font-family: inherit; font-weight: 500; } .ds-nav-link:hover { color: var(--color-text); } .ds-nav-link:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; border-radius: 2px; }"
+    },
+    {
+      "name": "Mobile Navigation Overlay Link",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Signature component. Full-screen overlay links at display scale. The only context where the Warm Signal accent appears on text hover.",
+      "html": "<div class=\"ds-mobile-nav\"><a class=\"ds-mobile-nav-link\" href=\"#\">Commercial</a><a class=\"ds-mobile-nav-link\" href=\"#\">Gallery</a><a class=\"ds-mobile-nav-link\" href=\"#\">About</a></div>",
+      "css": ".ds-mobile-nav { display: flex; flex-direction: column; } .ds-mobile-nav-link { display: block; font-size: clamp(2.5rem, 10vw, 4.5rem); font-weight: 400; font-family: inherit; text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.92; color: var(--color-text); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--color-border); transition: color 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-mobile-nav-link:hover { color: var(--color-accent); } .ds-mobile-nav-link:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 4px; }"
+    },
+    {
+      "name": "Micro Label",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Information infrastructure. Series names, index counters, footer credits. Not for body copy or headings.",
+      "html": "<span class=\"ds-micro-label\">Woven Memories — 01 / 12</span>",
+      "css": ".ds-micro-label { font-family: inherit; font-size: 9px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-text-muted); line-height: 1; }"
+    },
+    {
+      "name": "Footer",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Minimal footer. Border-top structural line, two-column layout, micro typography throughout.",
+      "html": "<footer class=\"ds-footer\"><p class=\"ds-footer-credit\">© 2026 Chaiya Katkwao, Creative Partner</p><nav class=\"ds-footer-nav\"><a class=\"ds-footer-link\" href=\"#\">Top</a><a class=\"ds-footer-link\" href=\"#\">Projects</a><a class=\"ds-footer-link\" href=\"#\">CV</a><a class=\"ds-footer-link\" href=\"#\">Email</a></nav></footer>",
+      "css": ".ds-footer { border-top: 1px solid var(--color-border); padding: 32px 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; font-family: inherit; } .ds-footer-credit { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-muted); } .ds-footer-nav { display: flex; align-items: center; gap: 28px; } .ds-footer-link { font-size: 0.75rem; color: var(--color-text-muted); text-decoration: none; transition: color 200ms ease; } .ds-footer-link:hover { color: var(--color-text); } .ds-footer-link:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; border-radius: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Production Floor",
+    "overview": "This portfolio does not perform. It works. The visual system is built the way a production is built: structure first, then everything else earns its place. The dark shell (OKLCH hue 250, near-zero chroma) is not dramatic — it is neutral in the same way a black stage is neutral. It holds the work without comment.\n\nThe Warm Signal accent (hue 35, amber) appears where action is required. Buttons. Hover states on navigation. Text selection. It is never decorative. Its rarity is its authority.\n\nMotion is controlled and calibrated. The custom ease cubic-bezier(0.16, 1, 0.3, 1) governs every entrance. Elements arrive with confidence and stop cleanly. Nothing bounces. Nothing elastic.",
+    "keyCharacteristics": [
+      "Single-hue dark shell (hue 250) with one warm accent (hue 35), maximum contrast distance",
+      "Single type family (Archivo + Archivo Black), hierarchy through weight and scale only",
+      "Flat elevation — depth via tonal surface steps, no shadows",
+      "Motion is sparse, purposeful, and exponential-ease only",
+      "Spacing varies by context; monotony is prohibited"
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "The Warm Signal accent appears on ≤10% of any given screen surface. If it feels like it's competing for attention, it has been overused. Reduce.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tint Rule",
+        "body": "Every neutral carries OKLCH hue 250 at chroma 0.01–0.014. Nothing in this system is pure grey. The tint is subtle enough to be invisible in isolation and visible the moment something untinted appears beside it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Single-Family Rule",
+        "body": "No additional typefaces. Solve hierarchy through weight contrast and scale, not a second family.",
+        "section": "typography"
+      },
+      {
+        "name": "The Scale Rule",
+        "body": "At least a 1.25 ratio between adjacent hierarchy steps. Flat scales read as indecision.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Surfaces are flat at rest. If a component needs to feel elevated, reach for the next tonal surface step — not a shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The No-Glass Rule",
+        "body": "The one backdrop-blur on the nav header is functional and at its limit. Do not extend glassmorphism to any other component.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use the Warm Signal accent on ≤10% of any screen surface. Its rarity is its authority.",
+      "Do vary spacing by context. Section padding, component padding, and inline spacing should all be different.",
+      "Do use tonal surface steps (bg → surface → surface-elevated) to express depth. Never shadows.",
+      "Do use exponential ease cubic-bezier(0.16, 1, 0.3, 1) for all motion. Never bounce, never elastic.",
+      "Do respect prefers-reduced-motion. FadeIn already implements this — keep it.",
+      "Do keep nav links, labels, and captions uppercase with wide tracking (0.15–0.30em).",
+      "Do tint every neutral toward hue 250.",
+      "Do cap body line length at 65–75ch on reading contexts."
+    ],
+    "donts": [
+      "Don't use colorful or expressive-color palettes — no gradients, no vibrant accents beyond the single Warm Signal, no neon.",
+      "Don't build a generic photographer portfolio layout: no centered hero with soft sans, no pastel tones.",
+      "Don't over-animate. If the animation is about the UI, it has failed.",
+      "Don't use border-left or border-right greater than 1px as a colored stripe on any component.",
+      "Don't use gradient text (background-clip: text). Prohibited.",
+      "Don't apply glassmorphism decoratively. The nav header is at the limit.",
+      "Don't use a second typeface.",
+      "Don't add shadows. If something needs elevation, use the next surface step.",
+      "Don't make the accent compete. If more than 10% of a screen surface carries the Warm Signal, scale it back.",
+      "Don't use bounce or elastic easing. Exponential ease-out only."
+    ]
+  }
+}

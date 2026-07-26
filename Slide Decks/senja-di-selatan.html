@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Senja di Selatan — The Southern Indonesia Sunset Ring Collection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+<style>
+/* ─────────────────────────────────────────────
+   RESET & ROOT
+───────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --midnight:   #0B132B;
+  --deep-navy:  #0E1A38;
+  --navy-soft:  #131F42;
+  --gold:       #FFB86C;
+  --gold-deep:  #D4893A;
+  --gold-pale:  #FFD9A8;
+  --rose:       #B76E79;
+  --rose-light: #D4959E;
+  --rose-deep:  #8B4F58;
+  --champagne:  #F7E7CE;
+  --champ-soft: #EDD5B0;
+  --white:      #FAFAF8;
+  --muted:      rgba(247,231,206,0.45);
+  --border:     rgba(183,110,121,0.25);
+  --border-gold:rgba(255,184,108,0.2);
+  --glow-gold:  rgba(255,184,108,0.12);
+  --glow-rose:  rgba(183,110,121,0.1);
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--midnight);
+  color: var(--champagne);
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─────────────────────────────────────────────
+   PRESENTATION SHELL
+───────────────────────────────────────────── */
+.deck {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5vh 6vw;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1),
+              transform 0.9s cubic-bezier(0.4,0,0.2,1);
+  transform: translateY(18px);
+  will-change: opacity, transform;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+.slide.exit-up {
+  opacity: 0;
+  transform: translateY(-18px);
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
+   SLIDE BACKGROUNDS
+───────────────────────────────────────────── */
+#s1 {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(183,110,121,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 75% 20%, rgba(255,184,108,0.10) 0%, transparent 60%),
+    linear-gradient(165deg, #0B132B 0%, #0E1935 45%, #12203A 100%);
+}
+#s2 {
+  background:
+    radial-gradient(ellipse 90% 50% at 20% 80%, rgba(183,110,121,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 10%, rgba(255,184,108,0.08) 0%, transparent 55%),
+    linear-gradient(150deg, #0C1530 0%, #0B132B 60%, #0E1935 100%);
+}
+#s3 {
+  background:
+    radial-gradient(ellipse 70% 60% at 30% 50%, rgba(255,184,108,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 80% 80%, rgba(183,110,121,0.10) 0%, transparent 60%),
+    linear-gradient(135deg, #0D1633 0%, #0B132B 50%, #101A36 100%);
+}
+#s4 {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,184,108,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 10% 90%, rgba(183,110,121,0.10) 0%, transparent 55%),
+    linear-gradient(145deg, #0B132B 0%, #0F1B38 55%, #0C152E 100%);
+}
+#s5 {
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 30%, rgba(255,184,108,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 70%, rgba(183,110,121,0.10) 0%, transparent 55%),
+    linear-gradient(155deg, #0E1935 0%, #0B132B 50%, #0C1530 100%);
+}
+
+/* ─────────────────────────────────────────────
+   AMBIENT NOISE OVERLAY
+───────────────────────────────────────────── */
+.deck::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* ─────────────────────────────────────────────
+   NAV — BOTTOM DOTS
+───────────────────────────────────────────── */
+.nav-dots {
+  position: fixed;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.7rem;
+  z-index: 200;
+  align-items: center;
+}
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(247,231,206,0.2);
+  border: 1px solid rgba(247,231,206,0.25);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.dot.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  width: 24px;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(255,184,108,0.5);
+}
+.dot:hover:not(.active) {
+  background: rgba(247,231,206,0.45);
+  border-color: rgba(247,231,206,0.5);
+}
+
+/* ─────────────────────────────────────────────
+   NAV ARROWS
+───────────────────────────────────────────── */
+.nav-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  background: rgba(11,19,43,0.5);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.nav-arrow:hover {
+  background: rgba(255,184,108,0.12);
+  border-color: var(--gold);
+  color: var(--gold);
+  box-shadow: 0 0 16px rgba(255,184,108,0.15);
+}
+.nav-arrow.prev { left: 2rem; }
+.nav-arrow.next { right: 2rem; }
+.nav-arrow.hidden { opacity: 0; pointer-events: none; }
+
+/* ─────────────────────────────────────────────
+   SLIDE COUNTER
+───────────────────────────────────────────── */
+.slide-counter {
+  position: fixed;
+  top: 2rem;
+  right: 2.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  z-index: 200;
+}
+.slide-counter .current { color: var(--gold); }
+
+/* ─────────────────────────────────────────────
+   HOUSE MARK / LOGO
+───────────────────────────────────────────── */
+.house-mark {
+  position: fixed;
+  top: 2rem;
+  left: 2.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  color: rgba(247,231,206,0.3);
+  text-transform: uppercase;
+  z-index: 200;
+}
+
+/* ─────────────────────────────────────────────
+   GLOBAL TYPOGRAPHY
+───────────────────────────────────────────── */
+.eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.4rem;
+}
+.headline {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--champagne);
+}
+.subheadline {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--gold-pale);
+}
+.body-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+/* ─────────────────────────────────────────────
+   DECORATIVE RULE
+───────────────────────────────────────────── */
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 1.4rem auto;
+}
+.rule::before, .rule::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  max-width: 80px;
+  background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+}
+.rule-diamond {
+  width: 5px; height: 5px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  opacity: 0.7;
+}
+
+/* ─────────────────────────────────────────────
+   SLIDE 1 — HERO
+───────────────────────────────────────────── */
+#s1 { text-align: center; }
+
+.hero-wrap { max-width: 780px; }
+
+.hero-title {
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+}
+.hero-title .accent { color: var(--gold); }
+
+.hero-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  letter-spacing: 0.12em;
+  margin-bottom: 2.2rem;
+}
+
+.hero-divider {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  margin: 2rem auto;
+  opacity: 0.6;
+}
+
+.hero-description {
+  max-width: 580px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-collection-tag {
+  display: inline-block;
+  margin-top: 2.5rem;
+  padding: 0.5rem 1.8rem;
+  border: 1px solid var(--border);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-radius: 1px;
+  background: rgba(255,184,108,0.03);
+}
+
+/* RING GLYPH — SVG INLINE */
+.hero-glyph {
+  margin: 1.8rem auto 0;
+  opacity: 0.85;
+}
+
+/* ─────────────────────────────────────────────
+   SLIDE 2 — MOODBOARD
+───────────────────────────────────────────── */
+#s2 { justify-content: flex-start; padding-top: 7vh; }
+
+.moodboard-header { text-align: center; width: 100%; margin-bottom: 2.5rem; }
+.moodboard-title { font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 0.4rem; }
+
+.moodboard-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 14px;
+  max-width: 900px;
+  width: 100%;
+}
+.mood-card {
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  border: 1px solid transparent;
+  transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+}
+.mood-card:hover {
+  border-color: var(--border-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.4), 0 0 20px rgba(255,184,108,0.08);
+}
+.mood-card:nth-child(1) {
+  grid-column: 1; grid-row: 1;
+  height: 220px;
+  background: linear-gradient(135deg,
+    #3A1C0D 0%, #7B3B15 30%, #C06020 55%, #E8922A 75%, #FFB86C 100%);
+}
+.mood-card:nth-child(2) {
+  grid-column: 2; grid-row: 1 / 3;
+  height: 100%;
+  min-height: 320px;
+  background: linear-gradient(165deg,
+    #051828 0%, #093048 25%, #0D4A70 55%, #1A6B96 80%, #1E7FAF 100%);
+}
+.mood-card:nth-child(3) {
+  grid-column: 1; grid-row: 2;
+  height: 140px;
+  background: linear-gradient(120deg,
+    #1A0C0E 0%, #4A1E24 35%, #8B4F58 65%, #B76E79 85%, #C8848F 100%);
+}
+.mood-card:nth-child(4) {
+  grid-column: 1 / 3; grid-row: 3;
+  height: 110px;
+  background: linear-gradient(100deg,
+    #1A1208 0%, #3A2C14 25%, #7A5C2A 50%, #C49A45 72%, #F7D980 88%, #FFF5D6 100%);
+}
+
+.mood-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11,19,43,0.28);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.2rem 1.3rem;
+  transition: background 0.35s;
+}
+.mood-card:hover .mood-overlay { background: rgba(11,19,43,0.12); }
+
+.mood-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+  margin-bottom: 0.3rem;
+}
+.mood-note {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: rgba(247,231,206,0.65);
+  text-transform: uppercase;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+}
+
+/* ─────────────────────────────────────────────
+   SLIDE 3 — DESIGN ARCHITECTURE
+───────────────────────────────────────────── */
+#s3 { padding: 5vh 5vw; }
+
+.arch-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 5vw;
+  max-width: 1000px;
+  width: 100%;
+  align-items: center;
+}
+.arch-info {}
+.arch-title { font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 0.5rem; }
+
+.arch-feature {
+  margin-top: 1.6rem;
+  padding-left: 1.1rem;
+  border-left: 1px solid var(--border);
+  transition: border-color 0.35s;
+}
+.arch-feature:hover { border-color: var(--gold); }
+.arch-feature-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+}
+.arch-feature-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ── RING SKETCH (SVG) ── */
+.ring-sketch-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.ring-sketch-wrap::before {
+  content: '';
+  position: absolute;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,184,108,0.07) 0%, transparent 70%);
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+/* ─────────────────────────────────────────────
+   SLIDE 4 — SPECIFICATIONS
+───────────────────────────────────────────── */
+#s4 { padding: 5vh 6vw; }
+
+.spec-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 920px;
+  width: 100%;
+  margin-top: 2rem;
+}
+.spec-card {
+  background: rgba(255,255,255,0.018);
+  border: 1px solid var(--border-gold);
+  border-radius: 2px;
+  padding: 1.6rem 1.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.35s, box-shadow 0.35s;
+}
+.spec-card:hover {
+  border-color: rgba(255,184,108,0.45);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 0 30px rgba(255,184,108,0.03);
+}
+.spec-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+.spec-card-wide { grid-column: 1 / 3; }
+
+.spec-card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--rose-light);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.spec-card-title::before {
+  content: '';
+  width: 18px; height: 1px;
+  background: var(--rose-light);
+  opacity: 0.5;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(247,231,206,0.06);
+  gap: 1rem;
+}
+.spec-row:last-child { border-bottom: none; }
+
+.spec-key {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(247,231,206,0.4);
+  white-space: nowrap;
+}
+.spec-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--champagne);
+  text-align: right;
+}
+.spec-val.highlight { color: var(--gold); font-style: italic; }
+
+.spec-banner {
+  margin-top: 1.8rem;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  color: rgba(247,231,206,0.25);
+  text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────────────
+   SLIDE 5 — PIPELINE
+───────────────────────────────────────────── */
+#s5 { padding: 5vh 6vw; align-items: flex-start; }
+
+.pipeline-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 5vw;
+  max-width: 1000px;
+  width: 100%;
+  align-items: start;
+}
+.pipeline-header-col { padding-top: 1rem; }
+.pipeline-title { font-size: clamp(1.3rem, 2.8vw, 1.9rem); margin-bottom: 0.5rem; }
+.pipeline-intro { font-size: 0.8rem; line-height: 1.8; }
+
+.pipeline-track { position: relative; padding-left: 2px; }
+
+.pipeline-phase {
+  position: relative;
+  padding: 0 0 2rem 2.2rem;
+  cursor: default;
+}
+.pipeline-phase:last-child { padding-bottom: 0; }
+
+/* vertical line */
+.pipeline-phase::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 12px;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold-deep), var(--rose-deep));
+  opacity: 0.35;
+}
+.pipeline-phase:last-child::before { display: none; }
+
+/* circle node */
+.pipeline-phase::after {
+  content: '';
+  position: absolute;
+  left: -4px; top: 8px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--midnight);
+  box-shadow: 0 0 10px rgba(255,184,108,0.5);
+  transition: box-shadow 0.3s;
+}
+.pipeline-phase:hover::after {
+  box-shadow: 0 0 18px rgba(255,184,108,0.8);
+}
+
+.phase-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.25rem;
+}
+.phase-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--champagne);
+  margin-bottom: 0.45rem;
+  line-height: 1.4;
+}
+.phase-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.pipeline-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: rgba(247,231,206,0.35);
+  text-align: center;
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* ─────────────────────────────────────────────
+   ANIMATE IN CLASSES
+───────────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.slide.active .fade-up { opacity: 1; transform: translateY(0); }
+.slide.active .fade-up:nth-child(1) { transition-delay: 0.12s; }
+.slide.active .fade-up:nth-child(2) { transition-delay: 0.22s; }
+.slide.active .fade-up:nth-child(3) { transition-delay: 0.32s; }
+.slide.active .fade-up:nth-child(4) { transition-delay: 0.42s; }
+.slide.active .fade-up:nth-child(5) { transition-delay: 0.52s; }
+.slide.active .fade-up:nth-child(6) { transition-delay: 0.62s; }
+
+/* ─────────────────────────────────────────────
+   KEYBOARD HINT
+───────────────────────────────────────────── */
+.kbd-hint {
+  position: fixed;
+  bottom: 2.2rem;
+  right: 2.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: rgba(247,231,206,0.2);
+  z-index: 200;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 780px) {
+  .arch-layout { grid-template-columns: 1fr; }
+  .ring-sketch-wrap { order: -1; }
+  .spec-layout { grid-template-columns: 1fr; }
+  .spec-card-wide { grid-column: 1; }
+  .pipeline-layout { grid-template-columns: 1fr; }
+  .pipeline-header-col { padding-top: 0; margin-bottom: 1.5rem; }
+  .moodboard-grid { grid-template-columns: 1fr; }
+  .mood-card:nth-child(2) { grid-column: 1; grid-row: auto; min-height: 200px; }
+  .mood-card:nth-child(4) { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- HOUSE MARK -->
+<div class="house-mark">Senja di Selatan &nbsp;·&nbsp; Atelier</div>
+
+<!-- SLIDE COUNTER -->
+<div class="slide-counter">
+  <span class="current" id="ctr-current">01</span>
+  <span style="opacity:0.3"> / </span>
+  <span id="ctr-total">05</span>
+</div>
+
+<!-- NAV ARROWS -->
+<button class="nav-arrow prev hidden" id="btn-prev" aria-label="Previous slide">&#8592;</button>
+<button class="nav-arrow next" id="btn-next" aria-label="Next slide">&#8594;</button>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" id="nav-dots"></nav>
+
+<!-- KEYBOARD HINT -->
+<div class="kbd-hint">← → or click to navigate</div>
+
+<!-- ══════════════════════════════════════════
+     DECK
+══════════════════════════════════════════ -->
+<main class="deck" id="deck">
+
+<!-- ══════════════════════ SLIDE 1 ══════════════════════ -->
+<section class="slide active" id="s1">
+  <div class="hero-wrap">
+
+    <p class="eyebrow fade-up">The Southern Indonesia Sunset Ring Collection</p>
+
+    <h1 class="headline hero-title fade-up">
+      <span class="accent">Senja</span> di Selatan
+    </h1>
+
+    <p class="subheadline hero-subtitle fade-up">Twilight in the South</p>
+
+    <div class="rule fade-up">
+      <div class="rule-diamond"></div>
+      <div class="rule-diamond" style="opacity:0.4;transform:rotate(45deg) scale(0.6)"></div>
+      <div class="rule-diamond"></div>
+    </div>
+
+    <p class="body-text hero-description fade-up">
+      At the precise moment the sun descends beyond the Indian Ocean horizon off the southern coast of the Indonesian archipelago, an extraordinary convergence of light occurs — amber and sienna rays fracture across the deep, rhythmic swells, casting molten gold across an infinite expanse of water. This collection translates that ephemeral natural phenomenon into wearable high jewellery: the warmth of a single luminous stone embodying the sun itself, cradled within a shank that carries the memory of the ocean's movement.
+    </p>
+
+    <div class="fade-up">
+      <!-- RING GLYPH -->
+      <div class="hero-glyph">
+        <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer halo -->
+          <circle cx="45" cy="45" r="36" stroke="rgba(255,184,108,0.12)" stroke-width="1"/>
+          <!-- Band -->
+          <ellipse cx="45" cy="45" rx="30" ry="30" stroke="rgba(183,110,121,0.5)" stroke-width="1.5" fill="none"/>
+          <!-- Inner band -->
+          <ellipse cx="45" cy="45" rx="22" ry="22" stroke="rgba(255,184,108,0.3)" stroke-width="0.8" fill="none"/>
+          <!-- Center stone — radiant cut outline -->
+          <polygon points="45,30 52,35 55,45 52,55 45,60 38,55 35,45 38,35"
+            stroke="rgba(255,184,108,0.8)" stroke-width="1.2" fill="rgba(255,184,108,0.06)"
+            stroke-linejoin="round"/>
+          <!-- Facet lines -->
+          <line x1="45" y1="30" x2="45" y2="60" stroke="rgba(255,184,108,0.25)" stroke-width="0.6"/>
+          <line x1="35" y1="45" x2="55" y2="45" stroke="rgba(255,184,108,0.25)" stroke-width="0.6"/>
+          <line x1="38" y1="35" x2="52" y2="55" stroke="rgba(255,184,108,0.18)" stroke-width="0.6"/>
+          <line x1="52" y1="35" x2="38" y2="55" stroke="rgba(255,184,108,0.18)" stroke-width="0.6"/>
+          <!-- Prong dots -->
+          <circle cx="45" cy="29" r="1.5" fill="rgba(247,231,206,0.6)"/>
+          <circle cx="56" cy="34" r="1.5" fill="rgba(247,231,206,0.5)"/>
+          <circle cx="56" cy="56" r="1.5" fill="rgba(247,231,206,0.5)"/>
+          <circle cx="45" cy="61" r="1.5" fill="rgba(247,231,206,0.6)"/>
+          <circle cx="34" cy="56" r="1.5" fill="rgba(247,231,206,0.5)"/>
+          <circle cx="34" cy="34" r="1.5" fill="rgba(247,231,206,0.5)"/>
+          <!-- Sparkle -->
+          <circle cx="48" cy="37" r="1" fill="rgba(255,255,255,0.8)"/>
+        </svg>
+      </div>
+
+      <div class="hero-collection-tag">
+        Bespoke Commission &nbsp;·&nbsp; Single Edition &nbsp;·&nbsp; Atelier Reference No. SDS-001
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════ SLIDE 2 ══════════════════════ -->
+<section class="slide" id="s2">
+  <div class="moodboard-header fade-up">
+    <p class="eyebrow">02 — Conceptual Moodboard</p>
+    <h2 class="headline moodboard-title">Visual Language &amp; Reference</h2>
+    <p class="subheadline" style="font-size:0.9rem;">The chromatic and textural vocabulary of the collection</p>
+  </div>
+
+  <div class="moodboard-grid fade-up">
+
+    <div class="mood-card">
+      <div class="mood-overlay">
+        <div class="mood-label">The Golden Hour Over Uluwatu</div>
+        <div class="mood-note">Colour Reference &nbsp;·&nbsp; Amber &amp; Warm Gold</div>
+      </div>
+    </div>
+
+    <div class="mood-card">
+      <div class="mood-overlay" style="justify-content:space-between; padding-top:1.2rem;">
+        <div>
+          <div class="mood-label" style="font-size:0.68rem;">The Deep Rhythmic Ocean</div>
+          <div class="mood-note">Texture Reference &nbsp;·&nbsp; Fluid Continuous Curves</div>
+        </div>
+        <!-- Wave Lines -->
+        <svg width="80%" height="50" viewBox="0 0 200 50" fill="none" style="opacity:0.3;margin:0 auto;">
+          <path d="M0 25 C 25 10, 50 40, 75 25 S 125 10, 150 25 S 175 40, 200 25" stroke="rgba(247,231,206,0.6)" stroke-width="1" fill="none"/>
+          <path d="M0 35 C 25 20, 50 50, 75 35 S 125 20, 150 35 S 175 50, 200 35" stroke="rgba(247,231,206,0.35)" stroke-width="0.7" fill="none"/>
+          <path d="M0 15 C 25 0, 50 30, 75 15 S 125 0, 150 15 S 175 30, 200 15" stroke="rgba(247,231,206,0.2)" stroke-width="0.7" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="mood-card">
+      <div class="mood-overlay">
+        <div class="mood-label">Raw Refined Textures</div>
+        <div class="mood-note">Material Reference &nbsp;·&nbsp; Brushed 18K Rose Gold</div>
+      </div>
+    </div>
+
+    <div class="mood-card">
+      <div class="mood-overlay" style="padding:1.1rem 1.3rem; justify-content:center; align-items:center; flex-direction:row; gap:2rem;">
+        <div>
+          <div class="mood-label">Capturing the Light</div>
+          <div class="mood-note">Gemstone Reference &nbsp;·&nbsp; Faceted Champagne Brilliance</div>
+        </div>
+        <!-- Facet geometry -->
+        <svg width="55" height="55" viewBox="0 0 55 55" fill="none" style="opacity:0.65;flex-shrink:0;">
+          <polygon points="27.5,2 53,16 53,39 27.5,53 2,39 2,16" stroke="rgba(247,231,206,0.6)" stroke-width="0.8" fill="rgba(247,231,206,0.04)"/>
+          <polygon points="27.5,10 44,19 44,36 27.5,45 11,36 11,19" stroke="rgba(247,231,206,0.4)" stroke-width="0.6" fill="none"/>
+          <line x1="27.5" y1="2" x2="27.5" y2="53" stroke="rgba(247,231,206,0.15)" stroke-width="0.5"/>
+          <line x1="2" y1="27.5" x2="53" y2="27.5" stroke="rgba(247,231,206,0.15)" stroke-width="0.5"/>
+          <circle cx="27.5" cy="27.5" r="3" fill="rgba(255,245,200,0.6)"/>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════ SLIDE 3 ══════════════════════ -->
+<section class="slide" id="s3">
+  <div class="arch-layout">
+
+    <!-- INFO COLUMN -->
+    <div class="arch-info">
+      <p class="eyebrow fade-up">03 — Design Architecture</p>
+      <h2 class="headline arch-title fade-up">Anatomical Structure<br>&amp; Sketch Visualization</h2>
+
+      <div class="arch-feature fade-up">
+        <div class="arch-feature-name">Centre Stone Setting</div>
+        <div class="arch-feature-desc">
+          Six-claw double-prong configuration in polished 18K Rose Gold, engineered to maximise the entry of ambient and incident light into the pavilion facets. Each prong tapers to a fine point, visually evoking the last rays of the sun breaking the horizon.
+        </div>
+      </div>
+
+      <div class="arch-feature fade-up">
+        <div class="arch-feature-name">The Shank — Bypass Architecture</div>
+        <div class="arch-feature-desc">
+          An intertwining bypass shank in satin-finished 18K Rose Gold, featuring engineered wave-like undulations in the shank profile. The two bands converge asymmetrically beneath the centre stone, referencing the convergence of ocean currents.
+        </div>
+      </div>
+
+      <div class="arch-feature fade-up">
+        <div class="arch-feature-name">Pavé Shoulder Accents</div>
+        <div class="arch-feature-desc">
+          Micro-pavé set round brilliant-cut diamonds (E–F / VS1–VS2) bead-set along the ascending shoulders, their collective scintillation replicating the shimmering reflection of golden light across a moving water surface.
+        </div>
+      </div>
+    </div>
+
+    <!-- SKETCH COLUMN -->
+    <div class="ring-sketch-wrap fade-up">
+      <svg width="300" height="340" viewBox="0 0 300 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- Band left -->
+        <path d="M 80 290 C 70 250, 65 210, 78 175 C 88 148, 100 138, 115 130"
+          stroke="rgba(183,110,121,0.7)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- Band right -->
+        <path d="M 220 290 C 230 250, 235 210, 222 175 C 212 148, 200 138, 185 130"
+          stroke="rgba(183,110,121,0.7)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+        <!-- Wave undulation left shank -->
+        <path d="M 85 260 C 75 240, 72 225, 80 210 C 87 196, 85 182, 82 168"
+          stroke="rgba(183,110,121,0.3)" stroke-width="0.8" fill="none" stroke-dasharray="3,3"/>
+        <!-- Wave undulation right shank -->
+        <path d="M 215 260 C 225 240, 228 225, 220 210 C 213 196, 215 182, 218 168"
+          stroke="rgba(183,110,121,0.3)" stroke-width="0.8" fill="none" stroke-dasharray="3,3"/>
+
+        <!-- Bottom ring shape -->
+        <ellipse cx="150" cy="290" rx="70" ry="12" stroke="rgba(183,110,121,0.5)" stroke-width="1.2" fill="none"/>
+        <ellipse cx="150" cy="290" rx="54" ry="9" stroke="rgba(183,110,121,0.25)" stroke-width="0.8" fill="none"/>
+
+        <!-- Gallery / basket -->
+        <path d="M 115 130 L 105 108 L 105 92 L 150 78 L 195 92 L 195 108 L 185 130"
+          stroke="rgba(255,184,108,0.6)" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+
+        <!-- Prongs (6) -->
+        <line x1="120" y1="102" x2="112" y2="82" stroke="rgba(247,231,206,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="150" y1="98" x2="150" y2="74" stroke="rgba(247,231,206,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="180" y1="102" x2="188" y2="82" stroke="rgba(247,231,206,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="122" y1="118" x2="110" y2="128" stroke="rgba(247,231,206,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="178" y1="118" x2="190" y2="128" stroke="rgba(247,231,206,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="150" y1="122" x2="150" y2="136" stroke="rgba(247,231,206,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+
+        <!-- Prong tips -->
+        <circle cx="111" cy="80" r="2.5" fill="rgba(247,231,206,0.7)"/>
+        <circle cx="150" cy="72" r="2.5" fill="rgba(247,231,206,0.7)"/>
+        <circle cx="189" cy="80" r="2.5" fill="rgba(247,231,206,0.7)"/>
+
+        <!-- CENTER STONE — Radiant Cut -->
+        <polygon points="150,82 168,90 175,105 168,120 150,128 132,120 125,105 132,90"
+          stroke="rgba(255,184,108,0.9)" stroke-width="1.5"
+          fill="rgba(255,184,108,0.06)" stroke-linejoin="round"/>
+        <!-- Table facet -->
+        <polygon points="150,89 162,94 167,105 162,116 150,121 138,116 133,105 138,94"
+          stroke="rgba(255,184,108,0.55)" stroke-width="0.8" fill="none"/>
+        <!-- Star facets -->
+        <line x1="150" y1="82" x2="150" y2="89" stroke="rgba(255,184,108,0.35)" stroke-width="0.6"/>
+        <line x1="168" y1="90" x2="162" y2="94" stroke="rgba(255,184,108,0.35)" stroke-width="0.6"/>
+        <line x1="175" y1="105" x2="167" y2="105" stroke="rgba(255,184,108,0.35)" stroke-width="0.6"/>
+        <line x1="168" y1="120" x2="162" y2="116" stroke="rgba(255,184,108,0.35)" stroke-width="0.6"/>
+        <line x1="150" y1="128" x2="150" y2="121" stroke="rgba(255,184,108,0.35)" stroke-width="0.6"/>
+        <line x1="132" y1="120" x2="138" y2="116" stroke="rgba(255,184,108,0.35)" stroke-width="0.6"/>
+        <line x1="125" y1="105" x2="133" y2="105" stroke="rgba(255,184,108,0.35)" stroke-width="0.6"/>
+        <line x1="132" y1="90" x2="138" y2="94" stroke="rgba(255,184,108,0.35)" stroke-width="0.6"/>
+        <!-- Cross facets -->
+        <line x1="150" y1="89" x2="150" y2="121" stroke="rgba(255,184,108,0.15)" stroke-width="0.5"/>
+        <line x1="133" y1="105" x2="167" y2="105" stroke="rgba(255,184,108,0.15)" stroke-width="0.5"/>
+        <!-- Highlight -->
+        <circle cx="158" cy="95" r="2" fill="rgba(255,255,255,0.55)"/>
+        <circle cx="154" cy="93" r="1" fill="rgba(255,255,255,0.35)"/>
+
+        <!-- Pavé dots on shoulders (left) -->
+        <circle cx="106" cy="140" r="2" fill="rgba(247,231,206,0.5)"/>
+        <circle cx="99" cy="150" r="1.8" fill="rgba(247,231,206,0.4)"/>
+        <circle cx="94" cy="161" r="1.8" fill="rgba(247,231,206,0.35)"/>
+        <circle cx="90" cy="173" r="1.6" fill="rgba(247,231,206,0.3)"/>
+        <!-- Pavé dots on shoulders (right) -->
+        <circle cx="194" cy="140" r="2" fill="rgba(247,231,206,0.5)"/>
+        <circle cx="201" cy="150" r="1.8" fill="rgba(247,231,206,0.4)"/>
+        <circle cx="206" cy="161" r="1.8" fill="rgba(247,231,206,0.35)"/>
+        <circle cx="210" cy="173" r="1.6" fill="rgba(247,231,206,0.3)"/>
+
+        <!-- Dimension callout lines -->
+        <line x1="60" y1="105" x2="103" y2="105" stroke="rgba(247,231,206,0.15)" stroke-width="0.6" stroke-dasharray="2,3"/>
+        <line x1="60" y1="128" x2="122" y2="128" stroke="rgba(247,231,206,0.15)" stroke-width="0.6" stroke-dasharray="2,3"/>
+        <line x1="60" y1="105" x2="60" y2="128" stroke="rgba(247,231,206,0.2)" stroke-width="0.5"/>
+        <line x1="57" y1="105" x2="63" y2="105" stroke="rgba(247,231,206,0.3)" stroke-width="0.6"/>
+        <line x1="57" y1="128" x2="63" y2="128" stroke="rgba(247,231,206,0.3)" stroke-width="0.6"/>
+        <text x="25" y="118" fill="rgba(247,231,206,0.3)" font-size="8" font-family="Courier New" letter-spacing="0.5">2.50ct</text>
+
+        <!-- Width dimension -->
+        <line x1="125" y1="320" x2="175" y2="320" stroke="rgba(183,110,121,0.25)" stroke-width="0.6"/>
+        <line x1="125" y1="317" x2="125" y2="323" stroke="rgba(183,110,121,0.3)" stroke-width="0.6"/>
+        <line x1="175" y1="317" x2="175" y2="323" stroke="rgba(183,110,121,0.3)" stroke-width="0.6"/>
+        <text x="135" y="334" fill="rgba(183,110,121,0.35)" font-size="7" font-family="Courier New">2.2 mm</text>
+
+        <!-- CAD label -->
+        <text x="220" y="290" fill="rgba(247,231,206,0.15)" font-size="7.5" font-family="Courier New" letter-spacing="1">CAD WIP</text>
+        <text x="218" y="300" fill="rgba(247,231,206,0.1)" font-size="6" font-family="Courier New">SDS-001 Rev.A</text>
+
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════ SLIDE 4 ══════════════════════ -->
+<section class="slide" id="s4">
+
+  <div style="text-align:center; width:100%; max-width:920px;">
+    <p class="eyebrow fade-up">04 — Technical Specifications</p>
+    <h2 class="headline fade-up" style="font-size:clamp(1.4rem,3vw,2rem); margin-bottom:0.3rem;">Gemological &amp; Engineering Data</h2>
+    <p class="subheadline fade-up" style="font-size:0.85rem; margin-bottom:0;">Atelier Reference No. SDS-001 &nbsp;·&nbsp; Commission Grade: Bespoke Haute Joaillerie</p>
+  </div>
+
+  <div class="spec-layout fade-up">
+
+    <!-- Centre Diamond -->
+    <div class="spec-card">
+      <div class="spec-card-title">Centre Stone</div>
+      <div class="spec-row">
+        <span class="spec-key">Carat Weight</span>
+        <span class="spec-val highlight">2.50 ct</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Cut</span>
+        <span class="spec-val">Radiant</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Colour Grade</span>
+        <span class="spec-val highlight">Fancy Vivid Yellow-Orange</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Clarity</span>
+        <span class="spec-val">VVS1</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Certification</span>
+        <span class="spec-val">GIA / GCAL</span>
+      </div>
+    </div>
+
+    <!-- Pavé Accents -->
+    <div class="spec-card">
+      <div class="spec-card-title">Pavé &amp; Accent Diamonds</div>
+      <div class="spec-row">
+        <span class="spec-key">Total Carat Weight</span>
+        <span class="spec-val highlight">0.45 ctw</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Cut</span>
+        <span class="spec-val">Round Brilliant</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Colour Range</span>
+        <span class="spec-val">E – F</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Clarity Range</span>
+        <span class="spec-val">VS1 – VS2</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Setting Method</span>
+        <span class="spec-val">Micro-Pavé Bead</span>
+      </div>
+    </div>
+
+    <!-- Metal Alloy -->
+    <div class="spec-card">
+      <div class="spec-card-title">Metal Alloy</div>
+      <div class="spec-row">
+        <span class="spec-key">Alloy Designation</span>
+        <span class="spec-val highlight">18K Premium Rose Gold</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Gold Content</span>
+        <span class="spec-val">75.00%</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Copper Content</span>
+        <span class="spec-val">22.25%</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Silver Content</span>
+        <span class="spec-val">2.75%</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Surface Finish</span>
+        <span class="spec-val">Satin / High Polish</span>
+      </div>
+    </div>
+
+    <!-- Dimensions -->
+    <div class="spec-card">
+      <div class="spec-card-title">Band &amp; Form Dimensions</div>
+      <div class="spec-row">
+        <span class="spec-key">Shank at Base</span>
+        <span class="spec-val">2.20 mm</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Shank near Gallery</span>
+        <span class="spec-val">1.80 mm</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Profile Type</span>
+        <span class="spec-val">Bypass / Intertwine</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Estimated Weight</span>
+        <span class="spec-val highlight">5.8 g</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Ring Architecture</span>
+        <span class="spec-val">Solitaire Engagement</span>
+      </div>
+    </div>
+
+    <!-- Full-width bottom bar -->
+    <div class="spec-card spec-card-wide" style="padding:1.2rem 1.8rem;">
+      <div style="display:flex; justify-content:space-around; flex-wrap:wrap; gap:1.5rem;">
+        <div style="text-align:center;">
+          <div class="spec-key" style="margin-bottom:0.4rem;">Total Diamond Content</div>
+          <div style="font-family:'Cinzel Decorative',serif; font-size:1.2rem; color:var(--gold);">2.95 ctw</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="spec-key" style="margin-bottom:0.4rem;">Estimated Production Lead Time</div>
+          <div style="font-family:'Cinzel Decorative',serif; font-size:1.2rem; color:var(--gold);">10 – 14 Weeks</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="spec-key" style="margin-bottom:0.4rem;">Edition Type</div>
+          <div style="font-family:'Cinzel Decorative',serif; font-size:1.2rem; color:var(--gold);">Single Commission</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="spec-banner fade-up">
+    All gemological specifications subject to final GIA certification confirmation &nbsp;·&nbsp; Proprietary Atelier Documentation
+  </div>
+
+</section>
+
+<!-- ══════════════════════ SLIDE 5 ══════════════════════ -->
+<section class="slide" id="s5">
+
+  <div class="pipeline-layout" style="max-height:82vh; overflow-y:auto; scrollbar-width:none;">
+    <!-- HEADER COL -->
+    <div class="pipeline-header-col">
+      <p class="eyebrow fade-up">05 — Pre-Production Pipeline</p>
+      <h2 class="headline pipeline-title fade-up">Craftsmanship<br>Roadmap</h2>
+      <div class="rule fade-up" style="justify-content:flex-start; margin-left:0;">
+        <div class="rule-diamond"></div>
+      </div>
+      <p class="body-text pipeline-intro fade-up">
+        Before a single gram of gold is poured, the Senja di Selatan commission passes through four exacting pre-production phases — each a discipline unto itself, and collectively the foundation upon which all tangible craft rests.
+      </p>
+
+      <!-- Compact stone SVG -->
+      <div style="margin-top:2.5rem; opacity:0.5;" class="fade-up">
+        <svg width="120" height="60" viewBox="0 0 120 60" fill="none">
+          <path d="M 10 50 C 15 30, 25 20, 40 18 C 52 16, 60 18, 60 18 C 60 18, 68 16, 80 18 C 95 20, 105 30, 110 50" stroke="rgba(183,110,121,0.5)" stroke-width="1.2" fill="none"/>
+          <path d="M 10 50 C 15 30, 25 20, 40 18" stroke="rgba(255,184,108,0.4)" stroke-width="0.8" fill="none" stroke-dasharray="2,2"/>
+          <path d="M 110 50 C 105 30, 95 20, 80 18" stroke="rgba(255,184,108,0.4)" stroke-width="0.8" fill="none" stroke-dasharray="2,2"/>
+          <circle cx="60" cy="14" r="4" fill="none" stroke="rgba(255,184,108,0.6)" stroke-width="1"/>
+          <path d="M 30 35 L 45 20 L 60 14 L 75 20 L 90 35" stroke="rgba(255,184,108,0.2)" stroke-width="0.6" fill="none"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- TIMELINE COL -->
+    <div>
+      <div class="pipeline-track">
+
+        <div class="pipeline-phase fade-up">
+          <div class="phase-label">Phase I</div>
+          <div class="phase-name">Gemstone Sourcing &amp; Calibration</div>
+          <div class="phase-desc">
+            Global procurement of the focal Fancy Vivid Yellow-Orange radiant diamond, subject to independent GIA grading verification and light performance analysis (ASET / Ideal-Scope). Concurrent curation of the pavé melee parcel: each stone calibrated for colour and brilliance matching to ensure chromatic coherence across the pavé field.
+          </div>
+        </div>
+
+        <div class="pipeline-phase fade-up">
+          <div class="phase-label">Phase II</div>
+          <div class="phase-name">3D CAD Engineering — Rhinoceros / Matrix</div>
+          <div class="phase-desc">
+            Conversion of 2D concept sketches into precision three-dimensional parametric models. This phase governs: exact gallery geometry and prong clearances, the bypass shank curvature ratio (wave undulation amplitude and frequency), pavé channel depth, and structural finite-element analysis to ensure the intertwining shank retains torsional integrity under daily wear.
+          </div>
+        </div>
+
+        <div class="pipeline-phase fade-up">
+          <div class="phase-label">Phase III</div>
+          <div class="phase-name">Rapid Prototyping — High-Fidelity Resin Wax Print</div>
+          <div class="phase-desc">
+            Production of a 1:1 scale wax resin model via SLA/DLP photopolymer printing at 25–50 micron layer resolution. Client fitting session: assessment of ring size, bypass proportion on the finger, visual weight balance, and stone seat verification. Prong tip geometry and pavé seat depth are inspected under 10× loupe before approval to proceed.
+          </div>
+        </div>
+
+        <div class="pipeline-phase fade-up">
+          <div class="phase-label">Phase IV</div>
+          <div class="phase-name">Casting Preparation — Lost-Wax Investment Method</div>
+          <div class="phase-desc">
+            Following client sign-off on the wax prototype: spruing the model within a casting tree, encasing in high-strength investment plaster (colloidal silica compound), de-waxing in a programmable kiln at 750°C to eliminate the resin, and final cavity inspection prior to centrifugal casting of the 18K rose gold alloy. The lost-wax methodology ensures micron-level fidelity between prototype and cast form.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pipeline-footer fade-up">
+        "Each phase is not a step toward the jewel — it is the jewel, forming."
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<script>
+(function() {
+  'use strict';
+
+  var slides = document.querySelectorAll('.slide');
+  var dots = [];
+  var current = 0;
+  var total = slides.length;
+  var isAnimating = false;
+
+  /* ── Build nav dots ── */
+  var navDots = document.getElementById('nav-dots');
+  for (var i = 0; i < total; i++) {
+    (function(idx) {
+      var d = document.createElement('button');
+      d.className = 'dot' + (idx === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Go to slide ' + (idx + 1));
+      d.addEventListener('click', function() { goTo(idx); });
+      navDots.appendChild(d);
+      dots.push(d);
+    })(i);
+  }
+
+  var btnPrev = document.getElementById('btn-prev');
+  var btnNext = document.getElementById('btn-next');
+  var ctrCurrent = document.getElementById('ctr-current');
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function updateUI() {
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+    ctrCurrent.textContent = pad(current + 1);
+    btnPrev.classList.toggle('hidden', current === 0);
+    btnNext.classList.toggle('hidden', current === total - 1);
+  }
+
+  function goTo(idx) {
+    if (idx === current || isAnimating) return;
+    isAnimating = true;
+
+    var prev = current;
+    current = idx;
+
+    slides[prev].classList.add('exit-up');
+    slides[prev].classList.remove('active');
+
+    setTimeout(function() {
+      slides[prev].classList.remove('exit-up');
+    }, 900);
+
+    slides[current].classList.add('active');
+    updateUI();
+
+    setTimeout(function() { isAnimating = false; }, 950);
+  }
+
+  function next() { if (current < total - 1) goTo(current + 1); }
+  function prev() { if (current > 0) goTo(current - 1); }
+
+  btnNext.addEventListener('click', next);
+  btnPrev.addEventListener('click', prev);
+
+  /* ── Keyboard ── */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault(); next();
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault(); prev();
+    }
+  });
+
+  /* ── Touch / swipe ── */
+  var touchStartX = 0;
+  var touchStartY = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    var dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      if (dx < 0) next(); else prev();
+    } else if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 40) {
+      if (dy < 0) next(); else prev();
+    }
+  }, { passive: true });
+
+  /* ── Mouse wheel ── */
+  var wheelCooldown = false;
+  document.addEventListener('wheel', function(e) {
+    if (wheelCooldown) return;
+    wheelCooldown = true;
+    if (e.deltaY > 0 || e.deltaX > 0) next();
+    else prev();
+    setTimeout(function() { wheelCooldown = false; }, 1000);
+  }, { passive: true });
+
+  updateUI();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Under the Same Sky — Film Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── Reset ─────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --teak:#7B5B2E;
+  --terracotta:#C4622D;
+  --forest:#2D4A1E;
+  --dark-wood:#3A2510;
+  --warm-sand:#E8D5B0;
+  --mustard:#D4A843;
+  --teal:#4A7B7B;
+  --slate:#3D4A52;
+  --crisp-white:#F5F0E8;
+  --deep-black:#0A0806;
+  --gold:#C9A84C;
+  --font-cin:'Cinzel',serif;
+  --font-ser:'Cormorant Garamond',serif;
+  --font-ui:'Inter',sans-serif;
+  --font-alt:'Montserrat',sans-serif;
+}
+
+html,body{width:100%;height:100%;overflow:hidden;background:var(--deep-black);color:var(--crisp-white);font-family:var(--font-ui)}
+
+/* ─── Film Grain ─────────────────────────── */
+body::after{
+  content:'';position:fixed;inset:0;
+  pointer-events:none;z-index:9999;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+  animation:grain .45s steps(1) infinite;
+}
+@keyframes grain{
+  0%{background-position:0 0}20%{background-position:-35px -15px}
+  40%{background-position:25px -35px}60%{background-position:-20px 25px}
+  80%{background-position:35px 10px}100%{background-position:-15px 35px}
+}
+
+/* ─── Top Bar ────────────────────────────── */
+#top-bar{
+  position:fixed;top:0;left:0;right:0;height:38px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;z-index:500;
+  background:linear-gradient(180deg,rgba(10,8,6,.75) 0%,transparent 100%);
+}
+#top-bar span{font-family:var(--font-alt);font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:rgba(255,255,255,.2)}
+
+/* ─── Navigation Dots ────────────────────── */
+#nav-dots{
+  position:fixed;right:28px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:11px;z-index:600;
+}
+.dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.15);cursor:pointer;transition:all .4s ease}
+.dot.active{background:var(--gold);border-color:var(--gold);height:22px}
+.dot:hover:not(.active){background:rgba(201,168,76,.5)}
+
+/* ─── Progress Bar ───────────────────────── */
+#prog{position:fixed;bottom:0;left:0;height:2px;background:linear-gradient(90deg,var(--terracotta),var(--gold),var(--teal));z-index:600;transition:width .9s cubic-bezier(.4,0,.2,1)}
+
+/* ─── Counter + Format ───────────────────── */
+#counter{position:fixed;bottom:22px;left:40px;font-family:var(--font-alt);font-size:10px;letter-spacing:.35em;color:rgba(255,255,255,.3);z-index:600;text-transform:uppercase}
+#format-badge{position:fixed;bottom:22px;right:90px;font-family:var(--font-alt);font-size:9px;letter-spacing:.28em;color:rgba(255,255,255,.18);z-index:600;text-transform:uppercase}
+
+/* ─── Arrows ─────────────────────────────── */
+.arr{
+  position:fixed;bottom:16px;z-index:600;width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:50%;cursor:pointer;color:rgba(255,255,255,.5);font-size:15px;
+  transition:all .3s ease;user-select:none;
+}
+.arr:hover{background:rgba(201,168,76,.18);border-color:var(--gold);color:var(--gold)}
+#arr-p{right:72px}
+#arr-n{right:22px}
+
+/* ─── Deck ───────────────────────────────── */
+#deck{width:100%;height:100vh;position:relative;overflow:hidden}
+.slide{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  opacity:0;pointer-events:none;
+  transition:opacity 1.1s cubic-bezier(.4,0,.2,1);overflow:hidden;
+}
+.slide.active{opacity:1;pointer-events:all}
+
+/* ─── Shared Enter Animations ────────────── */
+.ai{opacity:0;transform:translateY(18px)}
+.slide.active .ai{animation:fuUp .75s ease forwards}
+.slide:not(.active) .ai{opacity:0;transform:translateY(18px)}
+.d1{animation-delay:.2s!important}.d2{animation-delay:.38s!important}
+.d3{animation-delay:.56s!important}.d4{animation-delay:.74s!important}
+.d5{animation-delay:.92s!important}
+@keyframes fuUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fuIn{to{opacity:1}}
+
+/* ─── Shared Slide Layout ────────────────── */
+.sl-inner{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;padding:48px 60px}
+.sl-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px;flex-shrink:0;padding-bottom:20px;border-bottom:1px solid rgba(201,168,76,.1)}
+.sl-label{font-family:var(--font-alt);font-size:9px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:8px}
+.sl-title{font-family:var(--font-cin);font-size:clamp(26px,3.8vw,50px);font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--crisp-white);line-height:1}
+.sl-sub{font-family:var(--font-ser);font-size:clamp(13px,1.4vw,17px);font-style:italic;color:rgba(245,240,232,.45)}
+
+/* ─── SLIDE 1 ─────────────────────────────── */
+#s1{background:#0E0C09}
+.s1-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 28% 65%,rgba(123,91,46,.38) 0%,transparent 60%),
+    radial-gradient(ellipse 55% 70% at 72% 35%,rgba(74,123,123,.18) 0%,transparent 60%),
+    radial-gradient(ellipse 110% 110% at 50% 50%,transparent 40%,rgba(10,8,6,.85) 100%);
+  background-color:#0E0C09;
+}
+.s1-lines{position:absolute;inset:0;overflow:hidden}
+.s1-lines::before{content:'';position:absolute;top:0;left:50%;width:1px;height:100%;background:linear-gradient(180deg,transparent,rgba(201,168,76,.12) 30%,rgba(201,168,76,.07) 70%,transparent)}
+.s1-lines::after{content:'';position:absolute;top:50%;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.07) 30%,rgba(201,168,76,.13) 50%,rgba(201,168,76,.07) 70%,transparent)}
+.corner{position:absolute;width:55px;height:55px;opacity:.22}
+.c-tl{top:22px;left:22px;border-top:1px solid var(--gold);border-left:1px solid var(--gold)}
+.c-tr{top:22px;right:22px;border-top:1px solid var(--gold);border-right:1px solid var(--gold)}
+.c-bl{bottom:22px;left:22px;border-bottom:1px solid var(--gold);border-left:1px solid var(--gold)}
+.c-br{bottom:22px;right:22px;border-bottom:1px solid var(--gold);border-right:1px solid var(--gold)}
+.s1-content{position:relative;z-index:2;text-align:center;max-width:860px;padding:60px 40px}
+.s1-pre{font-family:var(--font-alt);font-size:10px;font-weight:500;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:30px;opacity:0;animation:fuUp 1s ease .5s forwards}
+.s1-h1{font-family:var(--font-cin);font-size:clamp(58px,9vw,118px);font-weight:700;line-height:.88;letter-spacing:.04em;text-transform:uppercase;color:var(--crisp-white);margin-bottom:14px;opacity:0;animation:fuUp 1.2s ease .8s forwards}
+.s1-h1 em{display:block;color:rgba(123,91,46,.9);font-style:normal;font-weight:400;font-size:.6em;letter-spacing:.14em}
+.s1-div{width:110px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:28px auto;opacity:0;animation:fuIn 1s ease 1.2s forwards}
+.s1-subtitle{font-family:var(--font-ser);font-size:clamp(17px,2.2vw,25px);font-weight:300;font-style:italic;color:rgba(245,240,232,.7);letter-spacing:.02em;line-height:1.6;margin-bottom:40px;opacity:0;animation:fuUp 1s ease 1.4s forwards}
+.s1-body{font-family:var(--font-ser);font-size:clamp(15px,1.6vw,18px);color:rgba(232,213,176,.6);line-height:2;max-width:660px;margin:0 auto;opacity:0;animation:fuUp 1s ease 1.7s forwards}
+
+/* ─── SLIDE 2 : MOOD BOARD ────────────────── */
+#s2{background:#0D0B08}
+.s2-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 78% 20%,rgba(196,98,45,.12) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 12% 78%,rgba(45,74,30,.14) 0%,transparent 60%);background-color:#0D0B08}
+.moodboard{flex:1;display:grid;grid-template-columns:1.45fr 1fr 1fr 1.15fr;grid-template-rows:1fr .68fr 1.1fr;gap:5px;min-height:0}
+.mc{position:relative;overflow:hidden;border-radius:2px;cursor:default;transition:transform .5s ease,box-shadow .5s ease}
+.mc:hover{transform:scale(1.025);z-index:10;box-shadow:0 14px 45px rgba(0,0,0,.65)}
+.mc-in{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;background:linear-gradient(0deg,rgba(0,0,0,.6) 0%,transparent 50%)}
+.mc-lbl{font-family:var(--font-alt);font-size:8px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.88);margin-bottom:3px}
+.mc-dsc{font-family:var(--font-ser);font-size:12px;font-style:italic;color:rgba(255,255,255,.58);line-height:1.4}
+/* Cell BGs */
+.mc1{grid-column:1;grid-row:1/3;background:repeating-linear-gradient(168deg,transparent,transparent 3px,rgba(0,0,0,.05) 3px,rgba(0,0,0,.05) 4px),linear-gradient(148deg,#4E2F12 0%,#7B5228 25%,#6A4420 52%,#9A6A20 72%,#4E2F12 100%)}
+.mc2{grid-column:2;grid-row:1;background:linear-gradient(155deg,#C4D8DB 0%,#A8C4C8 30%,#8FADB2 58%,#6E96A0 100%)}
+.mc3{grid-column:3;grid-row:1;background:linear-gradient(130deg,#C4622D 0%,#A04B22 42%,#7A3819 72%,#C4622D 100%)}
+.mc4{grid-column:4;grid-row:1;background:linear-gradient(168deg,#192C10 0%,#2D4A1E 32%,#3D6228 62%,#253E18 100%)}
+.mc5{grid-column:2;grid-row:2;background:linear-gradient(118deg,#E8B84B 0%,#D4A043 52%,#C08A30 100%)}
+.mc6{grid-column:3;grid-row:2;background:linear-gradient(45deg,rgba(255,255,255,.06) 25%,transparent 25%),linear-gradient(-45deg,rgba(255,255,255,.06) 25%,transparent 25%),linear-gradient(135deg,#1C2830 0%,#2D3D48 52%,#3D5060 100%)}
+.mc7{grid-column:4;grid-row:2;background:linear-gradient(158deg,#180E06 0%,#2C1808 32%,#381A0C 62%,#221008 100%)}
+.mc8{grid-column:1/3;grid-row:3;background:radial-gradient(circle at 38% 42%,rgba(255,160,50,.38) 0%,transparent 52%),radial-gradient(circle at 68% 68%,rgba(255,130,30,.28) 0%,transparent 42%),linear-gradient(158deg,#190B05 0%,#281306 52%,#190B05 100%)}
+.mc9{grid-column:3;grid-row:3;background:linear-gradient(180deg,rgba(120,180,200,.28) 0%,rgba(80,130,160,.18) 40%,transparent 62%),linear-gradient(168deg,#0C181C 0%,#14222E 52%,#091018 100%)}
+.mc10{grid-column:4;grid-row:3;background:repeating-linear-gradient(90deg,rgba(196,98,45,.14) 0px,rgba(196,98,45,.14) 7px,transparent 7px,transparent 14px),repeating-linear-gradient(0deg,rgba(74,123,123,.14) 0px,rgba(74,123,123,.14) 7px,transparent 7px,transparent 14px),linear-gradient(135deg,#28160E 0%,#3C2215 52%,#28160E 100%)}
+
+/* ─── SLIDE 3 : CINEMATOGRAPHY ────────────── */
+#s3{background:#080C0D}
+.s3-bg{position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 82% 50%,rgba(74,123,123,.14) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 18% 28%,rgba(45,74,30,.1) 0%,transparent 52%);background-color:#080C0D}
+.s3-panels{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:22px;min-height:0}
+.cp{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:28px 32px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.cp::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.cp.cam::before{background:linear-gradient(90deg,var(--teal),transparent)}
+.cp.lit::before{background:linear-gradient(90deg,var(--mustard),transparent)}
+.cp-tag{font-family:var(--font-alt);font-size:9px;font-weight:600;letter-spacing:.42em;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.cp-tag::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+.cp-tag.ct{color:var(--teal)}.cp-tag.lt{color:var(--mustard)}
+.cp-title{font-family:var(--font-cin);font-size:clamp(18px,2.2vw,28px);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--crisp-white);margin-bottom:22px;line-height:1.1}
+.spec{margin-bottom:18px;padding-left:14px;border-left:2px solid rgba(201,168,76,.2)}
+.spec-k{font-family:var(--font-alt);font-size:9px;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:.78;margin-bottom:5px}
+.spec-v{font-family:var(--font-ser);font-size:clamp(12px,1.3vw,15px);color:rgba(232,213,176,.72);line-height:1.75}
+.lens-viz{margin-top:auto;padding-top:20px;height:56px;background:rgba(74,123,123,.08);border-radius:2px;border:1px solid rgba(74,123,123,.15);display:flex;align-items:center;justify-content:center;font-family:var(--font-cin);font-size:22px;letter-spacing:.12em;color:var(--teal);position:relative}
+.lens-viz span{position:absolute;top:7px;left:12px;font-family:var(--font-alt);font-size:8px;letter-spacing:.3em;color:rgba(255,255,255,.25);font-family:var(--font-alt)}
+.light-bar{margin-top:auto;padding-top:20px}
+.light-grad{height:38px;border-radius:2px;background:linear-gradient(90deg,#A8C4D0 0%,#C4D8DB 14%,#E8D5B0 40%,#D4A843 64%,#C4622D 85%,#8B3A1A 100%)}
+.light-lbs{display:flex;justify-content:space-between;margin-top:7px}
+.light-lbs span{font-family:var(--font-alt);font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+
+/* ─── SLIDE 4 : STORYBOARD ────────────────── */
+#s4{background:#0C0908}
+.s4-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 28% at 50% 100%,rgba(196,98,45,.1) 0%,transparent 62%);background-color:#0C0908}
+.tl-bar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-bottom:30px;position:relative;flex-shrink:0}
+.tl-fill{position:absolute;inset:0;background:linear-gradient(90deg,var(--teal) 0%,var(--mustard) 33%,var(--terracotta) 100%);border-radius:2px}
+.tl-marks{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between}
+.tmark{display:flex;flex-direction:column;align-items:center}
+.tmark-dot{width:7px;height:7px;border-radius:50%;background:#0C0908;border:1.5px solid rgba(201,168,76,.45);margin-top:-2px}
+.tmark-lbl{font-family:var(--font-alt);font-size:8px;letter-spacing:.2em;color:rgba(255,255,255,.28);margin-top:7px}
+.acts-wrap{flex:1;display:flex;gap:18px;min-height:0}
+.act{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex;flex-direction:column;flex:1;transition:border-color .4s,transform .4s;cursor:default}
+.act:hover{border-color:rgba(201,168,76,.22);transform:translateY(-4px)}
+.act-vis{height:clamp(75px,11vw,135px);position:relative;overflow:hidden;flex-shrink:0}
+.act-ovl{position:absolute;bottom:10px;left:14px;font-family:var(--font-alt);font-size:7.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.48)}
+.act-body{flex:1;padding:18px 22px;display:flex;flex-direction:column}
+.act-num{font-family:var(--font-alt);font-size:8.5px;font-weight:600;letter-spacing:.4em;text-transform:uppercase;margin-bottom:5px}
+.act-ttl{font-family:var(--font-cin);font-size:clamp(13px,1.7vw,20px);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--crisp-white);line-height:1.2;margin-bottom:4px}
+.act-time{font-family:var(--font-alt);font-size:8px;letter-spacing:.22em;color:rgba(255,255,255,.28);margin-bottom:14px}
+.act-desc{font-family:var(--font-ser);font-size:clamp(11px,1.1vw,13.5px);color:rgba(232,213,176,.6);line-height:1.75;flex:1}
+.av1{background:linear-gradient(180deg,rgba(120,180,200,.5) 0%,rgba(80,140,160,.28) 42%,rgba(30,50,60,.85) 100%)}
+.av2{background:linear-gradient(135deg,rgba(123,91,46,.7) 0%,rgba(196,98,45,.48) 42%,rgba(74,123,123,.28) 72%,rgba(30,20,10,.85) 100%)}
+.av3{background:linear-gradient(158deg,rgba(25,15,5,.92) 0%,rgba(100,50,20,.58) 30%,rgba(196,98,45,.68) 62%,rgba(212,168,67,.48) 80%,rgba(40,20,10,.92) 100%)}
+.av3::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 58% 62%,rgba(255,160,50,.22) 0%,transparent 58%)}
+
+/* ─── SLIDE 5 : SOUND ─────────────────────── */
+#s5{background:#090A0D}
+.s5-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 10% 52%,rgba(45,74,30,.1) 0%,transparent 62%),radial-gradient(ellipse 40% 60% at 90% 38%,rgba(74,123,123,.11) 0%,transparent 62%);background-color:#090A0D}
+.s5-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;gap:20px;min-height:0}
+.sp{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.055);border-radius:3px;padding:26px 30px;position:relative;overflow:hidden}
+.sp::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.sp.snd::before{background:linear-gradient(90deg,var(--forest),transparent)}
+.sp.pac::before{background:linear-gradient(90deg,var(--mustard),transparent)}
+.sp-ttl{font-family:var(--font-cin);font-size:clamp(15px,1.8vw,22px);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--crisp-white);margin-bottom:14px}
+.sp-txt{font-family:var(--font-ser);font-size:clamp(12px,1.2vw,14.5px);color:rgba(232,213,176,.62);line-height:1.82}
+.waveform{height:54px;display:flex;align-items:center;gap:2px;margin:18px 0}
+.wb{flex:1;border-radius:1px;transition:height .6s ease}
+.pacing-viz{height:46px;display:flex;align-items:flex-end;gap:3px;margin:18px 0}
+.pb{flex:1;border-radius:1px;opacity:.72}
+.instr-bar{grid-column:1/-1;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.055);border-radius:3px;padding:16px 28px;display:flex;align-items:center;gap:22px;flex-shrink:0}
+.instr-lbl{font-family:var(--font-alt);font-size:8.5px;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);opacity:.78;white-space:nowrap}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{padding:4px 12px;border:1px solid rgba(201,168,76,.2);border-radius:20px;font-family:var(--font-alt);font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:rgba(232,213,176,.55);background:rgba(201,168,76,.04)}
+
+/* ─── SLIDE 6 : COLOR GRADE ───────────────── */
+#s6{background:#080808}
+.s6-bg{position:absolute;inset:0;background:radial-gradient(ellipse 58% 60% at 22% 50%,rgba(196,98,45,.08) 0%,transparent 60%),radial-gradient(ellipse 42% 42% at 80% 50%,rgba(74,123,123,.08) 0%,transparent 60%);background-color:#080808}
+.s6-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto auto;gap:18px;min-height:0}
+.grade-split{grid-column:1/-1;border-radius:3px;overflow:hidden;display:flex;position:relative;flex-shrink:0}
+.g-before{flex:1;background:linear-gradient(158deg,#7A8B8E 0%,#9EA8A8 20%,#7A7A70 42%,#5A5040 62%,#403028 80%,#302018 100%);display:flex;align-items:flex-end;padding:18px}
+.g-after{flex:1;background:linear-gradient(158deg,#1A2830 0%,#2A3830 20%,#4A3020 42%,#8B4A1A 62%,#C4622D 78%,#3A1808 100%);display:flex;align-items:flex-end;justify-content:flex-end;padding:18px}
+.g-lbl{font-family:var(--font-alt);font-size:8.5px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.58);background:rgba(0,0,0,.42);padding:5px 11px;border-radius:2px}
+.g-split-line{position:absolute;top:0;left:50%;transform:translateX(-50%);width:2px;height:100%;background:rgba(201,168,76,.55);z-index:5;display:flex;align-items:center;justify-content:center}
+.g-split-line::before{content:'◆';font-size:11px;color:var(--gold);background:#080808;padding:3px;line-height:1}
+.palette{grid-column:1/-1;display:grid;grid-template-columns:repeat(8,1fr);gap:5px;height:clamp(42px,5.5vh,62px)}
+.sw{border-radius:2px;position:relative;overflow:hidden;transition:transform .3s}
+.sw:hover{transform:scaleY(1.12);z-index:2}
+.sw-lbl{position:absolute;bottom:3px;left:0;right:0;text-align:center;font-family:var(--font-alt);font-size:6.5px;letter-spacing:.12em;color:rgba(255,255,255,.45);text-transform:uppercase}
+.lut-box{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.055);border-radius:3px;padding:22px 26px;display:flex;flex-direction:column;justify-content:space-between}
+.grade-notes{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.055);border-radius:3px;padding:22px 26px}
+.info-title{font-family:var(--font-cin);font-size:clamp(13px,1.6vw,19px);font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--crisp-white);margin-top:10px;margin-bottom:12px}
+.info-txt{font-family:var(--font-ser);font-size:clamp(11px,1.15vw,14px);color:rgba(232,213,176,.6);line-height:1.82}
+
+/* ─── Responsive ─────────────────────────── */
+@media(max-height:620px){
+  .sl-inner{padding:30px 42px}
+  .sl-hd{margin-bottom:20px;padding-bottom:14px}
+  .sl-title{font-size:26px}
+}
+@media(max-width:900px){
+  .s3-panels,.s5-grid{grid-template-columns:1fr}
+  .s5-grid{grid-template-rows:auto auto auto}
+  .grade-split{height:100px}
+}
+</style>
+</head>
+<body>
+
+<!-- Fixed UI -->
+<div id="top-bar">
+  <span>Director's Treatment — Confidential</span>
+  <span>Chiang Mai, Thailand &nbsp;&middot;&nbsp; 2024</span>
+</div>
+<div id="nav-dots">
+  <div class="dot active" onclick="gto(0)" title="Title"></div>
+  <div class="dot" onclick="gto(1)" title="Mood Board"></div>
+  <div class="dot" onclick="gto(2)" title="Cinematography"></div>
+  <div class="dot" onclick="gto(3)" title="Storyboard"></div>
+  <div class="dot" onclick="gto(4)" title="Sound &amp; Editing"></div>
+  <div class="dot" onclick="gto(5)" title="Color Grading"></div>
+</div>
+<div id="prog" style="width:16.67%"></div>
+<div id="counter">01 / 06</div>
+<div id="format-badge">2.39:1 &nbsp;&middot;&nbsp; ARRI ALEXA MINI LF</div>
+<div class="arr" id="arr-p" onclick="nav(-1)" style="opacity:.22">&#8592;</div>
+<div class="arr" id="arr-n" onclick="nav(1)">&#8594;</div>
+
+<!-- DECK -->
+<div id="deck">
+
+<!-- ══════════════════════════════════════════
+     SLIDE 1 — TITLE
+══════════════════════════════════════════ -->
+<div class="slide active" id="s1">
+  <div class="s1-bg"></div>
+  <div class="s1-lines"></div>
+  <div class="corner c-tl"></div><div class="corner c-tr"></div>
+  <div class="corner c-bl"></div><div class="corner c-br"></div>
+  <div class="s1-content">
+    <p class="s1-pre">A Cinematic Film Treatment &mdash; 2024</p>
+    <h1 class="s1-h1">Under the<em>Same Sky</em></h1>
+    <div class="s1-div"></div>
+    <p class="s1-subtitle">A Cinematic Journey for [Hotel Name Placeholder], Chiang Mai</p>
+    <p class="s1-body">The morning mist that touches the mid-century glass facade is the same mist that rolls over the traditional Lanna wooden pavilion. Two design philosophies. Two hemispheres of aesthetic tradition. One luxurious sanctuary where Eastern warmth and Western structural elegance coexist beautifully beneath the same Chiang Mai sky.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 2 — MOOD BOARD
+══════════════════════════════════════════ -->
+<div class="slide" id="s2">
+  <div class="s2-bg"></div>
+  <div class="sl-inner">
+    <div class="sl-hd ai d1">
+      <div><div class="sl-label">02 &mdash; Visual Mood &amp; Art Direction</div><h2 class="sl-title">The Moodboard</h2></div>
+      <div class="sl-sub">Production Design Reference</div>
+    </div>
+    <div class="moodboard ai d2">
+      <div class="mc mc1"><div class="mc-in"><span class="mc-lbl">Teak Wood</span><span class="mc-dsc">Aged Northern Thai hardwood — hand-carved Lanna motifs</span></div></div>
+      <div class="mc mc2"><div class="mc-in"><span class="mc-lbl">Morning Mist</span><span class="mc-dsc">Cool diffused light, European in temperament</span></div></div>
+      <div class="mc mc3"><div class="mc-in"><span class="mc-lbl">Terracotta</span><span class="mc-dsc">Earthen warmth, ancient Lanna clay</span></div></div>
+      <div class="mc mc4"><div class="mc-in"><span class="mc-lbl">Forest Canopy</span><span class="mc-dsc">Doi Suthep, lush Northern highlands</span></div></div>
+      <div class="mc mc5"><div class="mc-in"><span class="mc-lbl">Mustard</span><span class="mc-dsc">Mid-Century accent tone</span></div></div>
+      <div class="mc mc6"><div class="mc-in"><span class="mc-lbl">Geometric Shadow</span><span class="mc-dsc">Sharp Mid-Century lines on concrete</span></div></div>
+      <div class="mc mc7"><div class="mc-in"><span class="mc-lbl">Eames Leather</span><span class="mc-dsc">Iconic lounge on Lanna-woven rug</span></div></div>
+      <div class="mc mc8"><div class="mc-in"><span class="mc-lbl">Khom Lanna</span><span class="mc-dsc">Traditional hanging fabric lanterns swaying in the northern breeze, warm amber glow</span></div></div>
+      <div class="mc mc9"><div class="mc-in"><span class="mc-lbl">Glass &amp; Mountain</span><span class="mc-dsc">Floor-to-ceiling glass, Doi Suthep framed as living art</span></div></div>
+      <div class="mc mc10"><div class="mc-in"><span class="mc-lbl">Hand-Woven</span><span class="mc-dsc">Lanna textile tradition meets modern interior</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 3 — CINEMATOGRAPHY
+══════════════════════════════════════════ -->
+<div class="slide" id="s3">
+  <div class="s3-bg"></div>
+  <div class="sl-inner">
+    <div class="sl-hd ai d1">
+      <div><div class="sl-label">03 &mdash; Cinematography &amp; Lighting</div><h2 class="sl-title">Visual Language</h2></div>
+      <div class="sl-sub">Technical Production Plan</div>
+    </div>
+    <div class="s3-panels">
+      <!-- Camera -->
+      <div class="cp cam ai d2">
+        <div class="cp-tag ct">&#9679; Camera</div>
+        <h3 class="cp-title">Image Capture</h3>
+        <div class="spec"><div class="spec-k">Camera Body</div><div class="spec-v">ARRI Alexa Mini LF &mdash; Large Format sensor delivering exceptional latitude and true cinematic character at every stop</div></div>
+        <div class="spec"><div class="spec-k">Optics</div><div class="spec-v">Anamorphic prime lenses — widescreen 2.39:1 ratio with signature horizontal flares and refined, organic bokeh</div></div>
+        <div class="spec"><div class="spec-k">Movement</div><div class="spec-v">Smooth floating Steadicam glides through the architecture &mdash; drone aerials for grand establishing shots &mdash; slow-motion 50fps for moments of deep tranquility</div></div>
+        <div class="lens-viz"><span>Aspect Ratio</span>2.39 : 1</div>
+      </div>
+      <!-- Lighting -->
+      <div class="cp lit ai d3">
+        <div class="cp-tag lt">&#9675; Lighting</div>
+        <h3 class="cp-title">Light Design</h3>
+        <div class="spec"><div class="spec-k">Philosophy</div><div class="spec-v">Motivated natural light only — all practicals augmented, never replaced. The architecture itself dictates the light.</div></div>
+        <div class="spec"><div class="spec-k">Morning Mood</div><div class="spec-v">Cool, diffused Chiang Mai mist. Overcast bounce from mountain canopy. <em>European in temperament — clean and considered.</em></div></div>
+        <div class="spec"><div class="spec-k">Golden Hour</div><div class="spec-v">Rich sun flares through floor-to-ceiling glass. Warm tungsten practicals awakening across teak panels. <em>Asian warmth — ancient and alive.</em></div></div>
+        <div class="light-bar">
+          <div class="light-grad"></div>
+          <div class="light-lbs"><span>Cool Mist</span><span>Mid-Day</span><span>Golden Hour</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 4 — STORYBOARD
+══════════════════════════════════════════ -->
+<div class="slide" id="s4">
+  <div class="s4-bg"></div>
+  <div class="sl-inner">
+    <div class="sl-hd ai d1">
+      <div><div class="sl-label">04 &mdash; Storyboard Breakdown</div><h2 class="sl-title">3-Minute Flow</h2></div>
+      <div class="sl-sub">Narrative Architecture</div>
+    </div>
+    <!-- Timeline bar -->
+    <div class="tl-bar ai d2">
+      <div class="tl-fill"></div>
+      <div class="tl-marks">
+        <div class="tmark"><div class="tmark-dot"></div><div class="tmark-lbl">0:00</div></div>
+        <div class="tmark"><div class="tmark-dot"></div><div class="tmark-lbl">1:00</div></div>
+        <div class="tmark"><div class="tmark-dot"></div><div class="tmark-lbl">2:00</div></div>
+        <div class="tmark"><div class="tmark-dot"></div><div class="tmark-lbl">3:00</div></div>
+      </div>
+    </div>
+    <!-- Act Cards -->
+    <div class="acts-wrap ai d3">
+      <div class="act">
+        <div class="act-vis av1"><div class="act-ovl">Exterior / Interior &mdash; Dawn</div></div>
+        <div class="act-body">
+          <div class="act-num" style="color:var(--teal)">Act I</div>
+          <div class="act-ttl">"The Awakening"</div>
+          <div class="act-time">0:00 &mdash; 1:00</div>
+          <div class="act-desc">Crisp, cool morning in Chiang Mai. Wide establishing aerial reveals the architecture emerging from the mountain mist. A guest moves through the Mid-Century lobby — artisanal local coffee in hand. The first light touches both teak panels and glass facades with equal reverence.</div>
+        </div>
+      </div>
+      <div class="act">
+        <div class="act-vis av2"><div class="act-ovl">Macro / Detail &mdash; Afternoon</div></div>
+        <div class="act-body">
+          <div class="act-num" style="color:var(--mustard)">Act II</div>
+          <div class="act-ttl">"The Intersection"</div>
+          <div class="act-time">1:00 &mdash; 2:00</div>
+          <div class="act-desc">Extreme close-ups of texture. Hands tracing intricate Lanna woodcarvings — cutting to the same hand resting on smooth mid-century leather. Culinary artistry on a single plate unites both worlds. An Eames chair faces Doi Suthep, framed in geometric brass.</div>
+        </div>
+      </div>
+      <div class="act">
+        <div class="act-vis av3"><div class="act-ovl">Magic Hour &mdash; Aerial</div></div>
+        <div class="act-body">
+          <div class="act-num" style="color:var(--terracotta)">Act III</div>
+          <div class="act-ttl">"Under the Same Sky"</div>
+          <div class="act-time">2:00 &mdash; 3:00</div>
+          <div class="act-desc">Magic hour. The sky turns deep indigo and burnt orange. A wide drone shot pulls back from the resort as lantern lights and warm tungsten interior lights flicker on in perfect harmony — Eastern and Western traditions, glowing together beneath the same ancient sky.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 5 — SOUND & EDITING
+══════════════════════════════════════════ -->
+<div class="slide" id="s5">
+  <div class="s5-bg"></div>
+  <div class="sl-inner">
+    <div class="sl-hd ai d1">
+      <div><div class="sl-label">05 &mdash; Editing, Pacing &amp; Sound Design</div><h2 class="sl-title">The Rhythm</h2></div>
+      <div class="sl-sub">Post-Production Vision</div>
+    </div>
+    <div class="s5-grid">
+      <!-- Sound -->
+      <div class="sp snd ai d2">
+        <div class="sl-label" style="margin-bottom:14px">&#9836; Soundscape</div>
+        <div class="sp-ttl">Audio Architecture</div>
+        <p class="sp-txt">The film opens with pure ambient field recordings from the Chiang Mai forest — birdsong, rustling teak leaves, distant temple bells. This organic soundscape breathes beneath the entire first act, grounding the viewer in place and season.</p>
+        <div class="waveform" id="waveform"></div>
+        <p class="sp-txt">Gradually, a cinematic orchestral score rises — strings, low brass — interwoven with haunting Thai traditional instruments. The two layers coexist exactly as the architecture does: distinct yet harmonious.</p>
+      </div>
+      <!-- Pacing -->
+      <div class="sp pac ai d3">
+        <div class="sl-label" style="margin-bottom:14px">&#9201; Editorial Tempo</div>
+        <div class="sp-ttl">Pacing Design</div>
+        <div class="pacing-viz" id="pacing-viz"></div>
+        <div class="light-lbs" style="margin-bottom:16px"><span>Breathing</span><span>Building</span><span>Majestic</span></div>
+        <p class="sp-txt">
+          <strong style="color:rgba(255,255,255,.72)">Act I:</strong> Slow, deliberate, breathing. Long takes. The audience settles into the world.<br><br>
+          <strong style="color:rgba(255,255,255,.72)">Act II:</strong> Rhythmic, purposeful. Cut on beat. Two worlds interweave.<br><br>
+          <strong style="color:rgba(255,255,255,.72)">Act III:</strong> Grand and lingering. Wide shots held. Time expands. The sky takes over.
+        </p>
+      </div>
+      <!-- Instruments -->
+      <div class="instr-bar ai d4">
+        <div class="instr-lbl">Instruments</div>
+        <div class="tags">
+          <span class="tag">Salor (สะล้อ)</span>
+          <span class="tag">Khim (ขิม)</span>
+          <span class="tag">String Quartet</span>
+          <span class="tag">Low Brass</span>
+          <span class="tag">Chiang Mai Forest</span>
+          <span class="tag">Temple Bell</span>
+          <span class="tag">Ambient Texture</span>
+          <span class="tag">Minimal Piano</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 6 — COLOR GRADING
+══════════════════════════════════════════ -->
+<div class="slide" id="s6">
+  <div class="s6-bg"></div>
+  <div class="sl-inner">
+    <div class="sl-hd ai d1">
+      <div><div class="sl-label">06 &mdash; Post-Production &amp; Color Grading</div><h2 class="sl-title">The Grade</h2></div>
+      <div class="sl-sub">DI &mdash; Digital Intermediate Vision</div>
+    </div>
+    <div class="s6-grid">
+      <!-- Split screen -->
+      <div class="grade-split ai d2">
+        <div class="g-before"><div class="g-lbl">Raw / Ungraded</div></div>
+        <div class="g-split-line"></div>
+        <div class="g-after"><div class="g-lbl">Graded &mdash; Teal &amp; Orange</div></div>
+      </div>
+      <!-- Palette -->
+      <div class="palette ai d3">
+        <div class="sw" style="background:#1A2830"><div class="sw-lbl">Teal Black</div></div>
+        <div class="sw" style="background:#2A3830"><div class="sw-lbl">Shadow</div></div>
+        <div class="sw" style="background:#4A7B7B"><div class="sw-lbl">Teal Mid</div></div>
+        <div class="sw" style="background:#E8D5B0"><div class="sw-lbl">Warm Skin</div></div>
+        <div class="sw" style="background:#D4A843"><div class="sw-lbl">Highlight</div></div>
+        <div class="sw" style="background:#C4622D"><div class="sw-lbl">Terracotta</div></div>
+        <div class="sw" style="background:#8B3A1A"><div class="sw-lbl">Warm Shadow</div></div>
+        <div class="sw" style="background:#3A1808"><div class="sw-lbl">Deep Black</div></div>
+      </div>
+      <!-- LUT -->
+      <div class="lut-box ai d4">
+        <div>
+          <div class="sl-label">Film Emulation</div>
+          <div class="info-title">Kodak Vision3 500T</div>
+        </div>
+        <p class="info-txt">Analog warmth. Lifted, milky shadows. The grain of memory — ever-present but never intrusive. A look that feels lived-in and luxurious simultaneously.</p>
+      </div>
+      <!-- Notes -->
+      <div class="grade-notes ai d4">
+        <div class="sl-label" style="margin-bottom:10px">Grading Direction</div>
+        <p class="info-txt">Lifted shadows carry a subtle teal tint in the blacks, in perfect counterpoint to the rich, warm orange tones of teak wood, terracotta surfaces, and golden skin tones. A <em>luxurious interpretation</em> of the classic Teal &amp; Orange cinematic standard — elevated for a five-star narrative about two worlds sharing one sky.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /#deck -->
+
+<script>
+/* ─── State ─────────────────────────────── */
+let cur=0,tot=6,busy=false;
+
+/* ─── Navigate ───────────────────────────── */
+function gto(i){
+  if(busy||i===cur||i<0||i>=tot)return;
+  busy=true;
+  const slides=document.querySelectorAll('.slide'),dots=document.querySelectorAll('.dot');
+  slides[cur].classList.remove('active');dots[cur].classList.remove('active');
+  cur=i;
+  slides[cur].classList.add('active');dots[cur].classList.add('active');
+  document.getElementById('prog').style.width=((cur+1)/tot*100)+'%';
+  document.getElementById('counter').textContent=String(cur+1).padStart(2,'0')+' / 0'+tot;
+  document.getElementById('arr-p').style.opacity=cur===0?'.22':'1';
+  document.getElementById('arr-n').style.opacity=cur===tot-1?'.22':'1';
+  setTimeout(()=>{busy=false},1100);
+}
+function nav(d){gto(cur+d)}
+
+/* ─── Keyboard ───────────────────────────── */
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();nav(1)}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();nav(-1)}
+});
+
+/* ─── Touch/Swipe ────────────────────────── */
+let tx=0,ty=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>48)nav(dx<0?1:-1);
+});
+
+/* ─── Build Waveform ─────────────────────── */
+function buildWave(){
+  const wf=document.getElementById('waveform');if(!wf)return;
+  const n=64;
+  for(let i=0;i<n;i++){
+    const phase=i/n;
+    // Gradually rising amplitude: gentle in act1, peaking in act3
+    const base=0.15+phase*0.72;
+    const h=Math.max(4,Math.round((base+Math.sin(i*.7+1)*.18)*52));
+    // Color: teal → mustard → terracotta
+    const r=Math.round(74+(196-74)*phase),g=Math.round(123+(98-123)*phase),b=Math.round(123+(45-123)*phase);
+    const bar=document.createElement('div');
+    bar.className='wb';
+    bar.style.height=h+'px';
+    bar.style.background=`linear-gradient(180deg,rgb(${r},${g},${b}),rgba(${r},${g},${b},.28))`;
+    wf.appendChild(bar);
+  }
+  // Gentle living animation
+  document.querySelectorAll('.wb').forEach((bar,i)=>{
+    const base=parseInt(bar.style.height);
+    setInterval(()=>{bar.style.height=Math.max(4,base+(Math.random()-.5)*8)+'px'},900+i*18);
+  });
+}
+
+/* ─── Build Pacing Viz ───────────────────── */
+function buildPacing(){
+  const pv=document.getElementById('pacing-viz');if(!pv)return;
+  const palette=['#4A7B7B','#D4A843','#C4622D'];
+  // 60 blocks across 3 acts
+  for(let i=0;i<60;i++){
+    const act=Math.floor(i/20);
+    const localT=(i%20)/20;
+    // Act 1: slow short pulses | Act 2: medium rhythmic | Act 3: grand sweeping
+    const heights=[
+      ()=>0.18+Math.abs(Math.sin(localT*Math.PI*2.5))*.22,
+      ()=>0.42+Math.abs(Math.sin(localT*Math.PI*5))*.3,
+      ()=>0.72+Math.abs(Math.sin(localT*Math.PI*1.2))*.22,
+    ];
+    const bar=document.createElement('div');
+    bar.className='pb';
+    bar.style.height=Math.round(heights[act]()*44)+'px';
+    bar.style.background=palette[act];
+    pv.appendChild(bar);
+  }
+}
+
+/* ─── Init ───────────────────────────────── */
+window.addEventListener('DOMContentLoaded',()=>{
+  buildWave();
+  buildPacing();
+});
+</script>
+</body>
+</html>
