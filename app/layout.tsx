@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo, Archivo_Black, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const archivo = Archivo({
   variable: "--font-jakarta",
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <Navigation />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
