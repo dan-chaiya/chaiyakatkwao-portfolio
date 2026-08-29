@@ -11,17 +11,16 @@ import type { Project } from "@/data/commercial";
 
 export default function CommercialList({ projects }: { projects: Project[] }) {
   return (
-    <div role="list" style={{ borderTop: "1px solid var(--color-border)" }}>
+    <div style={{ borderTop: "1px solid var(--color-border)" }}>
       {projects.map((project) => (
         <Link
           key={project.id}
-          role="listitem"
           href={`/commercial/${project.slug}`}
           className="group relative grid grid-cols-12 items-center gap-4 px-1 py-6 md:py-7"
           style={{ borderBottom: "1px solid var(--color-border)", textDecoration: "none" }}
         >
           {/* Index */}
-          <span className="col-span-2 md:col-span-1 mono-label" style={{ color: "var(--color-text-dim)" }}>
+          <span className="col-span-2 md:col-span-1 mono-label" style={{ color: "var(--color-text-muted)" }}>
             {project.id}
           </span>
 
@@ -69,7 +68,7 @@ export default function CommercialList({ projects }: { projects: Project[] }) {
           {/* Hover thumbnail (desktop) — the cover, revealed, never altered */}
           <span
             aria-hidden
-            className="pointer-events-none absolute right-24 top-1/2 z-10 hidden -translate-y-1/2 overflow-hidden opacity-0 shadow-2xl transition-all duration-300 ease-out lg:block group-hover:opacity-100 group-focus-visible:opacity-100"
+            className="pointer-events-none absolute right-24 top-1/2 z-10 hidden -translate-y-1/2 overflow-hidden opacity-0 transition-all duration-300 ease-out lg:block group-hover:opacity-100 group-focus-visible:opacity-100"
             style={{ width: "92px", height: "120px", transform: "translateY(-50%) scale(0.96)" }}
           >
             <Image src={project.cover} alt={`${project.title} - Creative Producer Portfolio`} fill sizes="92px" className="object-cover" />

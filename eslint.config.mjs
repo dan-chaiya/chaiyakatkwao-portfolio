@@ -12,6 +12,13 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored agent/skill tooling. Not application code — it accounted for 107
+    // of 117 lint findings and buried the three that were real.
+    ".agents/**",
+    ".claude/**",
+    ".cursor/**",
+    ".superpowers/**",
+    "scripts/**",
   ]),
 ]);
 

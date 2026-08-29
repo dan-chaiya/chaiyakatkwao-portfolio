@@ -1,6 +1,6 @@
 // lib/motion.ts — canonical motion tokens for Chaiya Katkwao Portfolio v2.
 // Import these everywhere; never hard-code an ease or duration in a component.
-// Values match the shipping FadeIn.tsx / CreativeProducerHero.tsx signature curve.
+// Values match the shipping FadeIn.tsx / HeroStage.tsx signature curve.
 
 import type { Variants, Transition } from "framer-motion";
 

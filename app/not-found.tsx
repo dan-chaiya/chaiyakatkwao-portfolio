@@ -8,13 +8,13 @@ import Footer from "@/components/Footer";
 export default function NotFound() {
   return (
     <PageTransition>
-      <div className="pt-32 px-8 pb-8 min-h-[80vh] flex flex-col justify-between">
+      <main id="main-content" className="pt-32 px-8 pb-8 min-h-[80vh] flex flex-col justify-between">
         <div>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="font-body text-[9px] tracking-[0.35em] uppercase text-[var(--color-grey-500)] mb-5"
+            className="font-body text-[11px] tracking-[0.35em] uppercase text-[var(--color-text-muted)] mb-5"
           >
             404
           </motion.p>
@@ -40,13 +40,13 @@ export default function NotFound() {
           >
             <Link
               href="/"
-              className="inline-block font-body text-[9px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] hover:text-[var(--color-warm)] transition-colors duration-300"
+              className="inline-flex min-h-11 items-center font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-text-muted)] hover:text-[var(--color-warm)] transition-colors duration-300"
             >
               ← Back to home
             </Link>
           </motion.div>
         </div>
-      </div>
+      </main>
       <Footer />
     </PageTransition>
   );

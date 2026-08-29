@@ -4,7 +4,7 @@ import "./globals.css";
 import Navigation from "@/components/Navigation";
 
 const archivo = Archivo({
-  variable: "--font-jakarta",
+  variable: "--font-archivo",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
@@ -39,13 +39,23 @@ export const metadata: Metadata = {
     siteName: "Chaiya Katkwao",
     type: "website",
     locale: "en_US",
-    images: [{ url: "/images/woven-memories/01.jpg", width: 1200, height: 630, alt: "Chaiya Katkwao" }],
+    images: [
+      {
+        // Purpose-built 1200x630 card. The previous value pointed at a 2400x1600
+        // photograph while declaring 1200x630, so every platform cropped it
+        // somewhere different. Regenerate from scripts/share-card.html.
+        url: "/images/share-card.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Chaiya Katkwao — Creative Producer, Bangkok",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Chaiya Katkwao | Creative Producer - Bangkok",
     description: "Chaiya Katkwao (CK) Creative Producer ในกรุงเทพฯ ที่เชี่ยวชาญด้าน Art Direction, AV Engineering, Live Commerce และ Production",
-    images: ["/images/woven-memories/01.jpg"],
+    images: ["/images/share-card.jpg"],
   },
 };
 

@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 
 const eyebrow: React.CSSProperties = {
   fontFamily: "var(--font-jetbrains-mono)",
-  fontSize: "6.5pt",
+  fontSize: "var(--cv-eyebrow)",
   letterSpacing: "0.32em",
   textTransform: "uppercase",
-  color: "var(--color-grey-500)",
+  color: "var(--color-text-muted)",
   fontWeight: 400,
   marginBottom: "2.5mm",
 };
@@ -24,16 +24,16 @@ const rule: React.CSSProperties = {
 };
 
 const bodyLine: React.CSSProperties = {
-  fontFamily: "var(--font-jakarta)",
-  fontSize: "8.5pt",
+  fontFamily: "var(--font-archivo)",
+  fontSize: "var(--cv-body)",
   lineHeight: 1.5,
   color: "var(--color-grey-300)",
   fontWeight: 400,
 };
 
 const roleTitle: React.CSSProperties = {
-  fontFamily: "var(--font-jakarta)",
-  fontSize: "8.5pt",
+  fontFamily: "var(--font-archivo)",
+  fontSize: "var(--cv-role)",
   letterSpacing: "0",
   color: "var(--color-warm)",
   fontWeight: 700,
@@ -41,15 +41,15 @@ const roleTitle: React.CSSProperties = {
 
 const yearLabel: React.CSSProperties = {
   fontFamily: "var(--font-jetbrains-mono)",
-  fontSize: "6.5pt",
+  fontSize: "var(--cv-year)",
   letterSpacing: "0.12em",
   textTransform: "uppercase",
-  color: "var(--color-grey-500)",
+  color: "var(--color-text-muted)",
   whiteSpace: "nowrap",
   marginLeft: "4mm",
 };
 
-const sectionGap: React.CSSProperties = { marginBottom: "5mm" };
+const sectionGap: React.CSSProperties = { marginBottom: "var(--cv-section-gap)" };
 
 const clients = [
   "Dutchmil Delivery", "Fitflop", "Guess", "Her Hyness",
@@ -62,9 +62,62 @@ export default function CVPage() {
     <>
       <style>{`
         @page { size: A4 portrait; margin: 0; }
+
+        /* The A4 sheet. These are the print measurements and the wide-screen
+           measurements both — the page is a facsimile of the printed CV. */
+        .cv-sheet {
+          --cv-eyebrow: 6.5pt;
+          --cv-body: 8.5pt;
+          --cv-role: 8.5pt;
+          --cv-year: 6.5pt;
+          --cv-summary: 9pt;
+          --cv-name: 13mm;
+          --cv-section-gap: 5mm;
+          --cv-rail: 58mm;
+          --cv-col-gap: 10mm;
+        }
+        .cv-row { width: 210mm; margin: 0 auto; }
+        .cv-wrap {
+          width: 210mm;
+          height: 297mm;
+          padding: 11mm 14mm 10mm;
+        }
+        .cv-body-grid {
+          display: grid;
+          grid-template-columns: var(--cv-rail) 1fr;
+          gap: 0 var(--cv-col-gap);
+        }
+
         @media screen {
           .cv-screen-container { padding-top: 64px; padding-bottom: 48px; }
         }
+
+        /* Below the width of an A4 sheet (794px) the facsimile stops being
+           readable and starts being clipped — body has overflow-x: hidden, so
+           the overflowing half is unreachable rather than scrollable. Under
+           that width the sheet becomes a single reflowing column. Print is
+           untouched: every rule here is screen-only. */
+        @media screen and (max-width: 860px) {
+          .cv-sheet {
+            --cv-eyebrow: 10px;
+            --cv-body: 15px;
+            --cv-role: 16px;
+            --cv-year: 11px;
+            --cv-summary: 16px;
+            --cv-name: clamp(2.75rem, 13vw, 4.5rem);
+            --cv-section-gap: 30px;
+          }
+          .cv-row { width: 100%; padding: 0 24px; }
+          .cv-wrap {
+            width: 100%;
+            height: auto;
+            padding: 32px 24px 40px;
+          }
+          .cv-body-grid { grid-template-columns: 1fr; gap: 0; }
+          /* The left rail becomes a first block, not a column beside the work. */
+          .cv-body-grid > div:first-child { margin-bottom: var(--cv-section-gap); }
+        }
+
         @media print {
           html, body { background: #0D0D0D !important; margin: 0 !important; }
           header { display: none !important; }
@@ -72,10 +125,11 @@ export default function CVPage() {
           .cv-wrap { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           .cv-print-btn { display: none !important; }
         }
+
         .cv-list { list-style: none; padding: 0; margin: 0; }
         .cv-list li {
-          font-family: var(--font-jakarta);
-          font-size: 8.5pt;
+          font-family: var(--font-archivo);
+          font-size: var(--cv-body);
           line-height: 1.5;
           color: var(--color-grey-300);
           font-weight: 400;
@@ -86,24 +140,21 @@ export default function CVPage() {
           content: "—";
           position: absolute;
           left: 0;
-          color: var(--color-grey-700);
+          color: var(--color-grey-500);
           font-size: 7pt;
         }
       `}</style>
 
-      <div className="cv-screen-container" style={{ backgroundColor: "var(--color-surface-chat)" }}>
-        <div style={{ width: "210mm", margin: "0 auto", paddingBottom: "12px", display: "flex", justifyContent: "flex-end" }}>
+      <main id="main-content" className="cv-screen-container cv-sheet" style={{ backgroundColor: "var(--color-surface-chat)" }}>
+        <div className="cv-row" style={{ paddingBottom: "12px", display: "flex", justifyContent: "flex-end" }}>
           <PrintButton />
         </div>
         <div
           className="cv-wrap"
           style={{
-            width: "210mm",
-            height: "297mm",
             margin: "0 auto",
             backgroundColor: "var(--color-surface-chat)",
             color: "var(--color-warm)",
-            padding: "11mm 14mm 10mm",
             boxSizing: "border-box",
           }}
         >
@@ -114,9 +165,9 @@ export default function CVPage() {
             </p>
             <h1
               style={{
-                fontFamily: "var(--font-jakarta)",
+                fontFamily: "var(--font-archivo)",
                 fontWeight: 800,
-                fontSize: "13mm",
+                fontSize: "var(--cv-name)",
                 lineHeight: 0.88,
                 letterSpacing: "-0.04em",
                 color: "var(--color-warm)",
@@ -128,7 +179,7 @@ export default function CVPage() {
           </div>
 
           {/* BODY */}
-          <div style={{ display: "grid", gridTemplateColumns: "58mm 1fr", gap: "0 10mm" }}>
+          <div className="cv-body-grid">
 
             {/* ── LEFT RAIL ── */}
             <div>
@@ -146,7 +197,7 @@ export default function CVPage() {
                 <hr style={rule} />
                 <p style={bodyLine}>B.F.A. in Fine Art</p>
                 <p style={bodyLine}>Chiang Mai University</p>
-                <p style={{ ...bodyLine, color: "var(--color-grey-500)", marginTop: "1mm" }}>2020 – 2025</p>
+                <p style={{ ...bodyLine, color: "var(--color-text-muted)", marginTop: "1mm" }}>2020 – 2025</p>
               </section>
 
               <section style={sectionGap}>
@@ -176,8 +227,8 @@ export default function CVPage() {
               <section style={{ marginBottom: "5mm" }}>
                 <p
                   style={{
-                    fontFamily: "var(--font-jakarta)",
-                    fontSize: "9pt",
+                    fontFamily: "var(--font-archivo)",
+                    fontSize: "var(--cv-summary)",
                     lineHeight: 1.5,
                     color: "var(--color-grey-400)",
                     fontWeight: 400,
@@ -276,7 +327,7 @@ export default function CVPage() {
             <p style={{ ...eyebrow, marginBottom: 0 }}>Updated — July 2026</p>
           </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }

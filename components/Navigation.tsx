@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,6 +25,45 @@ const MONO: React.CSSProperties = {
 export default function Navigation() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  // Close on route change, so a tapped link — or a browser back — never leaves
+  // the overlay up. Adjusting during render rather than in an effect: this is
+  // derived state, and an effect here would cost an extra render pass.
+  const [renderedPath, setRenderedPath] = useState(pathname);
+  if (renderedPath !== pathname) {
+    setRenderedPath(pathname);
+    setOpen(false);
+  }
+
+  // While the overlay is up it is the only thing on screen: lock the page behind
+  // it, close on Escape, and keep Tab inside it.
+  useEffect(() => {
+    if (!open) return;
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setOpen(false); triggerRef.current?.focus(); return; }
+      if (e.key !== "Tab" || !menuRef.current) return;
+      const focusable = menuRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    menuRef.current?.querySelector<HTMLElement>("a[href]")?.focus();
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
 
   return (
     <>
@@ -43,10 +82,11 @@ export default function Navigation() {
         className="sticky top-0 left-0 right-0 z-50"
         style={{
           borderBottom: "1px solid rgba(249,249,249,0.07)",
+          minHeight: "var(--header-h)",
         }}
       >
         {/* Child 1: Logo | Child 2: Nav links — logo far left, links far right */}
-        <div className="w-full flex justify-between items-center py-[14px] px-8">
+        <div className="w-full flex justify-between items-center px-8" style={{ minHeight: "var(--header-h)", paddingBlock: "14px" }}>
 
           {/* Child 1 — Logo + optional page label (left) */}
           <div className="flex items-center gap-4">
@@ -67,8 +107,8 @@ export default function Navigation() {
               <span
                 className="hidden lg:block"
                 style={{
-                  fontFamily: "var(--font-jakarta)",
-                  fontSize: "0.62rem",
+                  fontFamily: "var(--font-archivo)",
+                  fontSize: "11px",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   color: "var(--color-text-muted)",
@@ -126,8 +166,9 @@ export default function Navigation() {
 
           {/* Hamburger — mobile only */}
           <button
+            ref={triggerRef}
             onClick={() => setOpen((v) => !v)}
-            className="flex lg:hidden h-10 w-10 flex-col justify-center gap-[5px]"
+            className="flex lg:hidden h-11 w-11 flex-col items-center justify-center gap-[5px]"
             style={{ color: "var(--color-text)" }}
             aria-expanded={open}
             aria-controls="mobile-menu"
@@ -148,6 +189,7 @@ export default function Navigation() {
         {open && (
           <motion.div
             id="mobile-menu"
+            ref={menuRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

@@ -24,11 +24,12 @@ export default function Lightbox({
   const navigating = useRef(false);
   const hasMultiple = (total ?? 0) > 1;
 
-  // First-open swipe hint (B6): show briefly so users know the set changes.
-  const [showHint, setShowHint] = useState(false);
+  // First-open swipe hint (B6): show briefly so users know the set changes. The
+  // component mounts fresh each time the lightbox opens, so the hint starts on;
+  // the effect only schedules its dismissal.
+  const [showHint, setShowHint] = useState(hasMultiple);
   useEffect(() => {
     if (!hasMultiple) return;
-    setShowHint(true);
     const t = setTimeout(() => setShowHint(false), 2600);
     return () => clearTimeout(t);
   }, [hasMultiple]);
@@ -48,11 +49,44 @@ export default function Lightbox({
     setTimeout(() => { navigating.current = false; }, 350);
   }, [hasNext, onNext]);
 
+  const dialogRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = prev; };
   }, []);
+
+  // Move focus into the dialog on open and put it back where it came from on
+  // close, so keyboard users are not dropped at the top of the document.
+  useEffect(() => {
+    const opener = document.activeElement as HTMLElement | null;
+    dialogRef.current?.focus();
+    return () => opener?.focus?.();
+  }, []);
+
+  // Trap Tab inside the dialog. Without this, tabbing walks the page behind the
+  // overlay — which is inert to the eye but not to the keyboard.
+  const handleTab = useCallback((e: KeyboardEvent) => {
+    if (e.key !== "Tab" || !dialogRef.current) return;
+    const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length === 0) { e.preventDefault(); return; }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement;
+    if (e.shiftKey && (active === first || active === dialogRef.current)) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && active === last) {
+      e.preventDefault(); first.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleTab);
+    return () => window.removeEventListener("keydown", handleTab);
+  }, [handleTab]);
 
   const handleKey = useCallback((e: KeyboardEvent) => {
     if (e.key === "Escape") onClose();
@@ -67,11 +101,16 @@ export default function Lightbox({
 
   return (
     <motion.div
+      ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={title ? `${title}${series ? ` — ${series}` : ""}` : alt}
+      tabIndex={-1}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-      className="fixed inset-0 z-[100] flex flex-col"
+      className="fixed inset-0 z-[100] flex flex-col outline-none"
       style={{ backgroundColor: "rgba(10, 10, 10, 0.97)" }}
       onClick={onClose}
     >
