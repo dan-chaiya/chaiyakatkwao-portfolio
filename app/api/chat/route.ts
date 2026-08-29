@@ -6,14 +6,24 @@ import { systemPrompt } from "@/lib/system-prompt";
 // with no login in front of it. Everything below exists to bound what one
 // caller can spend, not to be clever.
 
+// Hard per-request bounds. Unlike the limiter these hold on every instance, so
+// they are what actually caps the cost of any single call.
+export const maxDuration = 30;
+
 const MAX_MESSAGES = 24;
 const MAX_CHARS_PER_MESSAGE = 2_000;
 const MAX_TOTAL_CHARS = 12_000;
 
-// Fixed-window limiter, per IP. In-memory, so it resets on cold start and is not
-// shared between instances — it stops a loop from a single client, which is the
-// realistic abuse here. Move to Vercel KV / Upstash if this ever needs to hold
-// across instances.
+// Fixed-window limiter, per IP. The state is in-memory, so it is per function
+// instance: verified in production on 2026-08-30, a burst spread across cold
+// instances can exceed the nominal limit before the counters warm up, after
+// which 429s fire correctly. The effective ceiling is therefore
+// MAX_REQUESTS_PER_WINDOW x (warm instances), not a hard global cap.
+//
+// That is a real mitigation for the realistic abuse here — one client looping —
+// but it is NOT a guarantee. A hard global cap needs shared storage (Upstash
+// Redis or Vercel Edge Config via the Marketplace); the per-request bounds below
+// are what actually cap worst-case spend in the meantime.
 const WINDOW_MS = 60_000;
 const MAX_REQUESTS_PER_WINDOW = 10;
 const hits = new Map<string, { count: number; resetAt: number }>();
