@@ -160,43 +160,49 @@ The Lightbox uses a near-opaque dark overlay (`rgba(10, 10, 10, 0.97)`) — this
 
 **The Flat-By-Default Rule.** Surfaces are flat at rest. If a component needs to feel elevated, reach for the next tonal surface step — not a shadow. Shadows are not part of this system.
 
-**The No-Glass Rule.** Backdrop-blur appears once: the fixed navigation header (`backdrop-blur-md` over `bg/86%`). This is a functional accommodation for readability over scrolling content. It is not a design motif. Do not apply backdrop-blur to any other element.
+**The No-Glass Rule.** Backdrop-blur appears exactly once, on the lightbox caption pill (`backdrop-blur-sm` over `bg-black/40`), so a caption stays readable above an arbitrary photograph. It is a functional accommodation, not a motif. Do not apply it to any other element.
+
+*Corrected 29 Aug 2026: this rule previously located the blur on the navigation header. The header has no backdrop-filter and no translucent background — it is `sticky top-0` over the page background with a 1px bottom border.*
 
 ## 5. Components
 
+> **Rewritten 29 Aug 2026 against the code.** The previous version of this section
+> documented a "Primary CTA Button" with a Warm Signal background and a fully
+> rounded shape. No such component exists: `borderRadius` and `rounded-full` appear
+> nowhere in `Navigation.tsx`, and the accent is used in exactly two places in the
+> whole app. Type scales, paddings and border values below were read from the
+> components rather than carried over.
+
 ### Navigation Header
-Confident and structural. Fixed to the top, 1px structural border below.
-- **Shell:** `oklch(0.18 0.01 250)` at 86% opacity, `backdrop-filter: blur(12px)`. The blur is purely functional.
-- **Logo:** Archivo Black, 0.875rem, tracking 0.15em, uppercase. Links to root. Never decorated.
-- **Desktop links:** Label scale (0.72rem, tracking 0.16em, uppercase). Muted text at rest; Primary Text on hover. Transition: 200ms ease.
-- **CTA button:** Warm Signal background, rounded-full (9999px), 8px 16px padding, selection-text color. On hover: Warm Signal Strong. Transition: 200ms ease.
-- **Mobile hamburger:** Three 1px lines, 20px wide, animated to ✕ on open. No box, no icon library — inline drawn.
+`sticky top-0`, full width, z-50. Not fixed, not translucent, and not blurred.
+- **Shell:** the page background with `border-bottom: 1px solid rgba(249,249,249,0.07)`. There is no backdrop-filter and no opacity on the header.
+- **Logo:** Archivo Black, 1.15rem, tracking -0.02em. Links to root.
+- **Desktop links:** 0.8rem, tracking 0.18em, uppercase. Muted text at rest, Primary Text on hover, 200ms.
+- **Active underline:** a 1px bar in Warm Signal. This is one of only two accent appearances in the app.
+- **Mobile hamburger:** three 1px lines, inline-drawn, animating to a cross. No icon library.
 
 ### Mobile Navigation Overlay
-A signature component. Full-screen, full-bleed, no modal chrome.
-- **Surface:** Production Dark background (`oklch(0.18 0.01 250)`), no backdrop.
-- **Links:** Display scale — `clamp(2.5rem, 10vw, 4.5rem)`, Archivo Black, uppercase, line-height 0.92. Each link separated by a Structural Line border-bottom.
-- **Hover:** Muted text to Warm Signal — the only full-screen use of the accent.
-- **Animation:** Staggered entrance, 0.07s delay between items, exponential ease `cubic-bezier(0.16, 1, 0.3, 1)`, 0.5s duration.
-
-### Primary CTA Button
-- **Shape:** Fully rounded (border-radius: 9999px). The only rounded element in the system — everything else is square or edge.
-- **At rest:** Warm Signal background, selection-text color, Label typography.
-- **Hover:** Warm Signal Strong. Transition: 200ms ease.
-- **Focus:** 2px Warm Signal focus ring, 2px offset.
+Full-screen, full-bleed, no modal chrome. A signature component.
+- **Surface:** the page background, no backdrop.
+- **Links:** `clamp(2.5rem, 10vw, 5rem)`, Archivo Black, tracking -0.03em, separated by `1px solid rgba(249,249,249,0.06)`.
+- **Animation:** staggered entrance, 0.07s between items, `cubic-bezier(0.16, 1, 0.3, 1)`, 0.5s.
 
 ### Lightbox (Signature Component)
 The gallery viewer. Dark, focused, keyboard-native.
-- **Overlay:** `rgba(10, 10, 10, 0.97)` — nearly opaque, slightly warmer than the system background. Full-screen.
-- **Controls:** SVG-drawn arrows and close icon, no icon library. Default state: `oklch(0.55 0.005 35)` (warm mid-grey). Hover: `oklch(0.94 0.005 35)` (near-white warm). Disabled/boundary: near-invisible dark.
-- **Image:** Constrained to viewport with `object-fit: contain`. Swipeable via drag (dragElastic: 0.08). Spring animation on image transition (damping 30, stiffness 250).
-- **Labels:** Micro scale — 9px, tracking 0.25–0.30em, uppercase. Series name left, index counter right.
-- **Caption:** 10px, tracking 0.08em. Information only.
+- **Overlay:** `rgba(10, 10, 10, 0.97)` — nearly opaque, slightly warmer than the background.
+- **Controls:** SVG-drawn arrows and close, no icon library. Enabled state uses `--color-grey-200` with a `--color-grey-500` border, moving to white on `--color-grey-300` with a `bg-white/10` wash. Disabled boundary state is `#4A4844` on `#3A3735`.
+- **Caption pill:** the system's only backdrop-blur — `backdrop-blur-sm` over `bg-black/40`, inside a `--color-border-strong` hairline.
+- **Image:** `object-fit: contain`, swipeable (`dragElastic: 0.08`), spring transition (damping 30, stiffness 250).
 
 ### Footer
-- **Structure:** Single border-top at Structural Line color. Padding 32px vertical.
-- **Content:** Two-column flex row — copyright left, nav links right.
-- **Typography:** Micro scale (0.7rem, tracking 0.16em, uppercase). Muted text at rest; Primary Text on hover.
+- **Structure:** `border-top: 1px solid rgba(249,249,249,0.07)`, 24px padding top and bottom, two-column flex that wraps, 16px gap.
+- **Typography:** JetBrains Mono, 11px, tracking 0.18em, uppercase — the same label treatment the sister site calls `mono-label`. Muted text at rest, Primary Text on hover, 180ms.
+- **Links:** 28px apart. Includes the cross-site link to `/systems`, which is a plain `<a>` rather than `next/link` because the destination is a static file in `public/`, not a route.
+
+### Components that do not exist
+No button component, no input, no card, and no chip. This is a portfolio, not an
+application; its interactive surface is links, the lightbox, and the mobile menu.
+Do not add a button style to this file speculatively — document one when one ships.
 
 ## 6. Do's and Don'ts
 
