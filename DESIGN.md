@@ -2,16 +2,22 @@
 name: Chaiya Katkwao Portfolio
 description: A dark production-floor portfolio for a Bangkok-based creative producer.
 colors:
-  bg: "oklch(0.18 0.01 250)"
-  surface: "oklch(0.23 0.012 250)"
-  surface-elevated: "oklch(0.27 0.014 250)"
-  text: "oklch(0.95 0.01 250)"
-  text-muted: "oklch(0.72 0.01 250)"
-  border: "oklch(0.34 0.01 250)"
-  accent: "oklch(0.72 0.16 35)"
-  accent-strong: "oklch(0.66 0.19 35)"
-  focus-ring: "oklch(0.78 0.16 35)"
-  selection-text: "oklch(0.20 0.01 250)"
+  bg: "#000000"
+  surface: "#0A0A0A"
+  surface-elevated: "#111111"
+  surface-hover: "#161616"
+  text: "#F9F9F9"
+  text-muted: "#8B857F"
+  text-dim: "#4A4744"
+  text-inverse: "#000000"
+  border: "rgba(249, 249, 249, 0.09)"
+  border-strong: "rgba(249, 249, 249, 0.22)"
+  warm: "#F2F0EB"
+  accent: "oklch(72% 0.18 35)"
+  accent-dim: "oklch(72% 0.18 35 / 0.3)"
+  focus-ring: "rgba(249, 249, 249, 0.55)"
+  selection-bg: "#F9F9F9"
+  selection-text: "#000000"
 typography:
   display:
     fontFamily: "Archivo Black, sans-serif"
@@ -60,22 +66,19 @@ spacing:
   lg: "32px"
   xl: "64px"
 components:
-  button-primary:
-    backgroundColor: "{colors.accent}"
-    textColor: "{colors.selection-text}"
-    rounded: "{rounded.full}"
-    padding: "8px 16px"
-  button-primary-hover:
-    backgroundColor: "{colors.accent-strong}"
-    textColor: "{colors.selection-text}"
-    rounded: "{rounded.full}"
-    padding: "8px 16px"
   nav-link:
     textColor: "{colors.text-muted}"
     typography: "label"
   nav-link-hover:
     textColor: "{colors.text}"
     typography: "label"
+  nav-link-active-underline:
+    backgroundColor: "{colors.accent}"
+    height: "1px"
+  card-accent-border:
+    backgroundColor: "{colors.bg}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.none}"
 ---
 
 # Design System: Chaiya Katkwao Portfolio
@@ -101,25 +104,34 @@ This system explicitly rejects: colorful or expressive-color palettes (gradients
 
 ## 2. Colors: The Production-Floor Palette
 
-One warm signal in a room of cool, dark surfaces. The palette does not try to be beautiful — it tries to be correct.
+One warm signal in a room of true-black surfaces. The palette does not try to be beautiful — it tries to be correct.
+
+> **Corrected 29 Aug 2026.** Every value in this section was previously described
+> as OKLCH hue 250 (a cool blue-grey tint), and a "Tint Rule" asserted that
+> nothing in the system was pure grey. That did not match `app/globals.css`, which
+> ships pure-neutral surfaces and *warm* text greys. The values below were read
+> from the shipped `@theme` block and converted to OKLCH by measurement. Two
+> tokens named here before — `accent-strong` and an orange focus ring — do not
+> exist in the code at all and have been removed.
 
 ### Primary
-- **Warm Signal** (`oklch(0.72 0.16 35)`): The only saturated color in the system. Used on primary CTA buttons, text-selection backgrounds, and nav hover states. Appears on less than 10% of any given screen. Its scarcity is its power.
-- **Warm Signal Strong** (`oklch(0.66 0.19 35)`): The pressed/hover state of the accent — slightly deeper and more saturated. Used only as a response to interaction, never at rest.
-- **Focus Ring** (`oklch(0.78 0.16 35)`): Lighter than the accent for keyboard focus rings. Ensures WCAG AA contrast on dark surfaces.
+- **Warm Signal** (`oklch(72% 0.18 35)`): The only saturated color in the system, and it is used far more sparingly than a CTA palette would suggest. It appears in exactly two places in the shipped code: the 1px active underline in the navigation, and — at 30% alpha — a 1px card border on the portfolio home. Its scarcity is not a guideline, it is the current fact.
+- **Warm Signal Dim** (`oklch(72% 0.18 35 / 0.3)`): The same hue at 30% alpha, for the hairline border that must not compete with text.
+- **Focus Ring** (`rgba(249, 249, 249, 0.55)`): Translucent white at 55%, not an orange ring. 1px with a 3px offset. Neutral so it reads as a system affordance rather than as the brand accent.
 
 ### Neutral
-- **Production Dark** (`oklch(0.18 0.01 250)`): The base background. Not black — it holds a blue-grey tint that reads as intentional, not default.
-- **Studio Surface** (`oklch(0.23 0.012 250)`): Raised surfaces, cards, and panels. Five lightness points above the base — visible without being loud.
-- **Elevated Surface** (`oklch(0.27 0.014 250)`): The highest tonal step. Used for components that need to sit clearly above the studio surface.
-- **Structural Line** (`oklch(0.34 0.01 250)`): The sole border color in the system. Header bottom, footer top, mobile menu dividers. Not decorative — it marks where structure begins and ends.
-- **Primary Text** (`oklch(0.95 0.01 250)`): Near-white with a blue tint that matches the shell. Not `#fff` — the tint keeps it in the same family.
-- **Muted Text** (`oklch(0.72 0.01 250)`): Navigation links at rest, captions, metadata. Active states shift to Primary Text.
-- **Selection Text** (`oklch(0.20 0.01 250)`): Text rendered on top of the Warm Signal selection background. Near-black with the same blue cast.
+- **Production Black** (`#000000`): The base background. True black, zero chroma.
+- **Studio Surface** (`#0A0A0A`) and **Elevated Surface** (`#111111`): The two tonal steps above the base. Pure neutral, no tint.
+- **Hover Surface** (`#161616`): The third step, for a surface responding to the pointer.
+- **Primary Text** (`#F9F9F9`): Near-white, pure neutral. Measured chroma is zero.
+- **Muted Text** (`#8B857F`): Navigation links at rest, captions, metadata. This one *is* warm — `oklch(0.62 0.0115 67.6)`.
+- **Dim Text** (`#4A4744`): `oklch(0.40 0.0064 67.6)`. The same warmth, further down. Decorative and structural marks only.
+- **Warm Paper** (`#F2F0EB`): `oklch(0.955 0.007 88.6)`. The warmest light value in the system, used for drawn outlines such as the video play control.
+- **Structural Line** (`rgba(249, 249, 249, 0.09)`) and **Strong Line** (`rgba(249, 249, 249, 0.22)`): The two border values. Translucent white rather than a solid grey, so a border sits correctly on any of the three surface steps without a per-surface variant.
 
-**The One Signal Rule.** The Warm Signal accent appears on ≤10% of any given screen surface. If it feels like it's competing for attention, it's been overused. Reduce.
+**The One Signal Rule.** The Warm Signal accent appears on ≤10% of any given screen surface. In the shipped code it is closer to 1%. If it starts competing for attention, it has been overused. Reduce.
 
-**The Tint Rule.** Every neutral — background, surface, text — carries OKLCH hue 250 at chroma 0.01–0.014. Nothing in this system is pure grey. The tint is subtle enough to be invisible in isolation and visible the moment something untinted appears beside it.
+**The Pure Surface, Warm Text Rule.** Replaces the old Tint Rule, which described a colour this system has never shipped. Surfaces and primary text are *pure neutral* — `#000000`, `#0A0A0A`, `#111111`, `#161616`, `#F9F9F9` all measure zero chroma. The warmth lives only in the text greys and the paper tone, at hue 62°–89° and chroma 0.006–0.012. Never introduce a cool grey: the sister site at `management-portfolio` follows the same curve inverted onto white, and a blue-grey would read as foreign in either half of the pair.
 
 ## 3. Typography
 

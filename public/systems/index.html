@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ALL METADATA BELOW IS PLACEHOLDER.
+       The confidentiality constraint covers <title>, meta description, and
+       og tags, so none of these were written on your behalf. Replace every
+       bracketed token before publishing.
+       og:image expects 1200x630. A meta tag never triggers a network
+       request, so the placeholder produces no console error. -->
+  <title>Chaiya Katkwao &mdash; internal systems</title>
+  <meta name="description" content="Three internal systems for small teams: studio operations, an equipment register, and a private two-person archive. Built and maintained hands-on.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Chaiya Katkwao &mdash; internal systems">
+  <meta property="og:description" content="Three internal systems for small teams, built and maintained hands-on.">
+  <meta name="twitter:title" content="Chaiya Katkwao &mdash; internal systems">
+  <meta name="twitter:description" content="Three internal systems for small teams, built and maintained hands-on.">
+
+  <!-- The site is served from the parent portfolio at /systems, published by
+       ./sync-to-parent.sh. og:url and canonical are safe to ship live: these
+       tags only reach a reader where the page itself is served, so they cannot
+       point at an address that does not resolve. -->
+  <link rel="canonical" href="https://chaiyakatkwao.com/systems">
+  <meta property="og:url" content="https://chaiyakatkwao.com/systems">
+
+  <!-- STILL PARKED: needs an image that does not exist yet. Draw a 1200x630
+       share card and drop it at images/share-card.png, then uncomment all four.
+       Do not point og:image at the health-check screenshot instead — it is
+       1200x605 and letterboxes badly in a 1.91:1 crop.
+  <meta property="og:image" content="https://chaiyakatkwao.com/systems/images/share-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://chaiyakatkwao.com/systems/images/share-card.png">
+  -->
+  <!-- Suppresses the browser's automatic /favicon.ico request without adding
+       an icon asset. No file is created or referenced. -->
+  <link rel="icon" href="data:,">
+
+  <!-- Preload all three faces. Every one of them paints above the fold: the
+       display face in the masthead, the body face in the first paragraph, and
+       the mono face in the masthead eyebrow, the "Cases" heading, and the five
+       field labels of case 01. The mono was previously excluded on the grounds
+       that it "only paints small labels", but those labels are tracked out to
+       0.18em at 11px, where a fallback substitution shifts visibly. 76KB total,
+       same-origin, no other above-the-fold asset competing for bandwidth. -->
+  <link rel="preload" href="/systems/fonts/archivo-black-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/systems/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/systems/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="/systems/styles.css">
+
+  <!-- No script tag in this document. The cross-site toggle is an anchor
+       element and anchor scrolling is scroll-behavior + scroll-margin-top in
+       CSS. Nothing here requires JavaScript, so none is loaded. -->
+</head>
+
+<body>
+
+<a class="visually-hidden skip-link" href="#cases">Skip to case studies</a>
+
+<!-- ==========================================================================
+     HEADER
+     ======================================================================= -->
+<header class="masthead">
+  <div class="shell grid-12">
+
+    <h1 class="masthead__name text-balance">Chaiya Katkwao</h1>
+
+    <p class="masthead__positioning text-balance">I build the software small teams actually run on. Not prototypes &mdash; systems in daily use, deployed against live data, and maintained by the people who built them.</p>
+
+    <!-- CROSS-SITE TOGGLE
+         Not a nav link. The eyebrow carries the relationship — same person,
+         different discipline — so the link is legible without any copy being
+         invented for it. The target is the bare domain, a fact rather than a
+         claim. Identical markup appears in the footer. -->
+    <a class="toggle masthead__toggle" href="https://chaiyakatkwao.com">
+      <span class="mono-label toggle__eyebrow">Same person &middot; other discipline</span>
+      <span class="toggle__target">
+        chaiyakatkwao.com <span class="toggle__arrow" aria-hidden="true">&rarr;</span>
+      </span>
+    </a>
+
+  </div>
+</header>
+
+<hr class="rule shell">
+
+<!-- ==========================================================================
+     CONTENTS — anchor index. Each href is the canonical deep link for that
+     section and matches the section id exactly.
+     ======================================================================= -->
+<!-- id + tabindex="-1" live on the <nav>, not on the heading inside it. A <p>
+     cannot take focus, so a skip link pointing at one scrolls without moving
+     the keyboard position in Safari: the next Tab returns to the top of the
+     page. The nav is a landmark whose accessible name ("Case studies") already
+     matches the skip link text exactly. -->
+<nav class="contents" id="cases" tabindex="-1" aria-label="Case studies">
+  <div class="shell grid-12">
+    <p class="mono-label contents__heading">Cases</p>
+    <ul class="contents__list">
+      <li><a class="contents__link" href="#live-studio-os">01 &mdash; Live Studio OS</a></li>
+      <li><a class="contents__link" href="#keepsake">02 &mdash; Keepsake</a></li>
+      <li><a class="contents__link" href="#inventory">03 &mdash; The studio register</a></li>
+    </ul>
+  </div>
+</nav>
+
+<hr class="rule shell">
+
+<main>
+
+<section class="case" id="live-studio-os" aria-labelledby="live-studio-os-title">
+  <div class="shell grid-12">
+
+    <p class="mono-label case__index" aria-hidden="true">01</p>
+
+    <h2 class="case__title text-balance" id="live-studio-os-title">Live Studio OS</h2>
+
+    <!-- FIELD ORDER IS FIXED AND IDENTICAL IN ALL THREE SECTIONS:
+         ROLE -> PROBLEM -> WHAT I BUILT -> CONSTRAINTS -> OUTCOME
+         One flat definition list. Do not split these across two blocks and
+         do not reorder them. -->
+    <dl class="case__fields">
+      <dt class="mono-label">Role</dt>
+      <dd>Designed and built with the company&rsquo;s CEO, a software engineer. Two people, no other engineering resource. In-house, Ad The Top.</dd>
+
+      <dt class="mono-label">Problem</dt>
+      <dd>Studio procedure, equipment records and fault history lived in separate documents that had begun to contradict one another. The answer to &ldquo;what is in this room, and does it still work&rdquo; depended on who you asked.</dd>
+
+      <dt class="mono-label">What I built</dt>
+      <dd>One web app the team opens on whatever is to hand &mdash; a phone on the studio floor, a desktop at the office. Standard settings and a shutdown checklist, per-room equipment guides, a health check that turns a walkthrough into action items, and a fault log that exports the monthly report. Google Apps Script serves a single page; a Google Sheet is the database, addressed by column name rather than position so staff can reorder and rename it without a migration.</dd>
+
+      <dt class="mono-label">Constraints</dt>
+      <dd>No budget for hosting or licences, no staging environment, and a team with no technical background. It runs on the Google Workspace the company already pays for. Every change deploys straight against the data the team is using that day &mdash; the database is a document they have open while the code is writing to it.</dd>
+
+      <dt class="mono-label">Outcome</dt>
+      <dd><p class="case__fields-para">In daily use by the studio team, currently on its twentieth release. Requests now arrive as feature ideas rather than workarounds. The data layer is round-trip tested &mdash; written, read back, compared &mdash; so reordering a column no longer breaks anything. Four known limits are documented and deliberately unfixed, including a whole-table save that loses data if two people write at once, which needs the save path rebuilt.</p>
+
+      <p class="case__fields-para">The split was by strength: the CEO brought the engineering depth, I brought the studio floor and the operational discipline. The database rules the system is now held to, and the deploy order that stops old code redeploying over live data, exist because I asked for them &mdash; after both had already gone wrong once.</p></dd>
+    </dl>
+
+    <!-- THIS SECTION DIFFERS FROM THE OTHER TWO, DELIBERATELY. Cases 02-03
+         carry a synthetic .ui block because a real screenshot would expose
+         confidential data. This one shows the actual interface. That
+         asymmetry is the claim: it says this system can be shown and the
+         others cannot, which is exactly what the synthetic blocks are for.
+         Filling every figure synthetically would have made the technique read as
+         a house style rather than a constraint.
+
+         IMAGE SLOT, filled. The frame reserves the 16:10 ratio, so the layout
+         does not shift while the image loads, and object-fit: contain means
+         the image is fitted rather than cropped or stretched. To swap the
+         image, replace the <picture> inside .device__screen and rewrite the
+         alt text with it.
+
+         DESKTOP VARIANT IN EVERY SECTION, DELIBERATELY. The template
+         comment above states that a variation in one section reads as a claim
+         about that project. A mobile frame on one case would say "this is the
+         phone one" whether or not that is true. Switch a section to
+         .device--mobile only when that IS the claim you want to make — and
+         cap its width when you do, or a 9:19.5 frame in a full-width column
+         renders over 800px tall. -->
+    <figure class="case__figure device device--desktop">
+      <div class="device__frame">
+        <div class="device__bar" aria-hidden="true"></div>
+        <div class="device__screen">
+          <!-- REAL SCREENSHOT SLOT. This case shows the actual interface, so
+               no synthetic .ui block sits here — see the note above the
+               figure.
+
+               The source capture is 1200x605 (roughly 2:1), not the 16:10 the
+               frame reserves, so object-fit: contain letterboxes it rather
+               than cropping. MEASURED 29 Aug 2026 in a real browser: 25px of
+               bar top and bottom on a 255px frame. The frame background is
+               #f7f7f6 and the screenshot's own edges are pure white, so the
+               bars are invisible in practice — do NOT pad the PNG to 16:10 to
+               "fix" this; that fabricates pixels the app never rendered. If
+               you replace the image, any ratio is safe: contain never crops.
+
+               The alt below is this figure's ONLY accessible description —
+               the figcaption is a source-and-date credit, not a description.
+               Rewrite the alt whenever the image changes. -->
+          <picture>
+            <!-- Lossless WebP, 50KB against the PNG's 101KB — half the bytes
+                 with not one pixel changed, which matters for a screenshot of
+                 11px UI text where lossy compression would soften the very
+                 detail the figure exists to show. The PNG stays as the source
+                 of record and as the fallback for anything older than 2020. -->
+            <source srcset="/systems/images/live-studio-os-health-check.webp" type="image/webp">
+            <img src="/systems/images/live-studio-os-health-check.png"
+                 width="1200" height="605" loading="lazy" decoding="async"
+                 alt="The Studio Health Check screen of Live Studio OS. A row of room chips, 402 through 508, each carries a badge showing how many equipment issues are open; room 404 is selected and marked clear. Below, an equipment checklist lists items to inspect.">
+          </picture>
+        </div>
+      </div>
+      <!-- Unlike the other two cases, this figure's accessible description
+           comes from the <img> alt attribute, not from this caption. The
+           caption is a SOURCE AND DATE CREDIT: where the screen was captured
+           and when. It deliberately does not describe the image (the alt does
+           that) and does not make a claim about the project (the case fields
+           do that). Keep it to those two facts.
+
+           The date is the capture date, confirmed two ways: the file's own
+           creation date, and the inspection date printed inside the screen
+           (25 มิถุนายน 2569 = 25 June 2026). Update BOTH this line and the
+           alt whenever the image is replaced. -->
+      <figcaption class="mono-label device__caption">Ad The Top &mdash; captured <time datetime="2026-06-25">25 June 2026</time></figcaption>
+    </figure>
+
+    <!-- BEFORE / AFTER. Optional per case study, but present in all three so
+         it stays part of the constant template rather than becoming a claim
+         about one project.
+
+         Semantic <table>: the dimension is a <th scope="row">, so a screen
+         reader names it before reading each value. data-column supplies the
+         per-cell BEFORE/AFTER label that appears only in the stacked layout
+         below 768px — keep it in sync with the <thead>, nothing enforces that.
+
+         Rows are yours. Add or delete <tr> blocks freely. -->
+    <table class="case__compare compare">
+      <caption class="mono-label">What changed for the team</caption>
+
+      <thead>
+        <tr>
+          <th scope="col"><span class="visually-hidden">Aspect</span></th>
+          <th scope="col" class="mono-label">BEFORE</th>
+          <th scope="col" class="mono-label">AFTER</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <th scope="row">Equipment records</th>
+          <td data-column="BEFORE">A sheet per room, edited by hand</td>
+          <td data-column="AFTER">One register, read by the app</td>
+        </tr>
+        <tr>
+          <th scope="row">Fault history</th>
+          <td data-column="BEFORE">Told in chat, then lost</td>
+          <td data-column="AFTER">Logged with room, phase and severity</td>
+        </tr>
+        <tr>
+          <th scope="row">Monthly report</th>
+          <td data-column="BEFORE">Rebuilt by hand each month</td>
+          <td data-column="AFTER">Exported from the log as PDF or CSV</td>
+        </tr>
+        <tr>
+          <th scope="row">Source of truth</th>
+          <td data-column="BEFORE">Two documents disagreeing</td>
+          <td data-column="AFTER">One dashboard, named as authoritative</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ARCHITECTURE DIAGRAM. Present in THIS SECTION ONLY, which the case
+         template says is a claim about this project — and it is: it asserts
+         that this system's shape is the point. Do not add it to a section
+         where that is not the argument.
+
+         NOTE ON DUPLICATION: this SVG also exists in components.html, the
+         reference page. There is no build step, so the two are copies and can
+         drift. This one is authoritative; components.html is the workbench.
+
+         CORRECTED 29 Aug 2026. The original nodes described a static,
+         client-side app with in-browser storage — an architecture that was
+         deleted from the project and which HANDOFF.md explicitly flags as
+         dead. Nodes now match the live system: Apps Script serving one page
+         against a Google Sheet. Source: HANDOFF.md sections 1 and 3. -->
+    <figure class="case__diagram">
+    <svg class="diagram" viewBox="-1 -1 1282 422" role="img" aria-labelledby="diagram-title diagram-desc">
+      <title id="diagram-title">How Live Studio OS is put together</title>
+      <!-- DERIVED, NOT WRITTEN: a mechanical restatement of the five edges you
+           supplied, in the order you supplied them, so the diagram is not
+           silent to a screen reader. Reword freely — nothing was added. -->
+      <desc id="diagram-desc">A staff device opens the web app by URL. The app
+        writes rows to a Google Sheet and reads that sheet back for history and statistics. The sheet feeds a report centre, which sends a monthly
+        PDF or CSV to management.</desc>
+
+      <defs>
+        <!-- markerUnits="userSpaceOnUse" so the head scales with the diagram
+             rather than with the non-scaling stroke width, which would render
+             it microscopic. orient="auto" turns it for the vertical edges. -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="14" markerHeight="14"
+                markerUnits="userSpaceOnUse" orient="auto">
+          <path class="diagram__arrowhead" d="M 0 0 L 10 5 L 0 10 z"/>
+        </marker>
+      </defs>
+
+      <!-- ===== NODES ===== -->
+
+      <!-- A — Staff device -->
+      <text class="diagram__index" x="16" y="66" font-size="9" letter-spacing="2">A</text>
+      <rect class="diagram__node" x="0" y="40" width="220" height="96"/>
+      <text class="diagram__label" x="110" y="82" font-size="11" letter-spacing="2"
+            text-anchor="middle">Staff device</text>
+      <text class="diagram__edge-label" x="110" y="104" font-size="9" letter-spacing="2"
+            text-anchor="middle">(phone, tablet or desktop)</text>
+
+      <!-- B — Apps Script web app -->
+      <text class="diagram__index" x="346" y="66" font-size="9" letter-spacing="2">B</text>
+      <rect class="diagram__node" x="330" y="40" width="220" height="96"/>
+      <text class="diagram__label" x="440" y="82" font-size="11" letter-spacing="2"
+            text-anchor="middle">Apps Script web app</text>
+      <text class="diagram__edge-label" x="440" y="104" font-size="9" letter-spacing="2"
+            text-anchor="middle">(one page, no build step)</text>
+
+      <!-- C — Google Sheet -->
+      <text class="diagram__index" x="346" y="306" font-size="9" letter-spacing="2">C</text>
+      <rect class="diagram__node" x="330" y="280" width="220" height="96"/>
+      <text class="diagram__label" x="440" y="322" font-size="11" letter-spacing="2"
+            text-anchor="middle">Google Sheet</text>
+      <text class="diagram__edge-label" x="440" y="344" font-size="9" letter-spacing="2"
+            text-anchor="middle">(seven tabs, one source)</text>
+
+      <!-- D — Report centre -->
+      <text class="diagram__index" x="716" y="306" font-size="9" letter-spacing="2">D</text>
+      <rect class="diagram__node" x="700" y="280" width="220" height="96"/>
+      <text class="diagram__label" x="810" y="322" font-size="11" letter-spacing="2"
+            text-anchor="middle">Report centre</text>
+      <text class="diagram__edge-label" x="810" y="344" font-size="9" letter-spacing="2"
+            text-anchor="middle">(PDF / CSV, by month)</text>
+
+      <!-- E — Recipient -->
+      <text class="diagram__index" x="1046" y="306" font-size="9" letter-spacing="2">E</text>
+      <rect class="diagram__node" x="1030" y="280" width="220" height="96"/>
+      <text class="diagram__label" x="1140" y="322" font-size="11" letter-spacing="2"
+            text-anchor="middle">Recipient</text>
+      <text class="diagram__edge-label" x="1140" y="344" font-size="9" letter-spacing="2"
+            text-anchor="middle">(management)</text>
+
+      <!-- ===== EDGES ===== -->
+
+      <!-- A -> B  load -->
+      <line class="diagram__edge" x1="220" y1="88" x2="316" y2="88" marker-end="url(#arrow)"/>
+      <text class="diagram__edge-label" x="268" y="76" font-size="9" letter-spacing="2"
+            text-anchor="middle">open URL</text>
+
+      <!-- B -> C  write entry. Left lane. -->
+      <line class="diagram__edge" x1="396" y1="136" x2="396" y2="266" marker-end="url(#arrow)"/>
+      <text class="diagram__edge-label" x="386" y="205" font-size="9" letter-spacing="2"
+            text-anchor="end">write row</text>
+
+      <!-- C -> B  read for history + statistics. Right lane, opposite
+           direction. Two lines so the label does not run under the report
+           centre's column. -->
+      <line class="diagram__edge" x1="484" y1="280" x2="484" y2="150" marker-end="url(#arrow)"/>
+      <text class="diagram__edge-label" x="494" font-size="9" letter-spacing="2"
+            text-anchor="start">
+        <tspan x="494" y="196">read for history</tspan>
+        <tspan x="494" y="212">+ statistics</tspan>
+      </text>
+
+      <!-- C -> D  generate report -->
+      <line class="diagram__edge" x1="550" y1="328" x2="686" y2="328" marker-end="url(#arrow)"/>
+      <text class="diagram__edge-label" x="618" y="316" font-size="9" letter-spacing="2"
+            text-anchor="middle">build report</text>
+
+      <!-- D -> E  send -->
+      <line class="diagram__edge" x1="920" y1="328" x2="1016" y2="328" marker-end="url(#arrow)"/>
+      <text class="diagram__edge-label" x="968" y="316" font-size="9" letter-spacing="2"
+            text-anchor="middle">send</text>
+    </svg>
+      <figcaption class="mono-label diagram__caption">No build step, no npm, no server of my own. The team&rsquo;s spreadsheet is the database.</figcaption>
+    </figure>
+
+    <!-- THE DATA LAYER. Merged in from what was case 04 on 29 Aug 2026: the
+         sheet is this system's storage, not a separate project, and standing
+         it up as its own case read as one project counted twice.
+
+         SECOND FIGURE IN THIS SECTION, deliberately. The template says a
+         variation in one section is a claim about that project; this one
+         claims the storage design is worth its own picture. Do not copy this
+         pattern into a section where that is not the argument.
+
+         Original slot note follows. Still a styled empty box, not
+         an <img> with an unresolvable src: no image asset exists in this repo
+         and none is referenced. To fill it, put your <img> inside
+         .device__screen. The frame reserves the 16:10 ratio, so the layout
+         does not shift, and object-fit: contain means the image is fitted
+         rather than cropped or stretched.
+
+         DESKTOP VARIANT IN EVERY SECTION, DELIBERATELY. The template
+         comment above states that a variation in one section reads as a claim
+         about that project. A mobile frame on one case would say "this is the
+         phone one" whether or not that is true. Switch a section to
+         .device--mobile only when that IS the claim you want to make — and
+         cap its width when you do, or a 9:19.5 frame in a full-width column
+         renders over 800px tall. -->
+    <figure class="case__figure device device--desktop">
+      <div class="device__frame">
+        <div class="device__bar" aria-hidden="true"></div>
+        <div class="device__screen">
+
+          <!-- SYNTHETIC UI. Structure only, so the information architecture
+               is legible without any real data appearing on the page.
+               aria-hidden covers the whole block; the <figcaption> below is
+               outside it and is the only thing a screen reader gets, which
+               is why it must say what this depicts.
+               Every string is a placeholder. Add or remove .ui__nav-item,
+               .ui__module, and .ui__row freely — the shapes hold. -->
+          <div class="ui" aria-hidden="true">
+
+            <nav class="ui__nav">
+              <span class="mono-label ui__nav-item ui__nav-item--current">Inventory</span>
+              <span class="mono-label ui__nav-item">HealthCheck</span>
+              <span class="mono-label ui__nav-item">ProblemLog</span>
+              <span class="mono-label ui__nav-item">Rooms</span>
+            </nav>
+
+            <div class="ui__main">
+
+              <div class="ui__header">
+                <span class="ui__title">The sheet as the database</span>
+                <span class="mono-label ui__state">Seven tabs</span>
+              </div>
+
+              <ul class="ui__modules">
+                <li class="mono-label ui__module">Columns by name</li>
+                <li class="mono-label ui__module">Typed on read and write</li>
+                <li class="mono-label ui__module">Round-trip tested</li>
+              </ul>
+
+              <div class="ui__rows">
+                <div class="ui__row">
+                  <span class="ui__row-label">Column access</span>
+                  <span class="mono-label ui__row-value">by name</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__row-label">Type coercion</span>
+                  <span class="mono-label ui__row-value">converted</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__row-label">Headers</span>
+                  <span class="mono-label ui__row-value">self-repairing</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__row-label">Two writers</span>
+                  <span class="mono-label ui__row-value">known limit</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- Outside the aria-hidden block. State what the diagram DEPICTS, not
+           what it is made of. This is the only description a screen reader
+           receives for the figure. -->
+      <figcaption class="mono-label device__caption device__caption--prose">Structure of the spreadsheet behind the studio system, redrawn without content &mdash; seven tabs acting as the single source of truth, addressed by column name rather than position so staff can reorder the sheet by hand without breaking the app.</figcaption>
+    </figure>
+
+    <!-- SECOND BEFORE / AFTER, merged in with the figure above. The first
+         table in this section is what changed for the team; this one is the
+         engineering discipline that made it hold. They answer different
+         questions, which is why both survive the merge.
+
+         Semantic <table>: the dimension is a <th scope="row">, so a screen
+         reader names it before reading each value. data-column supplies the
+         per-cell BEFORE/AFTER label that appears only in the stacked layout
+         below 768px — keep it in sync with the <thead>, nothing enforces that.
+
+         Rows are yours. Add or delete <tr> blocks freely. -->
+    <table class="case__compare compare">
+      <caption class="mono-label">Treating a spreadsheet as a data layer</caption>
+
+      <thead>
+        <tr>
+          <th scope="col"><span class="visually-hidden">Rule</span></th>
+          <th scope="col" class="mono-label">BEFORE</th>
+          <th scope="col" class="mono-label">AFTER</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <th scope="row">Column access</th>
+          <td data-column="BEFORE">By position</td>
+          <td data-column="AFTER">By header name</td>
+        </tr>
+        <tr>
+          <th scope="row">Reordering columns</th>
+          <td data-column="BEFORE">Broke the app silently</td>
+          <td data-column="AFTER">Free, and expected</td>
+        </tr>
+        <tr>
+          <th scope="row">Types</th>
+          <td data-column="BEFORE">Coerced by Sheets, unnoticed</td>
+          <td data-column="AFTER">Converted on read, locked on write</td>
+        </tr>
+        <tr>
+          <th scope="row">Verification</th>
+          <td data-column="BEFORE">Assumed</td>
+          <td data-column="AFTER">Round-trip tested</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+<hr class="rule shell">
+
+<section class="case" id="keepsake" aria-labelledby="keepsake-title">
+  <div class="shell grid-12">
+
+    <p class="mono-label case__index" aria-hidden="true">02</p>
+
+    <h2 class="case__title text-balance" id="keepsake-title">Keepsake</h2>
+
+    <!-- FIELD ORDER IS FIXED AND IDENTICAL IN ALL THREE SECTIONS:
+         ROLE -> PROBLEM -> WHAT I BUILT -> CONSTRAINTS -> OUTCOME
+         One flat definition list. Do not split these across two blocks and
+         do not reorder them. -->
+    <dl class="case__fields">
+      <dt class="mono-label">Role</dt>
+      <dd>Sole designer and developer. Private commission, two users.</dd>
+
+      <dt class="mono-label">Problem</dt>
+      <dd>Two people wanted a single shared record of their life together that would outlive whatever platform held it. Consumer apps make that record someone else&rsquo;s asset, and none of them promise you can get it back intact.</dd>
+
+      <dt class="mono-label">What I built</dt>
+      <dd>A private two-person archive: entries with photographs, tags and colour labels, a timeline, and an on-this-day view. One page, installed to the home screen. Cloudflare Workers with D1 and R2, behind Access allow-listing exactly two addresses.</dd>
+
+      <dt class="mono-label">Constraints</dt>
+      <dd>One of the two users is non-technical and had to manage on his own Android handset without instruction. Exactly one runtime dependency was permitted. The backup was not allowed to sit with the same vendor as the data.</dd>
+
+      <dt class="mono-label">Outcome</dt>
+      <dd>Deployed August 2026 with a nightly backup to a different vendor and a thirty-day retention sweep. The acceptance test was not a passing suite &mdash; it was the non-technical user creating a memory unassisted, on his own phone. He did.</dd>
+    </dl>
+
+    <!-- IMAGE SLOT, now inside a device frame. Still a styled empty box, not
+         an <img> with an unresolvable src: no image asset exists in this repo
+         and none is referenced. To fill it, put your <img> inside
+         .device__screen. The frame reserves the 16:10 ratio, so the layout
+         does not shift, and object-fit: contain means the image is fitted
+         rather than cropped or stretched.
+
+         DESKTOP VARIANT IN EVERY SECTION, DELIBERATELY. The template
+         comment above states that a variation in one section reads as a claim
+         about that project. A mobile frame on one case would say "this is the
+         phone one" whether or not that is true. Switch a section to
+         .device--mobile only when that IS the claim you want to make — and
+         cap its width when you do, or a 9:19.5 frame in a full-width column
+         renders over 800px tall. -->
+    <figure class="case__figure device device--desktop">
+      <div class="device__frame">
+        <div class="device__bar" aria-hidden="true"></div>
+        <div class="device__screen">
+
+          <!-- SYNTHETIC UI. Structure only, so the information architecture
+               is legible without any real data appearing on the page.
+               aria-hidden covers the whole block; the <figcaption> below is
+               outside it and is the only thing a screen reader gets, which
+               is why it must say what this depicts.
+               Every string is a placeholder. Add or remove .ui__nav-item,
+               .ui__module, and .ui__row freely — the shapes hold. -->
+          <div class="ui" aria-hidden="true">
+
+            <nav class="ui__nav">
+              <span class="mono-label ui__nav-item ui__nav-item--current">Timeline</span>
+              <span class="mono-label ui__nav-item">Dashboard</span>
+              <span class="mono-label ui__nav-item">Deleted</span>
+              <span class="mono-label ui__nav-item">Settings</span>
+            </nav>
+
+            <div class="ui__main">
+
+              <div class="ui__header">
+                <span class="ui__title">What we have kept</span>
+                <span class="mono-label ui__state">Two accounts &middot; shared</span>
+              </div>
+
+              <ul class="ui__modules">
+                <li class="mono-label ui__module">On this day</li>
+                <li class="mono-label ui__module">Albums</li>
+                <li class="mono-label ui__module">Tags</li>
+              </ul>
+
+              <div class="ui__rows">
+                <div class="ui__row">
+                  <span class="ui__row-label">Entry text</span>
+                  <span class="mono-label ui__row-value">autosaved</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__row-label">Photos</span>
+                  <span class="mono-label ui__row-value">per entry</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__row-label">Tags</span>
+                  <span class="mono-label ui__row-value">shared list</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__row-label">Colour label</span>
+                  <span class="mono-label ui__row-value">six keys</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- Outside the aria-hidden block. State what the diagram DEPICTS, not
+           what it is made of. This is the only description a screen reader
+           receives for the figure. -->
+      <figcaption class="mono-label device__caption device__caption--prose">Structure of the timeline, redrawn without content &mdash; a shared record where each entry carries text, photos, tags and a colour label, alongside dashboard, deleted and settings views.</figcaption>
+    </figure>
+
+    <!-- BEFORE / AFTER. Optional per case study, but present in all three so
+         it stays part of the constant template rather than becoming a claim
+         about one project.
+
+         Semantic <table>: the dimension is a <th scope="row">, so a screen
+         reader names it before reading each value. data-column supplies the
+         per-cell BEFORE/AFTER label that appears only in the stacked layout
+         below 768px — keep it in sync with the <thead>, nothing enforces that.
+
+         Rows are yours. Add or delete <tr> blocks freely. -->
+    <table class="case__compare compare">
+      <caption class="mono-label">The obvious build, and the one I shipped</caption>
+
+      <thead>
+        <tr>
+          <th scope="col"><span class="visually-hidden">Decision</span></th>
+          <th scope="col" class="mono-label">BEFORE</th>
+          <th scope="col" class="mono-label">AFTER</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <th scope="row">Photo storage</th>
+          <td data-column="BEFORE">Object storage on a paid tier</td>
+          <td data-column="AFTER">R2, zero egress at any volume</td>
+        </tr>
+        <tr>
+          <th scope="row">Thumbnails</th>
+          <td data-column="BEFORE">An image transform service</td>
+          <td data-column="AFTER">Made on the phone before upload</td>
+        </tr>
+        <tr>
+          <th scope="row">Sign-in</th>
+          <td data-column="BEFORE">Password screen and session code</td>
+          <td data-column="AFTER">Edge auth, two addresses allow-listed</td>
+        </tr>
+        <tr>
+          <th scope="row">Backup</th>
+          <td data-column="BEFORE">Same vendor as the data</td>
+          <td data-column="AFTER">Nightly export to a different one</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+<hr class="rule shell">
+
+<section class="case" id="inventory" aria-labelledby="inventory-title">
+  <div class="shell grid-12">
+
+    <p class="mono-label case__index" aria-hidden="true">03</p>
+
+    <h2 class="case__title text-balance" id="inventory-title">The studio register</h2>
+
+    <!-- FIELD ORDER IS FIXED AND IDENTICAL IN ALL THREE SECTIONS:
+         ROLE -> PROBLEM -> WHAT I BUILT -> CONSTRAINTS -> OUTCOME
+         One flat definition list. Do not split these across two blocks and
+         do not reorder them. -->
+    <dl class="case__fields">
+      <dt class="mono-label">Role</dt>
+      <dd>Sole author. In-house, Ad The Top.</dd>
+
+      <dt class="mono-label">Problem</dt>
+      <dd>Equipment was tracked in a workbook whose formulas had to be repaired by script before anyone could trust a total. Warranty dates sat in a column that was only ever read after something had already broken.</dd>
+
+      <dt class="mono-label">What I built</dt>
+      <dd>A register of just over five hundred items held per room and floor, with a status breakdown, a by-floor rollup, and a warranty watch counting down remaining days. Python rebuilds the rollups and repairs the formulas from the room sheets.</dd>
+
+      <dt class="mono-label">Constraints</dt>
+      <dd>It had to stay a spreadsheet. The people maintaining it work in Excel and were never going to adopt a tool. Column order had to remain theirs to change.</dd>
+
+      <dt class="mono-label">Outcome</dt>
+      <dd>501 items migrated into the studio system&rsquo;s live register. The workbook stopped being the system of record and became its source.</dd>
+    </dl>
+
+    <!-- IMAGE SLOT, now inside a device frame. Still a styled empty box, not
+         an <img> with an unresolvable src: no image asset exists in this repo
+         and none is referenced. To fill it, put your <img> inside
+         .device__screen. The frame reserves the 16:10 ratio, so the layout
+         does not shift, and object-fit: contain means the image is fitted
+         rather than cropped or stretched.
+
+         DESKTOP VARIANT IN EVERY SECTION, DELIBERATELY. The template
+         comment above states that a variation in one section reads as a claim
+         about that project. A mobile frame on one case would say "this is the
+         phone one" whether or not that is true. Switch a section to
+         .device--mobile only when that IS the claim you want to make — and
+         cap its width when you do, or a 9:19.5 frame in a full-width column
+         renders over 800px tall. -->
+    <figure class="case__figure device device--desktop">
+      <div class="device__frame">
+        <div class="device__bar" aria-hidden="true"></div>
+        <div class="device__screen">
+
+          <!-- SYNTHETIC UI. Structure only, so the information architecture
+               is legible without any real data appearing on the page.
+               aria-hidden covers the whole block; the <figcaption> below is
+               outside it and is the only thing a screen reader gets, which
+               is why it must say what this depicts.
+               Every string is a placeholder. Add or remove .ui__nav-item,
+               .ui__module, and .ui__row freely — the shapes hold. -->
+          <div class="ui" aria-hidden="true">
+
+            <nav class="ui__nav">
+              <span class="mono-label ui__nav-item ui__nav-item--current">Rooms</span>
+              <span class="mono-label ui__nav-item">Assets</span>
+              <span class="mono-label ui__nav-item">Warranty</span>
+              <span class="mono-label ui__nav-item">Report</span>
+            </nav>
+
+            <div class="ui__main">
+
+              <div class="ui__header">
+                <span class="ui__title">Asset register</span>
+                <span class="mono-label ui__state">Ten rooms &middot; two floors</span>
+              </div>
+
+              <ul class="ui__modules">
+                <li class="mono-label ui__module">Status breakdown</li>
+                <li class="mono-label ui__module">By floor</li>
+                <li class="mono-label ui__module">Warranty expiry</li>
+              </ul>
+
+              <div class="ui__rows">
+                <div class="ui__row">
+                  <span class="ui__row-label">Item status</span>
+                  <span class="mono-label ui__row-value">four states</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__row-label">Room and floor</span>
+                  <span class="mono-label ui__row-value">from register</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__row-label">Warranty expiry</span>
+                  <span class="mono-label ui__row-value">days remaining</span>
+                </div>
+                <div class="ui__row">
+                  <span class="ui__row-label">Last checked</span>
+                  <span class="mono-label ui__row-value">monthly round</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- Outside the aria-hidden block. State what the diagram DEPICTS, not
+           what it is made of. This is the only description a screen reader
+           receives for the figure. -->
+      <figcaption class="mono-label device__caption device__caption--prose">Structure of the inventory, redrawn without content &mdash; an asset register held per room and floor, rolled up into a status breakdown and a warranty-expiry watch, refreshed by a monthly inspection round.</figcaption>
+    </figure>
+
+    <!-- BEFORE / AFTER. Optional per case study, but present in all three so
+         it stays part of the constant template rather than becoming a claim
+         about one project.
+
+         Semantic <table>: the dimension is a <th scope="row">, so a screen
+         reader names it before reading each value. data-column supplies the
+         per-cell BEFORE/AFTER label that appears only in the stacked layout
+         below 768px — keep it in sync with the <thead>, nothing enforces that.
+
+         Rows are yours. Add or delete <tr> blocks freely. -->
+    <table class="case__compare compare">
+      <caption class="mono-label">What the register became</caption>
+
+      <thead>
+        <tr>
+          <th scope="col"><span class="visually-hidden">Aspect</span></th>
+          <th scope="col" class="mono-label">BEFORE</th>
+          <th scope="col" class="mono-label">AFTER</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <th scope="row">Where it lived</th>
+          <td data-column="BEFORE">A worksheet per room</td>
+          <td data-column="AFTER">One register, one table</td>
+        </tr>
+        <tr>
+          <th scope="row">Warranty</th>
+          <td data-column="BEFORE">A date, read after failure</td>
+          <td data-column="AFTER">Days remaining, watched</td>
+        </tr>
+        <tr>
+          <th scope="row">Rollups</th>
+          <td data-column="BEFORE">Retyped by hand</td>
+          <td data-column="AFTER">Rebuilt by script</td>
+        </tr>
+        <tr>
+          <th scope="row">Condition</th>
+          <td data-column="BEFORE">Known by asking someone</td>
+          <td data-column="AFTER">Four states, recorded per item</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+<hr class="rule shell">
+
+
+</main>
+
+<hr class="rule rule--strong shell">
+
+<!-- ==========================================================================
+     FOOTER
+     ======================================================================= -->
+<footer class="colophon">
+  <div class="shell grid-12">
+
+    <p class="mono-label colophon__heading">Contact</p>
+
+    <p class="colophon__contact">chaiyakatkwao@gmail.com</p>
+
+    <a class="toggle colophon__toggle" href="https://chaiyakatkwao.com">
+      <span class="mono-label toggle__eyebrow">Same person &middot; other discipline</span>
+      <span class="toggle__target">
+        chaiyakatkwao.com <span class="toggle__arrow" aria-hidden="true">&rarr;</span>
+      </span>
+    </a>
+
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1318 @@
+/* ============================================================================
+   FONTS — self-hosted, latin subset
+   ----------------------------------------------------------------------------
+   The same three families the parent site loads (Archivo, Archivo Black,
+   JetBrains Mono), served from ./fonts/ rather than fetched from Google.
+   The parent gets them through next/font/google at build time; this site has
+   no build step, so the .woff2 files are committed and served locally.
+
+   Consequence: the page makes NO external request. Same typefaces, same
+   latin subset the parent requests, no third-party connection at runtime.
+
+   All three are SIL Open Font License 1.1, which permits self-hosting and
+   redistribution. The full licence text is in ./fonts/LICENSE.txt and must
+   travel with the font files.
+
+   Archivo and JetBrains Mono are variable fonts, so one file covers the
+   whole weight range the design uses.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Archivo";
+  src: url("./fonts/archivo-variable.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Archivo Black";
+  src: url("./fonts/archivo-black-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./fonts/jetbrains-mono-variable.woff2") format("woff2");
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ============================================================================
+   TOKEN LAYER
+   ----------------------------------------------------------------------------
+   Every colour, type, and spacing value in this stylesheet resolves through a
+   custom property declared below. No rule further down hard-codes a value.
+   Inverting this site back to the parent's tonality is a :root edit and
+   nothing else.
+
+   RELATIONSHIP TO THE PARENT SITE
+   The parent (chaiyakatkwao.com) is a Next.js + Tailwind v4 build. Its tokens
+   live in `app/globals.css` inside an `@theme inline { ... }` block, which
+   emits real CSS custom properties under the SAME NAMES used here
+   (--color-bg, --color-text-muted, --color-grey-400, ...).
+
+   CARRYING OVER A PARENT TOKEN CHANGE
+   1. Open the parent's app/globals.css and find the changed name in @theme.
+   2. Find the identical name in the :root block below.
+   3. Write the new value there. Nothing outside :root is touched.
+   Lines marked INVERTED are deliberate divergences rather than mirrors, each
+   carrying the measured contrast ratio that forced it. Read the comment
+   before overwriting one — a blind copy from the parent fails WCAG AA on a
+   white ground.
+
+   WHAT CANNOT BE CARRIED OVER
+   The parent expresses its rules as Tailwind utility classes compiled at
+   build time. This site has no build step, so the rules below are written by
+   hand. Token NAMES stay in sync across the two sites; rule bodies do not.
+   ========================================================================== */
+
+:root {
+
+  /* --- COLOUR ------------------------------------------------------------ */
+  --color-bg:               #FFFFFF;  /* parent #000000 */
+  --color-surface:          #F7F7F6;  /* parent #0A0A0A */
+  --color-surface-elevated: #F0EFED;  /* parent #111111 */
+  --color-surface-hover:    #E9E8E5;  /* parent #161616 */
+
+  --color-text:             #0A0A0A;  /* parent #F9F9F9 — 19.80:1 on bg */
+  /* INVERTED, not mirrored. Parent's #8B857F is 5.76:1 on #000 but only
+     3.65:1 on #FFF and fails AA. This is the parent's own grey-500, which
+     measures 5.74:1 here — the same perceptual weight on the new ground. */
+  --color-text-muted:       #6B6560;  /* 5.74:1 on bg — AA */
+  --color-text-dim:         #9A9087;  /* 3.13:1 — DECORATIVE ONLY, never text */
+  --color-text-inverse:     #FFFFFF;
+
+  --color-border:           rgba(10, 10, 10, 0.09);
+  --color-border-strong:    rgba(10, 10, 10, 0.22);
+
+  /* Grey ramp, REVERSED from the parent. Parent runs light-to-dark
+     (100 = #F9F9F9); here 100 is darkest. The ramp is what makes a
+     one-layer inversion possible at all. */
+  --color-grey-100: #0D0B0A;
+  --color-grey-200: #1A1816;
+  --color-grey-300: #2A2826;
+  --color-grey-400: #3D3A37;
+  --color-grey-500: #6B6560;
+  --color-grey-600: #9A9087;
+  --color-grey-700: #C8C4BC;
+  --color-grey-800: #E5E5E3;
+  --color-grey-900: #F9F9F9;
+
+  --color-warm:             #16150F;  /* parent #F2F0EB */
+
+  /* INVERTED. Parent accent oklch(72% 0.18 35) = #ff7350 is 7.82:1 on #000
+     but 2.69:1 on #FFF — below AA even for large text. Amber has almost no
+     lightness range left on white, so it must darken to reach AA. It reads
+     rustier here than on the parent. Unavoidable. */
+  --color-accent:           oklch(58% 0.19 35);  /* 4.70:1 on bg — AA */
+  --color-accent-dim:       oklch(58% 0.19 35 / 0.3);
+
+  --color-focus-ring:       rgba(10, 10, 10, 0.55);
+  --color-selection-bg:     #0A0A0A;
+  --color-selection-text:   #FFFFFF;
+
+  /* --- TYPE -------------------------------------------------------------- */
+  /* Same three families as the parent, self-hosted from ./fonts/ — see the
+     @font-face block at the top of this file. The system stack stays behind
+     each one as a fallback, so the page still renders correctly if a font
+     file is ever missing. */
+  --font-display: "Archivo Black", "Archivo", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:    "Archivo", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Mirrors the parent's shipped clamps. The parent carries four
+     near-duplicate display clamps (8vw/7rem, 7vw/6rem, 7vw/5.5rem,
+     6vw/5.5rem) — drift, not intent — so this collapses to the dominant one. */
+  --step-display:  clamp(3rem, 8vw, 7rem);
+  --step-headline: clamp(1.5rem, 3.5vw, 2.75rem);
+  --step-subhead:  clamp(1.2rem, 2.5vw, 2rem);
+  --step-body:     clamp(1rem, 1.8vw, 1.15rem);
+  --step-small:    0.9375rem;   /* 15px */
+  --step-label:    11px;
+  --step-micro:    9px;
+
+  --lh-display:  0.92;
+  --lh-headline: 1.1;
+  --lh-body:     1.6;
+  --lh-tight:    1.3;
+
+  --track-display:  -0.02em;
+  --track-headline: -0.01em;
+  --track-label:     0.18em;
+  --track-micro:     0.28em;
+
+  --weight-display: 400;   /* Archivo Black is single-weight */
+  --weight-light:   300;
+  --weight-body:    400;
+  --weight-medium:  500;
+
+  /* --- SPACING SCALE ------------------------------------------------------
+     8px base unit, inherited from the parent. Every vertical gap in this
+     stylesheet is one of these eight values and nothing else. --space-xs is
+     the parent's own half-step (4px); every other value is a whole multiple
+     of the 8px unit.
+
+       xs      4px    0.5x   parent half-step
+       sm      8px    1x     BASE UNIT
+       md     16px    2x
+       gutter 24px    3x     grid column gap only — never a vertical gap
+       lg     32px    4x
+       xl     64px    8x
+       2xl    96px   12x     parent section rhythm (py-24)
+       3xl   128px   16x     parent section rhythm (py-32)
+     --------------------------------------------------------------------- */
+  --space-xs:      4px;
+  --space-sm:      8px;
+  --space-md:     16px;
+  --space-gutter: 24px;
+  --space-lg:     32px;
+  --space-xl:     64px;
+  --space-2xl:    96px;
+  --space-3xl:   128px;
+
+  /* --- STRUCTURE ---------------------------------------------------------
+     Shell gutter is expressed in spacing units so the page margin sits on
+     the same scale as every vertical gap. 48px = 6x base; 64px = --space-xl. */
+  --shell-max:      1280px;
+  --shell-gutter:   48px;
+  --grid-columns:   12;
+  --rule-weight:     1px;
+  --hairline:        1px;   /* scrollbar + non-spacing 1px surfaces */
+  --focus-offset:    3px;   /* outline offset, inherited from the parent.
+                               Deliberately OFF the 8px scale: it is an
+                               optical ring gap, not a layout gap. */
+  --radius-none:     0px;
+  --radius-sm:       4px;
+  --radius-full:  9999px;
+
+  /* --- MOTION ------------------------------------------------------------ */
+  --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:  200ms;
+  --dur-mid:   300ms;
+  --dur-slow:  500ms;
+
+  /* --- TEXTURE ------------------------------------------------------------
+     Parent runs 0.038 on black. Dark grain on a white ground reads heavier
+     at the same alpha, so this is lowered. Purely perceptual. */
+  --grain-opacity: 0.025;
+  --grain-scale:   200px;
+
+  /* --- MEDIA -------------------------------------------------------------
+     Aspect ratio reserved for every case study image slot. */
+  --figure-ratio: 16 / 10;
+
+  /* Added for the device frame's mobile variant, and the ONLY value the four
+     component blocks below introduced. Nothing in the existing layer expresses
+     a phone ratio, so it could not resolve through an existing name. It is a
+     ratio, not a colour, type size, or spacing value — it sits here beside
+     --figure-ratio rather than in any of those three groups.
+     Flagged on introduction and approved 2026-08-28. */
+  --device-ratio-mobile: 9 / 19.5;
+}
+
+
+/* ============================================================================
+   RESET
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--step-body);
+  font-weight: var(--weight-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ============================================================================
+   GLOBAL SURFACE BEHAVIOUR — inherited from the parent
+   ========================================================================== */
+
+/* Grain overlay. Inline SVG data URI; no network request, no asset file. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: var(--grain-scale) var(--grain-scale);
+}
+
+::selection {
+  background-color: var(--color-selection-bg);
+  color: var(--color-selection-text);
+}
+
+::-webkit-scrollbar        { width: var(--hairline); }
+::-webkit-scrollbar-track  { background: var(--color-bg); }
+::-webkit-scrollbar-thumb  { background: var(--color-grey-700); }
+
+*:focus-visible {
+  outline: var(--rule-weight) solid var(--color-focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+
+/* ============================================================================
+   LAYOUT PRIMITIVES — same names and behaviour as the parent
+   ========================================================================== */
+
+/* Parent: .section-shell */
+.shell {
+  margin-inline: auto;
+  width: min(var(--shell-max), calc(100% - var(--shell-gutter)));
+}
+
+/* Parent: .grid-12. Fluid columns inside a capped container — columns
+   stretch, container stops at --shell-max. Column gap only; every vertical
+   gap comes from margin on the child, never from row-gap, so the spacing
+   audit has a single source. */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  row-gap: 0;
+  column-gap: var(--space-gutter);
+}
+
+/* Parent: .bauhaus-rule */
+.rule {
+  border: 0;
+  border-top: var(--rule-weight) solid var(--color-border);
+}
+
+.rule--strong {
+  border-top-color: var(--color-border-strong);
+}
+
+/* Parent: .mono-label — the system's label infrastructure */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  line-height: 1;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: var(--hairline);
+  height: var(--hairline);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Skip link. Hidden until focused, then painted in tokens rather than the
+   browser's default link blue — which would be the one colour on the page
+   not resolving through :root. */
+.skip-link {
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--color-text-inverse);
+  background-color: var(--color-text);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  position: fixed;
+  top: var(--space-md);
+  left: var(--space-md);
+  z-index: 9100;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+  padding: var(--space-sm) var(--space-md);
+}
+
+
+/* ============================================================================
+   CROSS-SITE TOGGLE
+   One rule, used twice (header and footer). A relationship marker, not a nav
+   item: the eyebrow states what the link means, the target states where it
+   goes.
+   ========================================================================== */
+
+.toggle {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--color-text);
+  padding-top: var(--space-sm);
+  border-top: var(--rule-weight) solid var(--color-border-strong);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.toggle:hover,
+.toggle:focus-visible {
+  border-top-color: var(--color-accent);
+}
+
+.toggle__eyebrow {
+  color: var(--color-text-muted);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.toggle:hover .toggle__eyebrow,
+.toggle:focus-visible .toggle__eyebrow {
+  color: var(--color-accent);
+}
+
+.toggle__target {
+  font-size: var(--step-subhead);
+  font-weight: var(--weight-light);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--track-headline);
+}
+
+.toggle__arrow {
+  display: inline-block;
+  transition: transform var(--dur-mid) var(--ease);
+}
+
+.toggle:hover .toggle__arrow,
+.toggle:focus-visible .toggle__arrow {
+  transform: translateX(var(--space-xs));
+}
+
+
+/* ============================================================================
+   HEADER
+   ========================================================================== */
+
+.masthead {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-xl);
+}
+
+.masthead__name {
+  grid-column: 1 / -1;
+  font-family: var(--font-display);
+  font-size: var(--step-display);
+  font-weight: var(--weight-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--track-display);
+  text-transform: uppercase;
+}
+
+.masthead__positioning {
+  grid-column: 1 / -1;
+  margin-top: var(--space-lg);
+  font-size: var(--step-subhead);
+  font-weight: var(--weight-light);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--track-headline);
+  color: var(--color-text-muted);
+}
+
+.masthead__toggle {
+  grid-column: 1 / -1;
+  margin-top: var(--space-xl);
+}
+
+
+/* ============================================================================
+   CONTENTS — anchor index
+   ========================================================================== */
+
+.contents {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+
+.contents__heading {
+  grid-column: 1 / -1;
+  margin-bottom: var(--space-md);
+}
+
+.contents__list {
+  grid-column: 1 / -1;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.contents__link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: var(--step-small);
+  /* Measured at 21px tall with padding-bottom alone, under the 24px floor of
+     WCAG 2.2 SC 2.5.8. The padding is added on TOP rather than increased at
+     the bottom so the underline stays exactly where it was: the target grows
+     upward into space the flex gap already owns, and nothing moves visually. */
+  display: inline-block;
+  padding-top: var(--space-sm);
+  padding-bottom: var(--space-xs);
+  border-bottom: var(--rule-weight) solid transparent;
+  transition: color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+}
+
+.contents__link:hover,
+.contents__link:focus-visible {
+  color: var(--color-text);
+  border-bottom-color: var(--color-accent);
+}
+
+
+/* ============================================================================
+   CASE STUDY — ONE TEMPLATE, THREE INSTANCES
+   --------------------------------------------------------------------------
+   FIELD ORDER IS FIXED:
+     ROLE -> PROBLEM -> WHAT I BUILT -> CONSTRAINTS -> OUTCOME
+   All five fields live in ONE definition list so the order is a property of
+   a single flat sequence and cannot drift by being split across blocks.
+
+   No .case--<project> modifier exists and none should be added. The layout is
+   the constant against which the three cases are compared; a variation in one
+   section reads as a claim about that project.
+   ========================================================================== */
+
+.case {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+  /* Deep-link landing offset. Without this an anchored section starts flush
+     against the viewport edge. */
+  scroll-margin-top: var(--space-lg);
+}
+
+.case__index {
+  grid-column: 1 / -1;
+  margin-bottom: var(--space-md);
+}
+
+.case__title {
+  grid-column: 1 / -1;
+  font-size: var(--step-headline);
+  font-weight: var(--weight-light);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--track-headline);
+}
+
+.case__fields {
+  grid-column: 1 / -1;
+  margin-top: var(--space-xl);
+}
+
+.case__fields dt {
+  margin-bottom: var(--space-sm);
+}
+
+.case__fields dd {
+  margin-bottom: var(--space-lg);
+  max-width: 60ch;
+}
+
+.case__fields dd:last-of-type {
+  margin-bottom: 0;
+}
+
+/* A field long enough to need two paragraphs. Only case 01's Outcome uses
+   this: the result and the account of how the work was split are two separate
+   thoughts, and running them together made a nine-line block. <br><br> would
+   have produced the same picture with none of the structure, so the dd takes
+   real <p> children instead — a screen reader gets two paragraphs, not one
+   sentence with a gap in it. Spacing matches the rhythm between fields. */
+.case__fields-para {
+  margin: 0;
+}
+
+.case__fields-para + .case__fields-para {
+  margin-top: var(--space-md);
+}
+
+.case__figure {
+  grid-column: 1 / -1;
+  margin-top: var(--space-xl);
+}
+
+/* Two optional blocks that hang below the fields and figure. Both are
+   full-width from the same column the title and fields start at, because a
+   comparison table and a topology are read across the whole measure rather
+   than in the body-copy column. Vertical gap is --space-xl, the same gap
+   .case__fields and .case__figure already use, so the section keeps one
+   rhythm no matter which blocks a case carries. */
+.case__compare,
+.case__diagram {
+  grid-column: 1 / -1;
+  margin-top: var(--space-xl);
+}
+
+
+/* ============================================================================
+   FOOTER
+   ========================================================================== */
+
+.colophon {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-xl);
+}
+
+.colophon__heading {
+  grid-column: 1 / -1;
+  margin-bottom: var(--space-md);
+}
+
+.colophon__contact {
+  grid-column: 1 / -1;
+  font-size: var(--step-subhead);
+  font-weight: var(--weight-light);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--track-headline);
+}
+
+.colophon__toggle {
+  grid-column: 1 / -1;
+  margin-top: var(--space-xl);
+}
+
+
+/* ============================================================================
+   DEVICE FRAME — ADD-ON 1
+   ----------------------------------------------------------------------------
+   A frame, not a mockup. The whole thing is one rule line at --rule-weight in
+   --color-border-strong, the same line the <hr class="rule"> draws. Nothing
+   here is skeuomorphic: no shadow, no gradient, no perspective, no reflection,
+   no traffic lights, no URL bar.
+
+   STRUCTURE
+     .device                       block wrapper, carries the caption
+       .device__frame              the border
+         .device__bar              desktop only — fixed height, one hairline
+         .device__screen           the SLOT
+     .device__caption              mono label, sits OUTSIDE the frame
+
+   THE SLOT
+   .device__screen is empty by contract. Put an <img> in it, or live HTML, or
+   the synthetic UI block below. It is never given content by this stylesheet.
+   Anything dropped in is sized by the two rules at the bottom of this block:
+   an image is fitted with object-fit: contain (never cropped, never stretched),
+   live HTML is stretched to fill and clipped at the frame edge.
+
+   SCALING
+   The frame is width: 100%. Height comes from aspect-ratio on .device__screen,
+   so the inner area holds its ratio at every width and the bar sits above it
+   at a constant --space-lg. No fixed width appears anywhere in this block.
+   ========================================================================== */
+
+.device {
+  width: 100%;
+}
+
+.device__frame {
+  border: var(--rule-weight) solid var(--color-border-strong);
+  border-radius: var(--radius-none);
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
+
+/* --- DESKTOP VARIANT ------------------------------------------------------
+   One bar, fixed height, containing a single hairline and nothing else. The
+   hairline is the bar's only content — it stands in for chrome without
+   depicting any. Bar height is --space-lg (32px), a scale value, not a
+   measurement taken off a real browser. */
+
+.device--desktop .device__bar {
+  position: relative;
+  height: var(--space-lg);
+  border-bottom: var(--rule-weight) solid var(--color-border);
+}
+
+.device--desktop .device__bar::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  inset-inline-start: var(--space-md);
+  width: var(--space-2xl);
+  height: var(--hairline);
+  background-color: var(--color-border-strong);
+}
+
+.device--desktop .device__screen {
+  aspect-ratio: var(--figure-ratio);   /* 16 / 10 */
+}
+
+/* --- MOBILE VARIANT -------------------------------------------------------
+   No bar. One hairline notch indicator, centred, floating over the top of the
+   inner area. It is pointer-events: none and aria-invisible, so it never
+   intercepts a click on live HTML sitting in the slot. */
+
+.device--mobile .device__screen {
+  aspect-ratio: var(--device-ratio-mobile);   /* 9 / 19.5 */
+  position: relative;
+}
+
+.device--mobile .device__screen::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: var(--space-sm);
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  width: var(--space-xl);
+  height: var(--hairline);
+  background-color: var(--color-border-strong);
+  pointer-events: none;
+}
+
+/* --- THE SLOT ------------------------------------------------------------ */
+
+.device__screen {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* An image is fitted, never distorted and never cropped. */
+/* <picture> is listed alongside <img> because it is NOT a replaced element:
+   it is an inline wrapper that hands its chosen source to the <img> inside it.
+   A rule written only for `> img` stops matching the moment the image is
+   wrapped for a WebP source, and the picture then falls through to the
+   live-HTML rule below, where display: inline swallows the sizing and the
+   image paints at its intrinsic width. Both levels are sized here. */
+.device__screen > img,
+.device__screen > picture,
+.device__screen > picture > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Live HTML fills the slot and is clipped by .device__frame's overflow. */
+.device__screen > :not(img):not(picture) {
+  width: 100%;
+  height: 100%;
+}
+
+/* SYNTHETIC UI SIZES TO ITS CONTENT, NOT TO THE FRAME RATIO.
+   The 16:10 on .device--desktop .device__screen exists to reserve a box while
+   an IMAGE loads, so the page does not jump when it arrives. A .ui block is
+   markup — there is nothing to wait for and nothing to reserve. Leaving the
+   ratio on clipped it: measured 29 Aug 2026, all three synthetic figures
+   overflowed their screen (110px, 83px, 56px), cutting off two to three of the
+   four rows and silently truncating every row label in case 01.
+
+   This was already true before the blocks had real content; longer strings
+   only widened the gap. Tuning row counts to the pixel would just re-break on
+   the next edit, so the frame gives up its fixed height instead.
+
+   :has() is unsupported in very old browsers, where this rule is skipped and
+   the block clips exactly as it did before — no worse than the bug it fixes. */
+.device__screen:has(> .ui) {
+  aspect-ratio: auto;
+}
+
+.device__screen:has(> .ui) > .ui {
+  height: auto;
+}
+
+.device__caption {
+  display: block;
+  margin-top: var(--space-sm);
+}
+
+/* A CAPTION THAT IS A SENTENCE, NOT A LABEL.
+   .mono-label is built for one-line labels: uppercase, tracked out,
+   line-height 1. The synthetic-UI captions run 180-240 characters, and in that
+   styling they set as four lines of tracked-out caps with no leading — legible
+   as a shape, not as a sentence.
+
+   They cannot simply be shortened. The .ui block above each one is
+   aria-hidden, so its figcaption is the ONLY description a screen reader gets;
+   cutting it for visual tidiness would trade an accessibility guarantee for
+   neatness. So the type gives way instead.
+
+   Keeps the mono voice, which is this design's metadata register. Drops the
+   label mannerisms. Case 01's caption is a short source credit and correctly
+   keeps plain .mono-label — do not add this class to it. */
+.device__caption--prose {
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: var(--lh-body);
+  max-width: 60ch;
+}
+
+
+/* ============================================================================
+   SYNTHETIC UI — ADD-ON 2
+   ----------------------------------------------------------------------------
+   For case studies where a real screenshot would expose confidential data.
+   This is a DIAGRAM OF AN INTERFACE rendered in the site's own type and
+   colour, not a pixel copy of one and not an image. It shows information
+   architecture — that a nav exists, that modules are listed, that rows carry
+   values, that a state is displayed — and nothing that would let a reader
+   reconstruct the real system.
+
+   RULES THIS BLOCK ENFORCES
+     - Non-interactive. No JS, no :hover, no :focus, no links, no buttons.
+     - The whole block carries aria-hidden="true" in the markup; the visible
+       caption stating what it depicts sits OUTSIDE it and is read normally.
+     - Every label, row, and value is a placeholder supplied by CK. This
+       stylesheet generates no content — there is not one `content:` string
+       with text in it below.
+
+   It is sized to fill .device__screen, so it drops straight into the frame
+   above. It also stands alone if a frame is not wanted.
+   ========================================================================== */
+
+.ui {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  background-color: var(--color-bg);
+  font-family: var(--font-body);
+  overflow: hidden;
+}
+
+/* --- NAVIGATION ----------------------------------------------------------- */
+
+.ui__nav {
+  border-inline-end: var(--rule-weight) solid var(--color-border);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  white-space: nowrap;
+}
+
+.ui__nav-item {
+  color: var(--color-text-muted);
+}
+
+/* One item is marked current. Weight and colour only — no fill, no bar. */
+.ui__nav-item--current {
+  color: var(--color-text);
+}
+
+/* --- MAIN COLUMN ---------------------------------------------------------- */
+
+.ui__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ui__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  /* WRAP IS LOad-BEARING. .ui__state is white-space: nowrap and sits inside
+     .device__screen, which is overflow: hidden — so on a narrow viewport a
+     state label longer than the row can hold is CLIPPED, not scrolled, and
+     silently loses its last words. Measured at 375px on 29 Aug 2026: three
+     labels overran the frame by 27-89px. Wrapping drops the state onto its
+     own line instead. Do not remove this to tighten the header. */
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-bottom: var(--rule-weight) solid var(--color-border);
+}
+
+.ui__title {
+  font-size: var(--step-small);
+  font-weight: var(--weight-medium);
+  line-height: var(--lh-tight);
+}
+
+/* --- STATE INDICATOR ------------------------------------------------------
+   A word in a hairline box. No colour coding, no dot, no icon — the state is
+   whatever text CK puts in it, and the system does not editorialise about
+   whether that state is good or bad. */
+
+.ui__state {
+  border: var(--rule-weight) solid var(--color-border-strong);
+  padding: var(--space-xs) var(--space-sm);
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+/* --- STATE INDICATOR, BELOW 375 -------------------------------------------
+   Content-driven breakpoint, not a device width. MEASURED 29 Aug 2026 across
+   320/340/360/375/400px: the two longest chips ("Two accounts · shared" and
+   "Ten rooms · two floors") sit 0.6px inside the frame at exactly 375 and
+   overrun it by 14px at 360, 34px at 340, and 54px at 320. .device__screen is
+   overflow: hidden, so an overrun is silently CLIPPED — the chip loses its
+   last words rather than scrolling.
+
+   flex-wrap on .ui__header cannot save it here: once the chip alone is wider
+   than the frame, wrapping it onto its own line still leaves it too wide. So
+   below 375 the header stops being a two-column row and the chip is allowed
+   to break across lines. It stops looking like a single tag at that size,
+   which is the correct trade against losing half its text. */
+@media (max-width: 374px) {
+
+  .ui__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .ui__state {
+    white-space: normal;
+  }
+}
+
+/* --- MODULE LIST ---------------------------------------------------------- */
+
+.ui__modules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-bottom: var(--rule-weight) solid var(--color-border);
+  list-style: none;
+}
+
+.ui__module {
+  color: var(--color-text-muted);
+}
+
+/* --- ROW SHAPE ------------------------------------------------------------
+   A table shape, not a table element — this is a picture of one, and it is
+   inside an aria-hidden block, so it must not enter the accessibility tree as
+   tabular data. The real semantic table in this system is .compare below. */
+
+.ui__rows {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ui__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-md);
+  align-items: baseline;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: var(--rule-weight) solid var(--color-border);
+}
+
+.ui__row-label {
+  font-size: var(--step-small);
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- ROWS STACK BELOW 768 -------------------------------------------------
+   .ui__row is `1fr auto`: the value takes the space it needs and the label
+   absorbs the remainder, ellipsing when there is not enough. That safety net
+   holds at desktop width, but measured at 375px on 29 Aug 2026 it was firing
+   on seven labels at once — "Column acc...", "Room and fl..." — which turns a
+   schematic of an interface into a column of stubs.
+
+   Stacking label over value is the same move .compare already makes below this
+   breakpoint, so this follows the system rather than inventing a second
+   behaviour for narrow screens. The ellipsis rule above stays as the backstop
+   for a label long enough to overrun even a full-width row. */
+@media (max-width: 767px) {
+  .ui__row {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+}
+
+.ui__row-value {
+  color: var(--color-text-muted);
+}
+
+.ui__caption {
+  display: block;
+  margin-top: var(--space-sm);
+}
+
+
+/* ============================================================================
+   BEFORE / AFTER — ADD-ON 3
+   ----------------------------------------------------------------------------
+   A real <table> with a real <caption>, because it is real tabular data: one
+   dimension read across two states. A flex grid of divs would say the same
+   thing to a sighted reader and nothing at all to a screen reader.
+
+   Mono for the dimension label (row header), sans for the values — the same
+   label/body split .mono-label and body copy already use everywhere else.
+
+   Rule lines between rows ONLY. No fills, no zebra striping, no icons, no
+   colour coding: nothing in the component may imply that AFTER is the better
+   column. That judgement belongs to the sentence above the table, not to the
+   table's styling.
+   ========================================================================== */
+
+.compare {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: start;
+}
+
+.compare caption {
+  text-align: start;
+  margin-bottom: var(--space-md);
+  /* Inherits .mono-label in the markup. */
+}
+
+.compare th,
+.compare td {
+  /* The UA stylesheet centres <th>. Reset it here rather than relying on
+     inheritance from .compare, which a th ignores. */
+  text-align: start;
+  padding-block: var(--space-md);
+  padding-inline: 0;
+  vertical-align: baseline;
+  border-bottom: var(--rule-weight) solid var(--color-border);
+}
+
+.compare tbody tr:last-child th,
+.compare tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Column headers — BEFORE | AFTER. */
+.compare thead th {
+  border-bottom-color: var(--color-border-strong);
+}
+
+/* The dimension label: row header, mono, matching .mono-label exactly. */
+.compare tbody th {
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  line-height: 1;
+  width: 25%;
+  padding-inline-end: var(--space-gutter);
+}
+
+/* Cell values: body face, body colour. */
+.compare td {
+  font-family: var(--font-body);
+  font-size: var(--step-small);
+  color: var(--color-text);
+  line-height: var(--lh-body);
+  width: 37.5%;
+  padding-inline-end: var(--space-gutter);
+}
+
+.compare td:last-child {
+  padding-inline-end: 0;
+}
+
+/* --- STACKED BELOW 768 ----------------------------------------------------
+   Kept with the component rather than in the RESPONSIVE section at the foot of
+   this file. That section is column placement on .grid-12 only; this is a
+   structural change to one component and does not belong in it.
+
+   The table stops being a table and becomes three stacked blocks per row:
+   dimension label, then BEFORE, then AFTER. The <thead> is hidden because the
+   column headers no longer sit above anything, so each cell re-labels itself
+   from a data-attribute in the markup. Semantics are untouched — the element
+   is still a <table> and a screen reader still reads it as one. */
+
+@media (max-width: 767px) {
+
+  .compare thead {
+    /* Same technique as .visually-hidden — removed visually, still announced. */
+    position: absolute;
+    width: var(--hairline);
+    height: var(--hairline);
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .compare,
+  .compare tbody,
+  .compare tr,
+  .compare th,
+  .compare td {
+    display: block;
+    width: auto;
+  }
+
+  .compare tbody tr {
+    border-bottom: var(--rule-weight) solid var(--color-border);
+    padding-block: var(--space-md);
+  }
+
+  .compare tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .compare tbody th,
+  .compare td {
+    border-bottom: 0;
+    padding-block: 0;
+    padding-inline: 0;
+  }
+
+  .compare tbody th {
+    margin-bottom: var(--space-sm);
+  }
+
+  .compare td {
+    margin-bottom: var(--space-md);
+  }
+
+  .compare td:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Per-cell column label, drawn from data-column in the markup. The
+     stylesheet supplies no text — only the attribute's value is printed.
+
+     COLOUR: --color-text-muted, NOT --color-text-dim. This looks like a
+     decorative micro-label and was written as one, which was wrong twice
+     over. Below 768px the <thead> is gone, so this label is the ONLY thing
+     telling a reader whether they are looking at BEFORE or AFTER — it is
+     functional text, not decoration, and it carries the whole comparison.
+     And --color-text-dim measures 3.13:1 on --color-bg, which fails WCAG AA
+     for normal text; its own declaration in :root says DECORATIVE ONLY,
+     never text. --color-text-muted measures 5.74:1 and passes.
+
+     This is the mobile layout, so the failure would have landed on phones
+     only — exactly where it would go unseen on a desktop review. */
+  .compare td::before {
+    content: attr(data-column);
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: var(--step-micro);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--track-micro);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    line-height: 1;
+  }
+}
+
+
+/* ============================================================================
+   ARCHITECTURE DIAGRAM — ADD-ON 4
+   ----------------------------------------------------------------------------
+   Hand-authored inline SVG. Not an export. Boxes, arrows, labels, nothing else.
+
+   TWO SCALING DECISIONS, MADE DIFFERENTLY ON PURPOSE
+
+   1. STROKES DO NOT SCALE. Every stroke carries
+      vector-effect: non-scaling-stroke, so a stroke-width of 1 renders as a
+      true 1 device-independent pixel at every diagram width. That is the point
+      of the rule: the diagram's lines are the SAME WEIGHT as <hr class="rule">
+      sitting above it. Let them scale and a wide diagram draws fat lines that
+      no longer match the page.
+
+   2. TEXT DOES SCALE. font-size is set with the SVG PRESENTATION ATTRIBUTE in
+      the markup (user units), not in CSS, so labels scale with the boxes they
+      sit inside and can never grow out of a node on a narrow screen. Set them
+      in CSS px instead and they would overflow their nodes on a phone, where
+      the diagram renders at roughly a quarter scale.
+
+      CONSEQUENCE: the label is only EXACTLY --step-label when the diagram
+      spans the full --shell-max. The viewBox is 1280 units wide to match it,
+      so at that width one user unit is one pixel and font-size="11" lands on
+      the token. Anywhere narrower the label lands between tokens — inside a
+      case study the diagram sits in grid columns 3 / -1, about 1063px, so it
+      renders at 0.829 scale and the label is ~9.1px. Measured, not estimated.
+
+      That is not a hole in the token system. The site already ships fluid
+      type: --step-display is clamp(3rem, 8vw, 7rem), which lands on a
+      non-integer size at nearly every viewport width. A diagram whose labels
+      scale with their boxes is the same behaviour, and the alternative —
+      fixed labels bursting out of their nodes on mobile — is worse.
+
+      An earlier version of this comment claimed the calibration held
+      generally. It only ever held at full shell width.
+
+   COLOUR
+   Every stroke and fill is currentColor. The diagram has no colour of its own;
+   it takes .diagram's colour, which is a token. Change the token layer and the
+   diagram follows with no edit to the SVG.
+   ========================================================================== */
+
+.diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--color-text);
+  overflow: visible;
+}
+
+.diagram__node,
+.diagram__edge {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Arrowheads are solid, so they fill rather than stroke. They live in
+   userSpaceOnUse marker units so they scale with the diagram instead of with
+   the (non-scaling) stroke width, which would render them microscopic. */
+.diagram__arrowhead {
+  fill: currentColor;
+  stroke: none;
+}
+
+.diagram__label {
+  font-family: var(--font-mono);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Secondary text — edge annotations. Muted, same face. */
+.diagram__edge-label {
+  font-family: var(--font-mono);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  fill: var(--color-text-muted);
+  stroke: none;
+}
+
+/* Node index — the A-E identifiers. A separate mark in the corner of the box
+   rather than a prefix on the node's name, matching .case__index, which sets
+   its number in its own column instead of inlining "01 —" into the title.
+   Muted, because the index is secondary to the name it labels — but
+   --color-text-muted, never --color-text-dim: an index too faint to read is
+   an index that cannot be cross-referenced, which is its only job. */
+.diagram__index {
+  font-family: var(--font-mono);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  fill: var(--color-text-muted);
+  stroke: none;
+}
+
+.diagram__caption {
+  display: block;
+  margin-top: var(--space-md);
+}
+
+
+/* ============================================================================
+   RESPONSIVE
+   Breakpoints match the parent's Tailwind defaults (md 768, xl 1280).
+   Below 768 every element spans all 12 columns — the grid is present but not
+   expressed. Column placement only; no vertical spacing is redefined here,
+   so the spacing audit holds identically at every width.
+   ========================================================================== */
+
+@media (min-width: 768px) {
+
+  :root {
+    --shell-gutter: var(--space-xl);   /* 64px */
+  }
+
+  .masthead__name        { grid-column: 1 / 11; }
+  .masthead__positioning { grid-column: 1 / 9; }
+  .masthead__toggle      { grid-column: 1 / 7; }
+
+  .contents__heading     { grid-column: 1 / 3; margin-bottom: 0; }
+  .contents__list        { grid-column: 3 / -1; }
+
+  .case__index           { grid-column: 1 / 3; margin-bottom: 0; }
+  .case__title           { grid-column: 3 / -1; }
+  /* Fields and figure stay STACKED at this width. Splitting them here leaves
+     the figure ~4 columns (218px at a 768 viewport) — a thumbnail — and pulls
+     body copy down to ~43 characters per line. Both only work once there is
+     enough width, which is the 1280 breakpoint below. */
+  .case__fields          { grid-column: 3 / -1; }
+  .case__figure          { grid-column: 3 / -1; }
+  .case__compare         { grid-column: 3 / -1; }
+  .case__diagram         { grid-column: 3 / -1; }
+
+  .colophon__heading     { grid-column: 1 / 3; margin-bottom: 0; }
+  .colophon__contact     { grid-column: 3 / 9; }
+  .colophon__toggle      { grid-column: 3 / 9; }
+}
+
+@media (min-width: 1280px) {
+
+  .masthead__name        { grid-column: 1 / 10; }
+  .masthead__positioning { grid-column: 1 / 8; }
+  .masthead__toggle      { grid-column: 1 / 5; }
+
+  .case__title           { grid-column: 3 / 10; }
+  /* Only here is there room to set the figure beside the fields. Same
+     template, same source order — column placement only. */
+  .case__fields          { grid-column: 3 / 8; }
+  .case__figure          { grid-column: 9 / -1; margin-top: 0; }
+  /* Deliberately NOT narrowed to the body column. Fields and figure split
+     into two columns at this width; the comparison table and the diagram
+     stay full measure beneath both, so they read as belonging to the whole
+     case rather than to the text column. */
+  .case__compare         { grid-column: 3 / -1; }
+  .case__diagram         { grid-column: 3 / -1; }
+}
+
+
+/* ============================================================================
+   MOTION PREFERENCES
+   ========================================================================== */
+
+/* The whole motion inventory of this page is four transitions and one scroll
+   behaviour, so this block names them rather than firing a blanket
+   `* { transition-duration: 0.01ms !important }`. The blanket version is the
+   wrong instrument here: three of the four transitions are colour and
+   border-colour, which are state feedback, not motion. Reduced-motion asks for
+   less movement, not for state changes to become invisible — so the colour
+   fades stay and only the two things that actually travel are removed:
+
+     1. smooth scrolling, which moves the entire viewport;
+     2. the 4px arrow nudge on the cross-site toggle.
+
+   The arrow keeps its hover and focus feedback through the colour change on
+   its parent, so nothing is lost except the movement itself. */
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .toggle__arrow {
+    transition: none;
+  }
+
+  .toggle:hover .toggle__arrow,
+  .toggle:focus-visible .toggle__arrow {
+    transform: none;
+  }
+}

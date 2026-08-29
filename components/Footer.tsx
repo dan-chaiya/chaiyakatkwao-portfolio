@@ -7,6 +7,10 @@ const links = [
   { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
   { href: "/cv", label: "CV" },
+  // external: true renders a plain <a>, which is required here and not a style
+  // choice. /systems is a static HTML file served out of public/, not a Next
+  // route, so next/link's client-side navigation would fail to find it.
+  { href: "/systems", label: "Systems", external: true },
   { href: "mailto:chaiyakatkwao@gmail.com", label: "Email", external: true },
 ];
 
