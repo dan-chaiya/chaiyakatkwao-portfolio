@@ -136,6 +136,27 @@ export default function About() {
                 He is interested in one thing: making creative work that
                 functions as well as it looks.
               </motion.p>
+
+              {/* Cross-link to the management portfolio. Plain <a>, not
+                  next/link: /systems is a static file in public/, not a route.
+                  Placed after the closing line rather than in the nav, because
+                  it is a claim about the work and not a sixth category of it. */}
+              <motion.p
+                variants={fadeUp}
+                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-grey-400)]"
+                style={{ fontWeight: 300 }}
+              >
+                Some of that work is software he builds and maintains himself.
+                Three internal systems, still in daily use by the teams they
+                were made for, are documented in{" "}
+                <a
+                  href="/systems"
+                  className="text-[var(--color-text)] border-b border-[var(--color-accent)] pb-px transition-colors duration-200 hover:text-[var(--color-warm)]"
+                >
+                  Systems
+                </a>
+                .
+              </motion.p>
             </motion.div>
 
             <FadeIn delay={0.1} className="mt-16">
