@@ -413,6 +413,7 @@ export default function CommercialClient() {
                   controls
                   playsInline
                   preload="none"
+                  aria-label={`${video.brand} — live commerce production`}
                   className="w-full h-auto block"
                 >
                   <source src={video.src} type={video.type} />
