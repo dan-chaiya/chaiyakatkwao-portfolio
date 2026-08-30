@@ -1,51 +1,50 @@
 import { anthropic } from "@ai-sdk/anthropic";
 import { streamText } from "ai";
+import { Redis } from "@upstash/redis";
+import { Ratelimit } from "@upstash/ratelimit";
 import { systemPrompt } from "@/lib/system-prompt";
 
 // This route spends real Anthropic credit and sits on a public marketing site
 // with no login in front of it. Everything below exists to bound what one
 // caller can spend, not to be clever.
 
-// Hard per-request bounds. Unlike the limiter these hold on every instance, so
-// they are what actually caps the cost of any single call.
+// Hard per-request bounds. These hold on every instance regardless of the
+// limiter, so they are the floor of the protection.
 export const maxDuration = 30;
 
 const MAX_MESSAGES = 24;
 const MAX_CHARS_PER_MESSAGE = 2_000;
 const MAX_TOTAL_CHARS = 12_000;
 
-// Fixed-window limiter, per IP. The state is in-memory, so it is per function
-// instance: verified in production on 2026-08-30, a burst spread across cold
-// instances can exceed the nominal limit before the counters warm up, after
-// which 429s fire correctly. The effective ceiling is therefore
-// MAX_REQUESTS_PER_WINDOW x (warm instances), not a hard global cap.
-//
-// That is a real mitigation for the realistic abuse here — one client looping —
-// but it is NOT a guarantee. A hard global cap needs shared storage (Upstash
-// Redis or Vercel Edge Config via the Marketplace); the per-request bounds below
-// are what actually cap worst-case spend in the meantime.
-const WINDOW_MS = 60_000;
 const MAX_REQUESTS_PER_WINDOW = 10;
-const hits = new Map<string, { count: number; resetAt: number }>();
+const WINDOW = "60 s" as const;
 
-function rateLimit(ip: string): { ok: boolean; retryAfter: number } {
-  const now = Date.now();
-  const entry = hits.get(ip);
+// Upstash Redis, provisioned through the Vercel Marketplace. The state lives
+// outside the function, so unlike the previous in-memory Map this is a true
+// global cap rather than a per-instance one.
+//
+// NOTE: the Marketplace injects KV_REST_API_URL / KV_REST_API_TOKEN, not the
+// UPSTASH_REDIS_REST_* names that Redis.fromEnv() expects — hence the explicit
+// construction. fromEnv() throws here.
+//
+// Built lazily: Next evaluates module scope at build time, and the env vars are
+// absent in that context on a clean checkout.
+let limiter: Ratelimit | null = null;
 
-  if (!entry || now > entry.resetAt) {
-    hits.set(ip, { count: 1, resetAt: now + WINDOW_MS });
-    // Opportunistic sweep so the map cannot grow without bound.
-    if (hits.size > 5_000) {
-      for (const [key, value] of hits) if (now > value.resetAt) hits.delete(key);
-    }
-    return { ok: true, retryAfter: 0 };
-  }
+function getLimiter(): Ratelimit | null {
+  if (limiter) return limiter;
 
-  entry.count += 1;
-  if (entry.count > MAX_REQUESTS_PER_WINDOW) {
-    return { ok: false, retryAfter: Math.ceil((entry.resetAt - now) / 1000) };
-  }
-  return { ok: true, retryAfter: 0 };
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+  if (!url || !token) return null;
+
+  limiter = new Ratelimit({
+    redis: new Redis({ url, token }),
+    limiter: Ratelimit.slidingWindow(MAX_REQUESTS_PER_WINDOW, WINDOW),
+    prefix: "ratelimit:chat",
+    analytics: false,
+  });
+  return limiter;
 }
 
 type IncomingMessage = { role: "user" | "assistant"; content: string };
@@ -81,12 +80,21 @@ export async function POST(req: Request) {
     req.headers.get("x-real-ip") ||
     "unknown";
 
-  const limit = rateLimit(ip);
-  if (!limit.ok) {
-    return new Response("Too many requests — give it a minute.", {
-      status: 429,
-      headers: { "Retry-After": String(limit.retryAfter) },
-    });
+  const rl = getLimiter();
+  if (rl) {
+    const { success, reset } = await rl.limit(ip);
+    if (!success) {
+      const retryAfter = Math.max(1, Math.ceil((reset - Date.now()) / 1000));
+      return new Response("Too many requests — give it a minute.", {
+        status: 429,
+        headers: { "Retry-After": String(retryAfter) },
+      });
+    }
+  } else if (process.env.NODE_ENV === "production") {
+    // Fail closed. Losing the limiter in production means an unmetered path to
+    // a paid API, which is worse than the endpoint being briefly unavailable.
+    console.error("[chat] rate limiter unavailable: KV_REST_API_* not set");
+    return new Response("Chat is temporarily unavailable.", { status: 503 });
   }
 
   let body: unknown;
