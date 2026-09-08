@@ -78,8 +78,8 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-archivo), system-ui, sans-serif;
-  font-size: clamp(1rem, 1.8vw, 1.15rem); /* B2: body floor 16px */
-  line-height: 1.6;
+  font-size: 1.0625rem; /* 17px, the reading size (audit 2026-09-08 §4.1). Was a 16–18px clamp. */
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -193,8 +193,43 @@ body::after {
   line-height: 1;
 }
 
-/* Heading weight — Archivo ExtraBold for strong hierarchy */
-h1, h2 { font-weight: 800; }
+/* Reading text. Three sizes carry every sentence on the site; everything smaller
+   is a label. Archivo 400 only: weight 300 is retired, it read as whispering under
+   the display heads. Prose is grey-200 so it has presence beside the mono labels;
+   grey 400/500 stay for data and captions. Named copy-* so they never collide
+   with Tailwind's text-* utilities. */
+.copy-lead {
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--color-grey-200);
+}
+.copy-body {
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0;
+  color: var(--color-grey-200);
+}
+.copy-small {
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--color-grey-300);
+}
+
+/* Display weight, set once. Archivo Black ships a single cut, and next/font declares
+   it at 400. Every display head asks for 800 on purpose: with no heavier face to
+   match, the browser synthesizes bold on top of Black, and that dense faux-bold is
+   the site's heading voice (2026-09-08). The rule covers every h1/h2 and every
+   `.font-heading` element, so an Archivo Black span or link cannot fall back to the
+   lighter native cut; heads styled inline set fontWeight: 800 for the same reason. */
+h1, h2, .font-heading { font-weight: 800; }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }

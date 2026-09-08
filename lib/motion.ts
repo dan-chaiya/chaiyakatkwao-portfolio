@@ -1,6 +1,7 @@
 // lib/motion.ts — canonical motion tokens for Chaiya Katkwao Portfolio v2.
 // Import these everywhere; never hard-code an ease or duration in a component.
-// Values match the shipping FadeIn.tsx / HeroStage.tsx signature curve.
+// Since 2026-09-08 the only entrances are the page fade (PageTransition) and the
+// hero cross-fade: content is visible at rest, nothing waits for a scroll observer.
 
 import type { Variants, Transition } from "framer-motion";
 
@@ -14,7 +15,7 @@ export const EASE = {
 export const DUR = {
   micro: 0.2,  // hover, focus, button
   base: 0.6,   // labels, small text
-  enter: 0.9,  // section entrances (matches FadeIn)
+  enter: 0.9,  // section entrances
   media: 1.2,  // full-bleed image / video reveals
 };
 

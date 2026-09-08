@@ -1,7 +1,7 @@
 "use client";
 
 import { use, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -80,7 +80,7 @@ export default function CaseStudy({
             >
               {project.title}.
             </h1>
-            <p className="font-body text-[var(--color-grey-300)] text-sm leading-relaxed tracking-wide max-w-xl">
+            <p className="copy-lead max-w-xl">
               {project.description}
             </p>
           </div>
@@ -89,7 +89,7 @@ export default function CaseStudy({
               <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
                 Role
               </p>
-              <p className="font-body text-[var(--color-grey-300)] text-xs tracking-wide">
+              <p className="copy-small">
                 {project.role}
               </p>
             </div>
@@ -97,7 +97,7 @@ export default function CaseStudy({
               <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
                 Year
               </p>
-              <p className="font-body text-[var(--color-grey-300)] text-xs tracking-wide">
+              <p className="copy-small">
                 {project.year}
               </p>
             </div>
@@ -120,13 +120,7 @@ export default function CaseStudy({
         </div>
 
         {/* Hero image — capped at 80vh so portrait images don't dominate the scroll */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1,
-            ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-          }}
+        <div
           className="relative w-full overflow-hidden bg-[var(--color-surface)] mb-4 cursor-pointer group"
           style={{ maxHeight: "80vh" }}
           onClick={() => setLightbox({ images: allImages, index: 0 })}
@@ -147,20 +141,11 @@ export default function CaseStudy({
               View full ↗
             </span>
           </div>
-        </motion.div>
+        </div>
 
         {/* Brief — long-form context */}
         {project.brief && (
-          <motion.section
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 16 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{
-              duration: 1,
-              ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-            }}
-            className="py-24 md:py-32"
-          >
+          <section className="py-24 md:py-32">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
               <div className="md:col-span-3">
                 <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">
@@ -169,36 +154,20 @@ export default function CaseStudy({
               </div>
               <div className="md:col-span-8 md:col-start-5 space-y-6 max-w-2xl">
                 {project.brief.map((para, i) => (
-                  <p
-                    key={i}
-                    className="font-body leading-relaxed tracking-wide text-[var(--color-grey-300)]"
-                    style={{
-                      fontSize: "clamp(1rem, 1.4vw, 1.25rem)",
-                      fontWeight: 300,
-                      lineHeight: 1.55,
-                    }}
-                  >
+                  <p key={i} className="copy-body">
                     {para}
                   </p>
                 ))}
               </div>
             </div>
-          </motion.section>
+          </section>
         )}
 
         {/* Supporting images — natural aspect ratios, no cropping */}
         <div className="space-y-2">
           {galleryImages.map((src, i) => (
-            <motion.div
+            <div
               key={src}
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 16 }}
-              viewport={{ once: true, margin: "-5%" }}
-              transition={{
-                duration: 1,
-                delay: 0.05,
-                ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-              }}
               className="relative w-full overflow-hidden bg-[var(--color-surface)] cursor-pointer group"
               onClick={() => setLightbox({ images: allImages, index: i + 1 })}
             >
@@ -211,22 +180,13 @@ export default function CaseStudy({
                 className="img-natural transition-transform duration-700 ease-out group-hover:scale-[1.01]"
               />
               <div className="absolute inset-0 bg-[var(--color-bg)]/0 group-hover:bg-[var(--color-bg)]/20 transition-colors duration-500" />
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Selected episodes (only when project links to YouTube videos) */}
         {project.youtubeIds && project.youtubeIds.length > 0 && (
-          <motion.section
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 16 }}
-            viewport={{ once: true, margin: "-8%" }}
-            transition={{
-              duration: 1,
-              ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-            }}
-            className="mt-32 pt-16 border-t border-[var(--color-border)]"
-          >
+          <section className="mt-32 pt-16 border-t border-[var(--color-border)]">
             <div className="flex items-center gap-8 mb-12">
               <span className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">
                 Selected Episodes
@@ -244,7 +204,7 @@ export default function CaseStudy({
                   <div key={id}>
                     <YouTubeEmbed id={id} title={meta.title} />
                     <div className="mt-3 flex items-baseline justify-between gap-4">
-                      <p className="font-body text-[11px] tracking-[0.08em] text-[var(--color-grey-400)] line-clamp-2">
+                      <p className="copy-small line-clamp-2">
                         {meta.title}
                       </p>
                       <span className="font-body text-[11px] tracking-[0.15em] uppercase text-[var(--color-grey-500)] shrink-0">
@@ -255,7 +215,7 @@ export default function CaseStudy({
                 );
               })}
             </div>
-          </motion.section>
+          </section>
         )}
 
         {/* Next project */}

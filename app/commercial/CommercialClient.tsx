@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import PageTransition from "@/components/PageTransition";
@@ -126,20 +126,10 @@ export default function CommercialClient() {
       <main id="main-content" className="pt-16 px-8 pb-8">
         {/* Header */}
         <div className="mb-20">
-          <motion.p
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 12 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)] mb-5"
-          >
+          <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)] mb-5">
             Commercial
-          </motion.p>
-          <motion.h1
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 32 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.1, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+          </p>
+          <h1
             className="font-heading text-[var(--color-warm)]"
             style={{
               fontSize: "clamp(3rem, 8vw, 7rem)",
@@ -150,7 +140,7 @@ export default function CommercialClient() {
             Selected /
             <br />
             commissions.
-          </motion.h1>
+          </h1>
         </div>
 
         {/* View toggle (B3) */}
@@ -177,17 +167,7 @@ export default function CommercialClient() {
         ) : (
         <div className="space-y-32">
           {projects.map((project, i) => (
-            <motion.article
-              key={project.id}
-              whileInView={{ y: 0 }}
-              initial={{ y: 20 }}
-              viewport={{ once: true, amount: 0 }}
-              transition={{
-                duration: 1,
-                ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-                delay: 0.05,
-              }}
-            >
+            <article key={project.id}>
               {/* Cover — natural aspect ratio, no cropping */}
               <Link
                 href={`/commercial/${project.slug}`}
@@ -238,7 +218,7 @@ export default function CommercialClient() {
                   </p>
                 </div>
                 <div className="md:col-span-5">
-                  <p className="font-body text-[var(--color-grey-400)] text-[13px] leading-relaxed tracking-wide mb-4">
+                  <p className="copy-body mb-4">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -307,19 +287,13 @@ export default function CommercialClient() {
                   </div>
                 );
               })()}
-            </motion.article>
+            </article>
           ))}
         </div>
         )}
 
         {/* Selected Episodes — long-form video & podcast work */}
-        <motion.section
-          whileInView={{ y: 0 }}
-          initial={{ y: 16 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-          className="mt-32 pt-16 border-t border-[var(--color-border-muted)]"
-        >
+        <section className="mt-32 pt-16 border-t border-[var(--color-border-muted)]">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
             <div className="md:col-span-1">
               <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">05</span>
@@ -336,7 +310,7 @@ export default function CommercialClient() {
               </p>
             </div>
             <div className="md:col-span-5">
-              <p className="font-body text-[var(--color-grey-400)] text-[13px] leading-relaxed tracking-wide mb-4">
+              <p className="copy-body mb-4">
                 Long-form podcasts and interviews produced and recorded across an ongoing slate of shows.
               </p>
               <div className="flex flex-wrap gap-2">
@@ -360,7 +334,7 @@ export default function CommercialClient() {
               <div key={video.id}>
                 <YouTubeEmbed id={video.id} title={video.title} />
                 <div className="mt-3 flex items-baseline justify-between gap-4">
-                  <p className="font-body text-[12px] tracking-[0.06em] text-[var(--color-grey-300)] line-clamp-2">
+                  <p className="copy-small line-clamp-2">
                     {video.title}
                   </p>
                   <span className="font-body text-[11px] tracking-[0.15em] uppercase text-[var(--color-text-muted)] shrink-0">
@@ -370,16 +344,10 @@ export default function CommercialClient() {
               </div>
             ))}
           </div>
-        </motion.section>
+        </section>
 
         {/* Live Commerce section */}
-        <motion.section
-          whileInView={{ y: 0 }}
-          initial={{ y: 16 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-          className="mt-24"
-        >
+        <section className="mt-24">
           <div style={{ borderTop: "1px solid rgba(249,249,249,0.18)", paddingTop: "20px", marginBottom: "48px", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
             <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">Live Commerce</p>
           </div>
@@ -399,7 +367,7 @@ export default function CommercialClient() {
               </p>
             </div>
             <div className="md:col-span-5">
-              <p className="font-body text-[var(--color-grey-400)] text-[13px] leading-relaxed tracking-wide mb-4">
+              <p className="copy-body mb-4">
                 Live commerce productions for fashion and lifestyle brands at Ad The Top Agency.
               </p>
               <div className="flex flex-wrap gap-2">
@@ -446,7 +414,7 @@ export default function CommercialClient() {
               </div>
             ))}
           </div>
-        </motion.section>
+        </section>
       </main>
 
       <div className="mt-32">

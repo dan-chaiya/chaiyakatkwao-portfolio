@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import Footer from "@/components/Footer";
 import HeroStage from "@/components/HeroStage";
 import { workAssets } from "@/data/work-asset-urls";
@@ -43,8 +43,6 @@ const disciplines = [
   "Live Commerce Production",
 ];
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
 export default function PortfolioHome() {
   const reduced = useReducedMotion();
 
@@ -59,74 +57,7 @@ export default function PortfolioHome() {
           aria-label="Featured project"
           style={{ borderBottom: "1px solid var(--color-border)" }}
         >
-          <motion.div
-            initial={reduced ? false : { opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0 }}
-            transition={{ duration: 1.2, ease: EASE }}
-          >
-            <Link href="/commercial" style={{ display: "block", position: "relative" }}>
-              <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "var(--color-surface)" }}>
-                <Image
-                  src={workAssets.knack("Knack-14.jpg")}
-                  alt="Knack Factory Fashion Show 2024 — Creative Producer Portfolio"
-                  fill
-                  sizes="100vw"
-                  className="object-cover"
-                  style={{
-                    transition: "transform 1000ms cubic-bezier(0.16, 1, 0.3, 1)",
-                    transform: "scale(1.0)",
-                  }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1.04)"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1.0)"; }}
-                />
-                <div
-                  aria-hidden
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)",
-                    pointerEvents: "none",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    padding: "clamp(20px, 4vw, 48px)",
-                    pointerEvents: "none",
-                  }}
-                >
-                  <p style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(249,249,249,0.62)" }}>
-                    Selected Work
-                  </p>
-                  <div>
-                    <h2
-                      style={{
-                        fontFamily: "var(--font-heading)",
-                        fontWeight: 400,
-                        fontSize: "clamp(1.75rem, 4vw, 3.5rem)",
-                        letterSpacing: "-0.03em",
-                        lineHeight: 0.9,
-                        color: "#F9F9F9",
-                        marginBottom: "14px",
-                      }}
-                    >
-                      Knack Factory
-                      <br />
-                      Fashion Show, 2024
-                    </h2>
-                    <p style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(249,249,249,0.62)" }}>
-                      Commercial Production
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </motion.div>
+          <FeaturedCard />
         </section>
 
         {/* ── ACT III: IMAGE TRIPTYCH ─────────────────────────────── */}
@@ -135,17 +66,13 @@ export default function PortfolioHome() {
           style={{ borderBottom: "1px solid var(--color-border)" }}
         >
           <div className="grid grid-cols-1 sm:grid-cols-3" style={{ gap: "1px" }}>
-            {sections.map((s, i) => (
-              <motion.div
+            {sections.map((s) => (
+              <div
                 key={s.index}
-                initial={reduced ? false : { opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, amount: 0 }}
-                transition={{ duration: 1.2, ease: EASE, delay: i * 0.1 }}
                 style={{ backgroundColor: "var(--color-surface)", overflow: "hidden" }}
               >
                 <TriptychCard section={s} />
-              </motion.div>
+              </div>
             ))}
           </div>
         </section>
@@ -159,25 +86,9 @@ export default function PortfolioHome() {
             className="section-shell grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6"
             style={{ paddingTop: "80px", paddingBottom: "80px" }}
           >
-            <motion.div
-              className="md:col-span-7"
-              initial={reduced ? false : { opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0 }}
-              transition={{ duration: 0.9, ease: EASE }}
-            >
-              <FadeLabel>About</FadeLabel>
-              <p
-                style={{
-                  fontFamily: "var(--font-archivo)",
-                  fontWeight: 300,
-                  fontSize: "clamp(1rem, 1.8vw, 1.15rem)",
-                  lineHeight: 1.7,
-                  color: "var(--color-grey-300)",
-                  maxWidth: "52ch",
-                  marginTop: "20px",
-                }}
-              >
+            <div className="md:col-span-7">
+              <Label>About</Label>
+              <p className="copy-lead" style={{ maxWidth: "52ch", marginTop: "20px" }}>
                 Bangkok-based Creative Producer working at the intersection of
                 art direction and technical execution.
               </p>
@@ -199,22 +110,16 @@ export default function PortfolioHome() {
               >
                 Full Profile →
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="md:col-span-4 md:col-start-9"
-              initial={reduced ? false : { opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.12 }}
-            >
-              <FadeLabel>Disciplines</FadeLabel>
+            <div className="md:col-span-4 md:col-start-9">
+              <Label>Disciplines</Label>
               <div style={{ marginTop: "20px" }}>
                 {disciplines.map((d, i) => (
-                  <DisciplineRow key={d} label={d} index={i} total={disciplines.length} reduced={!!reduced} />
+                  <DisciplineRow key={d} label={d} index={i} total={disciplines.length} />
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -230,12 +135,8 @@ export default function PortfolioHome() {
           >
             <div className="md:col-span-7">
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <FadeLabel>Contact</FadeLabel>
-                <motion.span
-                  initial={reduced ? false : { opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, amount: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
+                <Label>Contact</Label>
+                <span
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -258,16 +159,12 @@ export default function PortfolioHome() {
                     animation: reduced ? "none" : "pulse 2s ease-in-out infinite",
                   }} />
                   Available
-                </motion.span>
+                </span>
               </div>
-              <motion.h2
-                initial={reduced ? false : { opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0 }}
-                transition={{ duration: 0.9, ease: EASE, delay: 0.08 }}
+              <h2
                 style={{
                   fontFamily: "var(--font-heading)",
-                  fontWeight: 400,
+                  fontWeight: 800,
                   fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
                   letterSpacing: "-0.03em",
                   lineHeight: 0.9,
@@ -278,14 +175,10 @@ export default function PortfolioHome() {
                 Let&apos;s /
                 <br />
                 connect.
-              </motion.h2>
+              </h2>
             </div>
 
-            <motion.div
-              initial={reduced ? false : { opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
+            <div
               className="md:col-span-4 md:col-start-9"
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
             >
@@ -329,7 +222,7 @@ export default function PortfolioHome() {
               >
                 View CV →
               </Link>
-            </motion.div>
+            </div>
           </div>
         </section>
       </main>
@@ -339,14 +232,10 @@ export default function PortfolioHome() {
   );
 }
 
-function DisciplineRow({ label, index: i, total, reduced }: { label: string; index: number; total: number; reduced: boolean }) {
+function DisciplineRow({ label, index: i, total }: { label: string; index: number; total: number }) {
   const [hovered, setHovered] = useState(false);
   return (
-    <motion.div
-      initial={reduced ? false : { opacity: 0, x: 8 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.55, ease: EASE, delay: 0.18 + i * 0.07 }}
+    <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -362,7 +251,7 @@ function DisciplineRow({ label, index: i, total, reduced }: { label: string; ind
     >
       <span style={{
         fontFamily: "var(--font-archivo)",
-        fontSize: "0.8rem",
+        fontSize: "0.875rem",
         fontWeight: 500,
         color: hovered ? "var(--color-text)" : "var(--color-grey-300)",
         letterSpacing: "0.005em",
@@ -380,7 +269,66 @@ function DisciplineRow({ label, index: i, total, reduced }: { label: string; ind
       }}>
         {String(i + 1).padStart(2, "0")}
       </span>
-    </motion.div>
+    </div>
+  );
+}
+
+// The featured project: the photograph at full contrast in a 16:9 frame, then its
+// caption below in flow, on black. The dark gradient wash that carried white text
+// over the image went on 2026-09-08, the same move as the hero: nothing is layered
+// over the work, so legibility never costs the photograph anything.
+function FeaturedCard() {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Link
+      href="/commercial"
+      style={{ display: "block", color: "inherit", textDecoration: "none" }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "var(--color-surface)" }}>
+        <Image
+          src={workAssets.knack("Knack-14.jpg")}
+          alt="Knack Factory Fashion Show 2024 — Creative Producer Portfolio"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{
+            transition: "transform 1000ms cubic-bezier(0.16, 1, 0.3, 1)",
+            transform: hovered ? "scale(1.04)" : "scale(1)",
+          }}
+        />
+      </div>
+      <div
+        className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6"
+        style={{ padding: "24px 32px 32px" }}
+      >
+        <div>
+          <p className="mono-label">Selected Work</p>
+          <h2
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontWeight: 800,
+              fontSize: "clamp(1.75rem, 4vw, 3.5rem)",
+              letterSpacing: "-0.03em",
+              lineHeight: 0.9,
+              color: "var(--color-text)",
+              marginTop: "14px",
+            }}
+          >
+            Knack Factory
+            <br />
+            Fashion Show, 2024
+          </h2>
+        </div>
+        <p
+          className="mono-label"
+          style={{ transition: "color 200ms ease", color: hovered ? "var(--color-text)" : undefined }}
+        >
+          Commercial Production →
+        </p>
+      </div>
+    </Link>
   );
 }
 
@@ -437,7 +385,7 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
               </p>
               <p style={{
                 fontFamily: "var(--font-heading)",
-                fontWeight: 400,
+                fontWeight: 800,
                 fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
                 letterSpacing: "-0.02em",
                 color: "#F9F9F9",
@@ -453,14 +401,9 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
   );
 }
 
-function FadeLabel({ children }: { children: string }) {
-  const reduced = useReducedMotion();
+function Label({ children }: { children: string }) {
   return (
-    <motion.p
-      initial={reduced ? false : { opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+    <p
       style={{
         fontFamily: "var(--font-jetbrains-mono)",
         fontSize: "11px",
@@ -470,6 +413,6 @@ function FadeLabel({ children }: { children: string }) {
       }}
     >
       {children}
-    </motion.p>
+    </p>
   );
 }

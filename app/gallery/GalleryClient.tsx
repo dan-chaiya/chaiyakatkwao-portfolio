@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import PageTransition from "@/components/PageTransition";
 import Lightbox from "@/components/Lightbox";
-import FadeIn from "@/components/FadeIn";
 import Footer from "@/components/Footer";
 
 const wovenMemories = Array.from({ length: 12 }, (_, i) => ({
@@ -83,17 +82,7 @@ function MasonryGrid({
   return (
     <div className="masonry">
       {items.map((item, index) => (
-        <motion.div
-          key={item.id}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.9,
-            ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-            delay: Math.min(index * 0.05, 0.5),
-          }}
-          className="masonry-item"
-        >
+        <div key={item.id} className="masonry-item">
           {/* A real button, not a click-handled div: the lightbox is the only way
               to see the work at size, so it has to be reachable from the keyboard.
               The image alt supplies the accessible name. */}
@@ -115,10 +104,10 @@ function MasonryGrid({
               <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/40 group-focus-visible:bg-[var(--color-surface-chat)]/40 transition-colors duration-500" />
             </div>
             <div className="mt-2">
-              <p className="font-body text-[11px] tracking-[0.08em] text-[var(--color-grey-300)]">{item.title}</p>
+              <p className="copy-small">{item.title}</p>
             </div>
           </button>
-        </motion.div>
+        </div>
       ))}
     </div>
   );
@@ -138,20 +127,10 @@ export default function GalleryClient() {
       <main id="main-content" className="pt-16 px-8 pb-8">
         {/* Header */}
         <div className="mb-20">
-          <motion.p
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 12 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="font-body text-[11px] tracking-[0.35em] uppercase text-[var(--color-grey-400)] mb-5"
-          >
+          <p className="font-body text-[11px] tracking-[0.35em] uppercase text-[var(--color-grey-400)] mb-5">
             Gallery
-          </motion.p>
-          <motion.h1
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 32 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.1, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+          </p>
+          <h1
             className="font-heading text-[var(--color-warm)]"
             style={{
               fontSize: "clamp(3rem, 8vw, 7rem)",
@@ -162,20 +141,18 @@ export default function GalleryClient() {
             Photographs /
             <br />
             &amp; prints.
-          </motion.h1>
+          </h1>
         </div>
 
         {/* Woven Memories series */}
         <div className="mb-28">
-          <FadeIn>
-            <div className="flex items-center gap-8 mb-12">
-              <span className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
-                Woven Memories
-              </span>
-              <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
-              <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2025</span>
-            </div>
-          </FadeIn>
+          <div className="flex items-center gap-8 mb-12">
+            <span className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
+              Woven Memories
+            </span>
+            <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
+            <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2025</span>
+          </div>
           <MasonryGrid
             items={wovenMemories}
             onOpen={openLightbox(wovenMemories)}
@@ -185,15 +162,13 @@ export default function GalleryClient() {
 
         {/* Selected Work — unified */}
         <div className="mb-28">
-          <FadeIn>
-            <div className="flex items-center gap-8 mb-12">
-              <span className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
-                Selected Work
-              </span>
-              <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
-              <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2024–2025</span>
-            </div>
-          </FadeIn>
+          <div className="flex items-center gap-8 mb-12">
+            <span className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
+              Selected Work
+            </span>
+            <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
+            <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2024–2025</span>
+          </div>
           <MasonryGrid
             items={selectedWork}
             onOpen={openLightbox(selectedWork)}

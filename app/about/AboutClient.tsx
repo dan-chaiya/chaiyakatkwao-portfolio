@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import PageTransition from "@/components/PageTransition";
-import FadeIn, { fadeUp, stagger } from "@/components/FadeIn";
 import Footer from "@/components/Footer";
 
 const experience = [
@@ -64,21 +63,11 @@ export default function AboutClient() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
           {/* Left column */}
           <div className="lg:col-span-7">
-            <motion.p
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 12 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8"
-            >
+            <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8">
               About
-            </motion.p>
+            </p>
 
-            <motion.h1
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 32 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.1, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            <h1
               className="font-heading text-[var(--color-warm)] leading-[0.92] mb-16"
               style={{
                 fontSize: "clamp(3rem, 8vw, 7rem)",
@@ -88,65 +77,39 @@ export default function AboutClient() {
               Chaiya /
               <br />
               Katkwao.
-            </motion.h1>
+            </h1>
 
-            <motion.div
-              variants={stagger}
-              whileInView="show"
-              initial="hidden"
-              viewport={{ once: true, margin: "-5%" }}
-              className="space-y-8 max-w-xl"
-            >
-              <motion.p
-                variants={fadeUp}
-                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-grey-300)]"
-                style={{ fontWeight: 300 }}
-              >
+            <div className="space-y-8 max-w-xl">
+              <p className="copy-lead">
                 Chaiya is a Bangkok-based Creative Producer working at the
                 intersection of art direction and technical execution.
-              </motion.p>
+              </p>
 
-              <motion.p
-                variants={fadeUp}
-                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-grey-400)]"
-                style={{ fontWeight: 300 }}
-              >
+              <p className="copy-body">
                 Raised between the rhythms of rural Udon Thani and the density
                 of Bangkok, he came to image-making through lived experience —
                 not theory. He studied Photography at Chiang Mai University,
                 where his practice culminated in Woven Memories (2025), a
                 photographic project tracing identity, memory, and everyday
                 life.
-              </motion.p>
+              </p>
 
-              <motion.p
-                variants={fadeUp}
-                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-grey-400)]"
-                style={{ fontWeight: 300 }}
-              >
+              <p className="copy-body">
                 Now at Ad The Top Agency, he develops multi-camera productions
                 and live content systems — translating visual ideas into
                 structured workflows that hold up at scale.
-              </motion.p>
+              </p>
 
-              <motion.p
-                variants={fadeUp}
-                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-warm)]"
-                style={{ fontWeight: 500 }}
-              >
+              <p className="copy-body" style={{ color: "var(--color-warm)", fontWeight: 500 }}>
                 He is interested in one thing: making creative work that
                 functions as well as it looks.
-              </motion.p>
+              </p>
 
               {/* Cross-link to the management portfolio. Plain <a>, not
                   next/link: /systems is a static file in public/, not a route.
                   Placed after the closing line rather than in the nav, because
                   it is a claim about the work and not a sixth category of it. */}
-              <motion.p
-                variants={fadeUp}
-                className="font-body text-[15px] leading-relaxed tracking-wide text-[var(--color-grey-400)]"
-                style={{ fontWeight: 300 }}
-              >
+              <p className="copy-body">
                 Some of that work is software he builds and maintains himself.
                 Three internal systems, still in daily use by the teams they
                 were made for, are documented in{" "}
@@ -157,29 +120,23 @@ export default function AboutClient() {
                   Systems
                 </a>
                 .
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
 
-            <FadeIn delay={0.1} className="mt-16">
+            <div className="mt-16">
               <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-2">
                 Education
               </p>
-              <p className="font-body text-[var(--color-grey-300)] text-[13px] tracking-wide">
+              <p className="copy-small">
                 BFA Photography — Chiang Mai University, 2020–2025
               </p>
-            </FadeIn>
+            </div>
           </div>
 
           {/* Right column */}
           <div className="lg:col-span-5 lg:pl-16">
             {/* Portrait */}
-            <motion.div
-              whileInView={{ opacity: 1, scale: 1 }}
-              initial={{ opacity: 0, scale: 1.03 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-[3/4] overflow-hidden bg-[var(--color-surface-dark)] mb-12"
-            >
+            <div className="relative aspect-[3/4] overflow-hidden bg-[var(--color-surface-dark)] mb-12">
               <Image
                 src="/images/portrait/dan.jpg"
                 alt="Chaiya Katkwao | Creative Producer in Bangkok"
@@ -188,7 +145,7 @@ export default function AboutClient() {
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 priority
               />
-            </motion.div>
+            </div>
 
             {/* Experience timeline */}
             <div>
@@ -197,30 +154,19 @@ export default function AboutClient() {
               </p>
               <div className="space-y-px">
                 {experience.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    whileInView={{ x: 0 }}
-                    initial={{ x: 20 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 0.6,
-                      delay: i * 0.1,
-                      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-                    }}
-                    className="border-t border-[var(--color-grey-700)] py-4"
-                  >
+                  <div key={i} className="border-t border-[var(--color-grey-700)] py-4">
                     <div className="flex items-start justify-between mb-1">
-                      <p className="font-body text-[var(--color-grey-300)] text-[13px] tracking-wide flex-1 min-w-0 pr-4">
+                      <p className="copy-small flex-1 min-w-0 pr-4">
                         {item.role}
                       </p>
                       <span className="font-body text-[11px] text-[var(--color-grey-400)] tracking-[0.05em] shrink-0 whitespace-nowrap">
                         {item.period}
                       </span>
                     </div>
-                    <p className="font-body text-[var(--color-grey-400)] text-[12px] tracking-[0.08em]">
+                    <p className="font-body text-[13px] tracking-[0.04em] text-[var(--color-grey-400)]">
                       {item.company} — {item.location}
                     </p>
-                  </motion.div>
+                  </div>
                 ))}
                 <div className="border-t border-[var(--color-grey-700)]" />
               </div>
@@ -228,28 +174,17 @@ export default function AboutClient() {
 
             {/* Capabilities */}
             <div className="mt-12">
-              <FadeIn>
-                <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
-                  Capabilities
-                </p>
-              </FadeIn>
-              <motion.div
-                variants={stagger}
-                whileInView="show"
-                initial="hidden"
-                viewport={{ once: true, margin: "-5%" }}
-              >
+              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
+                Capabilities
+              </p>
+              <div>
                 {capabilities.map((cap) => (
-                  <motion.div
-                    key={cap}
-                    variants={fadeUp}
-                    className="border-t border-[var(--color-grey-700)] py-3"
-                  >
-                    <p className="font-body text-[var(--color-grey-300)] text-[13px] tracking-wide">{cap}</p>
-                  </motion.div>
+                  <div key={cap} className="border-t border-[var(--color-grey-700)] py-3">
+                    <p className="copy-small">{cap}</p>
+                  </div>
                 ))}
                 <div className="border-t border-[var(--color-grey-700)]" />
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>
@@ -269,16 +204,8 @@ export default function AboutClient() {
           <div className="lg:col-span-9">
             <ul>
               {clients.map((name, i) => (
-                <motion.li
+                <li
                   key={name}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  initial={{ opacity: 0, y: 12 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.04,
-                    ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-                  }}
                   className="border-t border-[var(--color-grey-700)] py-4 flex items-baseline justify-between last:border-b"
                 >
                   <span
@@ -287,7 +214,6 @@ export default function AboutClient() {
                       fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)",
                       lineHeight: 1.05,
                       letterSpacing: "-0.02em",
-                      fontWeight: 400,
                     }}
                   >
                     {name}
@@ -295,7 +221,7 @@ export default function AboutClient() {
                   <span className="font-body text-[11px] tracking-[0.18em] text-[var(--color-grey-400)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                </motion.li>
+                </li>
               ))}
             </ul>
           </div>
@@ -304,16 +230,7 @@ export default function AboutClient() {
 
       {/* Contact section */}
       <section className="border-t border-[var(--color-grey-700)] px-8 py-24">
-        <motion.div
-          whileInView={{ opacity: 1, y: 0 }}
-          initial={{ opacity: 0, y: 20 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.8,
-            ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-          }}
-          className="max-w-3xl"
-        >
+        <div className="max-w-3xl">
           <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8">
             Contact
           </p>
@@ -346,7 +263,7 @@ export default function AboutClient() {
               View CV →
             </motion.a>
           </div>
-        </motion.div>
+        </div>
       </section>
       </main>
 
