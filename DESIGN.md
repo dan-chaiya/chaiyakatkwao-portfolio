@@ -31,15 +31,21 @@ typography:
     fontWeight: 400
     lineHeight: 0.95
     letterSpacing: "-0.02em"
+  lead:
+    fontFamily: "Archivo, sans-serif"
+    fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)"
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: "normal"
   body:
     fontFamily: "Archivo, sans-serif"
-    fontSize: "15px"
+    fontSize: "17px"
     fontWeight: 400
-    lineHeight: 1.6
+    lineHeight: 1.55
     letterSpacing: "normal"
   body-sm:
     fontFamily: "Archivo, sans-serif"
-    fontSize: "13px"
+    fontSize: "14px"
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: "normal"
@@ -91,7 +97,7 @@ This portfolio does not perform. It works. The visual system is built the way a 
 
 The Warm Signal accent (hue 35, amber) appears where action is required. Buttons. Hover states on navigation. Text selection. It is never decorative. Its rarity is its authority — if something glows amber, the user should move there.
 
-Motion is controlled and calibrated. The custom ease `cubic-bezier(0.16, 1, 0.3, 1)` (an exponential ease-out) governs every entrance. Elements arrive with confidence and stop cleanly. Nothing bounces. Nothing elastic. The portfolio is still until it isn't.
+Motion is controlled and calibrated. Content is visible at rest: since 8 September 2026 nothing on a page waits for a scroll observer, and the only entrances are the page fade on a route change and the hero's cross-fade between slides. The custom ease `cubic-bezier(0.16, 1, 0.3, 1)` (an exponential ease-out) governs those and every hover. Nothing bounces. Nothing elastic.
 
 This system explicitly rejects: colorful or expressive-color palettes (gradients, vibrant accents, neon), generic photographer portfolio templates (centered hero, soft sans, pastel tones), and over-animated UI that competes with the work.
 
@@ -145,7 +151,7 @@ One warm signal in a room of true-black surfaces. The palette does not try to be
 
 **Display Font:** Archivo Black (weight 400, single cut) — every headline and the
 mobile navigation overlay.
-**Body Font:** Archivo (300, 400, 500, 600, 700, 800).
+**Body Font:** Archivo (400, 500, 600, 700, 800). Weight 300 was retired on 8 September 2026: it read as whispering under the display heads.
 **Label Font:** JetBrains Mono (400, 500) — every uppercase label, index, counter,
 caption and metadata line on the site.
 
@@ -161,10 +167,15 @@ document rather than a brochure.
 |---|---|---|---|---|
 | Display | Archivo Black 400 | `clamp(2.5rem, 8vw, 7rem)` | -0.02em | Page titles, the hero name |
 | Headline | Archivo Black 400 | `clamp(1.2rem, 2.5vw, 2rem)` | -0.02em | Section and project titles |
-| Body | Archivo 300–400 | `15px` | normal | Running text, bios, case-study copy |
-| Body S | Archivo 400 | `13px` | normal | Descriptions, chat messages, dense metadata |
+| Lead | Archivo 400 | `clamp(1.25rem, 1.6vw, 1.5rem)` / 1.4 | normal | Bios, positioning lines, project descriptions (`.copy-lead`) |
+| Body | Archivo 400 | `17px` / 1.55 | normal | Everything that is read: briefs, section descriptions (`.copy-body`) |
+| Small | Archivo 400 | `14px` / 1.5 | normal | Captions, list cells, roles and years in prose (`.copy-small`) |
 | Label | JetBrains Mono 500 | `11px` | 0.18em | Nav, footer, tags, years, indices, captions |
 | Label wide | JetBrains Mono 500 | `11px` | 0.28–0.35em | Eyebrows, section markers |
+
+Reading text is grey-200 (Lead, Body) or grey-300 (Small); grey 400 and 500 are for
+data and captions only. The three reading steps are the `.copy-lead`, `.copy-body` and
+`.copy-small` classes in `globals.css`, and `body` itself is set to the Body step.
 
 The display step is fluid rather than fixed: every headline on the site is a `clamp()`
 whose endpoints vary by context (`7rem` on index pages, `6.25rem` on the hero,
@@ -237,8 +248,8 @@ Bottom-right of the hero, beside the slide counter.
 - **Slide marks:** one 1px bar per slide in a 44px-tall hit area; active is `--color-warm`, rest `rgba(242,240,235,0.34)`.
 - **Counter:** `mono-label`, tabular numerals, `--color-warm`.
 
-### Legibility Bands
-The hero's flat `rgba(0,0,0,0.5)` scrim is not enough over a bright frame. Two gradient bands — 160px from the top, 256px from the bottom, each `rgba(0,0,0,0.5)` to transparent — darken only the zones that carry text, leaving the middle of the frame, where the work is, untouched. Same gradient language as the featured card.
+### Hero Stage
+Three rows inside the fold (`100svh` minus the header): the mono label, the stage, and the name row with the controls. The stage shows each slide `object-contain` on the black ground at full contrast: no scrim, no gradient bands, no blurred fill. All three were removed on 8 September 2026, together with the 96px backdrop derivatives and their build script. Nothing is layered over the work; the text rows are in flow, so legibility never costs the photograph anything. Slides cross-fade in 1200ms, a hard cut under reduced motion, and the hero does not fade or drift as the page scrolls.
 
 ### Components that do not exist
 No card and no chip. This is a portfolio, not an application; its interactive surface

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import Footer from "@/components/Footer";
 import HeroStage from "@/components/HeroStage";
 import { workAssets } from "@/data/work-asset-urls";
@@ -43,8 +43,6 @@ const disciplines = [
   "Live Commerce Production",
 ];
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
 export default function PortfolioHome() {
   const reduced = useReducedMotion();
 
@@ -59,12 +57,7 @@ export default function PortfolioHome() {
           aria-label="Featured project"
           style={{ borderBottom: "1px solid var(--color-border)" }}
         >
-          <motion.div
-            initial={reduced ? false : { opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0 }}
-            transition={{ duration: 1.2, ease: EASE }}
-          >
+          <div>
             <Link href="/commercial" style={{ display: "block", position: "relative" }}>
               <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "var(--color-surface)" }}>
                 <Image
@@ -126,7 +119,7 @@ export default function PortfolioHome() {
                 </div>
               </div>
             </Link>
-          </motion.div>
+          </div>
         </section>
 
         {/* ── ACT III: IMAGE TRIPTYCH ─────────────────────────────── */}
@@ -135,17 +128,13 @@ export default function PortfolioHome() {
           style={{ borderBottom: "1px solid var(--color-border)" }}
         >
           <div className="grid grid-cols-1 sm:grid-cols-3" style={{ gap: "1px" }}>
-            {sections.map((s, i) => (
-              <motion.div
+            {sections.map((s) => (
+              <div
                 key={s.index}
-                initial={reduced ? false : { opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, amount: 0 }}
-                transition={{ duration: 1.2, ease: EASE, delay: i * 0.1 }}
                 style={{ backgroundColor: "var(--color-surface)", overflow: "hidden" }}
               >
                 <TriptychCard section={s} />
-              </motion.div>
+              </div>
             ))}
           </div>
         </section>
@@ -159,25 +148,9 @@ export default function PortfolioHome() {
             className="section-shell grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6"
             style={{ paddingTop: "80px", paddingBottom: "80px" }}
           >
-            <motion.div
-              className="md:col-span-7"
-              initial={reduced ? false : { opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0 }}
-              transition={{ duration: 0.9, ease: EASE }}
-            >
-              <FadeLabel>About</FadeLabel>
-              <p
-                style={{
-                  fontFamily: "var(--font-archivo)",
-                  fontWeight: 300,
-                  fontSize: "clamp(1rem, 1.8vw, 1.15rem)",
-                  lineHeight: 1.7,
-                  color: "var(--color-grey-300)",
-                  maxWidth: "52ch",
-                  marginTop: "20px",
-                }}
-              >
+            <div className="md:col-span-7">
+              <Label>About</Label>
+              <p className="copy-lead" style={{ maxWidth: "52ch", marginTop: "20px" }}>
                 Bangkok-based Creative Producer working at the intersection of
                 art direction and technical execution.
               </p>
@@ -199,22 +172,16 @@ export default function PortfolioHome() {
               >
                 Full Profile →
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="md:col-span-4 md:col-start-9"
-              initial={reduced ? false : { opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.12 }}
-            >
-              <FadeLabel>Disciplines</FadeLabel>
+            <div className="md:col-span-4 md:col-start-9">
+              <Label>Disciplines</Label>
               <div style={{ marginTop: "20px" }}>
                 {disciplines.map((d, i) => (
-                  <DisciplineRow key={d} label={d} index={i} total={disciplines.length} reduced={!!reduced} />
+                  <DisciplineRow key={d} label={d} index={i} total={disciplines.length} />
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -230,12 +197,8 @@ export default function PortfolioHome() {
           >
             <div className="md:col-span-7">
               <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <FadeLabel>Contact</FadeLabel>
-                <motion.span
-                  initial={reduced ? false : { opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, amount: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
+                <Label>Contact</Label>
+                <span
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -258,13 +221,9 @@ export default function PortfolioHome() {
                     animation: reduced ? "none" : "pulse 2s ease-in-out infinite",
                   }} />
                   Available
-                </motion.span>
+                </span>
               </div>
-              <motion.h2
-                initial={reduced ? false : { opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0 }}
-                transition={{ duration: 0.9, ease: EASE, delay: 0.08 }}
+              <h2
                 style={{
                   fontFamily: "var(--font-heading)",
                   fontWeight: 400,
@@ -278,14 +237,10 @@ export default function PortfolioHome() {
                 Let&apos;s /
                 <br />
                 connect.
-              </motion.h2>
+              </h2>
             </div>
 
-            <motion.div
-              initial={reduced ? false : { opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0 }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
+            <div
               className="md:col-span-4 md:col-start-9"
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
             >
@@ -329,7 +284,7 @@ export default function PortfolioHome() {
               >
                 View CV →
               </Link>
-            </motion.div>
+            </div>
           </div>
         </section>
       </main>
@@ -339,14 +294,10 @@ export default function PortfolioHome() {
   );
 }
 
-function DisciplineRow({ label, index: i, total, reduced }: { label: string; index: number; total: number; reduced: boolean }) {
+function DisciplineRow({ label, index: i, total }: { label: string; index: number; total: number }) {
   const [hovered, setHovered] = useState(false);
   return (
-    <motion.div
-      initial={reduced ? false : { opacity: 0, x: 8 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.55, ease: EASE, delay: 0.18 + i * 0.07 }}
+    <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -362,7 +313,7 @@ function DisciplineRow({ label, index: i, total, reduced }: { label: string; ind
     >
       <span style={{
         fontFamily: "var(--font-archivo)",
-        fontSize: "0.8rem",
+        fontSize: "0.875rem",
         fontWeight: 500,
         color: hovered ? "var(--color-text)" : "var(--color-grey-300)",
         letterSpacing: "0.005em",
@@ -380,7 +331,7 @@ function DisciplineRow({ label, index: i, total, reduced }: { label: string; ind
       }}>
         {String(i + 1).padStart(2, "0")}
       </span>
-    </motion.div>
+    </div>
   );
 }
 
@@ -453,14 +404,9 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
   );
 }
 
-function FadeLabel({ children }: { children: string }) {
-  const reduced = useReducedMotion();
+function Label({ children }: { children: string }) {
   return (
-    <motion.p
-      initial={reduced ? false : { opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+    <p
       style={{
         fontFamily: "var(--font-jetbrains-mono)",
         fontSize: "11px",
@@ -470,6 +416,6 @@ function FadeLabel({ children }: { children: string }) {
       }}
     >
       {children}
-    </motion.p>
+    </p>
   );
 }
