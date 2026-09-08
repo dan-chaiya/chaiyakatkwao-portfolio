@@ -1,8 +1,6 @@
-Font licence for the file in this directory.
-Archivo is licensed under the SIL Open Font License 1.1, which permits
-self-hosting and redistribution. The Archivo Black and JetBrains Mono
-sections below are kept for the record; those files were removed on
-8 September 2026.
+Font licenses for the files in this directory.
+All three families are licensed under the SIL Open Font License 1.1,
+which permits self-hosting and redistribution.
 
 ============================================================================
 Archivo

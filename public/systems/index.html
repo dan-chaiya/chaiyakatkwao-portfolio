@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Internal systems, Chaiya Katkwao</title>
+  <title>Internal systems — Chaiya Katkwao</title>
   <meta name="description" content="Three internal systems for small teams: studio operations, an equipment register, and a private two-person archive. Built and maintained hands-on.">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Internal systems, Chaiya Katkwao">
+  <meta property="og:title" content="Internal systems — Chaiya Katkwao">
   <meta property="og:description" content="Three internal systems for small teams, built and maintained hands-on.">
-  <meta name="twitter:title" content="Internal systems, Chaiya Katkwao">
+  <meta name="twitter:title" content="Internal systems — Chaiya Katkwao">
   <meta name="twitter:description" content="Three internal systems for small teams, built and maintained hands-on.">
 
   <!-- The site is served from the parent portfolio at /systems, published by
@@ -25,9 +25,12 @@
   <meta name="twitter:image" content="https://chaiyakatkwao.com/systems/images/share-card.png">
   <link rel="icon" href="data:,">
 
-  <!-- One family, one file: Archivo with its weight and width axes. It paints
-       everything above the fold, so it is preloaded. -->
+  <!-- The parent's three families, self-hosted. All three paint above the
+       fold: the display face in the masthead, the body face in the lead, the
+       mono face in the header links and the eyebrow. 76 KB, same origin. -->
+  <link rel="preload" href="/systems/fonts/archivo-black-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/systems/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/systems/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/systems/styles.css">
 
   <!-- No script in this document. Anchors scroll with CSS; the diagram draws
@@ -36,33 +39,58 @@
 
 <body>
 
-<a class="visually-hidden skip-link t-small" href="#cases">Skip to the cases</a>
+<a class="visually-hidden skip-link" href="#cases">Skip to the cases</a>
 
 <!-- ==========================================================================
-     HEADER — the same row as the black box next door.
+     HEADER — the parent's row: the CK mark and the section on the left, the
+     tracked links on the right. Under 1024 px the links live in a details
+     element styled as the parent's overlay, so the page still needs no script.
      ======================================================================= -->
 <header class="site">
-  <div class="shell">
-    <div class="g12 site__row">
-      <a class="site__name" href="https://chaiyakatkwao.com">
-        <span class="t-label">Chaiya Katkwao</span>
-        <span class="t-small">Systems</span>
-      </a>
-      <nav class="site__nav t-body" aria-label="Site">
-        <a class="link" href="https://chaiyakatkwao.com">The productions</a>
-      </nav>
+  <div class="site__row">
+    <div class="site__brand">
+      <a class="site__mark" href="https://chaiyakatkwao.com" aria-label="Chaiya Katkwao, home">CK</a>
+      <span class="site__section">/ Systems</span>
     </div>
+    <nav class="site__nav" aria-label="Primary">
+      <a class="site__link" href="https://chaiyakatkwao.com/">Home</a>
+      <a class="site__link" href="https://chaiyakatkwao.com/commercial">Commercial</a>
+      <a class="site__link" href="https://chaiyakatkwao.com/gallery">Gallery</a>
+      <a class="site__link" href="https://chaiyakatkwao.com/about">About</a>
+      <a class="site__link" href="https://chaiyakatkwao.com/cv">CV</a>
+      <a class="site__link" href="https://chaiyakatkwao.com/chat">Chat</a>
+      <a class="site__link" href="mailto:chaiyakatkwao@gmail.com">Contact</a>
+    </nav>
+    <details class="menu">
+      <summary class="menu__button" aria-label="Menu">
+        <span class="menu__bar"></span>
+        <span class="menu__bar"></span>
+        <span class="menu__bar"></span>
+      </summary>
+      <div class="menu__panel">
+        <nav class="menu__nav" aria-label="Menu">
+          <a class="menu__link" href="https://chaiyakatkwao.com/">Home</a>
+          <a class="menu__link" href="https://chaiyakatkwao.com/commercial">Commercial</a>
+          <a class="menu__link" href="https://chaiyakatkwao.com/gallery">Gallery</a>
+          <a class="menu__link" href="https://chaiyakatkwao.com/about">About</a>
+          <a class="menu__link" href="https://chaiyakatkwao.com/cv">CV</a>
+          <a class="menu__link" href="https://chaiyakatkwao.com/chat">Chat</a>
+          <a class="menu__link" href="mailto:chaiyakatkwao@gmail.com">Contact</a>
+        </nav>
+        <p class="menu__note mono-label">Chaiya Katkwao / Creative Producer</p>
+      </div>
+    </details>
   </div>
 </header>
 
 <!-- ==========================================================================
-     MASTHEAD — the name spent once, inks reversed.
+     MASTHEAD — the parent's page header: mono eyebrow, the slash title in
+     Archivo Black, one lead paragraph.
      ======================================================================= -->
 <section class="masthead shell" aria-labelledby="masthead-title">
-  <h1 id="masthead-title" class="t-masthead masthead__name">Internal <br class="masthead__break">systems</h1>
-  <div class="g12">
-    <p class="t-lead masthead__lead c-1-8">Built and maintained by Chaiya Katkwao. Google Apps Script, Sheets, and a team that uses them every day.</p>
-  </div>
+  <p class="masthead__eyebrow mono-label">Systems</p>
+  <h1 id="masthead-title" class="t-masthead masthead__name">Internal /<br>systems.</h1>
+  <p class="t-lead masthead__lead">Built and maintained by Chaiya Katkwao. Google Apps Script, Sheets, and a team that uses them every day.</p>
 </section>
 
 <!-- ==========================================================================
@@ -93,8 +121,11 @@
      CASE 1 — Live Studio OS
      ======================================================================= -->
 <section class="case shell" id="live-studio-os" aria-labelledby="live-studio-os-title">
-  <div class="g12 case__head hairline" style="padding-top: 40px;">
-    <p class="t-data case__index c-1-2">Case 1 / 3</p>
+  <div class="g12 case__head hairline">
+    <div class="case__index c-1-2">
+      <p class="t-data">Case 1 / 3</p>
+      <p class="chip"><span class="chip__dot" aria-hidden="true"></span>In daily use</p>
+    </div>
     <div class="c-3-8">
       <h2 class="t-h1" id="live-studio-os-title">Live Studio OS</h2>
       <p class="t-body case__intro">One web app the team opens on whatever is to hand, a phone on the studio floor or a desktop at the office, against one Google Sheet.</p>
@@ -111,19 +142,19 @@
   <!-- FIELD ORDER IS FIXED AND IDENTICAL IN ALL THREE SECTIONS:
        Role, Problem, What I built, Constraints, Outcome. One flat list. -->
   <dl class="g12 case__fields">
-    <dt class="t-small">Role</dt>
+    <dt class="t-data">Role</dt>
     <dd class="t-body">Designed and built with the company&rsquo;s CEO, a software engineer. Two people, no other engineering resource. In-house, Ad The Top.</dd>
 
-    <dt class="t-small">Problem</dt>
+    <dt class="t-data">Problem</dt>
     <dd class="t-body">Studio procedure, equipment records and fault history lived in separate documents that had begun to contradict one another. The answer to &ldquo;what is in this room, and does it still work&rdquo; depended on who you asked.</dd>
 
-    <dt class="t-small">What I built</dt>
+    <dt class="t-data">What I built</dt>
     <dd class="t-body">One web app the team opens on whatever is to hand &mdash; a phone on the studio floor, a desktop at the office. Standard settings and a shutdown checklist, per-room equipment guides, a health check that turns a walkthrough into action items, and a fault log that exports the monthly report. Google Apps Script serves a single page; a Google Sheet is the database, addressed by column name rather than position so staff can reorder and rename it without a migration.</dd>
 
-    <dt class="t-small">Constraints</dt>
+    <dt class="t-data">Constraints</dt>
     <dd class="t-body">No budget for hosting or licences, no staging environment, and a team with no technical background. It runs on the Google Workspace the company already pays for. Every change deploys straight against the data the team is using that day &mdash; the database is a document they have open while the code is writing to it.</dd>
 
-    <dt class="t-small">Outcome</dt>
+    <dt class="t-data">Outcome</dt>
     <dd class="t-body">
       <p>In daily use by the studio team, currently on its twentieth release. Requests now arrive as feature ideas rather than workarounds. The data layer is round-trip tested &mdash; written, read back, compared &mdash; so reordering a column no longer breaks anything. Four known limits are documented and deliberately unfixed, including a whole-table save that loses data if two people write at once, which needs the save path rebuilt.</p>
       <p>The split was by strength: the CEO brought the engineering depth, I brought the studio floor and the operational discipline. The database rules the system is now held to, and the deploy order that stops old code redeploying over live data, exist because I asked for them &mdash; after both had already gone wrong once.</p>
@@ -309,7 +340,7 @@
      CASE 2 — Keepsake
      ======================================================================= -->
 <section class="case shell" id="keepsake" aria-labelledby="keepsake-title">
-  <div class="g12 case__head hairline" style="padding-top: 40px;">
+  <div class="g12 case__head hairline">
     <p class="t-data case__index c-1-2">Case 2 / 3</p>
     <div class="c-3-8">
       <h2 class="t-h1" id="keepsake-title">Keepsake</h2>
@@ -324,19 +355,19 @@
   </div>
 
   <dl class="g12 case__fields">
-    <dt class="t-small">Role</dt>
+    <dt class="t-data">Role</dt>
     <dd class="t-body">Sole designer and developer. Private commission, two users.</dd>
 
-    <dt class="t-small">Problem</dt>
+    <dt class="t-data">Problem</dt>
     <dd class="t-body">Two people wanted a single shared record of their life together that would outlive whatever platform held it. Consumer apps make that record someone else&rsquo;s asset, and none of them promise you can get it back intact.</dd>
 
-    <dt class="t-small">What I built</dt>
+    <dt class="t-data">What I built</dt>
     <dd class="t-body">A private two-person archive: entries with photographs, tags and colour labels, a timeline, and an on-this-day view. One page, installed to the home screen. Cloudflare Workers with D1 and R2, behind Access allow-listing exactly two addresses.</dd>
 
-    <dt class="t-small">Constraints</dt>
+    <dt class="t-data">Constraints</dt>
     <dd class="t-body">One of the two users is non-technical and had to manage on his own Android handset without instruction. Exactly one runtime dependency was permitted. The backup was not allowed to sit with the same vendor as the data.</dd>
 
-    <dt class="t-small">Outcome</dt>
+    <dt class="t-data">Outcome</dt>
     <dd class="t-body">Deployed August 2026 with a nightly backup to a different vendor and a thirty-day retention sweep. The acceptance test was not a passing suite &mdash; it was the non-technical user creating a memory unassisted, on his own phone. He did.</dd>
   </dl>
 
@@ -402,7 +433,7 @@
      CASE 3 — The studio register
      ======================================================================= -->
 <section class="case shell" id="inventory" aria-labelledby="inventory-title">
-  <div class="g12 case__head hairline" style="padding-top: 40px;">
+  <div class="g12 case__head hairline">
     <p class="t-data case__index c-1-2">Case 3 / 3</p>
     <div class="c-3-8">
       <h2 class="t-h1" id="inventory-title">The studio register</h2>
@@ -417,19 +448,19 @@
   </div>
 
   <dl class="g12 case__fields">
-    <dt class="t-small">Role</dt>
+    <dt class="t-data">Role</dt>
     <dd class="t-body">Sole author. In-house, Ad The Top.</dd>
 
-    <dt class="t-small">Problem</dt>
+    <dt class="t-data">Problem</dt>
     <dd class="t-body">Equipment was tracked in a workbook whose formulas had to be repaired by script before anyone could trust a total. Warranty dates sat in a column that was only ever read after something had already broken.</dd>
 
-    <dt class="t-small">What I built</dt>
+    <dt class="t-data">What I built</dt>
     <dd class="t-body">A register of just over five hundred items held per room and floor, with a status breakdown, a by-floor rollup, and a warranty watch counting down remaining days. Python rebuilds the rollups and repairs the formulas from the room sheets.</dd>
 
-    <dt class="t-small">Constraints</dt>
+    <dt class="t-data">Constraints</dt>
     <dd class="t-body">It had to stay a spreadsheet. The people maintaining it work in Excel and were never going to adopt a tool. Column order had to remain theirs to change.</dd>
 
-    <dt class="t-small">Outcome</dt>
+    <dt class="t-data">Outcome</dt>
     <dd class="t-body">501 items migrated into the studio system&rsquo;s live register. The workbook stopped being the system of record and became its source.</dd>
   </dl>
 
@@ -496,14 +527,17 @@
 <!-- ==========================================================================
      COLOPHON — one row of links in Small, the year in Data.
      ======================================================================= -->
-<footer class="colophon shell">
-  <div class="colophon__row">
-    <nav class="colophon__links t-small" aria-label="Colophon">
-      <a class="link" href="https://chaiyakatkwao.com">The productions</a>
-      <a class="link" href="https://chaiyakatkwao.com/about">About Chaiya Katkwao</a>
-      <a class="link" href="mailto:chaiyakatkwao@gmail.com">chaiyakatkwao@gmail.com</a>
+<footer class="colophon">
+  <div class="shell colophon__row">
+    <p class="mono-label">&copy; 2026 Chaiya Katkwao &mdash; Bangkok</p>
+    <nav class="colophon__links" aria-label="Footer navigation">
+      <a class="colophon__link" href="https://chaiyakatkwao.com/commercial">Commercial</a>
+      <a class="colophon__link" href="https://chaiyakatkwao.com/gallery">Gallery</a>
+      <a class="colophon__link" href="https://chaiyakatkwao.com/about">About</a>
+      <a class="colophon__link" href="https://chaiyakatkwao.com/cv">CV</a>
+      <a class="colophon__link colophon__link--current" href="https://chaiyakatkwao.com/systems" aria-current="page">Systems</a>
+      <a class="colophon__link" href="mailto:chaiyakatkwao@gmail.com">Email</a>
     </nav>
-    <p class="t-data">2026</p>
   </div>
 </footer>
 
