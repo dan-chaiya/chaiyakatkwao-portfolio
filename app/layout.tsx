@@ -2,6 +2,18 @@ import type { Metadata } from "next";
 import { Archivo, Archivo_Black, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import {
+  absoluteUrl,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_TITLE,
+  INSTAGRAM_URL,
+  jsonLd,
+  PORTRAIT_PATH,
+  SHARE_CARD,
+  SITE_NAME,
+  SITE_URL,
+  TITLE_TEMPLATE,
+} from "@/lib/seo";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -24,63 +36,66 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://chaiyakatkwao.com";
-
-const DESCRIPTION =
-  "Creative producer in Bangkok. Live commerce, multi-camera production, podcasts and photography.";
-
+// Site-wide defaults. Each page sets its own title, description, canonical and
+// share card through pageMetadata() in lib/seo.ts; the template below turns a
+// page title like "About" into "About — Chaiya Katkwao".
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Chaiya Katkwao | Creative Producer - Bangkok",
-  description:
-    DESCRIPTION,
+  title: { default: DEFAULT_TITLE, template: TITLE_TEMPLATE },
+  description: DEFAULT_DESCRIPTION,
   openGraph: {
-    title: "Chaiya Katkwao | Creative Producer - Bangkok",
-    description:
-      DESCRIPTION,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
     url: SITE_URL,
-    siteName: "Chaiya Katkwao",
+    siteName: SITE_NAME,
     type: "website",
     locale: "en_US",
-    images: [
-      {
-        // Purpose-built 1200x630 card. The previous value pointed at a 2400x1600
-        // photograph while declaring 1200x630, so every platform cropped it
-        // somewhere different. Regenerate from scripts/share-card.html.
-        url: "/images/share-card.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Chaiya Katkwao — Creative Producer, Bangkok",
-      },
-    ],
+    images: [SHARE_CARD],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chaiya Katkwao | Creative Producer - Bangkok",
-    description: DESCRIPTION,
-    images: ["/images/share-card.jpg"],
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [SHARE_CARD.url],
   },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const jsonLd = {
+  // Structured data for search engines: who runs the site and what the site is.
+  // Case studies point back at these two ids from their own CreativeWork.
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Chaiya Katkwao",
-    "jobTitle": "Creative Producer",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Bangkok",
-      "addressCountry": "TH"
-    },
-    "url": SITE_URL,
-    "knowsAbout": [
-      "Art Direction",
-      "Creative Production",
-      "AV Engineering",
-      "Live Commerce",
-      "Multi-camera Production"
-    ]
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${SITE_URL}/#person`,
+        name: "Chaiya Katkwao",
+        jobTitle: "Creative Producer",
+        url: SITE_URL,
+        image: absoluteUrl(PORTRAIT_PATH),
+        sameAs: [INSTAGRAM_URL],
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Bangkok",
+          addressCountry: "TH",
+        },
+        knowsAbout: [
+          "Art Direction",
+          "Creative Production",
+          "AV Engineering",
+          "Live Commerce",
+          "Multi-camera Production",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        name: SITE_NAME,
+        url: SITE_URL,
+        inLanguage: "en",
+        publisher: { "@id": `${SITE_URL}/#person` },
+      },
+    ],
   };
 
   return (
@@ -88,7 +103,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(structuredData) }}
         />
       </head>
       <body>

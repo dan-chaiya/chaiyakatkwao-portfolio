@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
 import PrintButton from "@/components/PrintButton";
+import { pageMetadata } from "@/lib/seo";
 
 // app/cv/page.tsx — the CV, set in the site's own kit.
 // On screen it is a page like About: the mono eyebrow, the Archivo Black title in
@@ -12,10 +13,11 @@ import PrintButton from "@/components/PrintButton";
 // and hides the header, footer and the button. Facts mirror the About page and the
 // chat's system prompt; nothing here that is not stated there.
 
-export const metadata: Metadata = {
-  title: "CV — Chaiya Katkwao",
+export const metadata: Metadata = pageMetadata({
+  title: "CV",
   description: "Chaiya Katkwao — Creative Producer, Bangkok. Curriculum vitae.",
-};
+  path: "/cv",
+});
 
 const experience = [
   {
