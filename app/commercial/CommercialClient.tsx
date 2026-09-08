@@ -18,6 +18,7 @@ const liveCommerceVideos = [
     title: "Dutchmil Delivery Live Showcase",
     brand: "Dutchmil Delivery",
     src: "/videos/live-commerce/dmd-live.mp4",
+    poster: "/images/live-posters/dmd-live.jpg",
     type: "video/mp4",
   },
   {
@@ -25,6 +26,7 @@ const liveCommerceVideos = [
     title: "Her Hyness Showcase",
     brand: "Her Hyness",
     src: "/videos/live-commerce/her-hyness.mp4",
+    poster: "/images/live-posters/her-hyness.jpg",
     type: "video/mp4",
   },
   {
@@ -32,6 +34,7 @@ const liveCommerceVideos = [
     title: "Nestlé Health Science Live",
     brand: "Nestlé Health Science",
     src: "/videos/live-commerce/nestle.mp4",
+    poster: "/images/live-posters/nestle.jpg",
     type: "video/mp4",
   },
   {
@@ -39,6 +42,7 @@ const liveCommerceVideos = [
     title: "Sunnies Studio Live",
     brand: "Sunnies Studio Thailand",
     src: "/videos/live-commerce/sunnies.mp4",
+    poster: "/images/live-posters/sunnies.jpg",
     type: "video/mp4",
   },
   {
@@ -46,6 +50,7 @@ const liveCommerceVideos = [
     title: "Tokfashion Live",
     brand: "Tokfashion",
     src: "/videos/live-commerce/tokfashion.mp4",
+    poster: "/images/live-posters/tokfashion.jpg",
     type: "video/mp4",
   },
   {
@@ -53,6 +58,7 @@ const liveCommerceVideos = [
     title: "Guess — April",
     brand: "Guess",
     src: "/videos/live-commerce/guess.mp4",
+    poster: "/images/live-posters/guess.jpg",
     type: "video/mp4",
   },
   {
@@ -60,6 +66,7 @@ const liveCommerceVideos = [
     title: "Colgate — May",
     brand: "Colgate",
     src: "/videos/live-commerce/colgate-may.mp4",
+    poster: "/images/live-posters/colgate-may.jpg",
     type: "video/mp4",
   },
   {
@@ -67,6 +74,7 @@ const liveCommerceVideos = [
     title: "Dutchmil Delivery — May",
     brand: "Dutchmil Delivery",
     src: "/videos/live-commerce/dutchmil-may.mp4",
+    poster: "/images/live-posters/dutchmil-may.jpg",
     type: "video/mp4",
   },
   {
@@ -74,6 +82,7 @@ const liveCommerceVideos = [
     title: "F&N Dairies — May",
     brand: "F&N Dairies",
     src: "/videos/live-commerce/fn-dairies-may.mp4",
+    poster: "/images/live-posters/fn-dairies-may.jpg",
     type: "video/mp4",
   },
   {
@@ -81,6 +90,7 @@ const liveCommerceVideos = [
     title: "Fitflop Live",
     brand: "Fitflop",
     src: "/videos/live-commerce/fitflop-may.mp4",
+    poster: "/images/live-posters/fitflop-may.jpg",
     type: "video/mp4",
   },
   {
@@ -88,6 +98,7 @@ const liveCommerceVideos = [
     title: "Rojukiss Live",
     brand: "Rojukiss",
     src: "/videos/live-commerce/rojukiss-may.mp4",
+    poster: "/images/live-posters/rojukiss-may.jpg",
     type: "video/mp4",
   },
   {
@@ -95,6 +106,7 @@ const liveCommerceVideos = [
     title: "Shop at Nestlé — May",
     brand: "Shop at Nestlé",
     src: "/videos/live-commerce/shop-at-nestle-may.mp4",
+    poster: "/images/live-posters/shop-at-nestle-may.jpg",
     type: "video/mp4",
   },
 ];
@@ -413,6 +425,7 @@ export default function CommercialClient() {
                   controls
                   playsInline
                   preload="none"
+                  poster={video.poster}
                   aria-label={`${video.brand} — live commerce production`}
                   className="w-full h-auto block"
                 >
