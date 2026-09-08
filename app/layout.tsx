@@ -26,15 +26,18 @@ const jetbrainsMono = JetBrains_Mono({
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://chaiyakatkwao.com";
 
+const DESCRIPTION =
+  "Creative producer in Bangkok. Live commerce, multi-camera production, podcasts and photography.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Chaiya Katkwao | Creative Producer - Bangkok",
   description:
-    "Chaiya Katkwao (CK) Creative Producer ในกรุงเทพฯ ที่เชี่ยวชาญด้าน Art Direction, AV Engineering, Live Commerce และ Production",
+    DESCRIPTION,
   openGraph: {
     title: "Chaiya Katkwao | Creative Producer - Bangkok",
     description:
-      "Chaiya Katkwao (CK) Creative Producer ในกรุงเทพฯ ที่เชี่ยวชาญด้าน Art Direction, AV Engineering, Live Commerce และ Production",
+      DESCRIPTION,
     url: SITE_URL,
     siteName: "Chaiya Katkwao",
     type: "website",
@@ -54,7 +57,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Chaiya Katkwao | Creative Producer - Bangkok",
-    description: "Chaiya Katkwao (CK) Creative Producer ในกรุงเทพฯ ที่เชี่ยวชาญด้าน Art Direction, AV Engineering, Live Commerce และ Production",
+    description: DESCRIPTION,
     images: ["/images/share-card.jpg"],
   },
 };
