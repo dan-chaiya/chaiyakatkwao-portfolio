@@ -23,7 +23,11 @@
   <meta property="og:image:alt" content="Chaiya Katkwao, internal systems: Live Studio OS, Keepsake, the studio register.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://chaiyakatkwao.com/systems/images/share-card.png">
-  <link rel="icon" href="data:,">
+  <!-- The tab icon is the parent's CK mark, served by its app/icon.svg. Absolute on
+       purpose: the page lives at /systems on the parent, and sync-to-parent.sh leaves
+       absolute paths alone. Until 2026-09-08 this was href="data:," (no icon), and
+       the tab showed the browser's blank-page glyph. -->
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
 
   <!-- The parent's three families, self-hosted. All three paint above the
        fold: the display face in the masthead, the body face in the lead, the
