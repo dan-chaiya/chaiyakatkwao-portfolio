@@ -57,69 +57,7 @@ export default function PortfolioHome() {
           aria-label="Featured project"
           style={{ borderBottom: "1px solid var(--color-border)" }}
         >
-          <div>
-            <Link href="/commercial" style={{ display: "block", position: "relative" }}>
-              <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "var(--color-surface)" }}>
-                <Image
-                  src={workAssets.knack("Knack-14.jpg")}
-                  alt="Knack Factory Fashion Show 2024 — Creative Producer Portfolio"
-                  fill
-                  sizes="100vw"
-                  className="object-cover"
-                  style={{
-                    transition: "transform 1000ms cubic-bezier(0.16, 1, 0.3, 1)",
-                    transform: "scale(1.0)",
-                  }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1.04)"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLImageElement).style.transform = "scale(1.0)"; }}
-                />
-                <div
-                  aria-hidden
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)",
-                    pointerEvents: "none",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    padding: "clamp(20px, 4vw, 48px)",
-                    pointerEvents: "none",
-                  }}
-                >
-                  <p style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(249,249,249,0.62)" }}>
-                    Selected Work
-                  </p>
-                  <div>
-                    <h2
-                      style={{
-                        fontFamily: "var(--font-heading)",
-                        fontWeight: 400,
-                        fontSize: "clamp(1.75rem, 4vw, 3.5rem)",
-                        letterSpacing: "-0.03em",
-                        lineHeight: 0.9,
-                        color: "#F9F9F9",
-                        marginBottom: "14px",
-                      }}
-                    >
-                      Knack Factory
-                      <br />
-                      Fashion Show, 2024
-                    </h2>
-                    <p style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(249,249,249,0.62)" }}>
-                      Commercial Production
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
+          <FeaturedCard />
         </section>
 
         {/* ── ACT III: IMAGE TRIPTYCH ─────────────────────────────── */}
@@ -226,7 +164,7 @@ export default function PortfolioHome() {
               <h2
                 style={{
                   fontFamily: "var(--font-heading)",
-                  fontWeight: 400,
+                  fontWeight: 800,
                   fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
                   letterSpacing: "-0.03em",
                   lineHeight: 0.9,
@@ -335,6 +273,65 @@ function DisciplineRow({ label, index: i, total }: { label: string; index: numbe
   );
 }
 
+// The featured project: the photograph at full contrast in a 16:9 frame, then its
+// caption below in flow, on black. The dark gradient wash that carried white text
+// over the image went on 2026-09-08, the same move as the hero: nothing is layered
+// over the work, so legibility never costs the photograph anything.
+function FeaturedCard() {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Link
+      href="/commercial"
+      style={{ display: "block", color: "inherit", textDecoration: "none" }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "var(--color-surface)" }}>
+        <Image
+          src={workAssets.knack("Knack-14.jpg")}
+          alt="Knack Factory Fashion Show 2024 — Creative Producer Portfolio"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{
+            transition: "transform 1000ms cubic-bezier(0.16, 1, 0.3, 1)",
+            transform: hovered ? "scale(1.04)" : "scale(1)",
+          }}
+        />
+      </div>
+      <div
+        className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6"
+        style={{ padding: "24px 32px 32px" }}
+      >
+        <div>
+          <p className="mono-label">Selected Work</p>
+          <h2
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontWeight: 800,
+              fontSize: "clamp(1.75rem, 4vw, 3.5rem)",
+              letterSpacing: "-0.03em",
+              lineHeight: 0.9,
+              color: "var(--color-text)",
+              marginTop: "14px",
+            }}
+          >
+            Knack Factory
+            <br />
+            Fashion Show, 2024
+          </h2>
+        </div>
+        <p
+          className="mono-label"
+          style={{ transition: "color 200ms ease", color: hovered ? "var(--color-text)" : undefined }}
+        >
+          Commercial Production →
+        </p>
+      </div>
+    </Link>
+  );
+}
+
 type SectionItem = { index: string; title: string; href: string; cover: string; coverAlt: string };
 
 function TriptychCard({ section: s }: { section: SectionItem }) {
@@ -388,7 +385,7 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
               </p>
               <p style={{
                 fontFamily: "var(--font-heading)",
-                fontWeight: 400,
+                fontWeight: 800,
                 fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
                 letterSpacing: "-0.02em",
                 color: "#F9F9F9",

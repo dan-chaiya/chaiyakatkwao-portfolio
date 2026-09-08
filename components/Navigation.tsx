@@ -94,7 +94,7 @@ export default function Navigation() {
               href="/"
               style={{
                 fontFamily: "var(--font-heading)",
-                fontWeight: 400,
+                fontWeight: 800,
                 fontSize: "1.15rem",
                 letterSpacing: "-0.02em",
                 color: "var(--color-text)",
@@ -211,7 +211,7 @@ export default function Navigation() {
                     style={{
                       display: "block",
                       fontFamily: "var(--font-heading)",
-                      fontWeight: 400,
+                      fontWeight: 800,
                       textTransform: "uppercase",
                       color: "var(--color-text)",
                       letterSpacing: "-0.03em",

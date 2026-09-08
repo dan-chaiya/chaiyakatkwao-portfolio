@@ -214,7 +214,6 @@ export default function AboutClient() {
                       fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)",
                       lineHeight: 1.05,
                       letterSpacing: "-0.02em",
-                      fontWeight: 400,
                     }}
                   >
                     {name}

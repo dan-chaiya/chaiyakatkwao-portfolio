@@ -22,13 +22,13 @@ typography:
   display:
     fontFamily: "Archivo Black, sans-serif"
     fontSize: "clamp(2.5rem, 8vw, 7rem)"
-    fontWeight: 400
+    fontWeight: 800
     lineHeight: 0.9
     letterSpacing: "-0.02em"
   headline:
     fontFamily: "Archivo Black, sans-serif"
     fontSize: "clamp(1.2rem, 2.5vw, 2rem)"
-    fontWeight: 400
+    fontWeight: 800
     lineHeight: 0.95
     letterSpacing: "-0.02em"
   lead:
@@ -149,8 +149,11 @@ One warm signal in a room of true-black surfaces. The palette does not try to be
 > detector's 130 findings were this document disagreeing with the code, not the
 > code drifting from the system.
 
-**Display Font:** Archivo Black (weight 400, single cut) — every headline and the
-mobile navigation overlay.
+**Display Font:** Archivo Black, a single cut, always set at `font-weight: 800`. The face
+has no 800, so the browser synthesizes bold on top of Black; that dense faux-bold is the
+heading voice, and it is deliberate. `h1, h2, .font-heading { font-weight: 800 }` in
+`globals.css` owns it, and heads styled inline set the same. Every headline, the CK mark,
+the hero name line and the mobile navigation overlay.
 **Body Font:** Archivo (400, 500, 600, 700, 800). Weight 300 was retired on 8 September 2026: it read as whispering under the display heads.
 **Label Font:** JetBrains Mono (400, 500) — every uppercase label, index, counter,
 caption and metadata line on the site.
@@ -165,8 +168,9 @@ document rather than a brochure.
 
 | Step | Family | Size | Tracking | Used for |
 |---|---|---|---|---|
-| Display | Archivo Black 400 | `clamp(2.5rem, 8vw, 7rem)` | -0.02em | Page titles, the hero name |
-| Headline | Archivo Black 400 | `clamp(1.2rem, 2.5vw, 2rem)` | -0.02em | Section and project titles |
+| Display | Archivo Black 800 (synthesized) | `clamp(2.5rem, 8vw, 7rem)` | -0.02em | Page titles, the featured and contact titles |
+| Headline | Archivo Black 800 (synthesized) | `clamp(1.2rem, 2.5vw, 2rem)` | -0.02em | Section and project titles |
+| Name line | Archivo Black 800 (synthesized) | `clamp(1.25rem, 1.6vw, 1.5rem)` | -0.02em | The hero's `Chaiya Katkwao.`, one line |
 | Lead | Archivo 400 | `clamp(1.25rem, 1.6vw, 1.5rem)` / 1.4 | normal | Bios, positioning lines, project descriptions (`.copy-lead`) |
 | Body | Archivo 400 | `17px` / 1.55 | normal | Everything that is read: briefs, section descriptions (`.copy-body`) |
 | Small | Archivo 400 | `14px` / 1.5 | normal | Captions, list cells, roles and years in prose (`.copy-small`) |
@@ -178,8 +182,8 @@ data and captions only. The three reading steps are the `.copy-lead`, `.copy-bod
 `.copy-small` classes in `globals.css`, and `body` itself is set to the Body step.
 
 The display step is fluid rather than fixed: every headline on the site is a `clamp()`
-whose endpoints vary by context (`7rem` on index pages, `6.25rem` on the hero,
-`5.5rem` on the contact strip). The table records the dominant pair; a headline that
+whose endpoints vary by context (`7rem` on index pages, `5.5rem` on the contact strip,
+`3.5rem` on the featured card). The table records the dominant pair; a headline that
 needs a different ceiling sets one, and that is intentional, not drift.
 
 **The Two-Family Rule.** Archivo and JetBrains Mono. No third family. If something
@@ -219,7 +223,7 @@ The Lightbox uses a near-opaque dark overlay (`rgba(10, 10, 10, 0.97)`) — this
 ### Navigation Header
 `sticky top-0`, full width, z-50. Not fixed, not translucent, and not blurred.
 - **Shell:** the page background with `border-bottom: 1px solid rgba(249,249,249,0.07)`. There is no backdrop-filter and no opacity on the header.
-- **Logo:** Archivo Black, 1.15rem, tracking -0.02em. Links to root.
+- **Logo:** Archivo Black 800, 1.15rem, tracking -0.02em. Links to root.
 - **Desktop links:** 0.8rem, tracking 0.18em, uppercase. Muted text at rest, Primary Text on hover, 200ms.
 - **Active underline:** a 1px bar in Warm Signal. This is one of only two accent appearances in the app.
 - **Mobile hamburger:** three 1px lines, inline-drawn, animating to a cross. No icon library.
@@ -227,7 +231,7 @@ The Lightbox uses a near-opaque dark overlay (`rgba(10, 10, 10, 0.97)`) — this
 ### Mobile Navigation Overlay
 Full-screen, full-bleed, no modal chrome. A signature component.
 - **Surface:** the page background, no backdrop.
-- **Links:** `clamp(2.5rem, 10vw, 5rem)`, Archivo Black, tracking -0.03em, separated by `1px solid rgba(249,249,249,0.06)`.
+- **Links:** `clamp(2.5rem, 10vw, 5rem)`, Archivo Black 800, tracking -0.03em, separated by `1px solid rgba(249,249,249,0.06)`.
 - **Animation:** staggered entrance, 0.07s between items, `cubic-bezier(0.16, 1, 0.3, 1)`, 0.5s.
 
 ### Lightbox (Signature Component)
@@ -249,7 +253,10 @@ Bottom-right of the hero, beside the slide counter.
 - **Counter:** `mono-label`, tabular numerals, `--color-warm`.
 
 ### Hero Stage
-Three rows inside the fold (`100svh` minus the header): the mono label, the stage, and the name row with the controls. The stage shows each slide `object-contain` on the black ground at full contrast: no scrim, no gradient bands, no blurred fill. All three were removed on 8 September 2026, together with the 96px backdrop derivatives and their build script. Nothing is layered over the work; the text rows are in flow, so legibility never costs the photograph anything. Slides cross-fade in 1200ms, a hard cut under reduced motion, and the hero does not fade or drift as the page scrolls.
+Three rows inside the fold (`100svh` minus the header): the header line, the stage, and the disciplines row with the controls. The header line is the name, `Chaiya Katkwao.`, as one small line of Archivo Black (`clamp(1.25rem, 1.6vw, 1.5rem)`) with the positioning label beside it; since 8 September 2026 the name no longer takes a display step in the hero, and the height it held went to the stage, which takes everything the two text rows do not. The stage shows each slide `object-contain` on the black ground at full contrast: no scrim, no gradient bands, no blurred fill. All three were removed on 8 September 2026, together with the 96px backdrop derivatives and their build script. Nothing is layered over the work; the text rows are in flow, so legibility never costs the photograph anything. Slides cross-fade in 1200ms, a hard cut under reduced motion, and the hero does not fade or drift as the page scrolls.
+
+### Featured Project
+The photograph in a 16:9 frame at full contrast, then its caption below in flow, on black: the `Selected Work` label, the title at `clamp(1.75rem, 4vw, 3.5rem)`, and the category label right. The dark gradient wash that carried white text over the image was removed on 8 September 2026, the same move as the hero: nothing is layered over the work. Hover scales the image 1.04 over 1000ms.
 
 ### Components that do not exist
 No card and no chip. This is a portfolio, not an application; its interactive surface

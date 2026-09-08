@@ -29,7 +29,7 @@ export default function CommercialList({ projects }: { projects: Project[] }) {
             className="col-span-10 md:col-span-4 transition-transform duration-300 ease-out group-hover:translate-x-1.5 group-focus-visible:translate-x-1.5"
             style={{
               fontFamily: "var(--font-heading)",
-              fontWeight: 400,
+              fontWeight: 800,
               fontSize: "clamp(1.15rem, 2.4vw, 1.9rem)",
               lineHeight: 1,
               letterSpacing: "-0.02em",

@@ -109,7 +109,7 @@ export default function ChatInterface() {
           className="lg:w-72 lg:pr-10 lg:border-r lg:border-b-0 lg:pb-0 lg:mb-0"
         >
           <p style={{ ...mono, marginBottom: "12px" }}>Speaking with</p>
-          <h1 style={{ fontFamily: "var(--font-heading)", fontWeight: 400, fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 0.92, letterSpacing: "-0.03em", color: "var(--color-warm)", textTransform: "uppercase", marginBottom: "16px" }}>
+          <h1 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 0.92, letterSpacing: "-0.03em", color: "var(--color-warm)", textTransform: "uppercase", marginBottom: "16px" }}>
             Chaiya /<br />Katkwao.
           </h1>
           <p style={{ fontFamily: "var(--font-archivo)", fontSize: "0.875rem", color: "var(--color-grey-300)", lineHeight: 1.5 }}>
