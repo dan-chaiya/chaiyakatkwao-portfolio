@@ -56,3 +56,6 @@ next-env.d.ts
 /screenshot-*.png
 /ss-*.png
 .env.local
+
+# Playwright MCP screenshots
+.playwright-mcp/

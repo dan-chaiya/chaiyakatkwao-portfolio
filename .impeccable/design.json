@@ -1,184 +1,300 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-05-09T00:00:00Z",
+  "generatedAt": "2026-08-29T23:33:35Z",
   "title": "Design System: Chaiya Katkwao Portfolio",
   "extensions": {
     "colorMeta": {
       "bg": {
         "role": "neutral",
-        "displayName": "Production Dark",
-        "canonical": "oklch(0.18 0.01 250)",
+        "displayName": "Production Black",
+        "canonical": "oklch(0 0 0)",
         "tonalRamp": [
-          "oklch(0.06 0.004 250)",
-          "oklch(0.10 0.006 250)",
-          "oklch(0.18 0.010 250)",
-          "oklch(0.23 0.012 250)",
-          "oklch(0.27 0.014 250)",
-          "oklch(0.34 0.010 250)",
-          "oklch(0.50 0.010 250)",
-          "oklch(0.72 0.010 250)"
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
         ]
       },
       "surface": {
         "role": "neutral",
         "displayName": "Studio Surface",
-        "canonical": "oklch(0.23 0.012 250)",
+        "canonical": "oklch(0.0301 0 0)",
         "tonalRamp": [
-          "oklch(0.06 0.004 250)",
-          "oklch(0.10 0.006 250)",
-          "oklch(0.18 0.010 250)",
-          "oklch(0.23 0.012 250)",
-          "oklch(0.27 0.014 250)",
-          "oklch(0.34 0.010 250)",
-          "oklch(0.50 0.010 250)",
-          "oklch(0.72 0.010 250)"
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
         ]
       },
       "surface-elevated": {
         "role": "neutral",
         "displayName": "Elevated Surface",
-        "canonical": "oklch(0.27 0.014 250)",
+        "canonical": "oklch(0.0733 0 0)",
         "tonalRamp": [
-          "oklch(0.06 0.004 250)",
-          "oklch(0.10 0.006 250)",
-          "oklch(0.18 0.010 250)",
-          "oklch(0.23 0.012 250)",
-          "oklch(0.27 0.014 250)",
-          "oklch(0.34 0.010 250)",
-          "oklch(0.50 0.010 250)",
-          "oklch(0.72 0.010 250)"
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
+        ]
+      },
+      "surface-hover": {
+        "role": "neutral",
+        "displayName": "Hover Surface",
+        "canonical": "oklch(0.1075 0 0)",
+        "tonalRamp": [
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
         ]
       },
       "text": {
         "role": "neutral",
         "displayName": "Primary Text",
-        "canonical": "oklch(0.95 0.01 250)",
+        "canonical": "oklch(0.9761 0 0)",
         "tonalRamp": [
-          "oklch(0.18 0.010 250)",
-          "oklch(0.34 0.010 250)",
-          "oklch(0.50 0.010 250)",
-          "oklch(0.62 0.010 250)",
-          "oklch(0.72 0.010 250)",
-          "oklch(0.82 0.010 250)",
-          "oklch(0.90 0.010 250)",
-          "oklch(0.95 0.010 250)"
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
         ]
       },
       "text-muted": {
         "role": "neutral",
         "displayName": "Muted Text",
-        "canonical": "oklch(0.72 0.01 250)",
+        "canonical": "oklch(0.6200 0.0115 67.6)",
         "tonalRamp": [
-          "oklch(0.18 0.010 250)",
-          "oklch(0.34 0.010 250)",
-          "oklch(0.50 0.010 250)",
-          "oklch(0.62 0.010 250)",
-          "oklch(0.72 0.010 250)",
-          "oklch(0.82 0.010 250)",
-          "oklch(0.90 0.010 250)",
-          "oklch(0.95 0.010 250)"
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
+        ]
+      },
+      "text-dim": {
+        "role": "neutral",
+        "displayName": "Dim Mark",
+        "canonical": "oklch(0.4000 0.0064 67.6)",
+        "tonalRamp": [
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
+        ]
+      },
+      "warm": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "oklch(0.9550 0.0070 88.6)",
+        "tonalRamp": [
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
         ]
       },
       "border": {
         "role": "neutral",
         "displayName": "Structural Line",
-        "canonical": "oklch(0.34 0.01 250)",
+        "canonical": "rgba(249, 249, 249, 0.09)",
         "tonalRamp": [
-          "oklch(0.18 0.010 250)",
-          "oklch(0.23 0.012 250)",
-          "oklch(0.27 0.014 250)",
-          "oklch(0.34 0.010 250)",
-          "oklch(0.42 0.010 250)",
-          "oklch(0.54 0.010 250)",
-          "oklch(0.68 0.010 250)",
-          "oklch(0.80 0.010 250)"
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
+        ]
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Strong Line",
+        "canonical": "rgba(249, 249, 249, 0.22)",
+        "tonalRamp": [
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
         ]
       },
       "accent": {
-        "role": "primary",
+        "role": "accent",
         "displayName": "Warm Signal",
-        "canonical": "oklch(0.72 0.16 35)",
+        "canonical": "oklch(0.72 0.18 35)",
         "tonalRamp": [
-          "oklch(0.20 0.06 35)",
-          "oklch(0.30 0.10 35)",
-          "oklch(0.42 0.14 35)",
-          "oklch(0.55 0.17 35)",
-          "oklch(0.66 0.19 35)",
-          "oklch(0.72 0.16 35)",
-          "oklch(0.82 0.12 35)",
-          "oklch(0.92 0.06 35)"
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
         ]
       },
-      "accent-strong": {
-        "role": "primary",
-        "displayName": "Warm Signal Strong",
-        "canonical": "oklch(0.66 0.19 35)",
+      "accent-dim": {
+        "role": "accent",
+        "displayName": "Warm Signal Dim",
+        "canonical": "oklch(0.72 0.18 35 / 0.3)",
         "tonalRamp": [
-          "oklch(0.20 0.06 35)",
-          "oklch(0.30 0.10 35)",
-          "oklch(0.42 0.14 35)",
-          "oklch(0.55 0.17 35)",
-          "oklch(0.66 0.19 35)",
-          "oklch(0.72 0.16 35)",
-          "oklch(0.82 0.12 35)",
-          "oklch(0.92 0.06 35)"
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
         ]
       },
       "focus-ring": {
-        "role": "primary",
+        "role": "neutral",
         "displayName": "Focus Ring",
-        "canonical": "oklch(0.78 0.16 35)",
+        "canonical": "rgba(249, 249, 249, 0.55)",
         "tonalRamp": [
-          "oklch(0.20 0.06 35)",
-          "oklch(0.30 0.10 35)",
-          "oklch(0.42 0.14 35)",
-          "oklch(0.55 0.17 35)",
-          "oklch(0.66 0.19 35)",
-          "oklch(0.72 0.16 35)",
-          "oklch(0.78 0.16 35)",
-          "oklch(0.92 0.06 35)"
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
         ]
       },
-      "selection-text": {
+      "selection-bg": {
         "role": "neutral",
-        "displayName": "Selection Text",
-        "canonical": "oklch(0.20 0.01 250)",
+        "displayName": "Selection",
+        "canonical": "oklch(0.9761 0 0)",
         "tonalRamp": [
-          "oklch(0.10 0.006 250)",
-          "oklch(0.15 0.008 250)",
-          "oklch(0.20 0.010 250)",
-          "oklch(0.30 0.010 250)",
-          "oklch(0.40 0.010 250)",
-          "oklch(0.55 0.010 250)",
-          "oklch(0.72 0.010 250)",
-          "oklch(0.88 0.010 250)"
+          "oklch(0 0 0)",
+          "oklch(0.0301 0 0)",
+          "oklch(0.0733 0 0)",
+          "oklch(0.1075 0 0)",
+          "oklch(0.2600 0.0050 67.6)",
+          "oklch(0.4000 0.0064 67.6)",
+          "oklch(0.5600 0.0100 67.6)",
+          "oklch(0.6200 0.0115 67.6)",
+          "oklch(0.7200 0.0110 67.6)",
+          "oklch(0.8300 0.0090 78.0)",
+          "oklch(0.9550 0.0070 88.6)",
+          "oklch(0.9761 0 0)"
         ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Hero headlines and mobile navigation overlay. Compressed line-height — these letters are architectural."
+        "purpose": "Page titles and the hero name. Archivo Black, fluid clamp, tight tracking, 0.88-0.95 line-height — structural, not decorative."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Section titles, project names. Light weight at large size creates contrast without visual mass."
-      },
-      "title": {
-        "displayName": "Title",
-        "purpose": "Subtitles, project categories, secondary section labels."
+        "purpose": "Section and project titles. Archivo Black at the smaller clamp."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Running text. Line length capped at 65–75ch. Italic available for emphasis — avoid bold."
+        "purpose": "Running text, bios, case-study copy. Archivo 300-400 at 15px."
+      },
+      "body-sm": {
+        "displayName": "Body Small",
+        "purpose": "Descriptions, chat messages, dense metadata. Archivo 400 at 13px."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Navigation links, button text, category chips. Uppercase with wide tracking for legibility at small sizes."
+        "purpose": "JetBrains Mono 500, 11px, 0.18em. Nav, footer, tags, years, indices, captions — the whole information layer."
       },
-      "micro": {
-        "displayName": "Micro",
-        "purpose": "Series labels, index counters, footer credits. Information infrastructure — these identify, they do not express."
+      "label-wide": {
+        "displayName": "Label Wide",
+        "purpose": "JetBrains Mono 500, 11px, 0.28-0.35em. Eyebrows and section markers."
       }
     },
     "shadows": [],
@@ -200,9 +316,28 @@
       }
     ],
     "breakpoints": [
-      { "name": "md", "value": "768px", "purpose": "Mobile nav collapses to full-screen overlay below this." },
-      { "name": "shell-max", "value": "1200px", "purpose": "section-shell max-width. Content centers and adds 1rem gutter each side below this." }
-    ]
+      {
+        "name": "md",
+        "value": "768px",
+        "purpose": "Mobile nav collapses to full-screen overlay below this."
+      },
+      {
+        "name": "shell-max",
+        "value": "1200px",
+        "purpose": "section-shell max-width. Content centers and adds 1rem gutter each side below this."
+      }
+    ],
+    "a11y": {
+      "contrastFloor": "4.5:1 for every text colour, verified against #000000 and #0D0D0D",
+      "typeFloor": "11px — no text below it, screen or print",
+      "notes": [
+        "text-dim (2.28:1) is a structural mark colour and must never carry text.",
+        "grey-500 was raised from #6B6560 (3.66:1) to #827C75 (5.09:1) on 29 Aug 2026; it is the site-wide secondary label colour, so the token moved rather than the call sites.",
+        "Hero labels sit on two gradient legibility bands, not on the flat scrim alone.",
+        "prefers-reduced-motion removes travel and looping but keeps 120ms colour/opacity feedback.",
+        "Anything that opens the lightbox is a real <button>."
+      ]
+    }
   },
   "components": [
     {

@@ -22,7 +22,7 @@ export const projects: Project[] = [
     id: "01",
     slug: "knack-factory",
     title: "Knack Factory",
-    subtitle: "Senior Fashion Thesis Showcase",
+    subtitle: "Suan Sunandha Rajabhat University",
     year: "2024",
     role: "Photographer",
     description:
@@ -54,9 +54,9 @@ export const projects: Project[] = [
     id: "02",
     slug: "bakao",
     title: "BAKAO",
-    subtitle: "Fashion Photography",
+    subtitle: "BAKAO, Bangkok",
     year: "2024",
-    role: "Photographer / Art Direction",
+    role: "Photographer and art direction",
     description:
       "Fashion photography and art direction for an emerging Thai clothing label.",
     brief: [
@@ -83,9 +83,9 @@ export const projects: Project[] = [
     id: "03",
     slug: "khun-chang-khian",
     title: "Khun Chang Khian",
-    subtitle: "Documentary",
+    subtitle: "Khun Chang Khian, Chiang Mai",
     year: "2024",
-    role: "Documentary Photographer",
+    role: "Documentary photographer",
     description:
       "Portrait series documenting community and landscape across Northern Thailand.",
     brief: [
@@ -104,9 +104,9 @@ export const projects: Project[] = [
     id: "04",
     slug: "podcast-studio",
     title: "Podcast & Studio",
-    subtitle: "Production",
+    subtitle: "Modal Creative Studio",
     year: "2025–2026",
-    role: "Creative Producer / AV Engineer",
+    role: "Creative producer and AV engineer",
     description:
       "Studio design and live production systems supporting an ongoing slate of podcasts and long-form interviews.",
     brief: [

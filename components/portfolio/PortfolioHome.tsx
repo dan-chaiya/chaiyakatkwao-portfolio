@@ -169,7 +169,7 @@ export default function PortfolioHome() {
               <FadeLabel>About</FadeLabel>
               <p
                 style={{
-                  fontFamily: "var(--font-jakarta)",
+                  fontFamily: "var(--font-archivo)",
                   fontWeight: 300,
                   fontSize: "clamp(1rem, 1.8vw, 1.15rem)",
                   lineHeight: 1.7,
@@ -293,7 +293,7 @@ export default function PortfolioHome() {
                 href="mailto:chaiyakatkwao@gmail.com"
                 style={{
                   fontFamily: "var(--font-jetbrains-mono)",
-                  fontSize: "0.62rem",
+                  fontSize: "11px",
                   letterSpacing: "0.14em",
                   textTransform: "uppercase",
                   color: "var(--color-text)",
@@ -313,7 +313,7 @@ export default function PortfolioHome() {
                 href="/cv"
                 style={{
                   fontFamily: "var(--font-jetbrains-mono)",
-                  fontSize: "0.62rem",
+                  fontSize: "11px",
                   letterSpacing: "0.14em",
                   textTransform: "uppercase",
                   color: "var(--color-text-muted)",
@@ -361,7 +361,7 @@ function DisciplineRow({ label, index: i, total, reduced }: { label: string; ind
       }}
     >
       <span style={{
-        fontFamily: "var(--font-jakarta)",
+        fontFamily: "var(--font-archivo)",
         fontSize: "0.8rem",
         fontWeight: 500,
         color: hovered ? "var(--color-text)" : "var(--color-grey-300)",
@@ -426,7 +426,7 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
             <div>
               <p style={{
                 fontFamily: "var(--font-jetbrains-mono)",
-                fontSize: "9px",
+                fontSize: "11px",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
                 color: hovered ? "rgba(249,249,249,0.9)" : "rgba(249,249,249,0.5)",

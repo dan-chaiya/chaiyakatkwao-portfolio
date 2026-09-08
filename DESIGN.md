@@ -21,40 +21,40 @@ colors:
 typography:
   display:
     fontFamily: "Archivo Black, sans-serif"
-    fontSize: "clamp(2.5rem, 10vw, 4.5rem)"
+    fontSize: "clamp(2.5rem, 8vw, 7rem)"
     fontWeight: 400
-    lineHeight: 0.92
+    lineHeight: 0.9
     letterSpacing: "-0.02em"
   headline:
-    fontFamily: "Archivo, sans-serif"
-    fontSize: "clamp(1.5rem, 4vw, 2.5rem)"
-    fontWeight: 300
-    lineHeight: 1.1
-    letterSpacing: "-0.01em"
-  title:
-    fontFamily: "Archivo, sans-serif"
-    fontSize: "1.125rem"
-    fontWeight: 500
-    lineHeight: 1.3
-    letterSpacing: "normal"
+    fontFamily: "Archivo Black, sans-serif"
+    fontSize: "clamp(1.2rem, 2.5vw, 2rem)"
+    fontWeight: 400
+    lineHeight: 0.95
+    letterSpacing: "-0.02em"
   body:
     fontFamily: "Archivo, sans-serif"
-    fontSize: "1rem"
+    fontSize: "15px"
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: "normal"
-  label:
+  body-sm:
     fontFamily: "Archivo, sans-serif"
-    fontSize: "0.72rem"
+    fontSize: "13px"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "normal"
+  label:
+    fontFamily: "JetBrains Mono, monospace"
+    fontSize: "11px"
     fontWeight: 500
     lineHeight: 1
-    letterSpacing: "0.16em"
-  micro:
-    fontFamily: "Archivo, sans-serif"
-    fontSize: "9px"
-    fontWeight: 400
+    letterSpacing: "0.18em"
+  label-wide:
+    fontFamily: "JetBrains Mono, monospace"
+    fontSize: "11px"
+    fontWeight: 500
     lineHeight: 1
-    letterSpacing: "0.25em"
+    letterSpacing: "0.30em"
 rounded:
   none: "0px"
   sm: "4px"
@@ -135,22 +135,54 @@ One warm signal in a room of true-black surfaces. The palette does not try to be
 
 ## 3. Typography
 
-**Display Font:** Archivo Black (weight 400 only, single-cut)
-**Body Font:** Archivo (weights 300, 400, 500; normal and italic)
+> **Rewritten 30 Aug 2026 against the code.** The previous version documented a
+> six-step ramp in `rem` (`0.72rem` labels, `9px` micro, a `1.125rem` title) and a
+> "Single-Family Rule" saying the system had no second typeface. Neither matched
+> what ships. The real system is **two** families — Archivo for reading, JetBrains
+> Mono for every label — and its ramp is expressed in `px`. 112 of the design
+> detector's 130 findings were this document disagreeing with the code, not the
+> code drifting from the system.
 
-**Character:** One family, two cuts. Archivo Black handles all display moments — its weight is structurally load-bearing, not decorative. Archivo's light and medium weights do everything else. The system has no serif, no script, no fallback personality.
+**Display Font:** Archivo Black (weight 400, single cut) — every headline and the
+mobile navigation overlay.
+**Body Font:** Archivo (300, 400, 500, 600, 700, 800).
+**Label Font:** JetBrains Mono (400, 500) — every uppercase label, index, counter,
+caption and metadata line on the site.
 
-### Hierarchy
-- **Display** (Archivo Black 400, `clamp(2.5rem, 10vw, 4.5rem)`, line-height 0.92, tracking -0.02em): Hero headlines and the mobile navigation overlay. Compressed line-height because the letters are large enough to be architectural — they don't need air, they need structure.
-- **Headline** (Archivo 300, `clamp(1.5rem, 4vw, 2.5rem)`, line-height 1.1, tracking -0.01em): Section titles, project names. Light weight in large size creates the contrast needed without adding visual mass.
-- **Title** (Archivo 500, `1.125rem`, line-height 1.3): Subtitles, project categories, secondary section labels.
-- **Body** (Archivo 400, `1rem`, line-height 1.6): Running text. Line length capped at 65–75ch. Italic weight available for emphasis; avoid bold in body copy.
-- **Label** (Archivo 500, `0.72rem`, tracking 0.16em, uppercase): Navigation links, button text, category chips. The uppercase + wide tracking reads at small sizes without losing legibility.
-- **Micro** (Archivo 400, `9px`, tracking 0.25–0.30em, uppercase): Series labels, index counters, footer credits. These read as information infrastructure — they identify, they do not express.
+**Character:** Archivo Black is structural, not decorative: it is used at size, tight
+(-0.02em to -0.03em), on a 0.88–0.95 line-height, so headlines read as built objects.
+Archivo carries running text. JetBrains Mono carries the entire information layer —
+this is the "production floor" voice, and it is the reason the site reads as a working
+document rather than a brochure.
 
-**The Single-Family Rule.** No additional typefaces. If the brief calls for a second personality, solve it through weight contrast and size, not a second family. Archivo has enough range.
+### The ramp
 
-**The Scale Rule.** At least a 1.25 ratio between adjacent hierarchy steps. Flat scales read as indecision.
+| Step | Family | Size | Tracking | Used for |
+|---|---|---|---|---|
+| Display | Archivo Black 400 | `clamp(2.5rem, 8vw, 7rem)` | -0.02em | Page titles, the hero name |
+| Headline | Archivo Black 400 | `clamp(1.2rem, 2.5vw, 2rem)` | -0.02em | Section and project titles |
+| Body | Archivo 300–400 | `15px` | normal | Running text, bios, case-study copy |
+| Body S | Archivo 400 | `13px` | normal | Descriptions, chat messages, dense metadata |
+| Label | JetBrains Mono 500 | `11px` | 0.18em | Nav, footer, tags, years, indices, captions |
+| Label wide | JetBrains Mono 500 | `11px` | 0.28–0.35em | Eyebrows, section markers |
+
+The display step is fluid rather than fixed: every headline on the site is a `clamp()`
+whose endpoints vary by context (`7rem` on index pages, `6.25rem` on the hero,
+`5.5rem` on the contact strip). The table records the dominant pair; a headline that
+needs a different ceiling sets one, and that is intentional, not drift.
+
+**The Two-Family Rule.** Archivo and JetBrains Mono. No third family. If something
+needs to read as *information* — an index, a year, a role, a counter, a caption — it is
+Mono, uppercase, tracked. If it needs to be *read*, it is Archivo. This split is the
+system, and it is what `.mono-label` in `globals.css` encodes.
+
+**The 11px Floor.** No text below 11px. The system previously ran labels at 9px and
+8px; they were illegible and several failed contrast at the same time. `.mono-label`
+is 11px and that is the floor for every label, in print units too — the CV's screen
+rendering scales its `pt` values up under 860px for exactly this reason.
+
+**The Scale Rule.** At least a 1.25 ratio between adjacent reading steps. Flat scales
+read as indecision.
 
 ## 4. Elevation
 
@@ -199,10 +231,26 @@ The gallery viewer. Dark, focused, keyboard-native.
 - **Typography:** JetBrains Mono, 11px, tracking 0.18em, uppercase — the same label treatment the sister site calls `mono-label`. Muted text at rest, Primary Text on hover, 180ms.
 - **Links:** 28px apart. Includes the cross-site link to `/systems`, which is a plain `<a>` rather than `next/link` because the destination is a static file in `public/`, not a route.
 
+### Hero Controls
+Bottom-right of the hero, beside the slide counter.
+- **Pause/play:** 44x44, 1px border at `rgba(242,240,235,0.28)`, inline-drawn SVG glyph. Hidden entirely under `prefers-reduced-motion`, where nothing is rotating.
+- **Slide marks:** one 1px bar per slide in a 44px-tall hit area; active is `--color-warm`, rest `rgba(242,240,235,0.34)`.
+- **Counter:** `mono-label`, tabular numerals, `--color-warm`.
+
+### Legibility Bands
+The hero's flat `rgba(0,0,0,0.5)` scrim is not enough over a bright frame. Two gradient bands — 160px from the top, 256px from the bottom, each `rgba(0,0,0,0.5)` to transparent — darken only the zones that carry text, leaving the middle of the frame, where the work is, untouched. Same gradient language as the featured card.
+
 ### Components that do not exist
-No button component, no input, no card, and no chip. This is a portfolio, not an
-application; its interactive surface is links, the lightbox, and the mobile menu.
+No card and no chip. This is a portfolio, not an application; its interactive surface
+is links, image tiles, the lightbox, the mobile menu, and the hero controls. There is
+one input (the chat field) and no general button style — buttons here are either a
+44px bordered square (lightbox, hero) or an unstyled tile wrapper (`.gallery-tile`).
 Do not add a button style to this file speculatively — document one when one ships.
+
+**Image tiles are buttons.** Anything that opens the lightbox is a real `<button>`
+carrying `.gallery-tile`, which strips the UA chrome. It must never go back to a
+`div` with an `onClick`: that made all 38 gallery images unreachable by keyboard
+until 29 Aug 2026.
 
 ## 6. Do's and Don'ts
 
@@ -211,9 +259,11 @@ Do not add a button style to this file speculatively — document one when one s
 - **Do** vary spacing by context. Section padding, component padding, and inline spacing should all be different.
 - **Do** use tonal surface steps (bg → surface → surface-elevated) to express depth. Never shadows.
 - **Do** use exponential ease `cubic-bezier(0.16, 1, 0.3, 1)` for all motion. Never bounce, never elastic.
-- **Do** respect `prefers-reduced-motion`. FadeIn already implements this — keep it.
+- **Do** respect `prefers-reduced-motion` by removing *travel and looping*, not feedback. The global rule keeps colour and opacity transitions at 120ms; components drop transforms via `useReducedMotion`. Never clamp all durations to 0.01ms — that flashes infinite animations rather than stopping them.
+- **Do** keep every text colour at 4.5:1 or better. `text-dim` is for structural marks only and is not a text colour.
+- **Do** give anything that moves for more than five seconds a stop control (WCAG 2.2.2). The hero carousel has one.
 - **Do** keep nav links, labels, and captions uppercase with wide tracking (0.15–0.30em). It is part of the system's identity.
-- **Do** tint every neutral toward hue 250. A pure grey alongside a hue-tinted grey will look like a mistake.
+- **Do** keep surfaces pure neutral and let the warmth live in the text greys (hue 62-89, chroma 0.006-0.012). Never introduce a cool grey.
 - **Do** cap body line length at 65–75ch on reading contexts.
 
 ### Don't:
@@ -222,8 +272,8 @@ Do not add a button style to this file speculatively — document one when one s
 - **Don't** over-animate. If the animation is about the UI, it has failed. Motion serves the content, not the other way around.
 - **Don't** use `border-left` or `border-right` greater than 1px as a colored stripe on any component. Never intentional. Rewrite with full borders or background tints.
 - **Don't** use gradient text (`background-clip: text`). Prohibited. Use Warm Signal solid if emphasis is needed.
-- **Don't** apply glassmorphism decoratively. The one backdrop-blur on the nav header is functional and already at its limit. Do not extend it.
-- **Don't** use a second typeface. Archivo has enough range. Solve hierarchy through weight and scale.
+- **Don't** apply glassmorphism decoratively. The one backdrop-blur is on the lightbox caption pill, is functional, and is already at its limit. Do not extend it.
+- **Don't** add a third typeface. Archivo reads, JetBrains Mono labels; that split is the system. Solve anything else through weight and scale.
 - **Don't** add shadows. If something needs elevation, use the next surface step.
 - **Don't** make the accent compete. If more than 10% of a screen surface carries the Warm Signal, scale it back.
 - **Don't** use bounce or elastic easing. Exponential ease-out only.
