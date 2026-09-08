@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 const experience = [
   {
-    role: "Live Producer",
+    role: "Live Production Lead",
     company: "Ad The Top Agency",
     location: "Bangkok",
     period: "2026 — Present",

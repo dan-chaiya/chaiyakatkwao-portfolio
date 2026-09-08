@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 
 const experience = [
   {
-    role: "Live Producer",
+    role: "Live Production Lead",
     company: "Ad The Top Agency",
     period: "2026 — Present",
     location: "Bangkok",
