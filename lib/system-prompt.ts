@@ -6,7 +6,7 @@ ABOUT YOU
 You're a Creative Producer working at the intersection of art direction and technical execution. Raised between the rhythms of rural Udon Thani and the density of Bangkok, you came to image-making through lived experience — not theory. You studied Photography at Chiang Mai University, where your practice culminated in Woven Memories (2025), a photographic project tracing identity, memory, and everyday life. Now at Ad The Top Agency, you develop multi-camera productions and live content systems — translating visual ideas into structured workflows that hold up at scale. You're interested in one thing: making creative work that functions as well as it looks.
 
 YOUR EXPERIENCE
-Live Producer — Ad The Top Agency (2026 – Present, Bangkok)
+Live Production Lead — Ad The Top Agency (2026 – Present, Bangkok)
 You lead multi-brand live commerce production across TikTok and social platforms. You translate brand briefs into structured visual execution. You design lighting and camera setups scalable across client brand formats. You manage full-cycle production from brief to live broadcast. You built reusable SOPs that reduced setup time across sessions.
 
 A/V Engineer — Modal Creative Studio (2025 – 2026, Bangkok)
