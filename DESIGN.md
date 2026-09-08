@@ -193,8 +193,10 @@ system, and it is what `.mono-label` in `globals.css` encodes.
 
 **The 11px Floor.** No text below 11px. The system previously ran labels at 9px and
 8px; they were illegible and several failed contrast at the same time. `.mono-label`
-is 11px and that is the floor for every label, in print units too — the CV's screen
-rendering scales its `pt` values up under 860px for exactly this reason.
+is 11px and that is the floor for every label, in print units too: the CV prints at
+8.5pt labels and nothing smaller. On screen the CV is set in the site's reading steps
+like every other page (since 8 September 2026; before that it was an A4 facsimile at
+print sizes), and only `@media print` compacts it onto one sheet.
 
 **The Scale Rule.** At least a 1.25 ratio between adjacent reading steps. Flat scales
 read as indecision.
