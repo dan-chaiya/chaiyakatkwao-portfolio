@@ -1,9 +1,11 @@
 "use client";
 
 // components/HeroStage.tsx — the home hero.
-// Brutalist + Swiss grid: an auto-looping showcase of the work with the person's name
-// as the title (not per-slide metadata). Three rows inside the fold: the mono label,
-// the stage, and the name row with the slideshow controls.
+// Brutalist + Swiss grid: an auto-looping showcase of the work. Three rows inside the
+// fold: the header line (the name as one small line of the heading voice, with the
+// positioning label beside it), the stage, and the disciplines row with the slideshow
+// controls. The stage takes everything the two text rows do not: since 2026-09-08 the
+// name no longer sits at display size under the work, so the work is the hero.
 // The stage shows the ORIGINAL uncropped work (object-contain) on the black ground —
 // no scrim, no gradient bands, no blurred fill. The text rows are in flow, on black,
 // so nothing has to be dimmed for legibility and the work is shown at full contrast.
@@ -96,13 +98,29 @@ export default function HeroStage() {
         borderBottom: "1px solid var(--color-border)",
       }}
     >
-      {/* Row 1: the label, in flow. */}
-      <p
-        className="mono-label shrink-0"
-        style={{ color: "var(--color-warm)", padding: `24px ${PAD_X} 16px` }}
+      {/* Row 1: the header line. The name is one small line, in flow, with the
+          positioning label beside it; on phones the two stack. */}
+      <div
+        className="flex shrink-0 flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+        style={{ padding: `20px ${PAD_X} 16px` }}
       >
-        Creative Producer — Bangkok
-      </p>
+        <h1
+          style={{
+            fontFamily: "var(--font-heading)",
+            fontWeight: 800,
+            fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)",
+            lineHeight: 1,
+            letterSpacing: "-0.02em",
+            color: "var(--color-warm)",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Chaiya Katkwao.
+        </h1>
+        <p className="mono-label" style={{ color: "var(--color-warm)" }}>
+          Creative Producer — Bangkok
+        </p>
+      </div>
 
       {/* Row 2: the stage. Each slide is the work, contained, on the black ground.
           Portrait work stands in the middle; landscape work fills the height. */}
@@ -145,28 +163,14 @@ export default function HeroStage() {
         ))}
       </div>
 
-      {/* Row 3: name + disciplines anchored left; slideshow controls right. */}
+      {/* Row 3: disciplines left; slideshow controls right. One line on desktop. */}
       <div
-        className="flex shrink-0 flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6"
-        style={{ padding: `24px ${PAD_X} 32px` }}
+        className="flex shrink-0 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+        style={{ padding: `16px ${PAD_X} 24px` }}
       >
-        <div>
-          <h1
-            style={{
-              fontFamily: "var(--font-heading)",
-              fontWeight: 400,
-              fontSize: "clamp(2.75rem, 7vw, 6.25rem)",
-              lineHeight: 0.92,
-              letterSpacing: "-0.02em",
-              color: "var(--color-warm)",
-            }}
-          >
-            Chaiya /<br />Katkwao.
-          </h1>
-          <p className="mono-label" style={{ marginTop: "18px", color: "var(--color-warm)" }}>
-            Art Direction · Production · Photography
-          </p>
-        </div>
+        <p className="mono-label" style={{ color: "var(--color-warm)" }}>
+          Art Direction · Production · Photography
+        </p>
         {/* The counter implied controls that did not exist. Now it is one: pause
             stops the rotation, and the slide marks step it. Hidden entirely under
             reduced motion, where nothing is rotating to begin with. */}
