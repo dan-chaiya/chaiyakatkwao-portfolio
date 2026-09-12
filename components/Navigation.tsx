@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { EASE } from "@/lib/motion";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -75,10 +76,7 @@ export default function Navigation() {
         Skip to content
       </a>
 
-      <motion.header
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+      <header
         className="sticky top-0 left-0 right-0 z-50"
         style={{
           borderBottom: "1px solid rgba(249,249,249,0.07)",
@@ -174,15 +172,15 @@ export default function Navigation() {
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
           >
-            <span className="block h-px bg-current transition-all duration-300 origin-center"
+            <span className="block h-px bg-current transition-[transform,opacity] duration-200 ease-out origin-center"
               style={{ width: "18px", transform: open ? "rotate(45deg) translateY(6px)" : "none" }} />
-            <span className="block h-px bg-current transition-all duration-300"
+            <span className="block h-px bg-current transition-[transform,opacity] duration-200 ease-out"
               style={{ width: "18px", opacity: open ? 0 : 1 }} />
-            <span className="block h-px bg-current transition-all duration-300 origin-center"
+            <span className="block h-px bg-current transition-[transform,opacity] duration-200 ease-out origin-center"
               style={{ width: "18px", transform: open ? "rotate(-45deg) translateY(-6px)" : "none" }} />
           </button>
         </div>
-      </motion.header>
+      </header>
 
       {/* Mobile full-screen overlay */}
       <AnimatePresence>
@@ -203,7 +201,7 @@ export default function Navigation() {
                   key={link.href}
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ delay: i * 0.05, duration: 0.3, ease: EASE.out }}
                 >
                   <Link
                     href={link.href}

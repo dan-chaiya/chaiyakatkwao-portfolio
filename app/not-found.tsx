@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { EASE } from "@/lib/motion";
 import Link from "next/link";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
@@ -13,7 +14,7 @@ export default function NotFound() {
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, ease: EASE.out }}
             className="font-body text-[11px] tracking-[0.35em] uppercase text-[var(--color-text-muted)] mb-5"
           >
             404
@@ -21,7 +22,7 @@ export default function NotFound() {
           <motion.h1
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.1, delay: 0.08, ease: EASE.out }}
             className="font-heading text-[var(--color-warm)] mb-10"
             style={{
               fontSize: "clamp(3rem, 8vw, 7rem)",

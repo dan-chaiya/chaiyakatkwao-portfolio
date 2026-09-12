@@ -48,6 +48,12 @@
   --font-body:    var(--font-archivo);
   --font-mono:    var(--font-jetbrains-mono);
   --font-heading: var(--font-archivo-black);
+
+  /* === MOTION === */
+  /* The signature curve from lib/motion.ts (EASE.out), as the Tailwind token, so every
+     `ease-out` utility and every `var(--ease-out)` in an inline style is the same curve.
+     Tailwind's own --ease-out is a soft (0, 0, 0.2, 1); this replaces it. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* This reset MUST stay inside @layer base. Tailwind v4 emits its utilities in

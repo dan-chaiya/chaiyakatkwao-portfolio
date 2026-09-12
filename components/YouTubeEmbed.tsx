@@ -38,7 +38,7 @@ export default function YouTubeEmbed({ id, title }: Props) {
           />
           <div className="absolute inset-0 bg-[#0D0D0D]/60 group-hover:bg-[#0D0D0D]/40 transition-colors duration-500" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-16 h-16 md:w-20 md:h-20 border border-[#F2F0EB] rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-[#F2F0EB]/10 group-hover:scale-105">
+            <div className="w-16 h-16 md:w-20 md:h-20 border border-[#F2F0EB] rounded-full flex items-center justify-center transition-[transform,background-color] duration-200 ease-out group-hover:bg-[#F2F0EB]/10 group-hover:scale-105">
               <div
                 className="w-0 h-0 border-y-transparent translate-x-[2px]"
                 style={{
