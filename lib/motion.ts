@@ -14,6 +14,7 @@ export const EASE = {
 /** Durations in seconds. */
 export const DUR = {
   micro: 0.2,  // hover, focus, button
+  route: 0.25, // the page fade in PageTransition: runs on every navigation, so it stays short
   base: 0.6,   // labels, small text
   enter: 0.9,  // section entrances
   media: 1.2,  // full-bleed image / video reveals

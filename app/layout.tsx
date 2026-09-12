@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo, Archivo_Black, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import MotionProvider from "@/components/MotionProvider";
 import {
   absoluteUrl,
   DEFAULT_DESCRIPTION,
@@ -107,8 +108,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       </head>
       <body>
-        <Navigation />
-        {children}
+        <MotionProvider>
+          <Navigation />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );

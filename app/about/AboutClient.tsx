@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
@@ -246,22 +245,18 @@ export default function AboutClient() {
             connect.
           </h2>
           <div className="flex flex-wrap items-center gap-4">
-            <motion.a
+            <a
               href="mailto:chaiyakatkwao@gmail.com"
-              whileHover={{ y: -3 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="font-body inline-block text-xs tracking-[0.05em] sm:tracking-[0.2em] uppercase text-[var(--color-warm)] border border-[var(--color-warm)] px-4 sm:px-8 py-4 hover:bg-[var(--color-warm)] hover:text-[var(--color-surface-chat)] transition-all duration-500"
+              className="font-body inline-block text-xs tracking-[0.05em] sm:tracking-[0.2em] uppercase text-[var(--color-warm)] border border-[var(--color-warm)] px-4 sm:px-8 py-4 hover:bg-[var(--color-warm)] hover:text-[var(--color-surface-chat)] transition-colors duration-200"
             >
               chaiyakatkwao@gmail.com
-            </motion.a>
-            <motion.a
+            </a>
+            <a
               href="/cv"
-              whileHover={{ y: -3 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="font-body inline-block text-xs tracking-[0.2em] uppercase text-[var(--color-grey-500)] border border-[var(--color-grey-700)] px-8 py-4 hover:border-[var(--color-warm)] hover:text-[var(--color-warm)] transition-all duration-500"
+              className="font-body inline-block text-xs tracking-[0.2em] uppercase text-[var(--color-grey-500)] border border-[var(--color-grey-700)] px-8 py-4 hover:border-[var(--color-warm)] hover:text-[var(--color-warm)] transition-colors duration-200"
             >
               View CV →
-            </motion.a>
+            </a>
           </div>
         </div>
       </section>

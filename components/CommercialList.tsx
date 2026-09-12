@@ -65,11 +65,13 @@ export default function CommercialList({ projects }: { projects: Project[] }) {
             {project.year}
           </span>
 
-          {/* Hover thumbnail (desktop) — the cover, revealed, never altered */}
+          {/* Hover thumbnail (desktop) — the cover, revealed, never altered. The rest
+              transform is in the class list, not the style prop, so the hover variant
+              can change it. */}
           <span
             aria-hidden
-            className="pointer-events-none absolute right-24 top-1/2 z-10 hidden -translate-y-1/2 overflow-hidden opacity-0 transition-all duration-300 ease-out lg:block group-hover:opacity-100 group-focus-visible:opacity-100"
-            style={{ width: "92px", height: "120px", transform: "translateY(-50%) scale(0.96)" }}
+            className="pointer-events-none absolute right-24 top-1/2 z-10 hidden overflow-hidden opacity-0 [transform:translateY(-50%)_scale(0.96)] transition-[opacity,transform] duration-200 ease-out lg:block group-hover:opacity-100 group-hover:[transform:translateY(-50%)_scale(1)] group-focus-visible:opacity-100 group-focus-visible:[transform:translateY(-50%)_scale(1)]"
+            style={{ width: "92px", height: "120px" }}
           >
             <Image src={project.cover} alt={`${project.title} - Creative Producer Portfolio`} fill sizes="92px" className="object-cover" />
           </span>

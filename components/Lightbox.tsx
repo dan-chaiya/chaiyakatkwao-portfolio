@@ -2,6 +2,7 @@
 
 import { useEffect, useCallback, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { EASE } from "@/lib/motion";
 
 export interface LightboxProps {
   src: string;
@@ -21,7 +22,6 @@ export default function Lightbox({
   src, alt, title, series, index, total,
   hasPrev, hasNext, onClose, onPrev, onNext,
 }: LightboxProps) {
-  const navigating = useRef(false);
   const hasMultiple = (total ?? 0) > 1;
 
   // First-open swipe hint (B6): show briefly so users know the set changes. The
@@ -34,19 +34,14 @@ export default function Lightbox({
     return () => clearTimeout(t);
   }, [hasMultiple]);
 
-  // Debounce prevents page crash from rapid clicking
   const handlePrev = useCallback(() => {
-    if (navigating.current || !hasPrev) return;
-    navigating.current = true;
+    if (!hasPrev) return;
     onPrev?.();
-    setTimeout(() => { navigating.current = false; }, 350);
   }, [hasPrev, onPrev]);
 
   const handleNext = useCallback(() => {
-    if (navigating.current || !hasNext) return;
-    navigating.current = true;
+    if (!hasNext) return;
     onNext?.();
-    setTimeout(() => { navigating.current = false; }, 350);
   }, [hasNext, onNext]);
 
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -109,7 +104,7 @@ export default function Lightbox({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+      transition={{ duration: 0.3, ease: EASE.out }}
       className="fixed inset-0 z-[100] flex flex-col outline-none"
       style={{ backgroundColor: "rgba(10, 10, 10, 0.97)" }}
       onClick={onClose}
@@ -132,7 +127,7 @@ export default function Lightbox({
           <button
             onClick={onClose}
             aria-label="Close"
-            className="flex items-center justify-center w-11 h-11 text-[var(--color-grey-200)] hover:text-white transition-all duration-200 cursor-pointer border border-[var(--color-grey-500)] hover:border-[var(--color-grey-300)] hover:bg-white/10"
+            className="flex items-center justify-center w-11 h-11 text-[var(--color-grey-200)] hover:text-white transition-colors duration-200 cursor-pointer border border-[var(--color-grey-500)] hover:border-[var(--color-grey-300)] hover:bg-white/10"
           >
             <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
               <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -151,7 +146,7 @@ export default function Lightbox({
           <button
             onClick={handlePrev}
             disabled={!hasPrev}
-            className={`absolute left-2 md:left-6 z-10 flex items-center justify-center w-12 h-12 transition-all duration-200 border ${
+            className={`absolute left-2 md:left-6 z-10 flex items-center justify-center w-12 h-12 transition-colors duration-200 border ${
               hasPrev ? "text-[var(--color-grey-200)] hover:text-white border-[var(--color-grey-500)] hover:border-[var(--color-grey-300)] hover:bg-white/10 cursor-pointer" : "text-[#4A4844] border-[#3A3735] cursor-default"
             }`}
             aria-label="Previous image"
@@ -162,9 +157,11 @@ export default function Lightbox({
           </button>
         )}
 
-        {/* Image */}
+        {/* Image. Mounted once per open: the scale-in is the arrival, and stepping
+            through the set swaps the picture instantly. Prev/next is a key-repeat
+            action (arrow keys), and animating each step made the set feel slow to
+            flip through. exit still runs on close via the parent AnimatePresence. */}
         <motion.div
-          key={src}
           initial={{ scale: 0.94, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.96, opacity: 0 }}
@@ -173,8 +170,9 @@ export default function Lightbox({
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.08}
           onDragEnd={(_, info) => {
-            if (info.offset.x < -60) handleNext();
-            if (info.offset.x > 60) handlePrev();
+            // A flick counts as well as a long drag: velocity is px/s.
+            if (info.offset.x < -60 || info.velocity.x < -110) handleNext();
+            else if (info.offset.x > 60 || info.velocity.x > 110) handlePrev();
           }}
           className="relative flex items-center justify-center w-full select-none"
           style={{ maxHeight: "calc(100vh - 140px)", cursor: "grab" }}
@@ -199,7 +197,7 @@ export default function Lightbox({
           <button
             onClick={handleNext}
             disabled={!hasNext}
-            className={`absolute right-2 md:right-6 z-10 flex items-center justify-center w-12 h-12 transition-all duration-200 border ${
+            className={`absolute right-2 md:right-6 z-10 flex items-center justify-center w-12 h-12 transition-colors duration-200 border ${
               hasNext ? "text-[var(--color-grey-200)] hover:text-white border-[var(--color-grey-500)] hover:border-[var(--color-grey-300)] hover:bg-white/10 cursor-pointer" : "text-[#4A4844] border-[#3A3735] cursor-default"
             }`}
             aria-label="Next image"
@@ -217,7 +215,7 @@ export default function Lightbox({
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, ease: EASE.out }}
               className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 border border-[var(--color-border-strong)] bg-black/40 backdrop-blur-sm"
             >
               <span className="text-[13px] leading-none text-[var(--color-grey-300)]">‹</span>

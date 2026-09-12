@@ -183,7 +183,7 @@ export default function CommercialClient() {
                   priority={i === 0}
                 />
                 <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/30 transition-colors duration-500" />
-                <div className="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-500">
+                <div className="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-[opacity,transform] duration-200 ease-out">
                   <span className="font-body text-[11px] tracking-[0.25em] uppercase text-[var(--color-warm)] border border-[var(--color-warm)] px-3 py-2">
                     View case study →
                   </span>
@@ -270,7 +270,7 @@ export default function CommercialClient() {
                             alt={`${project.title} ${j + 2} - Creative Producer`}
                             fill
                             sizes="(max-width: 768px) 33vw, 20vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
+                            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
                           />
                         ) : (
                           <Image
@@ -279,7 +279,7 @@ export default function CommercialClient() {
                             width={0}
                             height={0}
                             sizes="(max-width: 768px) 33vw, 20vw"
-                            className="img-natural transition-transform duration-500 group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
+                            className="img-natural transition-transform duration-500 ease-out group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
                           />
                         )}
                       </button>

@@ -1,14 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { DUR, EASE } from "@/lib/motion";
 
+// The one entrance that runs on every navigation. Opacity only: no travel, so it
+// stays on the compositor and never fights hydration for the main thread. There is
+// no AnimatePresence around the route, so an exit animation would never run.
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -24 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: DUR.route, ease: EASE.out }}
     >
       {children}
     </motion.div>

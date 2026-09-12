@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import Footer from "@/components/Footer";
 import HeroStage from "@/components/HeroStage";
+import PageTransition from "@/components/PageTransition";
 import { workAssets } from "@/data/work-asset-urls";
 
 const sections = [
@@ -47,7 +48,7 @@ export default function PortfolioHome() {
   const reduced = useReducedMotion();
 
   return (
-    <>
+    <PageTransition>
       <main id="main-content">
         {/* ── ACT I: HERO ────────────────────────────────────────── */}
         <HeroStage />
@@ -228,7 +229,7 @@ export default function PortfolioHome() {
       </main>
 
       <Footer />
-    </>
+    </PageTransition>
   );
 }
 
@@ -256,7 +257,7 @@ function DisciplineRow({ label, index: i, total }: { label: string; index: numbe
         color: hovered ? "var(--color-text)" : "var(--color-grey-300)",
         letterSpacing: "0.005em",
         transform: hovered ? "translateX(6px)" : "translateX(0px)",
-        transition: "color 200ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1)",
+        transition: "color 200ms ease, transform 250ms var(--ease-out)",
       }}>
         {label}
       </span>
@@ -294,7 +295,7 @@ function FeaturedCard() {
           sizes="100vw"
           className="object-cover"
           style={{
-            transition: "transform 1000ms cubic-bezier(0.16, 1, 0.3, 1)",
+            transition: "transform 1000ms var(--ease-out)",
             transform: hovered ? "scale(1.04)" : "scale(1)",
           }}
         />
@@ -351,7 +352,7 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
           sizes="(max-width: 768px) 100vw, 33vw"
           className="object-cover object-center"
           style={{
-            transition: "transform 800ms cubic-bezier(0.16, 1, 0.3, 1)",
+            transition: "transform 800ms var(--ease-out)",
             transform: hovered ? "scale(1.05)" : "scale(1)",
           }}
         />
