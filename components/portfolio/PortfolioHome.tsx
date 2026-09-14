@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
@@ -234,11 +233,10 @@ export default function PortfolioHome() {
 }
 
 function DisciplineRow({ label, index: i, total }: { label: string; index: number; total: number }) {
-  const [hovered, setHovered] = useState(false);
+  // Not a link: hover only brightens the text. No movement, which would read as clickable.
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className="group"
       style={{
         borderTop: "1px solid var(--color-border)",
         ...(i === total - 1 ? { borderBottom: "1px solid var(--color-border)" } : {}),
@@ -250,24 +248,25 @@ function DisciplineRow({ label, index: i, total }: { label: string; index: numbe
         transition: "none",
       }}
     >
-      <span style={{
-        fontFamily: "var(--font-archivo)",
-        fontSize: "0.875rem",
-        fontWeight: 500,
-        color: hovered ? "var(--color-text)" : "var(--color-grey-300)",
-        letterSpacing: "0.005em",
-        transform: hovered ? "translateX(6px)" : "translateX(0px)",
-        transition: "color 200ms ease, transform 250ms var(--ease-out)",
-      }}>
+      <span
+        className="text-[var(--color-grey-300)] transition-colors duration-200 group-hover:text-[var(--color-text)]"
+        style={{
+          fontFamily: "var(--font-archivo)",
+          fontSize: "0.875rem",
+          fontWeight: 500,
+          letterSpacing: "0.005em",
+        }}
+      >
         {label}
       </span>
-      <span style={{
-        fontFamily: "var(--font-jetbrains-mono)",
-        fontSize: "11px",
-        color: hovered ? "var(--color-text)" : "var(--color-text-muted)",
-        letterSpacing: "0.15em",
-        transition: "color 200ms ease",
-      }}>
+      <span
+        className="text-[var(--color-text-muted)] transition-colors duration-200 group-hover:text-[var(--color-text)]"
+        style={{
+          fontFamily: "var(--font-jetbrains-mono)",
+          fontSize: "11px",
+          letterSpacing: "0.15em",
+        }}
+      >
         {String(i + 1).padStart(2, "0")}
       </span>
     </div>
@@ -279,13 +278,11 @@ function DisciplineRow({ label, index: i, total }: { label: string; index: numbe
 // over the image went on 2026-09-08, the same move as the hero: nothing is layered
 // over the work, so legibility never costs the photograph anything.
 function FeaturedCard() {
-  const [hovered, setHovered] = useState(false);
   return (
     <Link
       href="/commercial"
+      className="group"
       style={{ display: "block", color: "inherit", textDecoration: "none" }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "var(--color-surface)" }}>
         <Image
@@ -293,11 +290,7 @@ function FeaturedCard() {
           alt="Knack Factory Fashion Show 2024 — Creative Producer Portfolio"
           fill
           sizes="100vw"
-          className="object-cover"
-          style={{
-            transition: "transform 1000ms var(--ease-out)",
-            transform: hovered ? "scale(1.04)" : "scale(1)",
-          }}
+          className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
         />
       </div>
       <div
@@ -322,10 +315,7 @@ function FeaturedCard() {
             Fashion Show, 2024
           </h2>
         </div>
-        <p
-          className="mono-label"
-          style={{ transition: "color 200ms ease", color: hovered ? "var(--color-text)" : undefined }}
-        >
+        <p className="mono-label transition-colors duration-200 group-hover:text-[var(--color-text)]! group-focus-visible:text-[var(--color-text)]!">
           Commercial Production →
         </p>
       </div>
@@ -336,52 +326,52 @@ function FeaturedCard() {
 type SectionItem = { index: string; title: string; href: string; cover: string; coverAlt: string };
 
 function TriptychCard({ section: s }: { section: SectionItem }) {
-  const [hovered, setHovered] = useState(false);
   return (
-    <Link
-      href={s.href}
-      style={{ display: "block" }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <Link href={s.href} className="group" style={{ display: "block" }}>
       <div className="aspect-video sm:aspect-[3/4]" style={{ position: "relative", overflow: "hidden" }}>
         <Image
           src={s.cover}
           alt={s.coverAlt}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover object-center"
-          style={{
-            transition: "transform 800ms var(--ease-out)",
-            transform: hovered ? "scale(1.05)" : "scale(1)",
-          }}
+          className="object-cover object-center transition-transform duration-[800ms] ease-out group-hover:scale-[1.05] group-focus-visible:scale-[1.05]"
         />
-        {/* Gradient overlay — deepens on hover */}
+        {/* Gradient overlay. A gradient cannot be transitioned into another gradient, so the
+            deeper hover wash is a second layer that fades in by opacity. Stacked on the rest
+            gradient it equals the old hover gradient: 0.88 at the bottom, 0.2 at 55%. */}
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: hovered
-              ? "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 55%, transparent 100%)"
-              : "linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%)",
-            transition: "background 500ms ease",
+            background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%)",
             display: "flex",
             alignItems: "flex-end",
             padding: "24px",
             pointerEvents: "none",
           }}
         >
-          <div style={{ width: "100%", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
+          <div
+            aria-hidden="true"
+            className="opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(to top, rgba(0,0,0,0.57) 0%, rgba(0,0,0,0.2) 55%, transparent 100%)",
+              transition: "opacity 300ms ease",
+            }}
+          />
+          <div style={{ position: "relative", width: "100%", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
             <div>
-              <p style={{
-                fontFamily: "var(--font-jetbrains-mono)",
-                fontSize: "11px",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: hovered ? "rgba(249,249,249,0.9)" : "rgba(249,249,249,0.5)",
-                marginBottom: "6px",
-                transition: "color 300ms ease",
-              }}>
+              <p
+                className="text-[rgba(249,249,249,0.5)] transition-colors duration-300 group-hover:text-[rgba(249,249,249,0.9)] group-focus-visible:text-[rgba(249,249,249,0.9)]"
+                style={{
+                  fontFamily: "var(--font-jetbrains-mono)",
+                  fontSize: "11px",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  marginBottom: "6px",
+                }}
+              >
                 {s.index}
               </p>
               <p style={{

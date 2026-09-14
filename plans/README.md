@@ -1,8 +1,10 @@
 # Animation plans — chaiyakatkwao.com
 
-Written by the `improve-animations` audit on 2026-09-12 against commit `96c93e8` (branch `main`).
+Written by the `improve-animations` audit on 2026-09-12 against commit `96c93e8` (plans 001–006),
+and a second audit on 2026-09-14 against `4726a87` (plans 007–010, after 001–006 went live).
 Each plan is self-contained: an executor with no other context can run it. Line numbers are as of
-`96c93e8`; if the file has moved on, match by the quoted code, and stop if it does not match.
+the commit stamped in each plan; if the file has moved on, match by the quoted code, and stop if it
+does not match.
 
 Plans change **motion only**. None of them changes the look, the copy, the layout or the markup
 beyond what a motion fix needs (one `<motion.header>` → `<header>`, two `<motion.a>` → `<a>`, one
@@ -18,8 +20,21 @@ provider wrapper).
 | [004](004-nav-arrives-instantly.md) | Let the nav arrive instantly and tidy the hamburger | HIGH | `components/Navigation.tsx` | DONE |
 | [005](005-lightbox-step-without-animation.md) | Stop animating lightbox prev/next; keep the scale-in for open only | HIGH | `components/Lightbox.tsx` | DONE |
 | [006](006-transition-all-sweep.md) | Replace every `transition: all` with named properties, fix the two effects it hid | HIGH | `components/Lightbox.tsx`, `components/CommercialList.tsx`, `app/commercial/CommercialClient.tsx`, `components/YouTubeEmbed.tsx`, `app/about/AboutClient.tsx` | DONE |
+| [007](007-no-smooth-scroll-on-navigation.md) | Stop the new page rolling up to the top on every navigation | HIGH | `app/globals.css` | DONE |
+| [008](008-hero-pick-a-slide-that-stays.md) | Let a picked hero slide stay, and answer the click in 300ms | HIGH | `components/HeroStage.tsx` | DONE |
+| [009](009-home-cards-css-hover.md) | Home cards: hover in CSS, not on tap, with a wash that actually fades | MEDIUM | `components/portfolio/PortfolioHome.tsx` | DONE |
+| [010](010-commercial-view-toggle-fade.md) | Fade the Commercial grid/list view in after a toggle | LOW (additive) | `app/commercial/CommercialClient.tsx` | DONE |
 
-## Recommended order
+## Recommended order — round 2 (007–010)
+
+1. **007**: the biggest felt problem (measured live: 1.2s+ of the page scrolling itself after a footer link), a 4-line deletion.
+2. **008**: the hero slide marks start working (measured live: a picked slide was replaced after 500ms).
+3. **009**: Home cards stop reacting to taps on phones; the section wash fades instead of jumping.
+4. **010**: additive polish on `/commercial`; do it last.
+
+The four plans touch four different files and share no lines; any order works.
+
+## Recommended order — round 1 (001–006, done)
 
 1. **001** — the biggest change to how the site feels, one small file.
 2. **004** — the nav arrives instantly.
@@ -28,7 +43,7 @@ provider wrapper).
 5. **003** — the curve token. Run after 004 and 006 so their new `ease-out` classes pick up the signature curve, and so its verification grep is clean.
 6. **002** — the reduced-motion provider. Independent; last only because its feel check is easier once the others are in.
 
-## Dependencies and overlaps
+## Dependencies and overlaps — round 1
 
 The plans are independent and can run in any order; no two plans edit the same lines. Three files are touched by more than one plan, at different places:
 
@@ -44,30 +59,40 @@ After all six: `grep -rn "transition-all" app components` returns nothing, and `
 
 ## Findings not yet planned
 
-Vetted in the same audit, left for a later pass or for a one-line edit. Ask for a plan for any of them.
+Re-vetted against `4726a87` on 2026-09-14. Ask for a plan for any of them. Findings from the first
+audit that are now planned were moved out of this table: the triptych gradient snap, React-state
+hovers and DisciplineRow slide (→ 009), the hero click fade (→ 008, which also fixes the timer not
+resetting on a click), and `scroll-behavior: smooth` (→ 007, raised to HIGH: under Next 16 it
+animates every navigation, not only the skip link).
 
 | Severity | Location | Finding | Fix summary |
 | --- | --- | --- | --- |
-| MEDIUM | `components/portfolio/PortfolioHome.tsx:363-366` | `transition: background 500ms ease` on a `linear-gradient`. Gradients do not interpolate, so the overlay snaps while the photo zooms over 800ms beneath it. | Two stacked overlay `<div>`s (rest gradient, hover gradient); transition `opacity` on the hover layer over 300ms. |
-| MEDIUM | `components/HeroStage.tsx:132-135` | Auto-advance and a click on a slide mark share one 1200ms cross-fade; a click that takes 1.2s to answer feels broken. Both slides at 50% over black also dip visibly mid-fade. | Keep 1200ms for auto-advance; ~450ms when `active` was set by a click. Fade only the incoming slide on top and hide the outgoing after. Curve: `ease-out` (signature, after plan 003). |
-| MEDIUM | `components/portfolio/PortfolioHome.tsx:281-288, 338-345` | Hover state via React `useState` + `onMouseEnter`. `onMouseEnter` fires on tap on phones, so the zoom plays as the page navigates away; each hover re-renders the card. | Move the zoom to CSS `group-hover:scale-[1.04]` / `[1.05]` classes on the `<Image>` and drop the state. Tailwind v4 gates `hover:` behind `@media (hover: hover)` for free. |
-| LOW | `components/portfolio/PortfolioHome.tsx:258-259` | DisciplineRow slides `translateX(6px)` on hover, but the rows are not links (`cursor: default`). Motion on hover signals "clickable". | Remove the `transform` and its transition; keep the colour change. |
+| MEDIUM | `components/Lightbox.tsx:169-176` | On a phone swipe the photo moves only 8% of the finger's travel (`dragElastic={0.08}` with zero constraints), so it feels locked. Cannot be judged from code. | **Swipe on a real phone first.** If it feels stuck: let the photo follow the finger, and on a committed swipe slide it out and the next one in from the opposite side (~250ms). Arrow keys and buttons stay instant (plan 005). May conclude "leave it". |
+| LOW | `components/Lightbox.tsx:164-168` | On close, the backdrop fades out in 300ms but the image's exit spring (`damping: 30, stiffness: 250`) keeps the invisible dialog mounted until ~500ms, swallowing a quick click on the page. | `exit={{ scale: 0.96, opacity: 0, transition: { duration: 0.3, ease: EASE.out } }}` on the image so both finish together. |
 | LOW | `app/commercial/[slug]/CaseStudyClient.tsx:128, 174` | `group-hover:scale-[1.01]` over 700ms: invisible, but promotes every full-width photo to its own compositor layer. | Delete `transition-transform duration-700 ease-out group-hover:scale-[1.01]` from both `className`s. |
 | LOW | `app/not-found.tsx:13-39` | Children fade 0.7s / 1.1s / 0.8s inside a `PageTransition` that also fades. Nested fades read as muddy. 404 is rare, so delight is allowed; this is about clarity. | Drop `opacity` from the three children's `initial`/`animate` (keep the `y` rise), h1 duration 1.1 → 0.6. |
-| LOW | `app/globals.css:239-250, 271` | `.kenburns` is unused since the hero rebuild. | Delete the `@keyframes kenburns`, `.kenburns`, its reduced-motion rule at 248-250, and the line `.kenburns { animation: none !important; }` at 271. |
-| LOW | `public/systems/styles.css:532-536` | Reduced-motion block clamps every transition to 1ms, which also kills hover colour feedback. | Mirror `app/globals.css:256-272`: keep `color, background-color, border-color, opacity, outline-color` at 120ms, stop everything else. |
-| LOW | `app/globals.css:66-68` | `scroll-behavior: smooth` on `html` animates the keyboard skip-link jump. Reduced motion already sets it to `auto`. | Remove it, or scope it away from `:focus` targets. Minor. |
+| LOW | `app/globals.css:245-256, 277` | `.kenburns` is unused since the hero rebuild (no reference outside `globals.css`). | Delete the comment and `@keyframes kenburns` at 245-250, `.kenburns` at 251-253, its reduced-motion rule at 254-256, and the line `.kenburns { animation: none !important; }` at 277. |
+| LOW | `public/systems/styles.css:532-536` | Reduced-motion block clamps every transition to 1ms, which also kills hover colour feedback. | Mirror `app/globals.css:262-278`: keep `color, background-color, border-color, opacity, outline-color` at 120ms, stop everything else. |
 
 ## Missed opportunities
 
-Additive, not corrective. Grounded in seams seen on the live site; none is planned yet.
+Additive, not corrective. Re-swept on 2026-09-14 with `find-animation-opportunities`.
 
-1. **Commercial grid ↔ list toggle** (`app/commercial/CommercialClient.tsx:165-167`). The two views swap instantly with a large layout jump (a tall `space-y-32` grid vs a dense list). A 150ms opacity crossfade of the container on toggle would stop the teleport without slowing the toggle.
-2. **Hero controls and lightbox buttons have no press feedback.** The pause button, the slide marks, the ✕ and the arrows (`components/HeroStage.tsx:179-199`, `components/Lightbox.tsx:132-140, 151-162, 199-210`). `active:scale-[0.97]` with `transition-transform duration-150 ease-out` on these few buttons only would give a physical answer to a press. Keep it off text links; the site's voice is flat, and this belongs only on the controls that behave like hardware.
-3. **New chat bubbles pop in** (`app/chat/ChatInterface.tsx:132-140`). Each message appears from nothing. A CSS `@starting-style` entrance of `opacity: 0; transform: translateY(4px)` over 150ms would settle each bubble without any JS and without slowing a conversation.
+1. **Commercial grid ↔ list toggle**: planned as **010**.
+2. **New chat bubbles pop in** (`app/chat/ChatInterface.tsx:132-140`). Each message appears from nothing. A `.chat-bubble` class in `app/globals.css`: `transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out)` with `@starting-style { opacity: 0; transform: translateY(4px); }`. Skip the opening message (`m.id !== "opening"`) so nothing moves on page load; apply the same class to the error bubble. The streamed text inside a bubble does not animate.
+3. **The chat's `...` placeholder is static** (`app/chat/ChatInterface.tsx:135-137`) while waiting for the first word. Reuse the existing `@keyframes pulse` (`app/globals.css:240-243`, opacity 1 → 0.3 → 1), as the Home "Available" dot does (`components/portfolio/PortfolioHome.tsx:160`): `animation: pulse 2s ease-in-out infinite`. The global reduced-motion block already stops it. Only worth doing if replies take longer than ~300ms to start; check by hand.
+4. **/systems phone menu appears in one frame** (`public/systems/styles.css:315-324`) while the main site's menu fades in over 150ms. `.menu__panel { transition: opacity 150ms var(--ease); }` with `@starting-style { .menu[open] .menu__panel { opacity: 0; } }`. It lives in a `<details>` element, so some browsers may not run it; the fallback is today's instant open.
+
+**Rejected on 2026-09-14 (do not build without asking CK):** press feedback (`active:scale-[0.97]`) on the hero controls and lightbox buttons, proposed in the first audit. Every one of those presses already produces an instant visible result (the slide or image changes, the play/pause icon flips, the lightbox closes), the lightbox arrows are pressed tens of times per set, and the site's voice is flat. Also rejected in the same sweep: a sliding underline between nav links (core navigation), staggered grid entrances and fade-in on image load (both hold back the work; `lib/motion.ts` records that content is visible at rest), and a fade on the YouTube thumbnail → player swap (the gap is the player loading, which a fade cannot fix).
 
 ## Execution log
 
+- **2026-09-14** — plans 007–010 applied by an executor agent in a worktree on branch `motion-plans-007-010` (from `main` at `4726a87`). Every quoted block matched once; no deviations. `npx tsc --noEmit` 0, `npm run lint` 0, `npm run build` 0 (all routes). (A first attempt using the Agent tool's own worktree was based on the repo's configured default branch `motion-upgrade`, `5dc57cd`, and correctly stopped before editing; the worktree was then created from `main` by hand.) Browser checks on the production build:
+  - 007: bottom of Home → footer "Commercial": `scrollY` 2367 → 0 in one jump (before: a 1.2s+ decreasing run).
+  - 008: a picked slide stayed current 6028ms; slide layers `transition-duration` 0.3s after a click, 1.2s after the next auto-advance.
+  - 009: real mouse hover on the Gallery section card: wash opacity 0 → 0.35 (50ms) → 0.67 (100ms) → 0.95 (200ms) → 1 (300ms); image `scale` reaches 1.05 by ~900ms; index colour 0.5 → 0.9 alpha. Built CSS puts every new `group-hover` rule inside `@media (hover: hover)`; the caption's `group-hover:text-[var(--color-text)]!` compiles with `!important`, so it beats the unlayered `.mono-label` colour. With phone emulation (390px, mobile, touch) `(hover: hover)` is false. The only remaining `onMouseEnter` on the cards is next/link's own prefetch handler, identical to the footer links.
+  - 010: no fade class before the first toggle; list and grid each ramp opacity 0 → 1 in ~200ms; 7 presses 40ms apart each answered in the next frame and ended fully opaque on the right view.
+  - Not checked: `prefers-reduced-motion` in a browser (the DevTools tool here cannot emulate it; the global CSS block that governs it is unchanged), and a real phone.
 - **2026-09-12** — all six plans applied on branch `motion-fixes` (from `96c93e8`), by exact-match replacement; every step matched the quoted code once. `npx tsc --noEmit` 0, `npm run lint` 0, `npm run build` compiled all 16 routes. Browser checks on the production build (`next start -p 3100`):
   - Home: page wrapper is opacity-only; hero slides, featured photo and triptych photos all compute to `cubic-bezier(0.16, 1, 0.3, 1)`; `<header>` has no inline opacity; hamburger bars transition `transform, opacity` over 200ms on the signature curve.
   - Commercial: badge and play ring transition named properties over 200ms; list thumbnail computes to `matrix(0.96, 0, 0, 0.96, 0, -60)` at rest with an `opacity, transform` transition, so the hover scale-up now fires.
