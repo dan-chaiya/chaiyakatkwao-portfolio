@@ -120,6 +120,11 @@ export default function CommercialClient() {
   const [lightbox, setLightbox] = useState<LightboxState>(null);
   const activeLbItem = lightbox ? lightbox.images[lightbox.index] : null;
   const [view, setView] = useState<"grid" | "list">("grid");
+  // True after the first toggle. The view that mounts after a toggle fades in (opacity
+  // only: the page height already jumps by thousands of pixels). Before any toggle the grid
+  // is the first paint and must not fade on top of the route fade in PageTransition.
+  const [toggled, setToggled] = useState(false);
+  const viewEnter = toggled ? "transition-opacity duration-200 ease-out starting:opacity-0" : "";
 
   return (
     <PageTransition>
@@ -148,7 +153,7 @@ export default function CommercialClient() {
           {(["grid", "list"] as const).map((v) => (
             <button
               key={v}
-              onClick={() => setView(v)}
+              onClick={() => { setView(v); setToggled(true); }}
               aria-pressed={view === v}
               className="mono-label flex h-11 items-center px-3 transition-colors duration-200"
               style={{
@@ -163,9 +168,11 @@ export default function CommercialClient() {
 
         {/* Photo / production projects */}
         {view === "list" ? (
-          <CommercialList projects={projects} />
+          <div key="list" className={viewEnter}>
+            <CommercialList projects={projects} />
+          </div>
         ) : (
-        <div className="space-y-32">
+        <div key="grid" className={`space-y-32 ${viewEnter}`}>
           {projects.map((project, i) => (
             <article key={project.id}>
               {/* Cover — natural aspect ratio, no cropping */}

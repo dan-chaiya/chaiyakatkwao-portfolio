@@ -69,10 +69,6 @@
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 /* The sticky header takes real space in flow, so a 100svh hero stacked under it
    overflows the viewport by exactly this much and pushes its own bottom row
    (name, disciplines, slideshow controls) below the fold. Anything sizing itself
@@ -260,8 +256,6 @@ h1, h2, .font-heading { font-weight: 800; }
    need — and an infinite animation clamped to 0.01ms flashes rather than stops.
    So: drop travel and looping, keep short colour/opacity transitions. */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-
   /* Looping and decorative animation stops outright. */
   *, *::before, *::after {
     animation-iteration-count: 1 !important;

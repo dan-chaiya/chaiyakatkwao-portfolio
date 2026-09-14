@@ -65,16 +65,23 @@ export default function HeroStage() {
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  // True when the visitor picked the current slide. A pick is answered in 300ms; the
+  // unattended slideshow keeps its slow 1200ms cross-fade.
+  const [picked, setPicked] = useState(false);
   const count = SLIDES.length;
 
   // Continuous auto-loop. WCAG 2.2.2 requires that anything moving for more than
   // five seconds can be stopped, so this honours an explicit pause as well as
-  // prefers-reduced-motion.
+  // prefers-reduced-motion. A timeout keyed on `active` restarts the wait on every
+  // slide change, so a slide the visitor picks stays for the full interval.
   useEffect(() => {
     if (reduced || paused) return;
-    const id = setInterval(() => setActive((i) => (i + 1) % count), HERO_INTERVAL_MS);
-    return () => clearInterval(id);
-  }, [reduced, paused, count]);
+    const id = setTimeout(() => {
+      setPicked(false);
+      setActive((i) => (i + 1) % count);
+    }, HERO_INTERVAL_MS);
+    return () => clearTimeout(id);
+  }, [reduced, paused, count, active]);
 
   // Only the active video plays; others pause to respect device resources.
   useEffect(() => {
@@ -132,7 +139,7 @@ export default function HeroStage() {
             className="absolute inset-0 transition-opacity ease-out"
             style={{
               opacity: i === active ? 1 : 0,
-              transitionDuration: reduced ? "0ms" : "1200ms",
+              transitionDuration: reduced ? "0ms" : picked ? "300ms" : "1200ms",
             }}
           >
             {slide.kind === "video" ? (
@@ -204,7 +211,7 @@ export default function HeroStage() {
               <button
                 key={i}
                 type="button"
-                onClick={() => setActive(i)}
+                onClick={() => { setPicked(true); setActive(i); }}
                 aria-label={`Show slide ${i + 1}: ${slide.alt}`}
                 aria-current={i === active ? "true" : undefined}
                 className="flex h-11 w-4 items-center justify-center"
