@@ -21,7 +21,7 @@ export const metadata: Metadata = pageMetadata({
 
 const experience = [
   {
-    role: "Live Production Lead",
+    role: "Live Production & Visual Co-ordinator",
     company: "Ad The Top Agency",
     location: "Bangkok",
     period: "2026 — Present",
@@ -59,9 +59,10 @@ const experience = [
 ];
 
 const exhibitions = [
-  { title: "Woven Memories, ID Thesis Exhibition, Red Dog Gallery, Chiang Mai", year: "2025" },
+  // "Chiang Mai": the city name never breaks across a line beside the year label.
+  { title: "Woven Memories, ID Thesis Exhibition, Red Dog Gallery, Chiang Mai", year: "2025" },
   { title: "Assistant Photographer, Khun Chang Khian Thesis Project", year: "2023 — 2024" },
-  { title: "Fuiyoh, Art Thesis Exhibition, CMU Art Centre, Chiang Mai", year: "2021" },
+  { title: "Fuiyoh, Art Thesis Exhibition, CMU Art Centre, Chiang Mai", year: "2021" },
 ];
 
 const skills = [
@@ -129,41 +130,56 @@ export default function CVPage() {
         .cv-skill b { color: var(--color-warm); font-weight: 500; }
         .cv-foot { margin-top: 96px; border-top: 1px solid var(--color-grey-700); padding-top: 16px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; }
 
-        /* Print: one A4 sheet, still black, the same markup compacted. The header,
-           footer, grain and button go; the reading steps step down to print sizes
-           (8.5pt is the site's 11px floor in print units); the two columns hold. */
-        @page { size: A4 portrait; margin: 12mm 14mm; }
+        /* Print: one A4 sheet, the same markup and type kit, set as a document —
+           ink on white paper. Until 2026-09-22 the sheet stayed black like the site;
+           a PDF is forwarded, printed and opened in viewers that drop backgrounds,
+           and the black block sat inside the printer's white page margins with
+           8.5pt grey text on it. The header, footer, grain and button go; the
+           reading steps land at document sizes (10pt body); the two columns hold. */
+        @page { size: A4 portrait; margin: 12mm 15mm; }
         @media print {
-          html, body { background: #000 !important; }
+          :root {
+            --cv-ink: #0D0B0A;
+            --cv-muted: #6B6560;
+            --cv-rule: #C8C4BC;
+          }
+          html, body { background: #fff !important; color: var(--cv-ink) !important; }
           header, footer, .cv-print, body::after { display: none !important; }
           /* The route fade wraps <main> in a motion div that starts at opacity 0; a
              print started before it lands (or from a print-to-PDF tool) would be a
              blank sheet. In print the wrapper is simply visible. */
           div:has(> .cv-shell) { opacity: 1 !important; transform: none !important; }
-          * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           .cv-shell { padding: 0; }
           .cv-grid { grid-template-columns: 7fr 5fr; gap: 0; }
           .cv-main, .cv-rail { grid-column: auto; }
           .cv-rail { padding-left: 10mm; }
-          .cv-top { margin-bottom: 3mm; }
-          .cv-h1 { font-size: 28pt; margin-bottom: 6mm; }
-          .cv-shell .copy-lead { font-size: 10.5pt; line-height: 1.35; }
-          .cv-shell .copy-body { font-size: 9pt; line-height: 1.4; }
-          .cv-shell .copy-small { font-size: 8.5pt; line-height: 1.4; }
-          .cv-shell .mono-label { font-size: 8.5pt; }
-          .cv-summary > * + * { margin-top: 3mm; }
+          .cv-top { margin-bottom: 2.5mm; }
+          .cv-h1 { font-size: 28pt; margin-bottom: 6mm; color: var(--cv-ink); }
+          .cv-shell .copy-lead { font-size: 11pt; line-height: 1.35; color: var(--cv-ink); }
+          .cv-shell .copy-body { font-size: 9.5pt; line-height: 1.4; color: var(--cv-ink); }
+          .cv-shell .copy-small { font-size: 9pt; line-height: 1.4; color: var(--cv-ink); }
+          .cv-shell .mono-label { font-size: 7pt; color: var(--cv-muted); }
+          .cv-summary { max-width: none; }
+          .cv-summary > * + * { margin-top: 2.5mm; }
           .cv-section { margin-top: 6mm; }
-          .cv-section--tight { margin-top: 4mm; }
+          .cv-section--tight { margin-top: 4.5mm; }
           .cv-shell .cv-eyebrow { margin-bottom: 2.5mm !important; }
           .cv-top .cv-eyebrow { margin-bottom: 0 !important; }
-          .cv-row { padding: 1.8mm 0; }
+          .cv-rows::after, .cv-row, .cv-foot { border-color: var(--cv-rule); border-top-width: 0.5pt; }
+          .cv-row { padding: 1.6mm 0; }
           .cv-row--role { padding: 3mm 0; }
+          .cv-role { color: var(--cv-ink); }
+          .cv-where { color: var(--cv-muted); margin-top: 0.5mm; }
           .cv-lines > * + * { margin-top: 1mm; }
+          .cv-lines a { border-bottom: 0; color: var(--cv-ink); }
           .cv-row--role, .cv-skill { break-inside: avoid; }
-          .cv-list { margin-top: 1.5mm; }
-          .cv-list li + li { margin-top: 0.5mm; }
+          .cv-list { margin-top: 1.8mm; }
+          .cv-list li { padding-left: 4.5mm; }
+          .cv-list li + li { margin-top: 0.6mm; }
+          .cv-list li::before { color: var(--cv-muted); }
           .cv-skill + .cv-skill { margin-top: 2.5mm; }
-          .cv-foot { margin-top: 5mm; padding-top: 2.5mm; }
+          .cv-skill b { color: var(--cv-ink); }
+          .cv-foot { margin-top: 6mm; padding-top: 2.5mm; }
         }
       `}</style>
 
@@ -246,7 +262,7 @@ export default function CVPage() {
               <section className="cv-section cv-section--tight" aria-label="Education">
                 <p className="mono-label cv-eyebrow" style={{ marginBottom: "16px" }}>Education</p>
                 <div className="cv-row__head">
-                  <p className="copy-small">BFA Photography — Chiang Mai University</p>
+                  <p className="copy-small">BFA Photography — Chiang&nbsp;Mai University</p>
                   <span className="mono-label">2020 — 2025</span>
                 </div>
               </section>

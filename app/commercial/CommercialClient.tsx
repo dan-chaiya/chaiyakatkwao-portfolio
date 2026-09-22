@@ -370,7 +370,7 @@ export default function CommercialClient() {
                 Live Commerce
               </h2>
               <p className="font-body text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
-                Live Production Lead / AV Engineer
+                Live Production &amp; Visual Co-ordinator
               </p>
             </div>
             <div className="md:col-span-5">
