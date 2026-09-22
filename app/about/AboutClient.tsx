@@ -118,7 +118,9 @@ export default function AboutClient() {
                 >
                   Systems
                 </a>
-                .
+                . Not everything he builds is for a team: a daily dashboard,
+                written with Claude, reads his calendar, mail, weather and the
+                news before he does.
               </p>
             </div>
 
