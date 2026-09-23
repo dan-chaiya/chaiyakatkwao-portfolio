@@ -1,23 +1,43 @@
 ---
 name: Chaiya Katkwao Portfolio
-description: A dark production-floor portfolio for a Bangkok-based creative producer.
+description: A production-floor portfolio for a Bangkok-based creative producer, in two themes — Light (the default) and Dark.
+# The Light theme, the default. Dark is `colors-dark` below; both live in app/globals.css.
 colors:
-  bg: "#000000"
-  surface: "#0A0A0A"
-  surface-elevated: "#111111"
-  surface-hover: "#161616"
-  text: "#F9F9F9"
-  text-muted: "#8B857F"
+  bg: "#F0F0F0"
+  surface: "#EAEAEA"
+  surface-elevated: "#E4E4E4"
+  surface-hover: "#DEDEDE"
+  text: "#111111"
+  text-muted: "#5F5A55"
+  text-dim: "#A8A29B"
+  text-inverse: "#F0F0F0"
+  border-faint: "rgba(17, 17, 17, 0.07)"
+  border: "rgba(17, 17, 17, 0.09)"
+  border-strong: "rgba(17, 17, 17, 0.22)"
+  warm: "#111111"
+  accent: "oklch(54% 0.19 35)"
+  accent-dim: "oklch(54% 0.19 35 / 0.3)"
+  focus-ring: "rgba(17, 17, 17, 0.55)"
+  selection-bg: "#111111"
+  selection-text: "#F0F0F0"
+colors-dark:
+  bg: "#111111"
+  surface: "#1C1C1C"
+  surface-elevated: "#222222"
+  surface-hover: "#2A2A2A"
+  text: "#F0F0F0"
+  text-muted: "#958F89"
   text-dim: "#4A4744"
-  text-inverse: "#000000"
-  border: "rgba(249, 249, 249, 0.09)"
-  border-strong: "rgba(249, 249, 249, 0.22)"
-  warm: "#F2F0EB"
+  text-inverse: "#111111"
+  border-faint: "rgba(240, 240, 240, 0.07)"
+  border: "rgba(240, 240, 240, 0.09)"
+  border-strong: "rgba(240, 240, 240, 0.22)"
+  warm: "#F0F0F0"
   accent: "oklch(72% 0.18 35)"
   accent-dim: "oklch(72% 0.18 35 / 0.3)"
-  focus-ring: "rgba(249, 249, 249, 0.55)"
-  selection-bg: "#F9F9F9"
-  selection-text: "#000000"
+  focus-ring: "rgba(240, 240, 240, 0.55)"
+  selection-bg: "#F0F0F0"
+  selection-text: "#111111"
 typography:
   display:
     fontFamily: "Archivo Black, sans-serif"
@@ -93,7 +113,7 @@ components:
 
 **Creative North Star: "The Production Floor"**
 
-This portfolio does not perform. It works. The visual system is built the way a production is built: structure first, then everything else earns its place. The dark shell (OKLCH hue 250, near-zero chroma) is not dramatic — it is neutral in the same way a black stage is neutral. It holds the work without comment.
+This portfolio does not perform. It works. The visual system is built the way a production is built: structure first, then everything else earns its place. The shell is neutral grey in two themes — paper in Light, the default since 23 September 2026, and near-black in Dark — neutral in the same way a black stage or a white wall is neutral. It holds the work without comment.
 
 The Warm Signal accent (hue 35, amber) appears where action is required. Buttons. Hover states on navigation. Text selection. It is never decorative. Its rarity is its authority — if something glows amber, the user should move there.
 
@@ -102,7 +122,7 @@ Motion is controlled and calibrated. Content is visible at rest: since 8 Septemb
 This system explicitly rejects: colorful or expressive-color palettes (gradients, vibrant accents, neon), generic photographer portfolio templates (centered hero, soft sans, pastel tones), and over-animated UI that competes with the work.
 
 **Key Characteristics:**
-- Single-hue dark shell (hue 250) with one warm accent (hue 35), maximum contrast distance
+- Two themes, Light (default) and Dark, built from five brutalist neutrals, with one warm accent (hue 35)
 - Single type family (Archivo + Archivo Black), hierarchy through weight and scale only
 - Flat elevation — depth via tonal surface steps, no shadows
 - Motion is sparse, purposeful, and exponential-ease only
@@ -110,7 +130,12 @@ This system explicitly rejects: colorful or expressive-color palettes (gradients
 
 ## 2. Colors: The Production-Floor Palette
 
-One warm signal in a room of true-black surfaces. The palette does not try to be beautiful — it tries to be correct.
+Two themes built from five brutalist neutrals — `#F0F0F0` and `#EAEAEA` paper, `#111111`, `#1C1C1C` and `#222222` ink — and one warm signal. Each theme uses the other's values as its ink. The palette does not try to be beautiful — it tries to be correct.
+
+> **Two themes, 23 Sep 2026.** Until then the site was dark only, on true black
+> `#000000`. Light is now the default. Dark moved from `#000000` onto `#111111`, and
+> its two lightest text greys were raised to keep 4.5:1 on the lighter surfaces.
+> Values below are Light / Dark.
 
 > **Corrected 29 Aug 2026.** Every value in this section was previously described
 > as OKLCH hue 250 (a cool blue-grey tint), and a "Tint Rule" asserted that
@@ -121,23 +146,33 @@ One warm signal in a room of true-black surfaces. The palette does not try to be
 > exist in the code at all and have been removed.
 
 ### Primary
-- **Warm Signal** (`oklch(72% 0.18 35)`): The only saturated color in the system, and it is used far more sparingly than a CTA palette would suggest. It appears in exactly two places in the shipped code: the 1px active underline in the navigation, and — at 30% alpha — a 1px card border on the portfolio home. Its scarcity is not a guideline, it is the current fact.
-- **Warm Signal Dim** (`oklch(72% 0.18 35 / 0.3)`): The same hue at 30% alpha, for the hairline border that must not compete with text.
-- **Focus Ring** (`rgba(249, 249, 249, 0.55)`): Translucent white at 55%, not an orange ring. 1px with a 3px offset. Neutral so it reads as a system affordance rather than as the brand accent.
+- **Warm Signal** (`oklch(54% 0.19 35)` / `oklch(72% 0.18 35)`): The only saturated color in the system, used sparingly: the 1px active underlines (navigation, the Commercial view toggle, the Systems link on About), the year on a hovered Commercial list row, and the "Available" badge on the home contact strip. It is deeper in Light because the badge is 11px text and needs 4.5:1 on paper (4.87:1); the `/systems` value, `oklch(58% 0.19 35)`, measures only 4.13:1 on `#F0F0F0`.
+- **Warm Signal Dim** (the same hue at 30% alpha): for the hairline border that must not compete with text.
+- **Focus Ring** (the text colour at 55%): 1px with a 3px offset. Neutral so it reads as a system affordance rather than as the brand accent.
 
 ### Neutral
-- **Production Black** (`#000000`): The base background. True black, zero chroma.
-- **Studio Surface** (`#0A0A0A`) and **Elevated Surface** (`#111111`): The two tonal steps above the base. Pure neutral, no tint.
-- **Hover Surface** (`#161616`): The third step, for a surface responding to the pointer.
-- **Primary Text** (`#F9F9F9`): Near-white, pure neutral. Measured chroma is zero.
-- **Muted Text** (`#8B857F`): Navigation links at rest, captions, metadata. This one *is* warm — `oklch(0.62 0.0115 67.6)`.
-- **Dim Text** (`#4A4744`): `oklch(0.40 0.0064 67.6)`. The same warmth, further down. Decorative and structural marks only.
-- **Warm Paper** (`#F2F0EB`): `oklch(0.955 0.007 88.6)`. The warmest light value in the system, used for drawn outlines such as the video play control.
-- **Structural Line** (`rgba(249, 249, 249, 0.09)`) and **Strong Line** (`rgba(249, 249, 249, 0.22)`): The two border values. Translucent white rather than a solid grey, so a border sits correctly on any of the three surface steps without a per-surface variant.
+
+| Role | Light | Dark |
+|---|---|---|
+| Ground (`bg`) | `#F0F0F0` | `#111111` |
+| Surface, elevated, hover | `#EAEAEA`, `#E4E4E4`, `#DEDEDE` | `#1C1C1C`, `#222222`, `#2A2A2A` |
+| Primary text and heading ink (`text`, `warm`) | `#111111` | `#F0F0F0` |
+| Reading text (`grey-200`) | `#1C1C1C` | `#EAEAEA` |
+| Small text (`grey-300`) | `#3D3A37` | `#C8C4BC` |
+| Data and captions (`grey-400`, `text-muted`, `grey-500`) | `#57524D`, `#5F5A55`, `#67625C` | `#9A9087`, `#958F89`, `#8F8983` |
+| Hairlines (`grey-700`, `border-muted`) | `#D3D0CA`, `#D6D6D6` | `#2A2826`, `#2A2A2A` |
+| Lines (`border-faint`, `border`, `border-strong`) | ink at 7%, 9% and 22% | ink at 7%, 9% and 22% |
+
+`#E4E4E4`, `#DEDEDE` and `#2A2A2A` are derived steps; every other ground and ink value is one of the five neutrals. Every text grey measures 4.5:1 or better on the ground, surface and elevated surface of its own theme. Measured across every page on 23 September 2026, the lowest text contrast is 4.87:1 in Light (the Available badge) and 5.45:1 in Dark.
+
+### The two themes
+- **Light is the default.** A first visit, a browser that blocks storage and a page without JavaScript all get Light, whatever the OS setting. A visitor's pick is saved in `localStorage` under `theme` and set as `<html data-theme>` by an inline script in `<head>` before the first paint (`lib/theme.ts`), so a saved Dark never flashes Light.
+- **Dark is screen-only.** The Dark block sits in `@media screen`, so a page printed or saved as PDF comes out in Light, and the CV's print sheet stays ink on white with white page margins.
+- **Name a token, never a colour.** Components read every colour through `var(--color-*)`. A one-off tint of a token is `color-mix(in srgb, var(--color-text) 7%, transparent)`, never an `rgba()` of a hex. The only literals left sit on photographs — the triptych captions and gradients, the YouTube veil and play mark — and they stay black and white in both themes because they belong to the image, not the page.
 
 **The One Signal Rule.** The Warm Signal accent appears on ≤10% of any given screen surface. In the shipped code it is closer to 1%. If it starts competing for attention, it has been overused. Reduce.
 
-**The Pure Surface, Warm Text Rule.** Replaces the old Tint Rule, which described a colour this system has never shipped. Surfaces and primary text are *pure neutral* — `#000000`, `#0A0A0A`, `#111111`, `#161616`, `#F9F9F9` all measure zero chroma. The warmth lives only in the text greys and the paper tone, at hue 62°–89° and chroma 0.006–0.012. Never introduce a cool grey: the sister site at `management-portfolio` follows the same curve inverted onto white, and a blue-grey would read as foreign in either half of the pair.
+**The Pure Surface, Warm Text Rule.** Replaces the old Tint Rule, which described a colour this system has never shipped. Surfaces and primary text are *pure neutral* in both themes — every ground, surface and ink value in the table above measures zero chroma. The warmth lives only in the text greys and hairlines, at hue 62°–89° and chroma 0.006–0.012. Never introduce a cool grey: the sister site at `management-portfolio` follows the same curve inverted onto white, and a blue-grey would read as foreign in either half of the pair.
 
 ## 3. Typography
 
@@ -203,13 +238,13 @@ read as indecision.
 
 ## 4. Elevation
 
-This system is flat by default. There are no box shadows at rest. Depth is communicated through tonal surface steps (Production Dark → Studio Surface → Elevated Surface, a delta of roughly 5–9 lightness points each) and through the single structural border at `oklch(0.34 0.01 250)`.
+This system is flat by default. There are no box shadows at rest. Depth is communicated through tonal surface steps (ground → surface → elevated surface, `#F0F0F0 → #EAEAEA → #E4E4E4` in Light and `#111111 → #1C1C1C → #222222` in Dark: in both themes each step moves toward the middle grey) and through the hairline borders.
 
-The Lightbox uses a near-opaque dark overlay (`rgba(10, 10, 10, 0.97)`) — this is the only intentional use of semi-transparency in the system, and it serves a functional isolation role, not a decorative one.
+The Lightbox uses a near-opaque overlay (the page ground at 97%) — this is the only intentional use of semi-transparency in the system, and it serves a functional isolation role, not a decorative one.
 
 **The Flat-By-Default Rule.** Surfaces are flat at rest. If a component needs to feel elevated, reach for the next tonal surface step — not a shadow. Shadows are not part of this system.
 
-**The No-Glass Rule.** Backdrop-blur appears exactly once, on the lightbox caption pill (`backdrop-blur-sm` over `bg-black/40`), so a caption stays readable above an arbitrary photograph. It is a functional accommodation, not a motif. Do not apply it to any other element.
+**The No-Glass Rule.** Backdrop-blur appears exactly once, on the lightbox caption pill (`backdrop-blur-sm` over the page ground at 85%), so a caption stays readable above an arbitrary photograph. It is a functional accommodation, not a motif. Do not apply it to any other element.
 
 *Corrected 29 Aug 2026: this rule previously located the blur on the navigation header. The header has no backdrop-filter and no translucent background — it is `sticky top-0` over the page background with a 1px bottom border.*
 
@@ -224,7 +259,8 @@ The Lightbox uses a near-opaque dark overlay (`rgba(10, 10, 10, 0.97)`) — this
 
 ### Navigation Header
 `sticky top-0`, full width, z-50. Not fixed, not translucent, and not blurred.
-- **Shell:** the page background with `border-bottom: 1px solid rgba(249,249,249,0.07)`. There is no backdrop-filter and no opacity on the header.
+- **Shell:** the page ground, opaque, with a 1px `--color-border-faint` bottom border. There is no backdrop-filter and no opacity on the header. (Until 23 September 2026 the code set no background at all, so the page scrolled through under the mark and the links.)
+- **Theme switch:** the header's last item on every breakpoint (beside the hamburger on mobile), after Contact on desktop. Two mono labels, `Light` and `Dark`, 11px, tracking 0.18em, in one `--color-border-strong` hairline box; the theme in use is a solid block of ink with paper text, the other is `--color-grey-400`. 30px tall to the eye, 44px to the finger. No accent: amber stays the active page's underline. Which option is solid is decided in CSS from `<html data-theme>`, so it is right from the first frame; the buttons carry `aria-pressed` in a group labelled "Theme". Switching is a hard cut: transitions are suspended for the frame of the swap so nothing ripples.
 - **Logo:** Archivo Black 800, 1.15rem, tracking -0.02em. Links to root.
 - **Desktop links:** 0.8rem, tracking 0.18em, uppercase. Muted text at rest, Primary Text on hover, 200ms.
 - **Active underline:** a 1px bar in Warm Signal. This is one of only two accent appearances in the app.
@@ -233,32 +269,32 @@ The Lightbox uses a near-opaque dark overlay (`rgba(10, 10, 10, 0.97)`) — this
 ### Mobile Navigation Overlay
 Full-screen, full-bleed, no modal chrome. A signature component.
 - **Surface:** the page background, no backdrop.
-- **Links:** `clamp(2.5rem, 10vw, 5rem)`, Archivo Black 800, tracking -0.03em, separated by `1px solid rgba(249,249,249,0.06)`.
+- **Links:** `clamp(2.5rem, 10vw, 5rem)`, Archivo Black 800, tracking -0.03em, separated by 1px `--color-border-faint` lines.
 - **Animation:** staggered entrance, 0.07s between items, `cubic-bezier(0.16, 1, 0.3, 1)`, 0.5s.
 
 ### Lightbox (Signature Component)
-The gallery viewer. Dark, focused, keyboard-native.
-- **Overlay:** `rgba(10, 10, 10, 0.97)` — nearly opaque, slightly warmer than the background.
-- **Controls:** SVG-drawn arrows and close, no icon library. Enabled state uses `--color-grey-200` with a `--color-grey-500` border, moving to white on `--color-grey-300` with a `bg-white/10` wash. Disabled boundary state is `#4A4844` on `#3A3735`.
-- **Caption pill:** the system's only backdrop-blur — `backdrop-blur-sm` over `bg-black/40`, inside a `--color-border-strong` hairline.
+The gallery viewer. Focused, keyboard-native, and in the page's theme: paper in Light, near-black in Dark.
+- **Overlay:** the page ground at 97% — nearly opaque.
+- **Controls:** SVG-drawn arrows and close, no icon library. Enabled state uses `--color-grey-200` with a `--color-grey-500` border, moving to `--color-text` on `--color-grey-300` with a wash of the text colour at 10%. Disabled boundary state is `--color-text-dim` on `--color-grey-600`.
+- **Caption pill:** the system's only backdrop-blur — `backdrop-blur-sm` over the page ground at 85% (40% until 23 September 2026, when its text failed on dark photos in Light), inside a `--color-border-strong` hairline.
 - **Image:** `object-fit: contain`, swipeable (`dragElastic: 0.08`), spring transition (damping 30, stiffness 250).
 
 ### Footer
-- **Structure:** `border-top: 1px solid rgba(249,249,249,0.07)`, 24px padding top and bottom, two-column flex that wraps, 16px gap.
+- **Structure:** a 1px `--color-border-faint` top border, 24px padding top and bottom, two-column flex that wraps, 16px gap.
 - **Typography:** JetBrains Mono, 11px, tracking 0.18em, uppercase — the same label treatment the sister site calls `mono-label`. Muted text at rest, Primary Text on hover, 180ms.
 - **Links:** 28px apart. Includes the cross-site link to `/systems`, which is a plain `<a>` rather than `next/link` because the destination is a static file in `public/`, not a route.
 
 ### Hero Controls
 Bottom-right of the hero, beside the slide counter.
-- **Pause/play:** 44x44, 1px border at `rgba(242,240,235,0.28)`, inline-drawn SVG glyph. Hidden entirely under `prefers-reduced-motion`, where nothing is rotating.
-- **Slide marks:** one 1px bar per slide in a 44px-tall hit area; active is `--color-warm`, rest `rgba(242,240,235,0.34)`.
+- **Pause/play:** 44x44, 1px border of `--color-warm` at 28%, glyph at 86%, inline-drawn SVG. Hidden entirely under `prefers-reduced-motion`, where nothing is rotating.
+- **Slide marks:** one 1px bar per slide in a 44px-tall hit area; active is `--color-warm`, rest `--color-warm` at 34%.
 - **Counter:** `mono-label`, tabular numerals, `--color-warm`.
 
 ### Hero Stage
-Three rows inside the fold (`100svh` minus the header): the header line, the stage, and the disciplines row with the controls. The header line is the name, `Chaiya Katkwao.`, as one small line of Archivo Black (`clamp(1.25rem, 1.6vw, 1.5rem)`) with the positioning label beside it; since 8 September 2026 the name no longer takes a display step in the hero, and the height it held went to the stage, which takes everything the two text rows do not. The stage shows each slide `object-contain` on the black ground at full contrast: no scrim, no gradient bands, no blurred fill. All three were removed on 8 September 2026, together with the 96px backdrop derivatives and their build script. Nothing is layered over the work; the text rows are in flow, so legibility never costs the photograph anything. Slides cross-fade in 1200ms, a hard cut under reduced motion, and the hero does not fade or drift as the page scrolls.
+Three rows inside the fold (`100svh` minus the header): the header line, the stage, and the disciplines row with the controls. The header line is the name, `Chaiya Katkwao.`, as one small line of Archivo Black (`clamp(1.25rem, 1.6vw, 1.5rem)`) with the positioning label beside it; since 8 September 2026 the name no longer takes a display step in the hero, and the height it held went to the stage, which takes everything the two text rows do not. The stage shows each slide `object-contain` on the page ground (paper in Light, `#111111` in Dark) at full contrast: no scrim, no gradient bands, no blurred fill. All three were removed on 8 September 2026, together with the 96px backdrop derivatives and their build script. Nothing is layered over the work; the text rows are in flow, so legibility never costs the photograph anything. Slides cross-fade in 1200ms, a hard cut under reduced motion, and the hero does not fade or drift as the page scrolls.
 
 ### Featured Project
-The photograph in a 16:9 frame at full contrast, then its caption below in flow, on black: the `Selected Work` label, the title at `clamp(1.75rem, 4vw, 3.5rem)`, and the category label right. The dark gradient wash that carried white text over the image was removed on 8 September 2026, the same move as the hero: nothing is layered over the work. Hover scales the image 1.04 over 1000ms.
+The photograph in a 16:9 frame at full contrast, then its caption below in flow, on the page ground: the `Selected Work` label, the title at `clamp(1.75rem, 4vw, 3.5rem)`, and the category label right. The dark gradient wash that carried white text over the image was removed on 8 September 2026, the same move as the hero: nothing is layered over the work. Hover scales the image 1.04 over 1000ms.
 
 ### Components that do not exist
 No card and no chip. This is a portfolio, not an application; its interactive surface
@@ -279,7 +315,7 @@ until 29 Aug 2026.
 - **Do** vary spacing by context. Section padding, component padding, and inline spacing should all be different.
 - **Do** use tonal surface steps (bg → surface → surface-elevated) to express depth. Never shadows.
 - **Do** use exponential ease `cubic-bezier(0.16, 1, 0.3, 1)` for all motion. Never bounce, never elastic.
-- **Do** respect `prefers-reduced-motion` by removing *travel and looping*, not feedback. The global rule keeps colour and opacity transitions at 120ms; components drop transforms via `useReducedMotion`. Never clamp all durations to 0.01ms — that flashes infinite animations rather than stopping them.
+- **Do** respect `prefers-reduced-motion` by removing *travel and looping*, not feedback. The global rule keeps colour and opacity transitions at 120ms; components branch on `usePrefersReducedMotion()` (`lib/use-prefers-reduced-motion.ts`), never framer-motion's `useReducedMotion()`, which renders differently on the server and made React throw away the home page's HTML under reduced motion until 23 September 2026. Never clamp all durations to 0.01ms — that flashes infinite animations rather than stopping them.
 - **Do** keep every text colour at 4.5:1 or better. `text-dim` is for structural marks only and is not a text colour.
 - **Do** give anything that moves for more than five seconds a stop control (WCAG 2.2.2). The hero carousel has one.
 - **Do** keep nav links, labels, and captions uppercase with wide tracking (0.15–0.30em). It is part of the system's identity.

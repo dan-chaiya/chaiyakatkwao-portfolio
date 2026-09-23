@@ -25,7 +25,7 @@ const MONO: React.CSSProperties = {
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: "1px solid rgba(249,249,249,0.07)", paddingTop: "24px", paddingBottom: "24px" }}>
+    <footer style={{ borderTop: "1px solid var(--color-border-faint)", paddingTop: "24px", paddingBottom: "24px" }}>
       <div
         className="section-shell"
         style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}

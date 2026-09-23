@@ -129,9 +129,10 @@ export default function CaseStudyClient({ project }: { project: Project }) {
             priority
           />
           <div className="absolute inset-0 bg-[var(--color-bg)]/0 group-hover:bg-[var(--color-bg)]/20 transition-colors duration-500" />
-          {/* Hint that clicking opens the full image */}
+          {/* Hint that clicking opens the full image. A solid block of the page ground, because
+              it sits on the photograph: see-through, it failed on dark covers in Light. */}
           <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="font-body text-[11px] tracking-[0.2em] uppercase text-[var(--color-warm)] border border-[var(--color-border-strong)] px-3 py-2">
+            <span className="font-body text-[11px] tracking-[0.2em] uppercase text-[var(--color-warm)] bg-[var(--color-bg)] border border-[var(--color-border-strong)] px-3 py-2">
               View full ↗
             </span>
           </div>
