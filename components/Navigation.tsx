@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { EASE } from "@/lib/motion";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -79,7 +80,11 @@ export default function Navigation() {
       <header
         className="sticky top-0 left-0 right-0 z-50"
         style={{
-          borderBottom: "1px solid rgba(249,249,249,0.07)",
+          // Opaque, as DESIGN.md always described it: without a ground of its own the
+          // sticky header let the page scroll through under the mark, the links and the
+          // theme switch (until 2026-09-23).
+          backgroundColor: "var(--color-bg)",
+          borderBottom: "1px solid var(--color-border-faint)",
           minHeight: "var(--header-h)",
         }}
       >
@@ -117,68 +122,73 @@ export default function Navigation() {
             )}
           </div>
 
-          {/* Child 2 — Nav links + contact (right) */}
-          <div className="hidden lg:flex items-center gap-x-8">
-            <nav className="flex items-center gap-x-8" aria-label="Primary">
-              {navLinks.map((link) => {
-                const active = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    style={{
-                      ...MONO,
-                      color: active ? "var(--color-text)" : "var(--color-grey-300)",
-                      transition: "color 180ms ease",
-                      position: "relative",
-                      paddingBottom: "1px",
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.color = active ? "var(--color-text)" : "var(--color-grey-300)"; }}
-                  >
-                    {link.label}
-                    {active && (
-                      <span style={{
-                        position: "absolute", bottom: 0, left: 0, right: 0,
-                        height: "1px", backgroundColor: "var(--color-accent)",
-                      }} />
-                    )}
-                  </Link>
-                );
-              })}
-            </nav>
+          {/* Child 2 — Nav links + contact on desktop, the theme switch, and the
+              hamburger on mobile (right) */}
+          <div className="flex items-center gap-x-4 lg:gap-x-8">
+            <div className="hidden lg:flex items-center gap-x-8">
+              <nav className="flex items-center gap-x-8" aria-label="Primary">
+                {navLinks.map((link) => {
+                  const active = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      style={{
+                        ...MONO,
+                        color: active ? "var(--color-text)" : "var(--color-grey-300)",
+                        transition: "color 180ms ease",
+                        position: "relative",
+                        paddingBottom: "1px",
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = active ? "var(--color-text)" : "var(--color-grey-300)"; }}
+                    >
+                      {link.label}
+                      {active && (
+                        <span style={{
+                          position: "absolute", bottom: 0, left: 0, right: 0,
+                          height: "1px", backgroundColor: "var(--color-accent)",
+                        }} />
+                      )}
+                    </Link>
+                  );
+                })}
+              </nav>
 
-            <a
-              href="mailto:chaiyakatkwao@gmail.com"
-              style={{
-                ...MONO,
-                color: "var(--color-grey-300)",
-                transition: "color 180ms ease",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-grey-300)"; }}
+              <a
+                href="mailto:chaiyakatkwao@gmail.com"
+                style={{
+                  ...MONO,
+                  color: "var(--color-grey-300)",
+                  transition: "color 180ms ease",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-grey-300)"; }}
+              >
+                Contact
+              </a>
+            </div>
+
+            <ThemeToggle />
+
+            {/* Hamburger — mobile only */}
+            <button
+              ref={triggerRef}
+              onClick={() => setOpen((v) => !v)}
+              className="flex lg:hidden h-11 w-11 flex-col items-center justify-center gap-[5px]"
+              style={{ color: "var(--color-text)" }}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? "Close menu" : "Open menu"}
             >
-              Contact
-            </a>
+              <span className="block h-px bg-current transition-[transform,opacity] duration-200 ease-out origin-center"
+                style={{ width: "18px", transform: open ? "rotate(45deg) translateY(6px)" : "none" }} />
+              <span className="block h-px bg-current transition-[transform,opacity] duration-200 ease-out"
+                style={{ width: "18px", opacity: open ? 0 : 1 }} />
+              <span className="block h-px bg-current transition-[transform,opacity] duration-200 ease-out origin-center"
+                style={{ width: "18px", transform: open ? "rotate(-45deg) translateY(-6px)" : "none" }} />
+            </button>
           </div>
-
-          {/* Hamburger — mobile only */}
-          <button
-            ref={triggerRef}
-            onClick={() => setOpen((v) => !v)}
-            className="flex lg:hidden h-11 w-11 flex-col items-center justify-center gap-[5px]"
-            style={{ color: "var(--color-text)" }}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? "Close menu" : "Open menu"}
-          >
-            <span className="block h-px bg-current transition-[transform,opacity] duration-200 ease-out origin-center"
-              style={{ width: "18px", transform: open ? "rotate(45deg) translateY(6px)" : "none" }} />
-            <span className="block h-px bg-current transition-[transform,opacity] duration-200 ease-out"
-              style={{ width: "18px", opacity: open ? 0 : 1 }} />
-            <span className="block h-px bg-current transition-[transform,opacity] duration-200 ease-out origin-center"
-              style={{ width: "18px", transform: open ? "rotate(-45deg) translateY(-6px)" : "none" }} />
-          </button>
         </div>
       </header>
 
@@ -216,7 +226,7 @@ export default function Navigation() {
                       lineHeight: 0.9,
                       fontSize: "clamp(2.5rem, 10vw, 5rem)",
                       padding: "14px 0",
-                      borderBottom: "1px solid rgba(249,249,249,0.06)",
+                      borderBottom: "1px solid var(--color-border-faint)",
                       textDecoration: "none",
                       transition: "opacity 180ms ease",
                     }}

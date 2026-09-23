@@ -6,17 +6,18 @@
 // positioning label beside it), the stage, and the disciplines row with the slideshow
 // controls. The stage takes everything the two text rows do not: since 2026-09-08 the
 // name no longer sits at display size under the work, so the work is the hero.
-// The stage shows the ORIGINAL uncropped work (object-contain) on the black ground —
-// no scrim, no gradient bands, no blurred fill. The text rows are in flow, on black,
-// so nothing has to be dimmed for legibility and the work is shown at full contrast.
+// The stage shows the ORIGINAL uncropped work (object-contain) on the page ground —
+// no scrim, no gradient bands, no blurred fill. The text rows are in flow, on the same
+// ground, so nothing has to be dimmed for legibility and the work is shown at full
+// contrast. The ground is the theme's: paper in Light, #111111 in Dark (2026-09-23).
 // Live-commerce slides play the real optimized loops the same way. prefers-reduced-motion
 // → no autoplay, no cross-fade.
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useReducedMotion } from "framer-motion";
 import { workAssets } from "@/data/work-asset-urls";
 import { HERO_INTERVAL_MS } from "@/lib/motion";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 type Slide =
   | { kind: "video"; sources: { src: string; type: string }[]; poster: string; alt: string }
@@ -61,7 +62,7 @@ const SLIDES: Slide[] = [
 const PAD_X = "32px";
 
 export default function HeroStage() {
-  const reduced = useReducedMotion();
+  const reduced = usePrefersReducedMotion();
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -129,7 +130,7 @@ export default function HeroStage() {
         </p>
       </div>
 
-      {/* Row 2: the stage. Each slide is the work, contained, on the black ground.
+      {/* Row 2: the stage. Each slide is the work, contained, on the page ground.
           Portrait work stands in the middle; landscape work fills the height. */}
       <div className="relative min-h-0 flex-1">
         {SLIDES.map((slide, i) => (
@@ -189,8 +190,8 @@ export default function HeroStage() {
               aria-label={paused ? "Play slideshow" : "Pause slideshow"}
               className="flex h-11 w-11 items-center justify-center border transition-colors duration-200"
               style={{
-                borderColor: "rgba(242,240,235,0.28)",
-                color: "rgba(242,240,235,0.86)",
+                borderColor: "color-mix(in srgb, var(--color-warm) 28%, transparent)",
+                color: "color-mix(in srgb, var(--color-warm) 86%, transparent)",
               }}
             >
               {paused ? (
@@ -221,7 +222,7 @@ export default function HeroStage() {
                     display: "block",
                     width: "100%",
                     height: "1px",
-                    backgroundColor: i === active ? "var(--color-warm)" : "rgba(242,240,235,0.34)",
+                    backgroundColor: i === active ? "var(--color-warm)" : "color-mix(in srgb, var(--color-warm) 34%, transparent)",
                     transition: "background-color 220ms ease",
                   }}
                 />

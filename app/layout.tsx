@@ -15,6 +15,7 @@ import {
   SITE_URL,
   TITLE_TEMPLATE,
 } from "@/lib/seo";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -99,9 +100,20 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     ],
   };
 
+  // suppressHydrationWarning: the theme script below writes data-theme onto <html>
+  // before React hydrates, so the server's <html> and the browser's differ by exactly
+  // that attribute. It covers <html>'s own attributes only, not the tree inside.
   return (
-    <html lang="en" className={`${archivo.variable} ${archivoBlack.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="en"
+      className={`${archivo.variable} ${archivoBlack.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
+        {/* A plain inline script, not next/script: beforeInteractive would queue it
+            behind Next's runtime, after the first paint, and a saved Dark would
+            flash Light on every load. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(structuredData) }}

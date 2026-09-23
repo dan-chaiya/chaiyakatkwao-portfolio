@@ -190,8 +190,10 @@ export default function CommercialClient() {
                   priority={i === 0}
                 />
                 <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/30 transition-colors duration-500" />
+                {/* A solid block of the page ground, because it sits on the photograph:
+                    see-through, it failed on dark covers in Light. */}
                 <div className="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-[opacity,transform] duration-200 ease-out">
-                  <span className="font-body text-[11px] tracking-[0.25em] uppercase text-[var(--color-warm)] border border-[var(--color-warm)] px-3 py-2">
+                  <span className="font-body text-[11px] tracking-[0.25em] uppercase text-[var(--color-warm)] bg-[var(--color-bg)] border border-[var(--color-warm)] px-3 py-2">
                     View case study →
                   </span>
                 </div>
@@ -355,7 +357,7 @@ export default function CommercialClient() {
 
         {/* Live Commerce section */}
         <section className="mt-24">
-          <div style={{ borderTop: "1px solid rgba(249,249,249,0.18)", paddingTop: "20px", marginBottom: "48px", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+          <div style={{ borderTop: "1px solid color-mix(in srgb, var(--color-text) 18%, transparent)", paddingTop: "20px", marginBottom: "48px", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
             <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">Live Commerce</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">

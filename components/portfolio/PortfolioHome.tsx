@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useReducedMotion } from "framer-motion";
 import Footer from "@/components/Footer";
 import HeroStage from "@/components/HeroStage";
 import PageTransition from "@/components/PageTransition";
 import { workAssets } from "@/data/work-asset-urls";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 
 const sections = [
   {
@@ -44,7 +44,7 @@ const disciplines = [
 ];
 
 export default function PortfolioHome() {
-  const reduced = useReducedMotion();
+  const reduced = usePrefersReducedMotion();
 
   return (
     <PageTransition>
@@ -274,9 +274,9 @@ function DisciplineRow({ label, index: i, total }: { label: string; index: numbe
 }
 
 // The featured project: the photograph at full contrast in a 16:9 frame, then its
-// caption below in flow, on black. The dark gradient wash that carried white text
-// over the image went on 2026-09-08, the same move as the hero: nothing is layered
-// over the work, so legibility never costs the photograph anything.
+// caption below in flow, on the page ground. The dark gradient wash that carried
+// white text over the image went on 2026-09-08, the same move as the hero: nothing
+// is layered over the work, so legibility never costs the photograph anything.
 function FeaturedCard() {
   return (
     <Link
@@ -336,9 +336,11 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
           sizes="(max-width: 768px) 100vw, 33vw"
           className="object-cover object-center transition-transform duration-[800ms] ease-out group-hover:scale-[1.05] group-focus-visible:scale-[1.05]"
         />
-        {/* Gradient overlay. A gradient cannot be transitioned into another gradient, so the
-            deeper hover wash is a second layer that fades in by opacity. Stacked on the rest
-            gradient it equals the old hover gradient: 0.88 at the bottom, 0.2 at 55%. */}
+        {/* Gradient overlay. Black and white in both themes on purpose: this text sits on
+            the photograph, not on the page. A gradient cannot be transitioned into another
+            gradient, so the deeper hover wash is a second layer that fades in by opacity.
+            Stacked on the rest gradient it equals the old hover gradient: 0.88 at the
+            bottom, 0.2 at 55%. */}
         <div
           style={{
             position: "absolute",

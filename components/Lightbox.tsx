@@ -106,7 +106,7 @@ export default function Lightbox({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3, ease: EASE.out }}
       className="fixed inset-0 z-[100] flex flex-col outline-none"
-      style={{ backgroundColor: "rgba(10, 10, 10, 0.97)" }}
+      style={{ backgroundColor: "color-mix(in srgb, var(--color-bg) 97%, transparent)" }}
       onClick={onClose}
     >
       {/* Top bar */}
@@ -127,7 +127,7 @@ export default function Lightbox({
           <button
             onClick={onClose}
             aria-label="Close"
-            className="flex items-center justify-center w-11 h-11 text-[var(--color-grey-200)] hover:text-white transition-colors duration-200 cursor-pointer border border-[var(--color-grey-500)] hover:border-[var(--color-grey-300)] hover:bg-white/10"
+            className="flex items-center justify-center w-11 h-11 text-[var(--color-grey-200)] hover:text-[var(--color-text)] transition-colors duration-200 cursor-pointer border border-[var(--color-grey-500)] hover:border-[var(--color-grey-300)] hover:bg-[var(--color-text)]/10"
           >
             <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
               <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -147,7 +147,7 @@ export default function Lightbox({
             onClick={handlePrev}
             disabled={!hasPrev}
             className={`absolute left-2 md:left-6 z-10 flex items-center justify-center w-12 h-12 transition-colors duration-200 border ${
-              hasPrev ? "text-[var(--color-grey-200)] hover:text-white border-[var(--color-grey-500)] hover:border-[var(--color-grey-300)] hover:bg-white/10 cursor-pointer" : "text-[#4A4844] border-[#3A3735] cursor-default"
+              hasPrev ? "text-[var(--color-grey-200)] hover:text-[var(--color-text)] border-[var(--color-grey-500)] hover:border-[var(--color-grey-300)] hover:bg-[var(--color-text)]/10 cursor-pointer" : "text-[var(--color-text-dim)] border-[var(--color-grey-600)] cursor-default"
             }`}
             aria-label="Previous image"
           >
@@ -198,7 +198,7 @@ export default function Lightbox({
             onClick={handleNext}
             disabled={!hasNext}
             className={`absolute right-2 md:right-6 z-10 flex items-center justify-center w-12 h-12 transition-colors duration-200 border ${
-              hasNext ? "text-[var(--color-grey-200)] hover:text-white border-[var(--color-grey-500)] hover:border-[var(--color-grey-300)] hover:bg-white/10 cursor-pointer" : "text-[#4A4844] border-[#3A3735] cursor-default"
+              hasNext ? "text-[var(--color-grey-200)] hover:text-[var(--color-text)] border-[var(--color-grey-500)] hover:border-[var(--color-grey-300)] hover:bg-[var(--color-text)]/10 cursor-pointer" : "text-[var(--color-text-dim)] border-[var(--color-grey-600)] cursor-default"
             }`}
             aria-label="Next image"
           >
@@ -208,7 +208,8 @@ export default function Lightbox({
           </button>
         )}
 
-        {/* First-open swipe hint (B6) */}
+        {/* First-open swipe hint (B6). The page ground at 85% under the blur: the pill can
+            sit on the photograph, and at 40% its text failed on dark photos in Light. */}
         <AnimatePresence>
           {hasMultiple && showHint && (
             <motion.div
@@ -216,7 +217,7 @@ export default function Lightbox({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
               transition={{ duration: 0.4, ease: EASE.out }}
-              className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 border border-[var(--color-border-strong)] bg-black/40 backdrop-blur-sm"
+              className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 border border-[var(--color-border-strong)] bg-[var(--color-bg)]/85 backdrop-blur-sm"
             >
               <span className="text-[13px] leading-none text-[var(--color-grey-300)]">‹</span>
               <span className="text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-300)]">

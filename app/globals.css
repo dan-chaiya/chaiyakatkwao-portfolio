@@ -1,48 +1,110 @@
 @import "tailwindcss";
 
+/* === COLOUR — TWO THEMES, ONE SET OF NAMES ==========================================
+   Brutalist neutrals, 2026-09-23: #F0F0F0 / #EAEAEA paper and #111111 / #1C1C1C /
+   #222222 ink, each theme using the other's values as its ink. Light is the default
+   (:root); Dark is <html data-theme="dark">, set before the first paint by the script
+   in app/layout.tsx from the visitor's pick (components/ThemeToggle.tsx, lib/theme.ts).
+   Components only ever name a token, so every page follows the switch.
+
+   Every name means the same role in both themes: `warm` is the heading ink,
+   grey-200/300 the reading greys, grey-700 and border-muted hairlines, surface-chat
+   the chat ground. The text greys keep their slight warmth (hue 60-80) on neutral
+   grounds, and each one is measured to 4.5:1 or better on bg, surface and
+   surface-elevated of its own theme.
+
+   Plain custom properties, not @theme tokens: the site reads every colour through
+   var() (inline styles, arbitrary values like text-[var(--color-warm)]) and never as
+   a named Tailwind utility, and the `@theme inline` block they used to sit in bakes
+   values in at build time, where a theme cannot reach them. */
+:root {
+  color-scheme: light;
+
+  --color-bg:               #F0F0F0;
+  --color-surface:          #EAEAEA;
+  --color-surface-elevated: #E4E4E4;
+  --color-surface-hover:    #DEDEDE;
+
+  --color-text:             #111111;
+  --color-text-muted:       #5F5A55; /* 5.98:1 on bg, 5.36:1 on surface-elevated */
+  --color-text-dim:         #A8A29B; /* structural marks and disabled controls only */
+  --color-text-inverse:     #F0F0F0;
+
+  --color-border-faint:     rgba(17, 17, 17, 0.07); /* header, footer, mobile menu rows */
+  --color-border:           rgba(17, 17, 17, 0.09);
+  --color-border-strong:    rgba(17, 17, 17, 0.22);
+
+  --color-grey-100: #111111;
+  --color-grey-200: #1C1C1C;
+  --color-grey-300: #3D3A37;
+  --color-grey-400: #57524D;
+  --color-grey-500: #67625C; /* the lightest text grey: 5.30:1 on bg, 4.75:1 on surface-elevated */
+  --color-grey-600: #BDB8B1;
+  --color-grey-700: #D3D0CA;
+  --color-grey-800: #E2E0DC;
+  --color-grey-900: #EAEAEA;
+
+  --color-warm:         #111111;
+  --color-surface-chat: #EAEAEA;
+  --color-surface-dark: #E4E4E4;
+  --color-border-muted: #D6D6D6;
+
+  --color-focus-ring:       rgba(17, 17, 17, 0.55);
+  --color-selection-bg:     #111111;
+  --color-selection-text:   #F0F0F0;
+
+  /* The amber, deepened for paper: the 11px "Available" badge is set in it, and it
+     needs 4.5:1 there (4.87:1 on bg). /systems' oklch(58%) measures 4.13:1 here. */
+  --color-accent:     oklch(54% 0.19 35);
+  --color-accent-dim: oklch(54% 0.19 35 / 0.3);
+}
+
+/* Screen only: on paper every page is Light, so a print or PDF made in Dark still
+   comes out ink on white. Under color-scheme: dark Chrome also paints the sheet's
+   page margins #121212, which framed the CV's white page in black. */
+@media screen {
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --color-bg:               #111111;
+    --color-surface:          #1C1C1C;
+    --color-surface-elevated: #222222;
+    --color-surface-hover:    #2A2A2A;
+
+    --color-text:             #F0F0F0;
+    --color-text-muted:       #958F89; /* was #8B857F on #000; raised for 4.98:1 on #222222 */
+    --color-text-dim:         #4A4744;
+    --color-text-inverse:     #111111;
+
+    --color-border-faint:     rgba(240, 240, 240, 0.07);
+    --color-border:           rgba(240, 240, 240, 0.09);
+    --color-border-strong:    rgba(240, 240, 240, 0.22);
+
+    --color-grey-100: #F0F0F0;
+    --color-grey-200: #EAEAEA;
+    --color-grey-300: #C8C4BC;
+    --color-grey-400: #9A9087;
+    --color-grey-500: #8F8983; /* was #827C75 on #000; raised for 4.60:1 on #222222 */
+    --color-grey-600: #3D3A37;
+    --color-grey-700: #2A2826;
+    --color-grey-800: #1A1816;
+    --color-grey-900: #0D0B0A;
+
+    --color-warm:         #F0F0F0;
+    --color-surface-chat: #1C1C1C;
+    --color-surface-dark: #222222;
+    --color-border-muted: #2A2A2A;
+
+    --color-focus-ring:       rgba(240, 240, 240, 0.55);
+    --color-selection-bg:     #F0F0F0;
+    --color-selection-text:   #111111;
+
+    --color-accent:     oklch(72% 0.18 35);
+    --color-accent-dim: oklch(72% 0.18 35 / 0.3);
+  }
+}
+
 @theme inline {
-  /* === COLOR SYSTEM — INK BLACK / GALLERY WHITE / ARCHITECTURAL GREY === */
-  --color-bg:               #000000;
-  --color-surface:          #0A0A0A;
-  --color-surface-elevated: #111111;
-  --color-surface-hover:    #161616;
-
-  --color-text:             #F9F9F9;
-  --color-text-muted:       #8B857F; /* B2: raised from #6B6560 for WCAG AA on #000 */
-  --color-text-dim:         #4A4744; /* B2: raised from #3D3A37 */
-  --color-text-inverse:     #000000;
-
-  --color-border:           rgba(249, 249, 249, 0.09);
-  --color-border-strong:    rgba(249, 249, 249, 0.22);
-
-  --color-grey-100: #F9F9F9;
-  --color-grey-200: #E5E5E3;
-  --color-grey-300: #C8C4BC;
-  --color-grey-400: #9A9087;
-  --color-grey-500: #827C75; /* A11y 2026-08-29: raised from #6B6560 (3.66:1, failed AA).
-                                Used site-wide as the secondary label colour, so the token
-                                moved rather than ~20 call sites. Now 5.09:1 on #000 and
-                                4.71:1 on #0D0D0D, still a step below text-muted. */
-  --color-grey-600: #3D3A37;
-  --color-grey-700: #2A2826;
-  --color-grey-800: #1A1816;
-  --color-grey-900: #0D0B0A;
-
-  /* === WARM SURFACES (toned toward hue 35, used in hero, info panels, CV) === */
-  --color-warm:         #F2F0EB;
-  --color-surface-chat: #0D0D0D;
-  --color-surface-dark: #161514;
-  --color-border-muted: #1E1C1A;
-
-  /* === SELECTION / FOCUS === */
-  --color-focus-ring:       rgba(249, 249, 249, 0.55);
-  --color-selection-bg:     #F9F9F9;
-  --color-selection-text:   #000000;
-
-  /* === ACCENT === */
-  --color-accent: oklch(72% 0.18 35);
-  --color-accent-dim: oklch(72% 0.18 35 / 0.3);
-
   /* === TYPOGRAPHY === */
   --font-display: var(--font-archivo-black);
   --font-body:    var(--font-archivo);
@@ -193,6 +255,44 @@ body::after {
   text-transform: uppercase;
   color: var(--color-text-muted);
   line-height: 1;
+}
+
+/* The theme switch (components/ThemeToggle.tsx): two mono labels in one hairline box,
+   the theme in use a solid block of ink. Which option is solid is read from
+   <html data-theme> here, not from React state, so it is right from the first frame.
+   No accent: amber stays the active page's underline. */
+.theme-toggle {
+  display: inline-flex;
+  border: 1px solid var(--color-border-strong);
+}
+.theme-toggle button {
+  position: relative;
+  height: 30px;
+  /* Tracking also trails the last letter; the extra left padding re-centres the word. */
+  padding: 0 10px 0 calc(10px + 0.18em);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-grey-400);
+  background: transparent;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+/* 44px tall to the finger, 30px to the eye. */
+.theme-toggle button::after {
+  content: "";
+  position: absolute;
+  inset: -7px 0;
+}
+.theme-toggle button:hover { color: var(--color-text); }
+:root:not([data-theme="dark"]) .theme-toggle [data-theme-option="light"],
+:root[data-theme="dark"] .theme-toggle [data-theme-option="dark"] {
+  background: var(--color-text);
+  color: var(--color-bg);
+  cursor: default;
 }
 
 /* Reading text. Three sizes carry every sentence on the site; everything smaller
