@@ -24,7 +24,7 @@ export const metadata: Metadata = pageMetadata({
 
 const experience = [
   {
-    role: "Live Production & Visual Co-ordinator",
+    role: "Live Production & Visual Coordinator",
     company: "Ad The Top Agency",
     location: "Bangkok",
     period: "2026 — Present",
@@ -71,11 +71,11 @@ const exhibitions = [
 const skills = [
   {
     group: "Creative",
-    items: "Art Direction, Creative Direction, Photography, Video Editing & Color Grading, Styling, Lighting Design, Visual Storytelling",
+    items: "Art Direction, Creative Direction, Photography, Video Editing & Color Grading (DaVinci Resolve), Styling, Lighting Design, Visual Storytelling",
   },
   {
     group: "Production",
-    items: "Live Commerce Production, Live Content Systems, Multi-camera Production, Studio Production, Audio-Visual Engineering",
+    items: "Live Commerce Production, Live Switching & Streaming (OBS), Live Content Systems, Multi-camera Production, Studio Production, Audio-Visual Engineering",
   },
   {
     group: "AI Systems",
@@ -182,7 +182,9 @@ export default function CVPage() {
           .cv-shell .cv-eyebrow { margin-bottom: 2.5mm !important; }
           .cv-top .cv-eyebrow { margin-bottom: 0 !important; }
           .cv-rows::after, .cv-row, .cv-foot { border-color: var(--cv-rule); border-top-width: 0.5pt; }
-          .cv-row { padding: 1.6mm 0; }
+          /* 1.3mm, not 1.6mm: the rail is the taller column since the Skills
+             gained DaVinci Resolve and OBS, and the sheet needs room to spare. */
+          .cv-row { padding: 1.3mm 0; }
           .cv-row--role { padding: 3mm 0; }
           .cv-role { color: var(--cv-ink); }
           .cv-where { color: var(--cv-muted); margin-top: 0.5mm; }
@@ -218,9 +220,12 @@ export default function CVPage() {
               </h1>
 
               <div className="cv-summary">
+                {/* No "in Bangkok" here: on paper the longer line runs to three
+                    lines with "other." alone on the third, and the page is
+                    full. Bangkok is in the contact block beside it. */}
                 <p className="copy-lead">
-                  Creative Producer working at the intersection of art direction
-                  and technical execution.
+                  Creative Producer. Art direction on one side; lighting,
+                  cameras, sound and the studio&apos;s own software on the other.
                 </p>
                 <p className="copy-body">
                   Turns briefs into broadcast-quality output, from multi-camera

@@ -89,8 +89,9 @@ export default function PortfolioHome() {
             <div className="md:col-span-7">
               <Label>About</Label>
               <p className="copy-lead" style={{ maxWidth: "52ch", marginTop: "20px" }}>
-                Bangkok-based Creative Producer working at the intersection of
-                art direction and technical execution.
+                Creative Producer in Bangkok. Art direction on one side;
+                lighting, cameras, sound and the studio&apos;s own software on
+                the other.
               </p>
               <Link
                 href="/about"

@@ -12,7 +12,7 @@ The site mostly reads like a person. Three things stand out.
 
 Labels, buttons, page descriptions, the Services section and /systems pass.
 
-Nothing below has been applied to the site except the CV and the chat script's experience block. Each item gives the current line, what gives it away, a proposed line, and the tradeoff. CK decides.
+Each item gives the line as it was, what gave it away, the proposed line, and the tradeoff. CK approved every proposal on 25 September 2026 and they are applied in the same branch as the CV work (PR #16). "Current" below means before that change.
 
 ## Site copy
 
@@ -28,7 +28,7 @@ Proposed (About): "Chaiya is a Creative Producer in Bangkok. He art-directs the 
 
 Proposed (Home and CV, no name): "Creative Producer in Bangkok. Art direction on one side; lighting, cameras, sound and the studio's own software on the other."
 
-Tradeoff: two sentences instead of one, and the tidy symmetry of "art direction and technical execution" goes. In return the reader gets four things they can picture. On the CV, "Creative Producer in Bangkok." as the first line after the name is also exactly what a resume parser wants to see as the headline.
+Tradeoff: two sentences instead of one, and the tidy symmetry of "art direction and technical execution" goes. In return the reader gets four things they can picture. On the CV the lead drops "in Bangkok" so it holds two lines on paper (the page is full, and the longer line left "other." alone on a third line); Bangkok sits in the contact block beside it.
 
 ### 2. About, paragraph two
 
@@ -115,7 +115,7 @@ Paragraph one passes. "The studio was designed to disappear." is a good first li
 The "About you" block is the About page in second person, so items 1 to 4 apply there too once CK decides. Two more things:
 
 - Its Skills block lists "Advanced Streaming Architecture" and "Full-Scale Media Production", puffed-up names for what the CV calls Multi-camera Production and Live Content Systems. Suggest the bot uses the CV's four skill groups.
-- It said freelance work ended in 2025 and left out Colgate. Both fixed in this branch to match the CV. It says "Nestlé Health Science" where the CV says "Nestlé". CK to confirm which is right, then use it in both places.
+- It said freelance work ended in 2025 and left out Colgate. Both fixed in this branch to match the CV. It said "Nestlé Health Science" where the CV says "Nestlé"; CK chose plain "Nestlé" for the CV and the chat script. The Commercial page keeps "Nestlé Health Science Live" because that is the show's name.
 
 ### 12. /systems
 
@@ -147,12 +147,12 @@ The live /cv page was printed to PDF on 25 September 2026 with headless Chrome, 
 
 The Ad The Top bullets said things like "Translates brand briefs into structured visual execution", which is the sentence a model writes when it has no facts. They were rewritten with facts the site already states, mostly from /systems: what he wrote, what he built, how many items. Nothing was added that the site does not say. The chat script's experience block carries the same wording.
 
-### Not changed, CK's call
+### CK's decisions, 25 September 2026
 
-- "Co-ordinator". A recruiter searching "Coordinator" will not match "Co-ordinator". It is the real title at Ad The Top, so it stays. Worth knowing.
-- Tool names. The Skills list names no editing, grading, switching or streaming software. Parsers and recruiters search by product name. Not added, because the site does not say which ones he uses. This is the single biggest keyword gap on the CV.
-- Date ranges use the long dash ("2026 — Present"). All three readers handled it. Older parsers prefer "2026 - Present". Left to match the rest of the site.
-- Two columns. Fine in testing. A single column is the safest shape for very old parsers, but the one-page design is worth more.
+- "Co-ordinator" became "Coordinator" on the CV, About, Commercial and the chat script, so a search for "Coordinator" matches. It no longer matches the HR spelling at Ad The Top, which is normal on a CV.
+- Tool names: CK named DaVinci Resolve (editing and grading) and OBS (live switching and streaming). Both are now in the CV's Skills and the chat script. They were the single biggest keyword gap.
+- Date ranges keep the long dash ("2026 — Present"). All three readers handled it. Older parsers prefer "2026 - Present". Left to match the rest of the site.
+- Two columns stay. Fine in testing. A single column is the safest shape for very old parsers, but the one-page design is worth more.
 
 ### On AI-writing detectors
 

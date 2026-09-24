@@ -5,7 +5,7 @@ import AboutClient from "./AboutClient";
 export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
-    "Chaiya Katkwao is a Bangkok-based Creative Producer working at the intersection of art direction and technical execution.",
+    "Chaiya Katkwao, Creative Producer in Bangkok. Art direction on one side; lighting, cameras, sound and the studio's own software on the other.",
   path: "/about",
 });
 
