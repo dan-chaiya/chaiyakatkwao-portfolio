@@ -54,6 +54,33 @@ const clients = [
   "BAKAO",
 ];
 
+const services = [
+  {
+    name: "Studio Design",
+    description:
+      "Floor plan, equipment list, lighting and audio plan, and a 3D render. Build it yourself or hand it to anyone.",
+  },
+  {
+    name: "Studio Build",
+    description:
+      "Design through handover: sourcing, contractors, installation, and training, so your team can run it on their own.",
+  },
+  {
+    name: "Studio Technician",
+    description:
+      "Freelance, by the day. Room and set preparation, props, lighting, picture and sound for recorded shows, then colour grade and audio finish. No full edits.",
+  },
+];
+
+const howItWorks = [
+  {
+    step: "Visit",
+    text: "The first conversation and a site visit are free, anywhere within an hour of Bangkok.",
+  },
+  { step: "Quote", text: "One fixed price for the whole job." },
+  { step: "Start", text: "Work begins when you accept it." },
+];
+
 export default function AboutClient() {
   return (
     <PageTransition>
@@ -225,6 +252,72 @@ export default function AboutClient() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Services — placed right before Contact, so it reads as what to write
+          about. No prices on the page: the first visit is free and each job gets
+          one fixed quote. scroll-margin keeps /about#services clear of the
+          sticky header. */}
+      <section
+        id="services"
+        className="border-t border-[var(--color-grey-700)] px-8 py-24"
+        style={{ scrollMarginTop: "var(--header-h)" }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="lg:col-span-3">
+            {/* An h2 for the outline, but it looks like the other labels: the
+                global h2 rule sets weight 800 outside Tailwind's layers, so only
+                an inline weight can bring it back to 400. */}
+            <h2
+              className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)]"
+              style={{ fontWeight: 400 }}
+            >
+              <span className="block mb-2">Studio</span>
+              <span className="block">Services</span>
+            </h2>
+          </div>
+          <div className="lg:col-span-9">
+            <ul>
+              {services.map((service, i) => (
+                <li
+                  key={service.name}
+                  className="border-t border-[var(--color-grey-700)] py-6 last:border-b"
+                >
+                  <div className="flex items-baseline justify-between gap-6">
+                    <h3
+                      className="font-heading text-[var(--color-warm)]"
+                      style={{
+                        fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)",
+                        lineHeight: 1.05,
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      {service.name}
+                    </h3>
+                    <span className="font-body text-[11px] tracking-[0.18em] text-[var(--color-grey-400)]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <p className="copy-small mt-3 max-w-xl">{service.description}</p>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-16">
+              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
+                How it works
+              </p>
+              <ol className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                {howItWorks.map((item) => (
+                  <li key={item.step} className="border-t border-[var(--color-grey-700)] pt-4">
+                    <p className="copy-small text-[var(--color-warm)] mb-2">{item.step}</p>
+                    <p className="copy-small">{item.text}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </div>
       </section>
