@@ -28,8 +28,8 @@ export const projects: Project[] = [
     description:
       "Documenting the senior thesis runway of Suan Sunandha Rajabhat University's graduating fashion class.",
     brief: [
-      "Knack Factory #18 is the senior thesis showcase of Suan Sunandha Rajabhat University's graduating fashion class. The runway is reimagined as an assembly line — each designer's \"knack,\" their specialised skill and distinct identity, processed as a working part of a larger machine that refines raw ideas into wearable art.",
-      "Industrial precision meets creative expression — a new generation of Thai fashion making its first public turn.",
+      "Knack Factory #18 is the senior thesis showcase of Suan Sunandha Rajabhat University's graduating fashion class. The runway is reimagined as an assembly line: each designer's \"knack,\" their specialised skill and distinct identity, processed as a working part of a larger machine that refines raw ideas into wearable art.",
+      "It was the first public turn for a new generation of Thai fashion graduates.",
     ],
     tags: ["Photography", "Fashion"],
     cover: workAssets.knack("Knack-75.jpg"),
@@ -60,8 +60,8 @@ export const projects: Project[] = [
     description:
       "Fashion photography and art direction for an emerging Thai clothing label.",
     brief: [
-      "BAKAO is an independent Bangkok-based clothing label built around clean silhouettes and natural fabrics. The brief was to shoot a lookbook that felt unhurried — clothes worn by real people in real light, without the urgency of trend-driven editorial.",
-      "The approach was sparse: minimal location scouting, a tight colour palette pulled from the garments themselves, and long pauses between frames. The result is a set of images that sit closer to portraiture than fashion photography.",
+      "BAKAO is an independent Bangkok-based clothing label built around clean silhouettes and natural fabrics. The brief was a lookbook that felt unhurried: clothes on real people in real light, with none of the rush of a trend editorial.",
+      "The shoot took little scouting, a palette pulled from the garments themselves, and long pauses between frames. The pictures came out closer to portraiture than fashion photography.",
     ],
     tags: ["Fashion Photography", "Art Direction"],
     cover: "/images/bakao/01.jpg",
@@ -89,8 +89,8 @@ export const projects: Project[] = [
     description:
       "Portrait series documenting community and landscape across Northern Thailand.",
     brief: [
-      "Khun Chang Khian is a village outside Chiang Mai where craft, community, and landscape are inseparable. The assignment began as a portrait series but expanded as the place itself became the subject — small fires burning at the edge of rice fields, hands at work, light that moves differently up north.",
-      "The photographs resist compression into a single theme. They are about proximity and patience, and the particular quality of time that only exists when you stay somewhere long enough to stop being a visitor.",
+      "Khun Chang Khian is a village outside Chiang Mai. The assignment began as a portrait series and widened as the place took over: small fires at the edge of the rice fields, hands at work, a light that moves differently up north.",
+      "There is no single theme. The pictures are about staying somewhere long enough to stop being a visitor.",
     ],
     tags: ["Documentary", "Portrait"],
     cover: "/images/khun-chang-khian/01.jpg",
@@ -111,7 +111,7 @@ export const projects: Project[] = [
       "Studio design and live production systems supporting an ongoing slate of podcasts and long-form interviews.",
     brief: [
       "The studio was designed to disappear. The goal was a production environment that could carry the technical weight of broadcast-quality recording while remaining warm enough for guests to forget they were being recorded at all. Acoustics, lighting, and furniture were treated as a single system.",
-      "Across an ongoing slate of shows, the role spans pre-production to post — guest coordination, signal routing, multi-camera direction, and final delivery. The work is less about any single episode and more about building a machine that runs consistently, week after week.",
+      "Across an ongoing slate of shows the role runs from pre-production to post: guest coordination, signal routing, multi-camera direction and final delivery. The job was to build a machine that runs the same way week after week.",
     ],
     tags: ["Studio Production", "Live Systems", "Podcast"],
     cover: "/images/podcast/02.jpg",
