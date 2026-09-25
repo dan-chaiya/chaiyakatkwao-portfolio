@@ -160,7 +160,7 @@
 
     <dt class="t-data">Outcome</dt>
     <dd class="t-body">
-      <p>In daily use by the studio team, with more than twenty releases shipped. Requests now arrive as feature ideas rather than workarounds. The data layer is round-trip tested &mdash; written, read back, compared &mdash; so reordering a column no longer breaks anything. Four known limits are documented and deliberately unfixed, including a whole-table save that loses data if two people write at once, which needs the save path rebuilt.</p>
+      <p>In daily use by the studio team, with more than twenty releases shipped. Requests now arrive as feature ideas rather than workarounds. The data layer is round-trip tested &mdash; written, read back, compared &mdash; so reordering a column no longer breaks anything. The save path has since been rebuilt to write one row at a time, so two people can log at once without overwriting each other. The limits that remain &mdash; check results tied to row order, no audit trail &mdash; are documented and deliberately unfixed.</p>
       <p>The split was by strength: the CEO brought the engineering depth, I brought the studio floor and the operational discipline. The database rules the system is now held to, and the deploy order that stops old code redeploying over live data, exist because I asked for them &mdash; after both had already gone wrong once.</p>
     </dd>
   </dl>
