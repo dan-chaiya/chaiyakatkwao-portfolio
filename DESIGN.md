@@ -40,43 +40,43 @@ colors-dark:
   selection-text: "#111111"
 typography:
   display:
-    fontFamily: "Archivo Black, sans-serif"
+    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
     fontSize: "clamp(2.5rem, 8vw, 7rem)"
     fontWeight: 800
     lineHeight: 0.9
     letterSpacing: "-0.02em"
   headline:
-    fontFamily: "Archivo Black, sans-serif"
+    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
     fontSize: "clamp(1.2rem, 2.5vw, 2rem)"
     fontWeight: 800
     lineHeight: 0.95
     letterSpacing: "-0.02em"
   lead:
-    fontFamily: "Archivo, sans-serif"
+    fontFamily: "Archivo, Noto Sans Thai, sans-serif"
     fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)"
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: "normal"
   body:
-    fontFamily: "Archivo, sans-serif"
+    fontFamily: "Archivo, Noto Sans Thai, sans-serif"
     fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.55
     letterSpacing: "normal"
   body-sm:
-    fontFamily: "Archivo, sans-serif"
+    fontFamily: "Archivo, Noto Sans Thai, sans-serif"
     fontSize: "14px"
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: "normal"
   label:
-    fontFamily: "JetBrains Mono, monospace"
+    fontFamily: "JetBrains Mono, Noto Sans Thai, monospace"
     fontSize: "11px"
     fontWeight: 500
     lineHeight: 1
     letterSpacing: "0.18em"
   label-wide:
-    fontFamily: "JetBrains Mono, monospace"
+    fontFamily: "JetBrains Mono, Noto Sans Thai, monospace"
     fontSize: "11px"
     fontWeight: 500
     lineHeight: 1
@@ -192,6 +192,15 @@ the hero name line and the mobile navigation overlay.
 **Body Font:** Archivo (400, 500, 600, 700, 800). Weight 300 was retired on 8 September 2026: it read as whispering under the display heads.
 **Label Font:** JetBrains Mono (400, 500) — every uppercase label, index, counter,
 caption and metadata line on the site.
+**Thai:** Noto Sans Thai (variable 100–900), added 25 September 2026. It is Archivo's
+companion script, not a third voice: it sits second in every stack (`--font-archivo`,
+`--font-archivo-black`, `--font-jetbrains-mono` in `globals.css`), so Latin always sets
+in Archivo and only Thai characters reach Noto. It was chosen over LINE Seed Sans TH,
+Kanit, Prompt, Anuphan and IBM Plex Sans Thai because it matches the 800 heading weight
+and stays neutral; Kanit reads as generic Thai advertising and LINE Seed as LINE's brand.
+A Thai headline sets in a real Noto 800 beside the synthesized Archivo Black. Labels stay
+English: Thai in the mono layer is a fallback, not a style. The file loads only when a
+Thai character is on the page (`preload: false`). Mark Thai passages `lang="th"`.
 
 **Character:** Archivo Black is structural, not decorative: it is used at size, tight
 (-0.02em to -0.03em), on a 0.88–0.95 line-height, so headlines read as built objects.
@@ -221,7 +230,8 @@ whose endpoints vary by context (`7rem` on index pages, `5.5rem` on the contact 
 `3.5rem` on the featured card). The table records the dominant pair; a headline that
 needs a different ceiling sets one, and that is intentional, not drift.
 
-**The Two-Family Rule.** Archivo and JetBrains Mono. No third family. If something
+**The Two-Family Rule.** Archivo and JetBrains Mono. No third family; Noto Sans Thai
+is Archivo's Thai script, not a family choice, and never sets Latin. If something
 needs to read as *information* — an index, a year, a role, a counter, a caption — it is
 Mono, uppercase, tracked. If it needs to be *read*, it is Archivo. This split is the
 system, and it is what `.mono-label` in `globals.css` encodes.
@@ -329,7 +339,7 @@ until 29 Aug 2026.
 - **Don't** use `border-left` or `border-right` greater than 1px as a colored stripe on any component. Never intentional. Rewrite with full borders or background tints.
 - **Don't** use gradient text (`background-clip: text`). Prohibited. Use Warm Signal solid if emphasis is needed.
 - **Don't** apply glassmorphism decoratively. The one backdrop-blur is on the lightbox caption pill, is functional, and is already at its limit. Do not extend it.
-- **Don't** add a third typeface. Archivo reads, JetBrains Mono labels; that split is the system. Solve anything else through weight and scale.
+- **Don't** add a third typeface. Archivo reads, JetBrains Mono labels; that split is the system. Solve anything else through weight and scale. Noto Sans Thai is the one exception, and it is a script, not a typeface choice: never use it to set Latin.
 - **Don't** add shadows. If something needs elevation, use the next surface step.
 - **Don't** make the accent compete. If more than 10% of a screen surface carries the Warm Signal, scale it back.
 - **Don't** use bounce or elastic easing. Exponential ease-out only.
