@@ -71,6 +71,10 @@ function parseMessages(body: unknown): IncomingMessage[] | null {
     clean.push({ role, content });
   }
 
+  // The model answers a visitor's message. A trailing assistant turn would let
+  // a caller write the start of the persona's reply (a prefill).
+  if (clean[clean.length - 1].role !== "user") return null;
+
   return clean;
 }
 
@@ -114,6 +118,8 @@ export async function POST(req: Request) {
     system: systemPrompt,
     messages,
     maxTokens: 512,
+    // ai@3.4 sends temperature 0 when omitted; 1 is Anthropic's default.
+    temperature: 1,
   });
 
   return new Response(result.textStream, {
