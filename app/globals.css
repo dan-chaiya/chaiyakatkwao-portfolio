@@ -104,6 +104,17 @@
   }
 }
 
+/* Thai rides behind every Latin face. next/font loads the Latin faces as *-latin
+   (app/layout.tsx); these rebuild the names the rest of the site uses, with Noto Sans
+   Thai second. Archivo has no Thai glyphs, so Latin always sets in Archivo and Thai
+   characters fall through to Noto. One stack per face, so a component that writes
+   var(--font-archivo) inline gets Thai for free. */
+:root {
+  --font-archivo:        var(--font-archivo-latin), var(--font-noto-sans-thai);
+  --font-archivo-black:  var(--font-archivo-black-latin), var(--font-noto-sans-thai);
+  --font-jetbrains-mono: var(--font-jetbrains-mono-latin), var(--font-noto-sans-thai);
+}
+
 @theme inline {
   /* === TYPOGRAPHY === */
   --font-display: var(--font-archivo-black);
