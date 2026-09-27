@@ -35,22 +35,28 @@
   font-display: swap;
 }
 
-/* --- TOKENS: the parent's @theme, inverted --------------------------------- */
+/* --- TOKENS: the parent's two themes, value for value -----------------------
+   Since 2026-09-27 these are the parent's own Light and Dark (its app/globals.css),
+   not an inversion of it: the warm paper #F2F0EB became the parent's #F0F0F0, and the
+   page follows the parent's theme pick (the script in index.html's head sets
+   <html data-theme>). Each name maps to the parent role in the comment; the parent
+   measured those values for AA on bg, surface and surface-elevated. */
 :root {
-  --color-bg:               #F2F0EB;  /* the parent's warm paper */
-  --color-surface:          #EBE9E3;  /* parent #0A0A0A */
-  --color-surface-elevated: #E4E2DB;  /* parent #111111 */
-  --color-text:             #0A0A0A;  /* parent #F9F9F9 */
-  --color-text-strong:      #16150F;  /* parent --color-warm, display type */
-  --color-text-body:        #3D3A37;  /* the parent's grey-300 role: bios, intros */
-  --color-text-muted:       #6B6560;  /* 4.9:1 on the ground, AA */
-  --color-text-dim:         #9A9087;  /* decorative only, never text */
-  --color-border:           rgba(10, 10, 10, 0.09);
-  --color-border-strong:    rgba(10, 10, 10, 0.22);
-  --color-border-header:    rgba(10, 10, 10, 0.07);
-  --color-accent:           oklch(58% 0.19 35);   /* the parent's amber, darkened to pass on paper */
-  --color-accent-dim:       oklch(58% 0.19 35 / 0.3);
-  --color-focus-ring:       rgba(10, 10, 10, 0.55);
+  color-scheme: light;
+  --color-bg:               #F0F0F0;  /* parent --color-bg */
+  --color-surface:          #EAEAEA;  /* parent --color-surface */
+  --color-surface-elevated: #E4E4E4;  /* parent --color-surface-elevated */
+  --color-text:             #111111;  /* parent --color-text */
+  --color-text-strong:      #111111;  /* parent --color-warm, display type */
+  --color-text-body:        #3D3A37;  /* parent --color-grey-300: bios, intros */
+  --color-text-muted:       #5F5A55;  /* parent --color-text-muted, 5.98:1 on the ground */
+  --color-text-dim:         #A8A29B;  /* decorative only, never text */
+  --color-border:           rgba(17, 17, 17, 0.09);
+  --color-border-strong:    rgba(17, 17, 17, 0.22);
+  --color-border-header:    rgba(17, 17, 17, 0.07);
+  --color-accent:           oklch(54% 0.19 35);   /* the parent's Light amber, 4.87:1 on the ground */
+  --color-accent-dim:       oklch(54% 0.19 35 / 0.3);
+  --color-focus-ring:       rgba(17, 17, 17, 0.55);
 
   --font-display: "Archivo Black", "Archivo", system-ui, sans-serif;
   --font-body:    "Archivo", system-ui, sans-serif;
@@ -74,6 +80,26 @@
   --gutter: 24px;
   --section: 128px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* Screen only, as on the parent: a print of this page is always Light. */
+@media screen {
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-bg:               #111111;
+    --color-surface:          #1C1C1C;
+    --color-surface-elevated: #222222;
+    --color-text:             #F0F0F0;
+    --color-text-strong:      #F0F0F0;
+    --color-text-body:        #C8C4BC;
+    --color-text-muted:       #958F89;  /* 4.98:1 on #222222 */
+    --color-text-dim:         #4A4744;
+    --color-border:           rgba(240, 240, 240, 0.09);
+    --color-border-strong:    rgba(240, 240, 240, 0.22);
+    --color-border-header:    rgba(240, 240, 240, 0.07);
+    --color-accent:           oklch(72% 0.18 35);
+    --color-accent-dim:       oklch(72% 0.18 35 / 0.3);
+    --color-focus-ring:       rgba(240, 240, 240, 0.55);
+  }
 }
 @media (max-width: 1023px) { :root { --header-h: 72px; } }
 @media (max-width: 767px)  { :root { --margin: 24px; --section: 96px; } }
@@ -253,19 +279,13 @@ table { border-collapse: collapse; width: 100%; }
   padding: 14px var(--margin);
 }
 .site__brand { position: relative; z-index: 41; display: flex; align-items: center; gap: 16px; }
+.site__end { display: flex; align-items: center; gap: 16px; }
 .site__mark {
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 1.15rem;
   letter-spacing: -0.02em;
   color: var(--color-text);
-}
-.site__section {
-  display: none;
-  font-size: var(--step-label);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
 }
 .site__nav { display: none; align-items: center; gap: 32px; }
 .site__link {
@@ -278,9 +298,77 @@ table { border-collapse: collapse; width: 100%; }
 }
 .site__link:hover, .site__link:focus-visible { color: var(--color-text); }
 @media (min-width: 1024px) {
-  .site__section { display: block; }
+  .site__end { gap: 32px; }
   .site__nav { display: flex; }
   .menu { display: none; }
+}
+
+/* The theme dot, drawn as on the parent: 14px, half ink and half clear in an ink ring;
+   the ink half sits left in Light and turns right in Dark. It shows only once the
+   head script has set data-theme, so a visitor without JavaScript never gets a dot
+   that does nothing. Above the open phone menu, like the menu button. */
+.theme-toggle {
+  position: relative;
+  z-index: 41;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+:root[data-theme] .theme-toggle { display: inline-flex; }
+.theme-toggle::after { content: ""; position: absolute; inset: -7px; } /* 44px to the finger */
+.theme-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-text);
+  background: linear-gradient(90deg, var(--color-text) 50%, transparent 50%);
+  transition: transform 420ms var(--ease);
+}
+.theme-toggle:hover .theme-dot { transform: scale(1.18); }
+:root[data-theme="dark"] .theme-dot { transform: rotate(180deg); }
+:root[data-theme="dark"] .theme-toggle:hover .theme-dot { transform: rotate(180deg) scale(1.18); }
+
+/* The theme change, as on the parent: the colour tokens are registered as colours, and
+   while <html> carries .theme-fading they fade to the other theme over 450ms (200ms
+   under reduced motion). Every colour here is read through a token, so the whole page
+   follows one fade; each element's own transitions are off meanwhile so nothing lags,
+   except the dot's turn. Images are never touched. A new colour token must be added
+   to this list, or it will cut instead of fading. */
+@property --color-bg { syntax: "<color>"; inherits: true; initial-value: #F0F0F0; }
+@property --color-surface { syntax: "<color>"; inherits: true; initial-value: #EAEAEA; }
+@property --color-surface-elevated { syntax: "<color>"; inherits: true; initial-value: #E4E4E4; }
+@property --color-text { syntax: "<color>"; inherits: true; initial-value: #111111; }
+@property --color-text-strong { syntax: "<color>"; inherits: true; initial-value: #111111; }
+@property --color-text-body { syntax: "<color>"; inherits: true; initial-value: #3D3A37; }
+@property --color-text-muted { syntax: "<color>"; inherits: true; initial-value: #5F5A55; }
+@property --color-text-dim { syntax: "<color>"; inherits: true; initial-value: #A8A29B; }
+@property --color-border { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.09); }
+@property --color-border-strong { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.22); }
+@property --color-border-header { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.07); }
+@property --color-accent { syntax: "<color>"; inherits: true; initial-value: oklch(54% 0.19 35); }
+@property --color-accent-dim { syntax: "<color>"; inherits: true; initial-value: oklch(54% 0.19 35 / 0.3); }
+@property --color-focus-ring { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.55); }
+
+html.theme-fading {
+  transition-property: --color-bg, --color-surface, --color-surface-elevated, --color-text, --color-text-strong, --color-text-body, --color-text-muted, --color-text-dim, --color-border, --color-border-strong, --color-border-header, --color-accent, --color-accent-dim, --color-focus-ring !important;
+  transition-duration: 450ms !important;
+  transition-timing-function: cubic-bezier(0.45, 0, 0.55, 1) !important;
+  transition-delay: 0s !important;
+}
+html.theme-fading *:not(.theme-dot),
+html.theme-fading *::before,
+html.theme-fading *::after {
+  transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-fading { transition-duration: 200ms !important; }
 }
 
 /* The phone menu is a details element: the parent's overlay, without script. */

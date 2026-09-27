@@ -1,14 +1,16 @@
 "use client";
 
-// components/ThemeToggle.tsx — the Light / Dark switch at the end of the header.
+// components/ThemeToggle.tsx — the theme dot at the end of the header.
+// One round button, half ink and half paper; a click flips the theme and the dot turns
+// half a circle (2026-09-27: was two mono LIGHT / DARK labels in a box).
 // <html data-theme> is the single source of truth: the inline script in app/layout.tsx
 // sets it before the first paint, and this switch rewrites it and saves the pick.
-// Which option looks selected is decided in globals.css from that attribute, not from
-// React state, so the switch is right from the first frame even before hydration;
-// React owns only the click and aria-pressed.
+// How the dot looks is decided in globals.css from that attribute, not from React
+// state, so it is right from the first frame even before hydration; React owns only
+// the click and the label.
 
 import { useLayoutEffect, useSyncExternalStore } from "react";
-import { THEMES, THEME_STORAGE_KEY, storedTheme, type Theme } from "@/lib/theme";
+import { THEME_STORAGE_KEY, storedTheme, type Theme } from "@/lib/theme";
 
 function readTheme(): Theme {
   return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
@@ -16,16 +18,44 @@ function readTheme(): Theme {
 
 // Every colour on the page changes in the same frame. Without the freeze, each element
 // that carries a colour transition (nav links, rows, buttons) would fade at its own
-// speed and the switch would ripple across the page instead of cutting.
-function showTheme(next: Theme) {
+// speed and the switch would ripple across the page. The dot itself is left out, so it
+// still turns.
+function applyTheme(next: Theme) {
   const root = document.documentElement;
-  if (root.dataset.theme === next) return;
   const freeze = document.createElement("style");
-  freeze.textContent = "*,*::before,*::after{transition:none!important}";
+  freeze.textContent = ":not(.theme-dot),::before,::after{transition:none!important}";
   document.head.appendChild(freeze);
   root.dataset.theme = next;
   void getComputedStyle(root).backgroundColor; // restyle now, while transitions are off
   requestAnimationFrame(() => requestAnimationFrame(() => freeze.remove()));
+}
+
+// A pick fades the page's colours from one theme to the other: while <html> carries
+// .theme-fading, globals.css fades the colour tokens themselves over 450ms, and every
+// element follows them, so the ground, the text and the rules shift together and
+// nothing ripples. Only colours move; photographs and videos are never copied, so a
+// playing video stays one clean picture. (Tried and dropped the same day: a
+// view-transition cross-fade, which showed every video twice, and a transition on every
+// element, which Chrome kept restarting on some text.) Corrections from
+// syncWithStorage always cut: they put back a pick the visitor already made, so there
+// is nothing to watch.
+const FADE_MS = 450;
+let fadeTimer: number | undefined;
+
+function fadeToTheme(next: Theme) {
+  const root = document.documentElement;
+  // The class and the new theme land in the same style change; transitions take their
+  // timing from the style after the change, so this one change is enough.
+  root.classList.add("theme-fading");
+  root.dataset.theme = next;
+  window.clearTimeout(fadeTimer);
+  fadeTimer = window.setTimeout(() => root.classList.remove("theme-fading"), FADE_MS + 50);
+}
+
+function showTheme(next: Theme, fade = false) {
+  if (document.documentElement.dataset.theme === next) return;
+  if (fade) fadeToTheme(next);
+  else applyTheme(next);
 }
 
 // Puts <html> back in step with the saved pick after something changed it behind the
@@ -65,7 +95,7 @@ function subscribe(onChange: () => void) {
 }
 
 function chooseTheme(next: Theme) {
-  showTheme(next);
+  showTheme(next, true);
   try {
     localStorage.setItem(THEME_STORAGE_KEY, next);
   } catch {
@@ -76,7 +106,7 @@ function chooseTheme(next: Theme) {
 
 export default function ThemeToggle() {
   // The server cannot know the visitor's pick, so it renders the default; the client
-  // snapshot corrects aria-pressed right after hydration.
+  // snapshot corrects the label right after hydration.
   const theme = useSyncExternalStore<Theme>(subscribe, readTheme, () => "light");
 
   // The hydration-error strip happens in the same commit that mounts this switch, before
@@ -85,19 +115,18 @@ export default function ThemeToggle() {
     if (!document.documentElement.dataset.theme) syncWithStorage();
   }, []);
 
+  const next: Theme = theme === "dark" ? "light" : "dark";
+  const label = `Switch to ${next} theme`;
+
   return (
-    <div className="theme-toggle" role="group" aria-label="Theme">
-      {THEMES.map((t) => (
-        <button
-          key={t}
-          type="button"
-          data-theme-option={t}
-          aria-pressed={theme === t}
-          onClick={() => chooseTheme(t)}
-        >
-          {t}
-        </button>
-      ))}
-    </div>
+    <button
+      type="button"
+      className="theme-toggle"
+      aria-label={label}
+      title={label}
+      onClick={() => chooseTheme(next)}
+    >
+      <span className="theme-dot" aria-hidden="true" />
+    </button>
   );
 }
