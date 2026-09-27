@@ -268,42 +268,96 @@ body::after {
   line-height: 1;
 }
 
-/* The theme switch (components/ThemeToggle.tsx): two mono labels in one hairline box,
-   the theme in use a solid block of ink. Which option is solid is read from
+/* The theme switch (components/ThemeToggle.tsx): one dot, half ink and half paper,
+   in an ink ring. The ink half sits on the left in Light and turns to the right in
+   Dark, so the dot shows which side you are on without a word. Read from
    <html data-theme> here, not from React state, so it is right from the first frame.
    No accent: amber stays the active page's underline. */
 .theme-toggle {
-  display: inline-flex;
-  border: 1px solid var(--color-border-strong);
-}
-.theme-toggle button {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
   height: 30px;
-  /* Tracking also trails the last letter; the extra left padding re-centres the word. */
-  padding: 0 10px 0 calc(10px + 0.18em);
-  font-family: var(--font-jetbrains-mono), monospace;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  line-height: 1;
-  color: var(--color-grey-400);
   background: transparent;
   cursor: pointer;
-  transition: color 180ms ease;
 }
-/* 44px tall to the finger, 30px to the eye. */
-.theme-toggle button::after {
+/* 44px to the finger, 14px to the eye. */
+.theme-toggle::after {
   content: "";
   position: absolute;
-  inset: -7px 0;
+  inset: -7px;
 }
-.theme-toggle button:hover { color: var(--color-text); }
-:root:not([data-theme="dark"]) .theme-toggle [data-theme-option="light"],
-:root[data-theme="dark"] .theme-toggle [data-theme-option="dark"] {
-  background: var(--color-text);
-  color: var(--color-bg);
-  cursor: default;
+.theme-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-text);
+  background: linear-gradient(90deg, var(--color-text) 50%, transparent 50%);
+  transition: transform 420ms var(--ease-out);
+}
+.theme-toggle:hover .theme-dot { transform: scale(1.18); }
+:root[data-theme="dark"] .theme-dot { transform: rotate(180deg); }
+:root[data-theme="dark"] .theme-toggle:hover .theme-dot { transform: rotate(180deg) scale(1.18); }
+
+/* The theme change itself (fadeToTheme in ThemeToggle.tsx). The colour tokens are
+   registered as colours so the browser can animate them; while <html> carries
+   .theme-fading, the tokens fade from one theme's values to the other's over 450ms,
+   slow in and slow out, and every element on the page follows them, because every
+   colour on the site is read through a token. One fade at the root drives the whole
+   page, so the ground, the text and the rules shift together, nothing ripples, and
+   photographs and videos are never touched. Each element's own transitions are off
+   for the length of the fade so none of them chases the moving tokens; the dot keeps
+   its own so it still turns. Long enough to adjust to, short enough not to wait on;
+   200ms under reduced motion (no travel, just a quicker fade).
+   (Tried and dropped on 2026-09-27: a view-transition cross-fade, which laid a frozen
+   picture of the old page over the live one and showed every video twice; and a
+   colour transition on every element, which Chrome kept restarting on some text.) */
+@property --color-bg { syntax: "<color>"; inherits: true; initial-value: #F0F0F0; }
+@property --color-surface { syntax: "<color>"; inherits: true; initial-value: #EAEAEA; }
+@property --color-surface-elevated { syntax: "<color>"; inherits: true; initial-value: #E4E4E4; }
+@property --color-surface-hover { syntax: "<color>"; inherits: true; initial-value: #DEDEDE; }
+@property --color-text { syntax: "<color>"; inherits: true; initial-value: #111111; }
+@property --color-text-muted { syntax: "<color>"; inherits: true; initial-value: #5F5A55; }
+@property --color-text-dim { syntax: "<color>"; inherits: true; initial-value: #A8A29B; }
+@property --color-text-inverse { syntax: "<color>"; inherits: true; initial-value: #F0F0F0; }
+@property --color-border-faint { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.07); }
+@property --color-border { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.09); }
+@property --color-border-strong { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.22); }
+@property --color-grey-100 { syntax: "<color>"; inherits: true; initial-value: #111111; }
+@property --color-grey-200 { syntax: "<color>"; inherits: true; initial-value: #1C1C1C; }
+@property --color-grey-300 { syntax: "<color>"; inherits: true; initial-value: #3D3A37; }
+@property --color-grey-400 { syntax: "<color>"; inherits: true; initial-value: #57524D; }
+@property --color-grey-500 { syntax: "<color>"; inherits: true; initial-value: #67625C; }
+@property --color-grey-600 { syntax: "<color>"; inherits: true; initial-value: #BDB8B1; }
+@property --color-grey-700 { syntax: "<color>"; inherits: true; initial-value: #D3D0CA; }
+@property --color-grey-800 { syntax: "<color>"; inherits: true; initial-value: #E2E0DC; }
+@property --color-grey-900 { syntax: "<color>"; inherits: true; initial-value: #EAEAEA; }
+@property --color-warm { syntax: "<color>"; inherits: true; initial-value: #111111; }
+@property --color-surface-chat { syntax: "<color>"; inherits: true; initial-value: #EAEAEA; }
+@property --color-surface-dark { syntax: "<color>"; inherits: true; initial-value: #E4E4E4; }
+@property --color-border-muted { syntax: "<color>"; inherits: true; initial-value: #D6D6D6; }
+@property --color-focus-ring { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.55); }
+@property --color-selection-bg { syntax: "<color>"; inherits: true; initial-value: #111111; }
+@property --color-selection-text { syntax: "<color>"; inherits: true; initial-value: #F0F0F0; }
+@property --color-accent { syntax: "<color>"; inherits: true; initial-value: oklch(54% 0.19 35); }
+@property --color-accent-dim { syntax: "<color>"; inherits: true; initial-value: oklch(54% 0.19 35 / 0.3); }
+
+html.theme-fading {
+  transition-property: --color-bg, --color-surface, --color-surface-elevated, --color-surface-hover, --color-text, --color-text-muted, --color-text-dim, --color-text-inverse, --color-border-faint, --color-border, --color-border-strong, --color-grey-100, --color-grey-200, --color-grey-300, --color-grey-400, --color-grey-500, --color-grey-600, --color-grey-700, --color-grey-800, --color-grey-900, --color-warm, --color-surface-chat, --color-surface-dark, --color-border-muted, --color-focus-ring, --color-selection-bg, --color-selection-text, --color-accent, --color-accent-dim !important;
+  transition-duration: 450ms !important;
+  transition-timing-function: cubic-bezier(0.45, 0, 0.55, 1) !important;
+  transition-delay: 0s !important;
+}
+html.theme-fading *:not(.theme-dot),
+html.theme-fading *::before,
+html.theme-fading *::after {
+  transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-fading { transition-duration: 200ms !important; }
 }
 
 /* Reading text. Three sizes carry every sentence on the site; everything smaller

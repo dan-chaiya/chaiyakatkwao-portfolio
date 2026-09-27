@@ -230,7 +230,9 @@ export default function HeroStage() {
             ))}
           </div>
 
-          <span className="mono-label tabular-nums" style={{ color: "var(--color-warm)" }}>
+          {/* The count is for phones, where the slide marks are hidden; on wider
+              screens the marks already say where you are (2026-09-27). */}
+          <span className="mono-label tabular-nums sm:hidden" style={{ color: "var(--color-warm)" }}>
             {String(active + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
           </span>
         </div>

@@ -7,8 +7,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { EASE } from "@/lib/motion";
 import ThemeToggle from "@/components/ThemeToggle";
 
+// No "Home": the CK mark at the far left is the way home, as on most portfolios
+// (2026-09-27).
 const navLinks = [
-  { href: "/", label: "Home" },
   { href: "/commercial", label: "Commercial" },
   { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
@@ -91,10 +92,13 @@ export default function Navigation() {
         {/* Child 1: Logo | Child 2: Nav links — logo far left, links far right */}
         <div className="w-full flex justify-between items-center px-8" style={{ minHeight: "var(--header-h)", paddingBlock: "14px" }}>
 
-          {/* Child 1 — Logo + optional page label (left) */}
+          {/* Child 1 — Logo (left). The "/ Page" label that sat beside it was dropped
+              on 2026-09-27: the underlined nav link and the page's own label already
+              name the page. */}
           <div className="flex items-center gap-4">
             <Link
               href="/"
+              aria-label="Chaiya Katkwao, home"
               style={{
                 fontFamily: "var(--font-heading)",
                 fontWeight: 800,
@@ -106,20 +110,6 @@ export default function Navigation() {
             >
               CK
             </Link>
-            {pathname !== "/" && (
-              <span
-                className="hidden lg:block"
-                style={{
-                  fontFamily: "var(--font-archivo)",
-                  fontSize: "11px",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "var(--color-text-muted)",
-                }}
-              >
-                / {navLinks.find((l) => pathname.startsWith(l.href) && l.href !== "/")?.label}
-              </span>
-            )}
           </div>
 
           {/* Child 2 — Nav links + contact on desktop, the theme switch, and the

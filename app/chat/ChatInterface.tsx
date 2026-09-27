@@ -45,11 +45,18 @@ export default function ChatInterface() {
     bottomRef.current?.scrollIntoView({ behavior: "auto" });
   }, [messages, isLoading]);
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    send(input);
+  }
 
-    const userMsg: Message = { id: String(++idRef.current), role: "user", content: input };
+  // A suggestion is a finished question, so a tap sends it, as quick replies do in
+  // messaging apps; filling the field and waiting for Enter left visitors unsure
+  // anything had happened (2026-09-27).
+  async function send(text: string) {
+    if (!text.trim() || isLoading) return;
+
+    const userMsg: Message = { id: String(++idRef.current), role: "user", content: text };
     const allMessages = [...messages, userMsg];
     setMessages(allMessages);
     setInput("");
@@ -84,7 +91,8 @@ export default function ChatInterface() {
         const { done, value } = await reader.read();
         if (done) break;
         full += decoder.decode(value, { stream: true });
-        setMessages(prev => prev.map(m => m.id === assistantId ? { ...m, content: full } : m));
+        const content = full; // the updater runs later; hand it this chunk's text, not the live variable
+        setMessages(prev => prev.map(m => m.id === assistantId ? { ...m, content } : m));
       }
     } catch (err) {
       setError(err instanceof Error && err.message ? err.message : "Something went wrong — try again.");
@@ -96,17 +104,19 @@ export default function ChatInterface() {
   }
 
   return (
-    <main id="main-content" style={{ backgroundColor: "var(--color-surface-chat)", minHeight: "100dvh", paddingTop: "64px" }}>
-      <p style={{ ...mono, padding: "24px 32px 0" }}>Chat</p>
-
+    <main id="main-content" style={{ backgroundColor: "var(--color-surface-chat)" }}>
+      {/* One screen under the sticky header. The direction and the rule that splits the
+          two columns live in classes only: as inline styles they beat the lg: classes,
+          which kept the identity panel stacked above the chat on desktop, under a
+          bottom rule, until 2026-09-27. The header's "/ Chat" names the page. */}
       <div
-        style={{ display: "flex", flexDirection: "column", padding: "32px", height: "calc(100dvh - 120px)" }}
-        className="lg:flex-row"
+        className="flex flex-col lg:flex-row"
+        style={{ padding: "32px", height: "calc(100dvh - var(--header-h) - 1px)" }}
       >
         {/* Left — identity */}
         <div
-          style={{ flexShrink: 0, paddingBottom: "24px", marginBottom: "24px", borderBottom: "1px solid var(--color-grey-700)" }}
-          className="lg:w-72 lg:pr-10 lg:border-r lg:border-b-0 lg:pb-0 lg:mb-0"
+          style={{ flexShrink: 0, borderColor: "var(--color-grey-700)" }}
+          className="border-b pb-6 mb-6 lg:w-72 lg:pr-10 lg:border-b-0 lg:border-r lg:pb-0 lg:mb-0"
         >
           <p style={{ ...mono, marginBottom: "12px" }}>Speaking with</p>
           <h1 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 0.92, letterSpacing: "-0.03em", color: "var(--color-warm)", textTransform: "uppercase", marginBottom: "16px" }}>
@@ -121,7 +131,7 @@ export default function ChatInterface() {
         </div>
 
         {/* Right — chat */}
-        <div style={{ display: "flex", flexDirection: "column", flex: 1 }} className="lg:pl-10">
+        <div style={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }} className="lg:pl-10">
           <div
             role="log"
             aria-live="polite"
@@ -129,6 +139,10 @@ export default function ChatInterface() {
             aria-label="Conversation"
             style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: "12px", paddingBottom: "16px" }}
           >
+            {/* Takes the empty height above a short conversation, so the messages sit
+                on the field the way they do in a messaging app instead of hanging at
+                the top of the panel. Shrinks to nothing once the log scrolls. */}
+            <div aria-hidden="true" style={{ flex: "1 1 0" }} />
             {messages.map(m => (
               <div key={m.id} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
                 <div style={{ maxWidth: "80%", padding: "12px 16px", backgroundColor: m.role === "user" ? "var(--color-warm)" : "var(--color-surface-dark)", border: m.role === "user" ? "none" : "1px solid var(--color-border-muted)", color: m.role === "user" ? "var(--color-surface-chat)" : "var(--color-grey-200)", fontFamily: "var(--font-archivo)", fontSize: "14px", lineHeight: 1.7 }}>
@@ -138,12 +152,26 @@ export default function ChatInterface() {
                 </div>
               </div>
             ))}
+            {error && (
+              <div style={{ display: "flex", justifyContent: "flex-start" }}>
+                <div role="alert" style={{ padding: "12px 16px", backgroundColor: "var(--color-surface-dark)", border: "1px solid var(--color-border-muted)", color: "var(--color-grey-400)", fontFamily: "var(--font-archivo)", fontSize: "14px" }}>{error}</div>
+              </div>
+            )}
+            <div ref={bottomRef} />
+          </div>
+
+          <form onSubmit={handleSubmit}>
+            {/* Suggestions sit on the field, where quick replies sit in a chat app. */}
             {!hasUserMessages && (
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "8px" }}>
+              // Phones get one row that swipes sideways, as quick replies do in messaging apps,
+              // so a long question never breaks its arrow onto a second line.
+              <div role="group" aria-label="Suggested questions" className="flex flex-nowrap overflow-x-auto sm:flex-wrap" style={{ gap: "8px", marginBottom: "10px", scrollbarWidth: "none" }}>
                 {SUGGESTIONS.map(s => (
                   <button
                     key={s}
-                    onClick={() => { setInput(s); inputRef.current?.focus(); }}
+                    type="button"
+                    onClick={() => send(s)}
+                    disabled={isLoading}
                     style={{
                       fontFamily: "var(--font-jetbrains-mono)",
                       fontSize: "11px",
@@ -154,6 +182,8 @@ export default function ChatInterface() {
                       padding: "8px 14px",
                       cursor: "pointer",
                       textAlign: "left",
+                      whiteSpace: "nowrap",
+                      flexShrink: 0,
                       transition: "border-color 180ms ease, color 180ms ease",
                     }}
                     onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--color-grey-500)"; e.currentTarget.style.color = "var(--color-text)"; }}
@@ -164,15 +194,6 @@ export default function ChatInterface() {
                 ))}
               </div>
             )}
-            {error && (
-              <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                <div role="alert" style={{ padding: "12px 16px", backgroundColor: "var(--color-surface-dark)", border: "1px solid var(--color-border-muted)", color: "var(--color-grey-400)", fontFamily: "var(--font-archivo)", fontSize: "14px" }}>{error}</div>
-              </div>
-            )}
-            <div ref={bottomRef} />
-          </div>
-
-          <form onSubmit={handleSubmit}>
             <label htmlFor="chat-input" className="sr-only">
               Ask Chaiya about his work
             </label>

@@ -37,8 +37,65 @@
   <link rel="preload" href="/systems/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/systems/styles.css">
 
-  <!-- No script in this document. Anchors scroll with CSS; the diagram draws
-       itself with a CSS scroll timeline. Nothing here needs JavaScript. -->
+  <!-- The one script on the page, and it is only the theme (2026-09-27; until then
+       the page had none). Anchors still scroll with CSS and the diagram still draws
+       itself with a CSS scroll timeline; without JavaScript the page reads the same,
+       in Light, with no theme dot.
+       It is the parent's theme, not a second one: the pick is saved under the same
+       "theme" key on the same origin, so a visitor who chose Dark on the parent lands
+       on this page in Dark. It runs here in the head so that happens before the first
+       paint. A pick fades the colour tokens over 450ms (styles.css, .theme-fading)
+       and leaves images alone, as on the parent (components/ThemeToggle.tsx there). -->
+  <script>
+    (function () {
+      var KEY = "theme", root = document.documentElement;
+      function stored() {
+        try { return localStorage.getItem(KEY) === "dark" ? "dark" : "light"; } catch (e) { return "light"; }
+      }
+      function label() {
+        var b = document.querySelector(".theme-toggle");
+        if (!b) return;
+        var text = "Switch to " + (root.dataset.theme === "dark" ? "light" : "dark") + " theme";
+        b.setAttribute("aria-label", text);
+        b.title = text;
+      }
+      // Transitions off for the frame of the swap, so no link or row fades at its own
+      // speed; the dot is left out, so it still turns.
+      function apply(t) {
+        var freeze = document.createElement("style");
+        freeze.textContent = ":not(.theme-dot),::before,::after{transition:none!important}";
+        document.head.appendChild(freeze);
+        root.dataset.theme = t;
+        void getComputedStyle(root).backgroundColor;
+        requestAnimationFrame(function () { requestAnimationFrame(function () { freeze.remove(); }); });
+        label();
+      }
+      // Another tab, or the parent in another tab, made a pick; or the page came
+      // back from the back-forward cache after one. Put back, with no fade.
+      function sync() {
+        var t = stored();
+        if (t !== root.dataset.theme) apply(t);
+      }
+      root.dataset.theme = stored();
+      document.addEventListener("DOMContentLoaded", label);
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest || !e.target.closest(".theme-toggle")) return;
+        var next = root.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem(KEY, next); } catch (err) {}
+        fade(next);
+      });
+      var fadeTimer;
+      function fade(t) {
+        root.classList.add("theme-fading");
+        root.dataset.theme = t;
+        label();
+        clearTimeout(fadeTimer);
+        fadeTimer = setTimeout(function () { root.classList.remove("theme-fading"); }, 500);
+      }
+      window.addEventListener("storage", function (e) { if (e.key === KEY || e.key === null) sync(); });
+      window.addEventListener("pageshow", function (e) { if (e.persisted) sync(); });
+    })();
+  </script>
 </head>
 
 <body>
@@ -46,44 +103,48 @@
 <a class="visually-hidden skip-link" href="#cases">Skip to the cases</a>
 
 <!-- ==========================================================================
-     HEADER — the parent's row: the CK mark and the section on the left, the
-     tracked links on the right. Under 1024 px the links live in a details
-     element styled as the parent's overlay, so the page still needs no script.
+     HEADER — the parent's row: the CK mark on the left; the tracked links and
+     the theme dot on the right. Under 1024 px the links live in a details
+     element styled as the parent's overlay, so the menu needs no script. As on
+     the parent since 2026-09-27: no Home link (the mark is the way home) and no
+     "/ Section" label beside the mark (the masthead names the page).
      ======================================================================= -->
 <header class="site">
   <div class="site__row">
     <div class="site__brand">
       <a class="site__mark" href="https://chaiyakatkwao.com" aria-label="Chaiya Katkwao, home">CK</a>
-      <span class="site__section">/ Systems</span>
     </div>
-    <nav class="site__nav" aria-label="Primary">
-      <a class="site__link" href="https://chaiyakatkwao.com/">Home</a>
-      <a class="site__link" href="https://chaiyakatkwao.com/commercial">Commercial</a>
-      <a class="site__link" href="https://chaiyakatkwao.com/gallery">Gallery</a>
-      <a class="site__link" href="https://chaiyakatkwao.com/about">About</a>
-      <a class="site__link" href="https://chaiyakatkwao.com/cv">CV</a>
-      <a class="site__link" href="https://chaiyakatkwao.com/chat">Chat</a>
-      <a class="site__link" href="mailto:chaiyakatkwao@gmail.com">Contact</a>
-    </nav>
-    <details class="menu">
-      <summary class="menu__button" aria-label="Menu">
-        <span class="menu__bar"></span>
-        <span class="menu__bar"></span>
-        <span class="menu__bar"></span>
-      </summary>
-      <div class="menu__panel">
-        <nav class="menu__nav" aria-label="Menu">
-          <a class="menu__link" href="https://chaiyakatkwao.com/">Home</a>
-          <a class="menu__link" href="https://chaiyakatkwao.com/commercial">Commercial</a>
-          <a class="menu__link" href="https://chaiyakatkwao.com/gallery">Gallery</a>
-          <a class="menu__link" href="https://chaiyakatkwao.com/about">About</a>
-          <a class="menu__link" href="https://chaiyakatkwao.com/cv">CV</a>
-          <a class="menu__link" href="https://chaiyakatkwao.com/chat">Chat</a>
-          <a class="menu__link" href="mailto:chaiyakatkwao@gmail.com">Contact</a>
-        </nav>
-        <p class="menu__note mono-label">Chaiya Katkwao / Creative Producer</p>
-      </div>
-    </details>
+    <div class="site__end">
+      <nav class="site__nav" aria-label="Primary">
+        <a class="site__link" href="https://chaiyakatkwao.com/commercial">Commercial</a>
+        <a class="site__link" href="https://chaiyakatkwao.com/gallery">Gallery</a>
+        <a class="site__link" href="https://chaiyakatkwao.com/about">About</a>
+        <a class="site__link" href="https://chaiyakatkwao.com/cv">CV</a>
+        <a class="site__link" href="https://chaiyakatkwao.com/chat">Chat</a>
+        <a class="site__link" href="mailto:chaiyakatkwao@gmail.com">Contact</a>
+      </nav>
+      <button type="button" class="theme-toggle" aria-label="Switch to dark theme" title="Switch to dark theme">
+        <span class="theme-dot" aria-hidden="true"></span>
+      </button>
+      <details class="menu">
+        <summary class="menu__button" aria-label="Menu">
+          <span class="menu__bar"></span>
+          <span class="menu__bar"></span>
+          <span class="menu__bar"></span>
+        </summary>
+        <div class="menu__panel">
+          <nav class="menu__nav" aria-label="Menu">
+            <a class="menu__link" href="https://chaiyakatkwao.com/commercial">Commercial</a>
+            <a class="menu__link" href="https://chaiyakatkwao.com/gallery">Gallery</a>
+            <a class="menu__link" href="https://chaiyakatkwao.com/about">About</a>
+            <a class="menu__link" href="https://chaiyakatkwao.com/cv">CV</a>
+            <a class="menu__link" href="https://chaiyakatkwao.com/chat">Chat</a>
+            <a class="menu__link" href="mailto:chaiyakatkwao@gmail.com">Contact</a>
+          </nav>
+          <p class="menu__note mono-label">Chaiya Katkwao / Creative Producer</p>
+        </div>
+      </details>
+    </div>
   </div>
 </header>
 
