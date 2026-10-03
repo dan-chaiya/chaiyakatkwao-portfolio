@@ -137,7 +137,7 @@ export default function CommercialClient() {
           <h1
             className="font-heading text-[var(--color-warm)]"
             style={{
-              fontSize: "clamp(3rem, 8vw, 7rem)",
+              fontSize: "clamp(2.5rem, 8vw, 7rem)",
               lineHeight: 0.9,
               letterSpacing: "-0.02em",
             }}
