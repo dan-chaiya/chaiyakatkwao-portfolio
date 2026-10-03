@@ -95,6 +95,7 @@ export default function PortfolioHome() {
               </p>
               <Link
                 href="/about"
+                className="tap-target"
                 style={{
                   display: "inline-block",
                   marginTop: "28px",

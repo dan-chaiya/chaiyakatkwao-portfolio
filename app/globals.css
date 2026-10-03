@@ -302,6 +302,24 @@ body::after {
 :root[data-theme="dark"] .theme-dot { transform: rotate(180deg); }
 :root[data-theme="dark"] .theme-toggle:hover .theme-dot { transform: rotate(180deg) scale(1.18); }
 
+/* The same rule for the small text links (the CK mark, the header and footer links,
+   "← Commercial", "Full Profile →"): 44px to the finger, the label's own size to the
+   eye. An invisible box at least 44 × 44, centred on the link; layout does not move.
+   Every link that carries it has at least 28px of clear space to its neighbours, so
+   two boxes never overlap. */
+.tap-target {
+  position: relative;
+}
+.tap-target::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
+}
+
 /* The theme change itself (fadeToTheme in ThemeToggle.tsx). The colour tokens are
    registered as colours so the browser can animate them; while <html> carries
    .theme-fading, the tokens fade from one theme's values to the other's over 450ms,

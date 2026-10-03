@@ -47,7 +47,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         <div className="mb-12">
           <Link
             href="/commercial"
-            className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] hover:text-[var(--color-warm)] transition-colors duration-300"
+            className="tap-target font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] hover:text-[var(--color-warm)] transition-colors duration-300"
           >
             ← Commercial
           </Link>
