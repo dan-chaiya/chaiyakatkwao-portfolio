@@ -140,6 +140,13 @@
     margin: 0;
     padding: 0;
   }
+  /* The browser's own placeholder is the text colour at half strength: 3.4:1 on the
+     chat box, under the 4.5:1 every other text grey meets. text-muted is 5.6:1 on
+     surface-chat in Light and 5.3:1 in Dark. */
+  ::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+  }
 }
 
 /* The sticky header takes real space in flow, so a 100svh hero stacked under it
@@ -301,6 +308,24 @@ body::after {
 .theme-toggle:hover .theme-dot { transform: scale(1.18); }
 :root[data-theme="dark"] .theme-dot { transform: rotate(180deg); }
 :root[data-theme="dark"] .theme-toggle:hover .theme-dot { transform: rotate(180deg) scale(1.18); }
+
+/* The same rule for the small text links (the CK mark, the header and footer links,
+   "← Commercial", "Full Profile →"): 44px to the finger, the label's own size to the
+   eye. An invisible box at least 44 × 44, centred on the link; layout does not move.
+   Every link that carries it has at least 28px of clear space to its neighbours, so
+   two boxes never overlap. */
+.tap-target {
+  position: relative;
+}
+.tap-target::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
+}
 
 /* The theme change itself (fadeToTheme in ThemeToggle.tsx). The colour tokens are
    registered as colours so the browser can animate them; while <html> carries

@@ -40,6 +40,7 @@ export default function Footer() {
               <a
                 key={item.label}
                 href={item.href}
+                className="tap-target"
                 style={{ ...MONO, color: "var(--color-text-muted)" }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-text-muted)"; }}
@@ -50,6 +51,7 @@ export default function Footer() {
               <Link
                 key={item.label}
                 href={item.href}
+                className="tap-target"
                 style={{ ...MONO, color: "var(--color-text-muted)" }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-text-muted)"; }}

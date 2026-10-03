@@ -42,12 +42,12 @@ export default function CaseStudyClient({ project }: { project: Project }) {
 
   return (
     <PageTransition>
-      <div className="pt-16 px-8 pb-8">
+      <main id="main-content" className="pt-16 px-8 pb-8">
         {/* Breadcrumb */}
         <div className="mb-12">
           <Link
             href="/commercial"
-            className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] hover:text-[var(--color-warm)] transition-colors duration-300"
+            className="tap-target font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] hover:text-[var(--color-warm)] transition-colors duration-300"
           >
             ← Commercial
           </Link>
@@ -237,7 +237,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
             </p>
           </Link>
         </section>
-      </div>
+      </main>
 
       <div className="mt-32">
         <Footer />

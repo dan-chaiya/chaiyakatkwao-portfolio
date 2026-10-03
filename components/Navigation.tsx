@@ -99,6 +99,7 @@ export default function Navigation() {
             <Link
               href="/"
               aria-label="Chaiya Katkwao, home"
+              className="tap-target"
               style={{
                 fontFamily: "var(--font-heading)",
                 fontWeight: 800,
@@ -123,6 +124,7 @@ export default function Navigation() {
                     <Link
                       key={link.href}
                       href={link.href}
+                      className="tap-target"
                       style={{
                         ...MONO,
                         color: active ? "var(--color-text)" : "var(--color-grey-300)",
@@ -147,6 +149,7 @@ export default function Navigation() {
 
               <a
                 href="mailto:chaiyakatkwao@gmail.com"
+                className="tap-target"
                 style={{
                   ...MONO,
                   color: "var(--color-grey-300)",
