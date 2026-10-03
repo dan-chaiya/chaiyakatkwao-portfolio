@@ -140,6 +140,13 @@
     margin: 0;
     padding: 0;
   }
+  /* The browser's own placeholder is the text colour at half strength: 3.4:1 on the
+     chat box, under the 4.5:1 every other text grey meets. text-muted is 5.6:1 on
+     surface-chat in Light and 5.3:1 in Dark. */
+  ::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+  }
 }
 
 /* The sticky header takes real space in flow, so a 100svh hero stacked under it
