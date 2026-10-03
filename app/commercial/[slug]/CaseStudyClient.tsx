@@ -42,7 +42,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
 
   return (
     <PageTransition>
-      <div className="pt-16 px-8 pb-8">
+      <main id="main-content" className="pt-16 px-8 pb-8">
         {/* Breadcrumb */}
         <div className="mb-12">
           <Link
@@ -237,7 +237,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
             </p>
           </Link>
         </section>
-      </div>
+      </main>
 
       <div className="mt-32">
         <Footer />
