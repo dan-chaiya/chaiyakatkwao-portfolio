@@ -322,6 +322,19 @@ table { border-collapse: collapse; width: 100%; }
 }
 :root[data-theme] .theme-toggle { display: inline-flex; }
 .theme-toggle::after { content: ""; position: absolute; inset: -7px; } /* 44px to the finger */
+/* The same for the small text links (mirrors .tap-target in the parent's globals.css):
+   an invisible box at least 44 x 44 centred on the link; layout does not move. Each of
+   these links has at least 28px of clear space, so no two boxes overlap. */
+.site__mark, .site__link, .colophon__link { position: relative; }
+.site__mark::after, .site__link::after, .colophon__link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
+}
 .theme-dot {
   display: block;
   width: 14px;
