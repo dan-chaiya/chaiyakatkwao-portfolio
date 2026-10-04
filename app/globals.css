@@ -420,6 +420,11 @@ html.theme-fading *::after {
    lighter native cut; heads styled inline set fontWeight: 800 for the same reason. */
 h1, h2, .font-heading { font-weight: 800; }
 
+/* No widows (2026-10-04): a reading line never ends on one word, and a head breaks
+   into even lines. Both are progressive: browsers without them wrap as before. */
+.copy-lead, .copy-body, .copy-small { text-wrap: pretty; }
+h1, h2 { text-wrap: balance; }
+
 /* Reduced motion is a request for less movement, not for no feedback. Killing
    every duration to 0.01ms removes hover, focus and state changes users still
    need — and an infinite animation clamped to 0.01ms flashes rather than stops.
