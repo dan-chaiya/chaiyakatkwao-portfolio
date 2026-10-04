@@ -14,7 +14,7 @@ const navLinks = [
   { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
   { href: "/cv", label: "CV" },
-  { href: "/chat", label: "Chat" },
+  { href: "/chat", label: "Chat", hint: "Ask an AI about the work" },
 ];
 
 const MONO: React.CSSProperties = {
@@ -130,6 +130,7 @@ export default function Navigation() {
                       key={link.href}
                       href={link.href}
                       aria-current={active ? "page" : undefined}
+                      title={link.hint}
                       className={`tap-target relative pb-px transition-colors duration-[180ms] hover:text-[var(--color-text)] ${
                         active ? "text-[var(--color-text)]" : "text-[var(--color-grey-300)]"
                       }`}
@@ -224,6 +225,10 @@ export default function Navigation() {
                     }}
                   >
                     {link.label}
+                    {/* What Chat opens, said before the tap (2026-10-04). */}
+                    {"hint" in link && link.hint && (
+                      <span className="mono-label block" style={{ marginTop: "10px", textTransform: "uppercase" }}>{link.hint}</span>
+                    )}
                   </Link>
                 </motion.div>
               ))}

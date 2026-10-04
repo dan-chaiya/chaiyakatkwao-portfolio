@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useSyncExternalStore } from "react";
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import PageTransition from "@/components/PageTransition";
@@ -10,6 +10,7 @@ import { photoAlt, photoSize } from "@/lib/photos";
 
 const wovenMemories = Array.from({ length: 12 }, (_, i) => ({
   id: i + 1,
+  slug: `woven-${String(i + 1).padStart(2, "0")}`,
   title: `No. ${String(i + 1).padStart(2, "0")}`,
   series: "Woven Memories",
   year: "2025",
@@ -52,6 +53,7 @@ const selectedWorkSrcs = [
 
 const selectedWork = selectedWorkSrcs.map((src, i) => ({
   id: 200 + i,
+  slug: `untitled-${i + 1}`,
   title: `Untitled ${toRoman(i + 1)}`,
   series: "Selected Work",
   year: "2024",
@@ -65,6 +67,7 @@ type LightboxState = {
 
 type GalleryItem = {
   id: number;
+  slug: string;
   title: string;
   series: string;
   year: string;
@@ -113,12 +116,38 @@ function MasonryGrid({
   );
 }
 
-export default function GalleryClient() {
-  const [lightbox, setLightbox] = useState<LightboxState>(null);
+// The open photo lives in the URL hash (#woven-03, #untitled-7), so a photo can be
+// linked to, a reload keeps it, and the back button closes it (2026-10-04).
+const SERIES: GalleryItem[][] = [wovenMemories, selectedWork];
 
-  const openLightbox = useCallback((seriesItems: GalleryItem[]) => (_item: GalleryItem, index: number) => {
-    setLightbox({ items: seriesItems, index });
-  }, []);
+function subscribeHash(onChange: () => void) {
+  window.addEventListener("hashchange", onChange);
+  window.addEventListener("popstate", onChange);
+  return () => {
+    window.removeEventListener("hashchange", onChange);
+    window.removeEventListener("popstate", onChange);
+  };
+}
+
+// Steps within an open set replace the entry rather than piling up history.
+function replaceHash(slug: string | null) {
+  const url = window.location.pathname + window.location.search + (slug ? `#${slug}` : "");
+  window.history.replaceState(null, "", url);
+  window.dispatchEvent(new Event("hashchange"));
+}
+
+export default function GalleryClient() {
+  const hash = useSyncExternalStore(subscribeHash, () => window.location.hash.slice(1), () => "");
+
+  let lightbox: LightboxState = null;
+  for (const items of SERIES) {
+    const index = items.findIndex((it) => it.slug === hash);
+    if (index >= 0) lightbox = { items, index };
+  }
+
+  const openLightbox = (seriesItems: GalleryItem[]) => (_item: GalleryItem, index: number) => {
+    window.location.hash = seriesItems[index].slug;
+  };
 
   const activeLbItem = lightbox ? lightbox.items[lightbox.index] : null;
 
@@ -192,9 +221,9 @@ export default function GalleryClient() {
             hasNext={lightbox.index < lightbox.items.length - 1}
             prevSrc={lightbox.items[lightbox.index - 1]?.src}
             nextSrc={lightbox.items[lightbox.index + 1]?.src}
-            onClose={() => setLightbox(null)}
-            onPrev={() => setLightbox((lb) => lb && { ...lb, index: lb.index - 1 })}
-            onNext={() => setLightbox((lb) => lb && { ...lb, index: lb.index + 1 })}
+            onClose={() => replaceHash(null)}
+            onPrev={() => lightbox && lightbox.index > 0 && replaceHash(lightbox.items[lightbox.index - 1].slug)}
+            onNext={() => lightbox && lightbox.index < lightbox.items.length - 1 && replaceHash(lightbox.items[lightbox.index + 1].slug)}
           />
         )}
       </AnimatePresence>

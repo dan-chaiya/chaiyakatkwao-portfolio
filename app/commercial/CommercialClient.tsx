@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -121,7 +121,24 @@ type LightboxState = {
 export default function CommercialClient() {
   const [lightbox, setLightbox] = useState<LightboxState>(null);
   const activeLbItem = lightbox ? lightbox.images[lightbox.index] : null;
-  const [view, setView] = useState<"grid" | "list">("grid");
+  // The view lives in the URL (?view=list), so a reload or a shared link keeps it
+  // (2026-10-04). The server always renders the grid; the client reads the URL right
+  // after hydration, and a press overrides it.
+  const urlView = useSyncExternalStore<"grid" | "list">(
+    () => () => {},
+    () => (new URLSearchParams(window.location.search).get("view") === "list" ? "list" : "grid"),
+    () => "grid",
+  );
+  const [pickedView, setPickedView] = useState<"grid" | "list" | null>(null);
+  const view = pickedView ?? urlView;
+  const chooseView = (v: "grid" | "list") => {
+    setPickedView(v);
+    setToggled(true);
+    const url = new URL(window.location.href);
+    if (v === "list") url.searchParams.set("view", "list");
+    else url.searchParams.delete("view");
+    window.history.replaceState(null, "", url);
+  };
   // True after the first toggle. The view that mounts after a toggle fades in (opacity
   // only: the page height already jumps by thousands of pixels). Before any toggle the grid
   // is the first paint and must not fade on top of the route fade in PageTransition.
@@ -180,7 +197,7 @@ export default function CommercialClient() {
           {(["grid", "list"] as const).map((v) => (
             <button
               key={v}
-              onClick={() => { setView(v); setToggled(true); }}
+              onClick={() => chooseView(v)}
               aria-pressed={view === v}
               className="mono-label flex h-11 items-center px-3 transition-colors duration-200"
               style={{
