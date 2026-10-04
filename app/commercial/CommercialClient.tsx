@@ -125,6 +125,10 @@ export default function CommercialClient() {
   // only: the page height already jumps by thousands of pixels). Before any toggle the grid
   // is the first paint and must not fade on top of the route fade in PageTransition.
   const [toggled, setToggled] = useState(false);
+  // Live commerce shows its four strongest recordings; the rest are one press away. A
+  // wall of a dozen near-identical sale streams read as "can't edit" (2026-10-04).
+  const [allLive, setAllLive] = useState(false);
+  const shownLive = allLive ? liveCommerceVideos : liveCommerceVideos.slice(0, 4);
   const viewEnter = toggled ? "transition-opacity duration-200 ease-out starting:opacity-0" : "";
 
   return (
@@ -148,6 +152,27 @@ export default function CommercialClient() {
             commissions.
           </h1>
         </div>
+
+        {/* Index: every section of a long page, one tap away (2026-10-04). */}
+        <nav aria-label="On this page" className="mb-16 border-t border-[var(--color-border)]">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ...projects.map((p) => ({ href: `#${p.slug}`, label: p.title, meta: p.year })),
+              { href: "#episodes", label: "Selected Episodes", meta: "2025–2026" },
+              { href: "#live-commerce", label: "Live Commerce", meta: "2026" },
+            ].map((item) => (
+              <li key={item.href} className="border-b border-[var(--color-border)]">
+                <a
+                  href={item.href}
+                  className="flex items-baseline justify-between gap-4 py-3 pr-6 text-[var(--color-grey-300)] transition-colors duration-[180ms] hover:text-[var(--color-text)]"
+                >
+                  <span className="copy-small" style={{ color: "inherit", fontWeight: 500 }}>{item.label}</span>
+                  <span className="font-mono font-medium text-[11px] tracking-[0.12em] text-[var(--color-text-muted)]">{item.meta}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         {/* View toggle (B3) */}
         <div className="mb-12 flex items-center gap-1" role="group" aria-label="View mode">
@@ -175,7 +200,7 @@ export default function CommercialClient() {
         ) : (
         <div key="grid" className={`space-y-32 ${viewEnter}`}>
           {projects.map((project, i) => (
-            <article key={project.id}>
+            <article key={project.id} id={project.slug} className="scroll-mt-24">
               {/* Cover — natural aspect ratio, no cropping */}
               <Link
                 href={`/commercial/${project.slug}`}
@@ -301,7 +326,7 @@ export default function CommercialClient() {
         )}
 
         {/* Selected Episodes — long-form video & podcast work */}
-        <section className="mt-32 pt-16 border-t border-[var(--color-border-muted)]">
+        <section id="episodes" className="mt-32 pt-16 border-t border-[var(--color-border-muted)] scroll-mt-24">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
             <div className="md:col-span-1">
               <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">06</span>
@@ -355,7 +380,7 @@ export default function CommercialClient() {
         </section>
 
         {/* Live Commerce section */}
-        <section className="mt-24">
+        <section id="live-commerce" className="mt-24 scroll-mt-24">
           <div style={{ borderTop: "1px solid color-mix(in srgb, var(--color-text) 18%, transparent)", paddingTop: "20px", marginBottom: "48px", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
             <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">Live Commerce</p>
           </div>
@@ -395,7 +420,7 @@ export default function CommercialClient() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "1px" }}>
-            {liveCommerceVideos.map((video) => (
+            {shownLive.map((video) => (
               <div key={video.id} style={{ backgroundColor: "var(--color-bg)" }}>
                 <video
                   controls
@@ -422,6 +447,15 @@ export default function CommercialClient() {
               </div>
             ))}
           </div>
+          {!allLive && (
+            <button
+              type="button"
+              onClick={() => setAllLive(true)}
+              className="mt-8 w-full border border-[var(--color-border)] py-[18px] font-mono font-medium text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] transition-[border-color,color] duration-[250ms] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]"
+            >
+              Show all {liveCommerceVideos.length} recordings
+            </button>
+          )}
         </section>
       </main>
 

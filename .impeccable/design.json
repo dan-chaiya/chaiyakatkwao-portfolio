@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-04T15:15:13Z",
+  "generatedAt": "2026-10-04T15:35:39Z",
   "title": "Design System: Chaiya Katkwao Portfolio",
   "extensions": {
     "colorMeta": {
@@ -559,9 +559,9 @@
       "name": "Mono Label & Available Badge",
       "kind": "custom",
       "refersTo": "label",
-      "description": "The information voice: 11px mono, uppercase, tracked. The Available badge is the Cue Light's one text use, with a still dot.",
-      "html": "<div class=\"ds-labels\"><p class=\"ds-label\">Contact</p><span class=\"ds-badge\"><span class=\"ds-badge-dot\" aria-hidden=\"true\"></span>Available</span></div>",
-      "css": ".ds-labels { display: flex; align-items: center; gap: 12px; } .ds-label { margin: 0; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1; letter-spacing: 0.22em; color: var(--color-text-muted); } .ds-badge { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1; color: var(--color-accent); border: 1px solid var(--color-accent-dim); padding: 3px 9px; } .ds-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--color-accent); }"
+      "description": "The information voice: 11px mono, uppercase, tracked. The Available line is the Cue Light's one text use: plain mono, a still dot, no pill.",
+      "html": "<div class=\"ds-labels\"><p class=\"ds-label\">Contact</p><span class=\"ds-badge\"><span class=\"ds-badge-dot\" aria-hidden=\"true\"></span>Available for projects</span></div>",
+      "css": ".ds-labels { display: flex; align-items: center; gap: 12px; } .ds-label { margin: 0; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1; letter-spacing: 0.22em; color: var(--color-text-muted); } .ds-badge { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1; color: var(--color-accent); } .ds-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--color-accent); }"
     },
     {
       "name": "Hero Slide Marks",
@@ -597,7 +597,7 @@
       },
       {
         "name": "The Name-a-Token Rule",
-        "body": "Components read every colour as `var(--color-*)`, never a hex, so both themes follow automatically. A one-off tint is `color-mix(in srgb, var(--color-text) 7%, transparent)`. The only literals are the black and white that sit on photographs (the triptych captions and their gradient, the YouTube veil and play mark), because they belong to the image, not the page. A new token must also join the `@property` list in `globals.css`, or it will cut instead of fading.",
+        "body": "Components read every colour as `var(--color-*)`, never a hex, so both themes follow automatically. A one-off tint is `color-mix(in srgb, var(--color-text) 7%, transparent)`. The only literals are the black and white that sit on photographs (the YouTube veil and play mark), because they belong to the image, not the page. A new token must also join the `@property` list in `globals.css`, or it will cut instead of fading.",
         "section": "colors"
       },
       {
@@ -655,7 +655,8 @@
       "Don't add glassmorphism; the one backdrop-blur is the lightbox pill and it is at its limit.",
       "Don't add shadows, radii (beyond the two dots) or a third typeface.",
       "Don't pulse anything: the Available dot is still, and there is no grain overlay.",
-      "Don't spread the slash headline (`Let's / connect.`): it is a signature on two pages, the Home contact strip and the CV name.",
+      "Don't let the chat pass for Chaiya. It answers in his voice, and says on screen and in its first line that it is an AI assistant built from his CV, with email as the route for anything that matters.",
+      "Don't spread the slash headline (`Chaiya / Katkwao.`): it is a signature on one page, the CV name. The Home contact strip says \"Send the brief.\" since 4 October 2026.",
       "Don't use em dashes in copy: commas, colons, parentheses, and en dashes for ranges (`2022–Present`). Quoted titles keep their own punctuation.",
       "Don't use bounce or elastic easing.",
       "Don't hover with `onMouseEnter`; use CSS `hover:`.",

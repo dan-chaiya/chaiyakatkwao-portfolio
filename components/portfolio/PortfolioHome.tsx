@@ -13,8 +13,9 @@ const sections = [
   {
     title: "Commercial",
     href: "/commercial",
-    cover: workAssets.knack("Knack-75.jpg"),
-    coverAlt: photoAlt(workAssets.knack("Knack-75.jpg"), "Knack Factory fashion show"),
+    // Not Knack-75: that frame now opens the hero, two screens up.
+    cover: "/images/kol-lookbook/01.jpg",
+    coverAlt: photoAlt("/images/kol-lookbook/01.jpg", "KOL Casting Lookbook"),
   },
   {
     title: "Gallery",
@@ -54,7 +55,7 @@ export default function PortfolioHome() {
             {sections.map((s) => (
               <div
                 key={s.href}
-                style={{ backgroundColor: "var(--color-surface)", overflow: "hidden" }}
+                style={{ backgroundColor: "var(--color-bg)", overflow: "hidden" }}
               >
                 <TriptychCard section={s} />
               </div>
@@ -132,12 +133,10 @@ export default function PortfolioHome() {
                     letterSpacing: "0.18em",
                     textTransform: "uppercase",
                     color: "var(--color-accent)",
-                    border: "1px solid var(--color-accent-dim)",
-                    padding: "3px 9px",
                   }}
                 >
-                  {/* Still, not pulsing (2026-10-04): the pulsing "available" dot is the
-                      most-copied move on portfolios, and stillness is this site's voice. */}
+                  {/* A plain line, not a pill, and a still dot (2026-10-04): the boxed,
+                      pulsing "available" badge is the most-copied move on portfolios. */}
                   <span aria-hidden="true" style={{
                     width: "5px",
                     height: "5px",
@@ -145,7 +144,7 @@ export default function PortfolioHome() {
                     backgroundColor: "var(--color-accent)",
                     display: "inline-block",
                   }} />
-                  Available
+                  Available for projects
                 </span>
               </div>
               <h2
@@ -159,9 +158,9 @@ export default function PortfolioHome() {
                   marginTop: "20px",
                 }}
               >
-                Let&apos;s /
+                Send the
                 <br />
-                connect.
+                brief.
               </h2>
               <p className="copy-body" style={{ maxWidth: "44ch", marginTop: "24px" }}>
                 Shoots, live productions and studio builds. Send the brief to
@@ -242,7 +241,7 @@ function ListRow({ label, last }: { label: string; last: boolean }) {
 function FeaturedCard() {
   return (
     <Link
-      href="/commercial"
+      href="/commercial/knack-factory"
       className="group"
       style={{ display: "block", color: "inherit", textDecoration: "none" }}
     >
@@ -278,7 +277,7 @@ function FeaturedCard() {
           </h2>
         </div>
         <p className="mono-label transition-colors duration-200 group-hover:text-[var(--color-text)]! group-focus-visible:text-[var(--color-text)]!">
-          Commercial Production →
+          View the project →
         </p>
       </div>
     </Link>
@@ -288,6 +287,9 @@ function FeaturedCard() {
 type SectionItem = { title: string; href: string; cover: string; coverAlt: string };
 
 function TriptychCard({ section: s }: { section: SectionItem }) {
+  // The title sits under the photograph, in flow, like every other caption on the site
+  // (2026-10-04). It used to be white type on a black gradient over the picture, the
+  // one place that broke "nothing is layered over the work".
   return (
     <Link href={s.href} className="group" style={{ display: "block" }}>
       <div className="aspect-video sm:aspect-[3/4]" style={{ position: "relative", overflow: "hidden" }}>
@@ -298,48 +300,19 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
           sizes="(max-width: 768px) 100vw, 33vw"
           className="object-cover object-center"
         />
-        {/* Gradient overlay. Black and white in both themes on purpose: this text sits on
-            the photograph, not on the page. A gradient cannot be transitioned into another
-            gradient, so the deeper hover wash is a second layer that fades in by opacity.
-            Stacked on the rest gradient it equals the old hover gradient: 0.88 at the
-            bottom, 0.2 at 55%. */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%)",
-            display: "flex",
-            alignItems: "flex-end",
-            padding: "24px",
-            pointerEvents: "none",
-          }}
-        >
-          <div
-            aria-hidden="true"
-            className="opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(to top, rgba(0,0,0,0.57) 0%, rgba(0,0,0,0.2) 55%, transparent 100%)",
-              transition: "opacity 300ms ease",
-            }}
-          />
-          <div style={{ position: "relative", width: "100%", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
-            <div>
-              <p style={{
-                fontFamily: "var(--font-heading)",
-                fontWeight: 800,
-                fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)",
-                letterSpacing: "-0.02em",
-                color: "#F9F9F9",
-                lineHeight: 1,
-              }}>
-                {s.title}
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
+      <p
+        className="font-heading text-[var(--color-warm)] transition-opacity duration-200 group-hover:opacity-60"
+        style={{
+          fontWeight: 800,
+          fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)",
+          letterSpacing: "-0.02em",
+          lineHeight: 1,
+          padding: "18px 24px 22px",
+        }}
+      >
+        {s.title} →
+      </p>
     </Link>
   );
 }
