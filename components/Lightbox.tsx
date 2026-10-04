@@ -258,11 +258,11 @@ export default function Lightbox({
               transition={{ duration: 0.4, ease: EASE.out }}
               className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 border border-[var(--color-border-strong)] bg-[var(--color-bg)]/85 backdrop-blur-sm"
             >
-              <span className="text-[13px] leading-none text-[var(--color-grey-300)]">‹</span>
+              <span className="text-[14px] leading-none text-[var(--color-grey-300)]">‹</span>
               <span className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-300)]">
                 Swipe or use arrows
               </span>
-              <span className="text-[13px] leading-none text-[var(--color-grey-300)]">›</span>
+              <span className="text-[14px] leading-none text-[var(--color-grey-300)]">›</span>
             </motion.div>
           )}
         </AnimatePresence>

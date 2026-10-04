@@ -177,7 +177,7 @@ export default function AboutClient() {
                         {item.period}
                       </span>
                     </div>
-                    <p className="font-body text-[13px] tracking-[0.04em] text-[var(--color-grey-400)]">
+                    <p className="copy-small text-[var(--color-grey-400)]!">
                       {item.company}, {item.location}
                     </p>
                   </div>

@@ -9,7 +9,10 @@ type Props = {
 
 export default function YouTubeEmbed({ id, title }: Props) {
   const [active, setActive] = useState(false);
-  const thumb = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+  // maxresdefault exists only for HD uploads; for the rest YouTube answers with a
+  // 120 x 90 grey placeholder (or a 404). Fall back to hqdefault, which every video has.
+  const [thumb, setThumb] = useState(`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`);
+  const fallback = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 
   return (
     <div className="relative w-full overflow-hidden bg-[#111]" style={{ aspectRatio: "16 / 9" }}>
@@ -32,6 +35,8 @@ export default function YouTubeEmbed({ id, title }: Props) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={thumb}
+            onError={() => setThumb(fallback)}
+            onLoad={(e) => { if (e.currentTarget.naturalWidth <= 120 && thumb !== fallback) setThumb(fallback); }}
             alt={title}
             loading="lazy"
             className="absolute inset-0 w-full h-full object-cover"

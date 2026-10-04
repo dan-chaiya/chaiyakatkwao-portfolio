@@ -494,9 +494,10 @@ html:has(.menu[open]) { overflow: hidden; }
   height: 5px;
   border-radius: 50%;
   background: var(--color-accent);
-  animation: pulse 2s ease-in-out infinite;
+  /* Still, not pulsing (2026-10-04), the same move as the parent's Available dot:
+     a pulsing status dot is the most-copied portfolio tell, and stillness is the
+     voice. The chip's words already say the system is in daily use. */
 }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
 /* Fields as a definition list: mono labels on 3 to 4, text on 5 to 10. */
 .case__fields { margin-top: 64px; row-gap: 20px; }
@@ -634,7 +635,6 @@ html:has(.menu[open]) { overflow: hidden; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
   .diagram__edge { animation: none; stroke-dashoffset: 0; }
-  .chip__dot { animation: none; }
 }
 
 @media print {

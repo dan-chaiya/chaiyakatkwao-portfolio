@@ -25,12 +25,38 @@ import { photoAlt } from "@/lib/photos";
 type Slide = { caption: string } & (
   | { kind: "video"; sources: { src: string; type: string }[]; poster: string; alt: string }
   | { kind: "image"; src: string; alt: string }
+  // Portrait frames from one shoot, side by side on wider screens so a 4:5 set fills
+  // the stage instead of standing in a narrow column; phones show the first frame.
+  | { kind: "set"; frames: { src: string; alt: string }[]; alt: string }
 );
 
-// Commercial work first (2026-10-04): an agency deciding in a few seconds should meet a
-// client and a role on the first screen, not only a fine-art frame. The art series
-// closes the loop. Art originals via workAssets (never altered) + the optimized live loops.
+const frame = (src: string, fallback: string) => ({ src, alt: photoAlt(src, fallback) });
+
+// The strongest editorial work first (2026-10-04, after a second critique): Knack Factory
+// and the KOL lookbook as three-frame sets, then the live productions and the studio, the
+// art series last. A live-commerce sale banner as the first frame read as retail
+// operations, not "stylish"; every slide still names its client and role. Art originals via workAssets (never altered) + the optimized live loops.
 const SLIDES: Slide[] = [
+  {
+    kind: "set",
+    frames: [
+      frame(workAssets.knack("Knack-75.jpg"), "Knack Factory runway"),
+      frame(workAssets.knack("Knack-120.jpg"), "Knack Factory runway"),
+      frame(workAssets.knack("Knack-131.jpg"), "Knack Factory runway"),
+    ],
+    alt: "Knack Factory Fashion Show, three runway frames",
+    caption: "Knack Factory · Photographer, 2024",
+  },
+  {
+    kind: "set",
+    frames: [
+      frame("/images/kol-lookbook/02.jpg", "KOL casting portrait"),
+      frame("/images/kol-lookbook/04.jpg", "KOL casting portrait"),
+      frame("/images/kol-lookbook/05.jpg", "KOL casting portrait"),
+    ],
+    alt: "KOL Casting Lookbook, three casting portraits",
+    caption: "KOL Casting Lookbook · Photographer and art direction, Ad The Top, 2026",
+  },
   {
     kind: "video",
     sources: [
@@ -40,22 +66,6 @@ const SLIDES: Slide[] = [
     poster: "/videos/motion/live-fitflop-may.poster.jpg",
     alt: "Fitflop live commerce stream",
     caption: "Fitflop · Live production, Ad The Top, 2026",
-  },
-  {
-    kind: "image",
-    src: workAssets.knack("Knack-75.jpg"),
-    alt: photoAlt(workAssets.knack("Knack-75.jpg"), "Knack Factory Fashion Show, 2024"),
-    caption: "Knack Factory · Photographer, 2024",
-  },
-  {
-    kind: "video",
-    sources: [
-      { src: "/videos/motion/live-rojukiss-may.webm", type: "video/webm" },
-      { src: "/videos/motion/live-rojukiss-may.mp4", type: "video/mp4" },
-    ],
-    poster: "/videos/motion/live-rojukiss-may.poster.jpg",
-    alt: "Rojukiss live commerce stream",
-    caption: "Rojukiss · Live production, Ad The Top, 2026",
   },
   {
     kind: "image",
@@ -174,13 +184,28 @@ export default function HeroStage() {
                 muted
                 loop
                 playsInline
-                autoPlay={i === 0 && !reduced}
+                autoPlay={false}
                 preload={i === 0 ? "auto" : "metadata"}
                 aria-label={slide.alt}
                 className="absolute inset-0 h-full w-full object-contain"
               >
                 {slide.sources.map((s) => <source key={s.src} src={s.src} type={s.type} />)}
               </video>
+            ) : slide.kind === "set" ? (
+              <div className="absolute inset-0 flex justify-center gap-[1px]">
+                {slide.frames.map((f, j) => (
+                  <div key={f.src} className={`relative h-full flex-1 ${j > 0 ? "hidden sm:block" : ""}`}>
+                    <Image
+                      src={f.src}
+                      alt={f.alt}
+                      fill
+                      preload={i === 0 && j === 0}
+                      sizes="(max-width: 640px) 100vw, 33vw"
+                      className="object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
             ) : (
               <Image
                 src={slide.src}

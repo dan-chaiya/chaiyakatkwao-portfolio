@@ -7,7 +7,9 @@ type Message = { id: string; role: "user" | "assistant"; content: string };
 const OPENING: Message = {
   id: "opening",
   role: "assistant",
-  content: "Hey, I'm Chaiya. Ask me anything about my work, or just say hi.",
+  // Said up front (2026-10-04): this is an AI answering in Chaiya's voice, not Chaiya.
+  // An agency that found out later would feel misled, and a wrong answer would read as his.
+  content: "Hi, I'm an AI assistant that answers in Chaiya's voice, from his CV and projects. Ask about his work, clients or process. For anything that matters, email him.",
 };
 
 const SUGGESTIONS = [
@@ -118,7 +120,7 @@ export default function ChatInterface() {
           style={{ flexShrink: 0, borderColor: "var(--color-grey-700)" }}
           className="border-b pb-6 mb-6 lg:w-72 lg:pr-10 lg:border-b-0 lg:border-r lg:pb-0 lg:mb-0"
         >
-          <p style={{ ...mono, marginBottom: "12px" }}>Speaking with</p>
+          <p style={{ ...mono, marginBottom: "12px" }}>AI assistant for</p>
           <h1 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(1.75rem, 4vw, 3.5rem)", lineHeight: 0.92, letterSpacing: "-0.03em", color: "var(--color-warm)", marginBottom: "16px" }}>
             Chaiya<br />Katkwao.
           </h1>
@@ -126,8 +128,21 @@ export default function ChatInterface() {
             Creative Producer<br />Bangkok, Thailand
           </p>
           <p style={{ fontFamily: "var(--font-archivo)", fontSize: "0.875rem", color: "var(--color-grey-400)", lineHeight: 1.5, marginTop: "10px" }}>
-            Ask me about my work, clients, or process.
+            Answers come from his CV and project notes and can be wrong. Briefs and
+            bookings go to{" "}
+            <a href="mailto:chaiyakatkwao@gmail.com" className="text-[var(--color-text)] underline underline-offset-4">chaiyakatkwao@gmail.com</a>.
           </p>
+          {hasUserMessages && (
+            <button
+              type="button"
+              onClick={() => { setMessages([OPENING]); setError(null); setInput(""); }}
+              disabled={isLoading}
+              className="tap-target mt-6 text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text)]"
+              style={{ ...mono, background: "transparent", border: 0, padding: 0, cursor: "pointer" }}
+            >
+              Start over
+            </button>
+          )}
         </div>
 
         {/* Right — chat */}
@@ -150,7 +165,7 @@ export default function ChatInterface() {
               <div key={m.id} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
                 <div style={{ maxWidth: "80%", padding: "12px 16px", backgroundColor: m.role === "user" ? "var(--color-warm)" : "var(--color-surface-dark)", border: m.role === "user" ? "none" : "1px solid var(--color-border-muted)", color: m.role === "user" ? "var(--color-surface-chat)" : "var(--color-grey-200)", fontFamily: "var(--font-archivo)", fontSize: "14px", lineHeight: 1.7 }}>
                   {m.content || (
-                    <span style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "11px", color: "var(--color-grey-500)" }}>...</span>
+                    <span style={{ fontFamily: "var(--font-jetbrains-mono)", fontSize: "11px", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--color-grey-500)" }}>Thinking…</span>
                   )}
                 </div>
               </div>
@@ -216,7 +231,7 @@ export default function ChatInterface() {
                 type="submit"
                 aria-label="Send message"
                 disabled={isLoading || !input.trim()}
-                style={{ display: "flex", alignItems: "center", justifyContent: "center", minWidth: "44px", minHeight: "44px", color: isLoading || !input.trim() ? "var(--color-grey-400)" : "var(--color-grey-200)", fontFamily: "var(--font-jetbrains-mono)", fontSize: "13px", background: "transparent", border: "none", cursor: isLoading || !input.trim() ? "not-allowed" : "pointer", transition: "color 0.15s" }}
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", minWidth: "44px", minHeight: "44px", color: isLoading || !input.trim() ? "var(--color-grey-400)" : "var(--color-grey-200)", fontFamily: "var(--font-jetbrains-mono)", fontSize: "14px", background: "transparent", border: "none", cursor: isLoading || !input.trim() ? "not-allowed" : "pointer", transition: "color 0.15s" }}
               >
                 <span aria-hidden="true">↵</span>
               </button>

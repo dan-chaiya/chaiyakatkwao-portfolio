@@ -196,7 +196,7 @@ The system rejects, by name, the three anti-references in PRODUCT.md: colourful 
 Five neutrals and one cue: the palette does not try to be beautiful, it tries to be correct.
 
 ### Primary
-- **Cue Light** (`oklch(54% 0.19 35)` on Paper, `oklch(72% 0.18 35)` on Ink): the amber of a cue light backstage, lit only when it is your turn. The 1px underline under the current nav link, the Commercial view toggle and the Systems link on About; the year on a hovered Commercial list row; the "Available" badge and its still dot on the Home contact strip. It is deeper on Paper because the badge is 11px text and needs 4.5:1 there (4.87:1).
+- **Cue Light** (`oklch(54% 0.19 35)` on Paper, `oklch(72% 0.18 35)` on Ink): the amber of a cue light backstage, lit only when it is your turn. The 1px underline under the current nav link, the Commercial view toggle and the Systems link on About; the year on a hovered Commercial list row; the "Available for projects" line and its still dot on the Home contact strip (a plain mono line, no pill, since 4 October 2026). It is deeper on Paper because that line is 11px text and needs 4.5:1 there (4.87:1).
 - **Cue Light, dimmed** (the same hue at 30%): the badge's hairline border, so the frame never competes with its text.
 
 ### Neutral
@@ -222,7 +222,7 @@ Every text grey measures 4.5:1 or better on the ground, surface and elevated sur
 
 **The Pure Ground, Warm Ink Rule.** Grounds, surfaces and the primary ink are pure neutral (zero chroma) in both themes. The warmth lives only in the text greys and hairlines, at hue 62°–89° and chroma 0.006–0.012. Never introduce a cool grey; the sister site at `/systems` follows the same curve.
 
-**The Name-a-Token Rule.** Components read every colour as `var(--color-*)`, never a hex, so both themes follow automatically. A one-off tint is `color-mix(in srgb, var(--color-text) 7%, transparent)`. The only literals are the black and white that sit on photographs (the triptych captions and their gradient, the YouTube veil and play mark), because they belong to the image, not the page. A new token must also join the `@property` list in `globals.css`, or it will cut instead of fading.
+**The Name-a-Token Rule.** Components read every colour as `var(--color-*)`, never a hex, so both themes follow automatically. A one-off tint is `color-mix(in srgb, var(--color-text) 7%, transparent)`. The only literals are the black and white that sit on photographs (the YouTube veil and play mark), because they belong to the image, not the page. A new token must also join the `@property` list in `globals.css`, or it will cut instead of fading.
 
 ## 3. Typography
 
@@ -281,7 +281,7 @@ Labelled like gear: flat, square, named in mono, and answering instantly. No dec
 
 ### Cards / Containers
 - There are no cards. Work sits directly on the ground; sections are separated by `border` hairlines and 80px of vertical space.
-- The home triptych is three image links in a 1px-gap grid on `surface`, titles in white on a black gradient (they belong to the photograph). No index numbers: the order means nothing.
+- The home triptych is three image links in a 1px-gap grid, each photograph clean and its title under it in flow (Title step, "Gallery →"), never over it. No index numbers: the order means nothing.
 - Under the Home bio, the **Selected clients** roll (`data/clients.ts`, shared with About) is the producer proof an agency scans for; it replaced a list of disciplines that repeated About and the CV.
 - A case study's meta column leads with **Client**, then Role, Year, Discipline; it ends on the next project's title beside its cover.
 
@@ -291,8 +291,8 @@ Labelled like gear: flat, square, named in mono, and answering instantly. No dec
 - **Placeholder:** `text-muted` at full opacity (5.67:1), never the browser's half-strength default.
 
 ### Navigation
-- **Header:** `sticky top-0`, opaque on the page ground, 1px `border-faint` below, 58px tall (72px under 1024px). The CK mark at left is the only way home (accessible name "Chaiya Katkwao, home").
-- **Links:** 0.8rem mono, uppercase, 0.18em, `grey-300` at rest, ink on hover (180ms). The current page carries `aria-current="page"` and a 1px Cue Light underline.
+- **Header:** `sticky top-0`, opaque on the page ground, 1px `border-faint` below, 58px tall (72px under 1024px). The CK mark at left (Archivo Black 800 at 1.15rem, its own size, not a ramp step) is the only way home (accessible name "Chaiya Katkwao, home").
+- **Links:** 0.8rem mono (the nav's own label size, one step above the 11px label), uppercase, 0.18em, `grey-300` at rest, ink on hover (180ms). The current page carries `aria-current="page"` and a 1px Cue Light underline.
 - **Small links get 44px to the finger** through `.tap-target`, an invisible centred box; the label keeps its own size.
 - **Mobile menu:** a full-screen overlay on the page ground with no modal chrome. Links are Archivo Black 800 at `clamp(2rem, min(10vw, 9svh), 5rem)`, uppercase, separated by `border-faint` hairlines, staggered in at 0.05s over 0.3s. The overlay scrolls itself and centres with auto margins, so a phone turned sideways still reaches every link. Escape closes; Tab loops through the links and the close button.
 
@@ -300,7 +300,7 @@ Labelled like gear: flat, square, named in mono, and answering instantly. No dec
 One 14px dot in a 1.5px ink ring, half ink and half clear. The ink half sits left on Paper and turns right on Ink (420ms, the signature curve); it grows 18% on hover. 44px to the finger, no words, no accent. Its side is decided in CSS from `<html data-theme>`, so it is right from the first frame; its label names the action ("Switch to dark theme").
 
 ### Hero Stage (Signature Component)
-Three rows inside `100svh` minus the header: the name line with "Creative Producer, Bangkok" beside it, the stage, and the caption row with the controls. Commercial work comes first (Fitflop, Knack Factory, Rojukiss, Modal Creative Studio, Nestlé), the art series last, and the caption names the client and role of the slide on screen ("Fitflop · Live production, Ad The Top, 2026"), so an agency meets a brand on the first screen. Each slide is the original work, `object-contain` on the page ground, at full contrast: no scrim, no gradient, no blur. Slides cross-fade over 1200ms, 300ms when the visitor picks one, a hard cut under reduced motion. Controls: a 44px pause square (WCAG 2.2.2) and one 16px bar per slide inside a 24 × 44 button (WCAG 2.5.8), active in ink and the rest at 34%; on phones a `01 / 06` counter replaces the bars.
+Three rows inside `100svh` minus the header: the name line with "Creative Producer, Bangkok" beside it, the stage, and the caption row with the controls. The strongest editorial work comes first: Knack Factory and the KOL Casting Lookbook as three-frame sets (portrait frames side by side on screens 640px and wider, the first frame alone on phones), then Fitflop, Modal Creative Studio and Nestlé, the art series last. The caption names the client and role of the slide on screen ("Knack Factory · Photographer, 2024"). A live-commerce sale stream led for one deploy on 4 October 2026 and read as retail operations rather than "stylish"; it stays in the rotation, not at the front. Each slide is the original work, `object-contain` on the page ground, at full contrast: no scrim, no gradient, no blur. Slides cross-fade over 1200ms, 300ms when the visitor picks one, a hard cut under reduced motion. Controls: a 44px pause square (WCAG 2.2.2) and one 16px bar per slide inside a 24 × 44 button (WCAG 2.5.8), active in ink and the rest at 34%; on phones a `01 / 06` counter replaces the bars.
 
 ### Lightbox (Signature Component)
 The gallery viewer, keyboard-native and in the page's theme. The photo is `next/image` at `sizes="100vw"`, `object-fit: contain`, capped at `100dvh` minus the chrome, swipeable, with a spring arrival (damping 30, stiffness 250); the photos either side are fetched ahead so a step shows at once. Never a plain `<img>` of the original: opening Knack Factory and stepping three times once fetched 29.6 MB, and now fetches under 1 MB. The counter is `aria-live` and reads the photo's description. Focus moves in on open, is trapped inside, and returns to the tile on close.
@@ -337,7 +337,8 @@ Every photo has a size and a description. `photoSize(src)` and `photoAlt(src)` i
 - **Don't** add glassmorphism; the one backdrop-blur is the lightbox pill and it is at its limit.
 - **Don't** add shadows, radii (beyond the two dots) or a third typeface.
 - **Don't** pulse anything: the Available dot is still, and there is no grain overlay.
-- **Don't** spread the slash headline (`Let's / connect.`): it is a signature on two pages, the Home contact strip and the CV name.
+- **Don't** let the chat pass for Chaiya. It answers in his voice, and says on screen and in its first line that it is an AI assistant built from his CV, with email as the route for anything that matters.
+- **Don't** spread the slash headline (`Chaiya / Katkwao.`): it is a signature on one page, the CV name. The Home contact strip says "Send the brief." since 4 October 2026.
 - **Don't** use em dashes in copy: commas, colons, parentheses, and en dashes for ranges (`2022–Present`). Quoted titles keep their own punctuation.
 - **Don't** use bounce or elastic easing.
 - **Don't** hover with `onMouseEnter`; use CSS `hover:`.
