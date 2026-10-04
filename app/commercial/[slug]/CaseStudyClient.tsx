@@ -62,13 +62,10 @@ export default function CaseStudyClient({ project }: { project: Project }) {
             </span>
           </div>
           <div className="md:col-span-7">
-            <p className="font-mono font-medium text-[11px] tracking-[0.35em] uppercase text-[var(--color-grey-500)] mb-5">
-              {project.subtitle}
-            </p>
             <h1
               className="font-heading text-[var(--color-warm)] mb-8"
               style={{
-                fontSize: "clamp(2.5rem, 7vw, 6rem)",
+                fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
                 lineHeight: 0.92,
                 letterSpacing: "-0.02em",
               }}
@@ -80,6 +77,15 @@ export default function CaseStudyClient({ project }: { project: Project }) {
             </p>
           </div>
           <div className="md:col-span-4 md:pl-8 flex flex-col gap-6 md:gap-8 mt-4 md:mt-0">
+            {/* Client first: the row an agency scans for (2026-10-04). */}
+            <div>
+              <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
+                Client
+              </p>
+              <p className="copy-small">
+                {project.subtitle}
+              </p>
+            </div>
             <div>
               <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
                 Role
@@ -222,23 +228,36 @@ export default function CaseStudyClient({ project }: { project: Project }) {
           <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-6">
             Next
           </p>
+          {/* The next project shows its cover, so the page ends on the work rather than a
+              line of text (2026-10-04). */}
           <Link
             href={`/commercial/${next.slug}`}
-            className="group block"
+            className="group grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end"
           >
-            <h2
-              className="font-heading text-[var(--color-warm)] transition-opacity duration-300 group-hover:opacity-60"
-              style={{
-                fontSize: "clamp(2.5rem, 7vw, 5.5rem)",
-                lineHeight: 0.92,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              {next.title} →
-            </h2>
-            <p className="font-mono font-medium text-[11px] tracking-[0.2em] uppercase text-[var(--color-grey-500)] mt-3">
-              {next.subtitle}, {next.year}
-            </p>
+            <div className="md:col-span-8">
+              <h2
+                className="font-heading text-[var(--color-warm)] transition-opacity duration-300 group-hover:opacity-60"
+                style={{
+                  fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
+                  lineHeight: 0.92,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {next.title} →
+              </h2>
+              <p className="font-mono font-medium text-[11px] tracking-[0.2em] uppercase text-[var(--color-grey-500)] mt-3">
+                {next.subtitle}, {next.year}
+              </p>
+            </div>
+            <div className="md:col-span-4 relative overflow-hidden bg-[var(--color-surface)]" style={{ aspectRatio: "4 / 3" }}>
+              <Image
+                src={next.cover}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover"
+              />
+            </div>
           </Link>
         </section>
       </main>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { photoAlt } from "@/lib/photos";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
+import { clients } from "@/data/clients";
 
 const experience = [
   {
@@ -39,20 +40,6 @@ const capabilities = [
   "Studio Production",
   "Visual Storytelling",
   "Audio-Visual Engineering",
-];
-
-const clients = [
-  "Colgate",
-  "Dutchmil Delivery",
-  "Fitflop",
-  "Guess",
-  "Her Hyness",
-  "Nestlé",
-  "Rojukiss",
-  "Sunnies Studio Thailand",
-  "Tokfashion",
-  "Knack Factory",
-  "BAKAO",
 ];
 
 const services = [
@@ -97,7 +84,7 @@ export default function AboutClient() {
             <h1
               className="font-heading text-[var(--color-warm)] leading-[0.92] mb-16"
               style={{
-                fontSize: "clamp(3rem, 8vw, 7rem)",
+                fontSize: "clamp(2.5rem, 8vw, 7rem)",
                 letterSpacing: "-0.02em",
               }}
             >
@@ -230,7 +217,7 @@ export default function AboutClient() {
           </div>
           <div className="lg:col-span-9">
             <ul>
-              {clients.map((name, i) => (
+              {clients.map((name) => (
                 <li
                   key={name}
                   className="border-t border-[var(--color-grey-700)] py-4 flex items-baseline justify-between last:border-b"
@@ -244,9 +231,6 @@ export default function AboutClient() {
                     }}
                   >
                     {name}
-                  </span>
-                  <span className="font-mono font-medium text-[11px] tracking-[0.18em] text-[var(--color-grey-400)]">
-                    {String(i + 1).padStart(2, "0")}
                   </span>
                 </li>
               ))}
@@ -279,7 +263,7 @@ export default function AboutClient() {
           </div>
           <div className="lg:col-span-9">
             <ul>
-              {services.map((service, i) => (
+              {services.map((service) => (
                 <li
                   key={service.name}
                   className="border-t border-[var(--color-grey-700)] py-6 last:border-b"
@@ -295,9 +279,6 @@ export default function AboutClient() {
                     >
                       {service.name}
                     </h3>
-                    <span className="font-mono font-medium text-[11px] tracking-[0.18em] text-[var(--color-grey-400)]">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
                   </div>
                   <p className="copy-small mt-3 max-w-xl">{service.description}</p>
                 </li>

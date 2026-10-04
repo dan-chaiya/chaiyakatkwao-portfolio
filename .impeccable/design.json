@@ -1,449 +1,666 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-29T23:33:35Z",
+  "generatedAt": "2026-10-04T15:15:13Z",
   "title": "Design System: Chaiya Katkwao Portfolio",
   "extensions": {
     "colorMeta": {
       "bg": {
         "role": "neutral",
-        "displayName": "Production Black",
-        "canonical": "oklch(0 0 0)",
+        "displayName": "Paper / Ink ground",
+        "canonical": "#F0F0F0",
+        "dark": "#111111",
+        "purpose": "The page ground.",
         "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
         ]
       },
       "surface": {
         "role": "neutral",
-        "displayName": "Studio Surface",
-        "canonical": "oklch(0.0301 0 0)",
+        "displayName": "Surface",
+        "canonical": "#EAEAEA",
+        "dark": "#1C1C1C",
+        "purpose": "First tonal step: tiles, chat ground.",
         "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
         ]
       },
       "surface-elevated": {
         "role": "neutral",
-        "displayName": "Elevated Surface",
-        "canonical": "oklch(0.0733 0 0)",
+        "displayName": "Elevated surface",
+        "canonical": "#E4E4E4",
+        "dark": "#222222",
+        "purpose": "Second tonal step: image tile wells.",
         "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
         ]
       },
       "surface-hover": {
         "role": "neutral",
-        "displayName": "Hover Surface",
-        "canonical": "oklch(0.1075 0 0)",
+        "displayName": "Hover surface",
+        "canonical": "#DEDEDE",
+        "dark": "#2A2A2A",
+        "purpose": "Third tonal step.",
         "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
         ]
       },
       "text": {
         "role": "neutral",
-        "displayName": "Primary Text",
-        "canonical": "oklch(0.9761 0 0)",
+        "displayName": "Ink",
+        "canonical": "#111111",
+        "dark": "#F0F0F0",
+        "purpose": "Primary text, rules, the theme dot.",
         "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
-        ]
-      },
-      "text-muted": {
-        "role": "neutral",
-        "displayName": "Muted Text",
-        "canonical": "oklch(0.6200 0.0115 67.6)",
-        "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
-        ]
-      },
-      "text-dim": {
-        "role": "neutral",
-        "displayName": "Dim Mark",
-        "canonical": "oklch(0.4000 0.0064 67.6)",
-        "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
         ]
       },
       "warm": {
         "role": "neutral",
-        "displayName": "Warm Paper",
-        "canonical": "oklch(0.9550 0.0070 88.6)",
+        "displayName": "Heading ink",
+        "canonical": "#111111",
+        "dark": "#F0F0F0",
+        "purpose": "Display and headline ink.",
         "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
+        ]
+      },
+      "grey-200": {
+        "role": "neutral",
+        "displayName": "Reading grey",
+        "canonical": "#1C1C1C",
+        "dark": "#EAEAEA",
+        "purpose": "Lead and body copy.",
+        "tonalRamp": [
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
+        ]
+      },
+      "grey-300": {
+        "role": "neutral",
+        "displayName": "Small-text grey",
+        "canonical": "#3D3A37",
+        "dark": "#C8C4BC",
+        "purpose": "Small copy, nav links at rest.",
+        "tonalRamp": [
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
+        ]
+      },
+      "grey-400": {
+        "role": "neutral",
+        "displayName": "Data grey",
+        "canonical": "#57524D",
+        "dark": "#9A9087",
+        "purpose": "Labels and tags.",
+        "tonalRamp": [
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
+        ]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Muted label grey",
+        "canonical": "#5F5A55",
+        "dark": "#958F89",
+        "purpose": "Mono labels, footer, placeholders.",
+        "tonalRamp": [
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
+        ]
+      },
+      "grey-500": {
+        "role": "neutral",
+        "displayName": "Caption grey",
+        "canonical": "#67625C",
+        "dark": "#8F8983",
+        "purpose": "Indices, captions, lightbox frames.",
+        "tonalRamp": [
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
+        ]
+      },
+      "text-dim": {
+        "role": "neutral",
+        "displayName": "Structural mark",
+        "canonical": "#A8A29B",
+        "dark": "#4A4744",
+        "purpose": "Disabled controls only; never text.",
+        "tonalRamp": [
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
+        ]
+      },
+      "grey-600": {
+        "role": "neutral",
+        "displayName": "Disabled frame",
+        "canonical": "#BDB8B1",
+        "dark": "#3D3A37",
+        "purpose": "Disabled control borders.",
+        "tonalRamp": [
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
+        ]
+      },
+      "grey-700": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#D3D0CA",
+        "dark": "#2A2826",
+        "purpose": "Chat field frame, About rules.",
+        "tonalRamp": [
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
+        ]
+      },
+      "border-muted": {
+        "role": "neutral",
+        "displayName": "Muted hairline",
+        "canonical": "#D6D6D6",
+        "dark": "#2A2A2A",
+        "purpose": "Tag and chip frames.",
+        "tonalRamp": [
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
+        ]
+      },
+      "border-faint": {
+        "role": "neutral",
+        "displayName": "Faint line",
+        "canonical": "rgba(17, 17, 17, 0.07)",
+        "dark": "rgba(240, 240, 240, 0.07)",
+        "purpose": "Header, footer, menu rows.",
+        "tonalRamp": [
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
         ]
       },
       "border": {
         "role": "neutral",
-        "displayName": "Structural Line",
-        "canonical": "rgba(249, 249, 249, 0.09)",
+        "displayName": "Line",
+        "canonical": "rgba(17, 17, 17, 0.09)",
+        "dark": "rgba(240, 240, 240, 0.09)",
+        "purpose": "Section rules.",
         "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
         ]
       },
       "border-strong": {
         "role": "neutral",
-        "displayName": "Strong Line",
-        "canonical": "rgba(249, 249, 249, 0.22)",
+        "displayName": "Strong line",
+        "canonical": "rgba(17, 17, 17, 0.22)",
+        "dark": "rgba(240, 240, 240, 0.22)",
+        "purpose": "Primary button frame, hint pill.",
         "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
+        ]
+      },
+      "text-inverse": {
+        "role": "neutral",
+        "displayName": "Inverse ink",
+        "canonical": "#F0F0F0",
+        "dark": "#111111",
+        "purpose": "Text on an ink ground (primary button hover).",
+        "tonalRamp": [
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
         ]
       },
       "accent": {
-        "role": "accent",
-        "displayName": "Warm Signal",
-        "canonical": "oklch(0.72 0.18 35)",
+        "role": "primary",
+        "displayName": "Cue Light",
+        "canonical": "oklch(54% 0.19 35)",
+        "dark": "oklch(72% 0.18 35)",
+        "purpose": "Live marks only: the current page underline, the Available badge.",
         "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
+          "oklch(15% 0.06 35)",
+          "oklch(25% 0.1 35)",
+          "oklch(35% 0.14 35)",
+          "oklch(45% 0.17 35)",
+          "oklch(54% 0.19 35)",
+          "oklch(65% 0.18 35)",
+          "oklch(80% 0.11 35)",
+          "oklch(95% 0.03 35)"
         ]
       },
       "accent-dim": {
-        "role": "accent",
-        "displayName": "Warm Signal Dim",
-        "canonical": "oklch(0.72 0.18 35 / 0.3)",
+        "role": "primary",
+        "displayName": "Cue Light, dimmed",
+        "canonical": "oklch(54% 0.19 35 / 0.3)",
+        "dark": "oklch(72% 0.18 35 / 0.3)",
+        "purpose": "The Available badge's frame.",
         "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
+          "oklch(15% 0.06 35)",
+          "oklch(25% 0.1 35)",
+          "oklch(35% 0.14 35)",
+          "oklch(45% 0.17 35)",
+          "oklch(54% 0.19 35)",
+          "oklch(65% 0.18 35)",
+          "oklch(80% 0.11 35)",
+          "oklch(95% 0.03 35)"
         ]
       },
       "focus-ring": {
         "role": "neutral",
-        "displayName": "Focus Ring",
-        "canonical": "rgba(249, 249, 249, 0.55)",
+        "displayName": "Focus ring",
+        "canonical": "rgba(17, 17, 17, 0.55)",
+        "dark": "rgba(240, 240, 240, 0.55)",
+        "purpose": "1px focus outline, 3px offset.",
         "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
-        ]
-      },
-      "selection-bg": {
-        "role": "neutral",
-        "displayName": "Selection",
-        "canonical": "oklch(0.9761 0 0)",
-        "tonalRamp": [
-          "oklch(0 0 0)",
-          "oklch(0.0301 0 0)",
-          "oklch(0.0733 0 0)",
-          "oklch(0.1075 0 0)",
-          "oklch(0.2600 0.0050 67.6)",
-          "oklch(0.4000 0.0064 67.6)",
-          "oklch(0.5600 0.0100 67.6)",
-          "oklch(0.6200 0.0115 67.6)",
-          "oklch(0.7200 0.0110 67.6)",
-          "oklch(0.8300 0.0090 78.0)",
-          "oklch(0.9550 0.0070 88.6)",
-          "oklch(0.9761 0 0)"
+          "#111111",
+          "#1C1C1C",
+          "#3D3A37",
+          "#57524D",
+          "#67625C",
+          "#A8A29B",
+          "#D3D0CA",
+          "#F0F0F0"
         ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Page titles and the hero name. Archivo Black, fluid clamp, tight tracking, 0.88-0.95 line-height — structural, not decorative."
+        "purpose": "Page titles. Archivo Black 800 (synthesized), fluid clamp, -0.02em, 0.9 line-height."
+      },
+      "display-s": {
+        "displayName": "Display S",
+        "purpose": "Case-study titles, contact strips, the Next project."
+      },
+      "feature": {
+        "displayName": "Feature",
+        "purpose": "Featured project caption, the chat name."
+      },
+      "roll": {
+        "displayName": "Roll",
+        "purpose": "About client and service rolls."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Section and project titles. Archivo Black at the smaller clamp."
+        "purpose": "Section and project titles, Commercial list rows."
+      },
+      "title": {
+        "displayName": "Name line",
+        "purpose": "The hero's one-line name, Chaiya Katkwao."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Bios, positioning lines, project descriptions (.copy-lead)."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Running text, bios, case-study copy. Archivo 300-400 at 15px."
+        "purpose": "Everything that is read (.copy-body), capped at 52-75ch."
       },
       "body-sm": {
-        "displayName": "Body Small",
-        "purpose": "Descriptions, chat messages, dense metadata. Archivo 400 at 13px."
+        "displayName": "Small",
+        "purpose": "Captions and list cells (.copy-small)."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "JetBrains Mono 500, 11px, 0.18em. Nav, footer, tags, years, indices, captions — the whole information layer."
+        "purpose": "Nav, footer, tags, years, indices, counters (.mono-label)."
       },
       "label-wide": {
-        "displayName": "Label Wide",
-        "purpose": "JetBrains Mono 500, 11px, 0.28-0.35em. Eyebrows and section markers."
+        "displayName": "Label wide",
+        "purpose": "Eyebrows and section markers."
       }
     },
     "shadows": [],
     "motion": [
       {
-        "name": "ease-expo-out",
+        "name": "ease-out",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Universal easing for all entrances and transitions. Arrives fast, lands clean. Used at 0.5–0.9s for reveals, 0.2–0.3s for state changes."
+        "purpose": "The signature curve (--ease-out, EASE.out): every hover, the page fade, the hero cross-fade, the theme dot."
       },
       {
-        "name": "stagger-children",
-        "value": "0.07s delay between siblings",
-        "purpose": "Staggered entrance for list items (mobile nav links). Applied as Framer Motion stagger."
+        "name": "theme-fade",
+        "value": "450ms cubic-bezier(0.45, 0, 0.55, 1)",
+        "purpose": "Colour tokens fade between Paper and Ink (200ms under reduced motion)."
+      },
+      {
+        "name": "page-fade",
+        "value": "250ms opacity",
+        "purpose": "The one entrance on every navigation (PageTransition)."
+      },
+      {
+        "name": "hero-crossfade",
+        "value": "1200ms auto, 300ms on a pick",
+        "purpose": "Hero slides; a hard cut under reduced motion."
+      },
+      {
+        "name": "hover",
+        "value": "180-250ms",
+        "purpose": "Colour and border feedback on links and buttons, CSS hover: only."
+      },
+      {
+        "name": "menu-stagger",
+        "value": "0.05s between items, 0.3s each",
+        "purpose": "Mobile menu links."
       },
       {
         "name": "spring-image",
-        "value": "damping: 30, stiffness: 250",
-        "purpose": "Spring animation for Lightbox image transitions only. Not used elsewhere."
+        "value": "damping 30, stiffness 250",
+        "purpose": "Lightbox arrival only."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "120ms colour/opacity only",
+        "purpose": "Travel and looping stop; feedback stays."
       }
     ],
     "breakpoints": [
       {
-        "name": "md",
-        "value": "768px",
-        "purpose": "Mobile nav collapses to full-screen overlay below this."
+        "name": "sm",
+        "value": "640px",
+        "purpose": "Hero rows go side by side; slide marks replace the counter; gallery 2 columns."
       },
       {
-        "name": "shell-max",
-        "value": "1200px",
-        "purpose": "section-shell max-width. Content centers and adds 1rem gutter each side below this."
+        "name": "md",
+        "value": "768px",
+        "purpose": "12-column metadata grids on Commercial and Home."
+      },
+      {
+        "name": "lg",
+        "value": "1024px",
+        "purpose": "Desktop nav replaces the menu; header 58px (72px below); gallery 3 columns."
       }
     ],
     "a11y": {
-      "contrastFloor": "4.5:1 for every text colour, verified against #000000 and #0D0D0D",
-      "typeFloor": "11px — no text below it, screen or print",
+      "contrastFloor": "4.5:1 for every text colour on bg, surface and surface-elevated of its own theme; lowest 4.87:1 (Paper), 5.45:1 (Ink).",
+      "typeFloor": "11px on screen, 8.5pt in print.",
+      "targets": "24 x 24 minimum (WCAG 2.5.8); small text links get 44px through .tap-target.",
       "notes": [
-        "text-dim (2.28:1) is a structural mark colour and must never carry text.",
-        "grey-500 was raised from #6B6560 (3.66:1) to #827C75 (5.09:1) on 29 Aug 2026; it is the site-wide secondary label colour, so the token moved rather than the call sites.",
-        "Hero labels sit on two gradient legibility bands, not on the flat scrim alone.",
-        "prefers-reduced-motion removes travel and looping but keeps 120ms colour/opacity feedback.",
-        "Anything that opens the lightbox is a real <button>."
+        "text-dim and grey-600 are structural marks and never carry text.",
+        "Every photo has width/height (data/image-sizes.json) and a descriptive alt (data/alt-text.json) via lib/photos.ts.",
+        "Image tiles that open the lightbox are <button class=gallery-tile>; the lightbox counter is aria-live.",
+        "The current nav link carries aria-current=page.",
+        "prefers-reduced-motion removes travel and looping but keeps 120ms colour/opacity feedback; the hero has a pause control (WCAG 2.2.2)."
       ]
     }
   },
   "components": [
     {
-      "name": "Primary CTA Button",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "The only call-to-action button in the system. Fully rounded, Warm Signal background. Appears in the navigation header and contact sections.",
-      "html": "<button class=\"ds-btn-primary\">Let&apos;s work together</button>",
-      "css": ".ds-btn-primary { background: var(--color-accent); color: var(--color-selection-text); padding: 8px 16px; border-radius: 9999px; border: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.02em; text-transform: none; cursor: pointer; transition: background 200ms cubic-bezier(0.16, 1, 0.3, 1); font-family: inherit; } .ds-btn-primary:hover { background: var(--color-accent-strong); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }"
-    },
-    {
-      "name": "Navigation Link",
+      "name": "Navigation",
       "kind": "nav",
       "refersTo": "nav-link",
-      "description": "Desktop navigation links. Uppercase label scale. Muted at rest, full text on hover.",
-      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Projects</a><a class=\"ds-nav-link\" href=\"#\">Gallery</a><a class=\"ds-nav-link\" href=\"#\">About</a></nav>",
-      "css": ".ds-nav { display: flex; gap: 32px; align-items: center; } .ds-nav-link { color: var(--color-text-muted); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; transition: color 200ms ease; font-family: inherit; font-weight: 500; } .ds-nav-link:hover { color: var(--color-text); } .ds-nav-link:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; border-radius: 2px; }"
+      "description": "Desktop header links: mono, uppercase, grey-300 at rest, ink on hover; the current page in ink with a 1px Cue Light underline.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary\"><a class=\"ds-nav-link\" href=\"#\" aria-current=\"page\">Commercial</a><a class=\"ds-nav-link\" href=\"#\">Gallery</a><a class=\"ds-nav-link\" href=\"#\">About</a><a class=\"ds-nav-link\" href=\"#\">CV</a><a class=\"ds-nav-link\" href=\"#\">Chat</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 32px; align-items: center; } .ds-nav-link { position: relative; padding-bottom: 1px; font-family: var(--font-jetbrains-mono), monospace; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--color-grey-300); transition: color 180ms ease; } .ds-nav-link:hover { color: var(--color-text); } .ds-nav-link[aria-current=page] { color: var(--color-text); } .ds-nav-link[aria-current=page]::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--color-accent); } .ds-nav-link:focus-visible { outline: 1px solid var(--color-focus-ring); outline-offset: 3px; }"
     },
     {
-      "name": "Mobile Navigation Overlay Link",
-      "kind": "nav",
-      "refersTo": null,
-      "description": "Signature component. Full-screen overlay links at display scale. The only context where the Warm Signal accent appears on text hover.",
-      "html": "<div class=\"ds-mobile-nav\"><a class=\"ds-mobile-nav-link\" href=\"#\">Commercial</a><a class=\"ds-mobile-nav-link\" href=\"#\">Gallery</a><a class=\"ds-mobile-nav-link\" href=\"#\">About</a></div>",
-      "css": ".ds-mobile-nav { display: flex; flex-direction: column; } .ds-mobile-nav-link { display: block; font-size: clamp(2.5rem, 10vw, 4.5rem); font-weight: 400; font-family: inherit; text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.92; color: var(--color-text); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--color-border); transition: color 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-mobile-nav-link:hover { color: var(--color-accent); } .ds-mobile-nav-link:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 4px; }"
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The email CTA: ink label in a strong hairline frame; hover inverts to an ink ground.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">chaiyakatkwao@gmail.com →</a>",
+      "css": ".ds-btn-primary { display: block; text-align: center; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--color-text); border: 1px solid var(--color-border-strong); border-radius: 0; padding: 18px 20px; background: transparent; transition: background-color 250ms ease, color 250ms ease; } .ds-btn-primary:hover { background: var(--color-text); color: var(--color-text-inverse); } .ds-btn-primary:focus-visible { outline: 1px solid var(--color-focus-ring); outline-offset: 3px; }"
     },
     {
-      "name": "Micro Label",
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "View CV, Print: muted label in a faint frame; hover lifts text to ink and the frame to strong.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">View CV →</a>",
+      "css": ".ds-btn-secondary { display: block; text-align: center; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--color-text-muted); border: 1px solid var(--color-border); border-radius: 0; padding: 18px 20px; transition: border-color 250ms ease, color 250ms ease; } .ds-btn-secondary:hover { color: var(--color-text); border-color: var(--color-border-strong); } .ds-btn-secondary:focus-visible { outline: 1px solid var(--color-focus-ring); outline-offset: 3px; }"
+    },
+    {
+      "name": "Control Square",
+      "kind": "button",
+      "refersTo": "control-square",
+      "description": "Lightbox close/prev/next: a 44px square, inline SVG, grey frame; disabled at the boundary.",
+      "html": "<div class=\"ds-controls\"><button class=\"ds-ctl\" aria-label=\"Previous image\" disabled><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M15 4L8 12L15 20\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button><button class=\"ds-ctl\" aria-label=\"Next image\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M9 4L16 12L9 20\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button><button class=\"ds-ctl\" aria-label=\"Close\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><path d=\"M2 2L14 14M14 2L2 14\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></button></div>",
+      "css": ".ds-controls { display: flex; gap: 12px; } .ds-ctl { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; background: transparent; color: var(--color-grey-200); border: 1px solid var(--color-grey-500); border-radius: 0; cursor: pointer; transition: color 200ms ease, border-color 200ms ease, background-color 200ms ease; } .ds-ctl:hover:not(:disabled) { color: var(--color-text); border-color: var(--color-grey-300); background: color-mix(in srgb, var(--color-text) 10%, transparent); } .ds-ctl:disabled { color: var(--color-text-dim); border-color: var(--color-grey-600); cursor: default; } .ds-ctl:focus-visible { outline: 1px solid var(--color-focus-ring); outline-offset: 3px; }"
+    },
+    {
+      "name": "Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Project tags: information, not actions. Mono label in a muted hairline frame.",
+      "html": "<div class=\"ds-tags\"><span class=\"ds-tag\">Photography</span><span class=\"ds-tag\">Fashion</span><span class=\"ds-tag\">Live Production</span></div>",
+      "css": ".ds-tags { display: flex; flex-wrap: wrap; gap: 8px; } .ds-tag { font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-grey-400); border: 1px solid var(--color-border-muted); border-radius: 0; padding: 4px 8px; }"
+    },
+    {
+      "name": "Chat Field",
+      "kind": "input",
+      "refersTo": "input-chat",
+      "description": "The site's one input: 16px Archivo in a square hairline frame that carries the focus ring.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-sr\">Ask Chaiya about his work</span><input class=\"ds-field-input\" placeholder=\"Ask something...\" /><button class=\"ds-field-send\" aria-label=\"Send message\"><span aria-hidden=\"true\">↵</span></button></label>",
+      "css": ".ds-field { display: flex; align-items: center; border: 1px solid var(--color-grey-700); border-radius: 0; background: var(--color-surface-chat); } .ds-field:focus-within { outline: 1px solid var(--color-focus-ring); outline-offset: 2px; } .ds-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } .ds-field-input { flex: 1; background: transparent; border: 0; outline: 0; padding: 14px 16px; font-family: var(--font-archivo), sans-serif; font-size: 16px; color: var(--color-warm); } .ds-field-input::placeholder { color: var(--color-text-muted); opacity: 1; } .ds-field-send { min-width: 44px; min-height: 44px; background: transparent; border: 0; color: var(--color-grey-200); font-family: var(--font-jetbrains-mono), monospace; font-size: 13px; cursor: pointer; }"
+    },
+    {
+      "name": "Theme Switch",
       "kind": "custom",
-      "refersTo": null,
-      "description": "Information infrastructure. Series names, index counters, footer credits. Not for body copy or headings.",
-      "html": "<span class=\"ds-micro-label\">Woven Memories — 01 / 12</span>",
-      "css": ".ds-micro-label { font-family: inherit; font-size: 9px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-text-muted); line-height: 1; }"
+      "refersTo": "theme-toggle",
+      "description": "One 14px dot, half ink and half clear; the ink half turns from left (Paper) to right (Ink). 44px to the finger.",
+      "html": "<button class=\"ds-theme\" aria-label=\"Switch to dark theme\"><span class=\"ds-theme-dot\" aria-hidden=\"true\"></span></button>",
+      "css": ".ds-theme { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; padding: 0; background: transparent; border: 0; cursor: pointer; } .ds-theme::after { content: ''; position: absolute; inset: -7px; } .ds-theme-dot { display: block; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--color-text); background: linear-gradient(90deg, var(--color-text) 50%, transparent 50%); transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-theme:hover .ds-theme-dot { transform: scale(1.18); } .ds-theme:focus-visible { outline: 1px solid var(--color-focus-ring); outline-offset: 3px; }"
     },
     {
-      "name": "Footer",
+      "name": "Mono Label & Available Badge",
       "kind": "custom",
-      "refersTo": null,
-      "description": "Minimal footer. Border-top structural line, two-column layout, micro typography throughout.",
-      "html": "<footer class=\"ds-footer\"><p class=\"ds-footer-credit\">© 2026 Chaiya Katkwao, Creative Partner</p><nav class=\"ds-footer-nav\"><a class=\"ds-footer-link\" href=\"#\">Top</a><a class=\"ds-footer-link\" href=\"#\">Projects</a><a class=\"ds-footer-link\" href=\"#\">CV</a><a class=\"ds-footer-link\" href=\"#\">Email</a></nav></footer>",
-      "css": ".ds-footer { border-top: 1px solid var(--color-border); padding: 32px 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; font-family: inherit; } .ds-footer-credit { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-muted); } .ds-footer-nav { display: flex; align-items: center; gap: 28px; } .ds-footer-link { font-size: 0.75rem; color: var(--color-text-muted); text-decoration: none; transition: color 200ms ease; } .ds-footer-link:hover { color: var(--color-text); } .ds-footer-link:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; border-radius: 2px; }"
+      "refersTo": "label",
+      "description": "The information voice: 11px mono, uppercase, tracked. The Available badge is the Cue Light's one text use, with a still dot.",
+      "html": "<div class=\"ds-labels\"><p class=\"ds-label\">Contact</p><span class=\"ds-badge\"><span class=\"ds-badge-dot\" aria-hidden=\"true\"></span>Available</span></div>",
+      "css": ".ds-labels { display: flex; align-items: center; gap: 12px; } .ds-label { margin: 0; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1; letter-spacing: 0.22em; color: var(--color-text-muted); } .ds-badge { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-jetbrains-mono), monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1; color: var(--color-accent); border: 1px solid var(--color-accent-dim); padding: 3px 9px; } .ds-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--color-accent); }"
+    },
+    {
+      "name": "Hero Slide Marks",
+      "kind": "custom",
+      "refersTo": "hero-controls",
+      "description": "A 44px pause square and one 16px bar per slide inside a 24 x 44 button; active in ink, the rest at 34%.",
+      "html": "<div class=\"ds-hero-ctl\"><button class=\"ds-pause\" aria-label=\"Pause slideshow\"><svg width=\"10\" height=\"12\" viewBox=\"0 0 10 12\" aria-hidden=\"true\"><rect width=\"3\" height=\"12\" fill=\"currentColor\"/><rect x=\"7\" width=\"3\" height=\"12\" fill=\"currentColor\"/></svg></button><div class=\"ds-marks\" role=\"group\" aria-label=\"Slides\"><button class=\"ds-mark\" aria-current=\"true\" aria-label=\"Show slide 1\"><span></span></button><button class=\"ds-mark\" aria-label=\"Show slide 2\"><span></span></button><button class=\"ds-mark\" aria-label=\"Show slide 3\"><span></span></button></div></div>",
+      "css": ".ds-hero-ctl { display: flex; align-items: center; gap: 16px; } .ds-pause { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: transparent; border: 1px solid color-mix(in srgb, var(--color-warm) 28%, transparent); color: color-mix(in srgb, var(--color-warm) 86%, transparent); cursor: pointer; } .ds-marks { display: flex; } .ds-mark { display: flex; align-items: center; justify-content: center; width: 24px; height: 44px; padding: 0; background: transparent; border: 0; cursor: pointer; } .ds-mark span { display: block; width: 16px; height: 1px; background: color-mix(in srgb, var(--color-warm) 34%, transparent); transition: background-color 220ms ease; } .ds-mark[aria-current=true] span { background: var(--color-warm); } .ds-pause:focus-visible, .ds-mark:focus-visible { outline: 1px solid var(--color-focus-ring); outline-offset: 3px; }"
     }
   ],
   "narrative": {
     "northStar": "The Production Floor",
-    "overview": "This portfolio does not perform. It works. The visual system is built the way a production is built: structure first, then everything else earns its place. The dark shell (OKLCH hue 250, near-zero chroma) is not dramatic — it is neutral in the same way a black stage is neutral. It holds the work without comment.\n\nThe Warm Signal accent (hue 35, amber) appears where action is required. Buttons. Hover states on navigation. Text selection. It is never decorative. Its rarity is its authority.\n\nMotion is controlled and calibrated. The custom ease cubic-bezier(0.16, 1, 0.3, 1) governs every entrance. Elements arrive with confidence and stop cleanly. Nothing bounces. Nothing elastic.",
+    "overview": "This portfolio does not perform; it works. It is built the way a production is built: structure first, and everything else earns its place. The shell is a neutral grey room in two lights, Paper by day and Ink after dark, neutral the way a cyclorama wall or a blackout drape is neutral. It holds the work without comment. PRODUCT.md puts it plainly: \"The portfolio doesn't try hard; it simply is.\"\n\nEverything the visitor reads as information is labelled like gear on a studio floor: a small uppercase mono tag, a number, a hairline. Everything the visitor looks at is the work itself, at full contrast, never dimmed, never cropped behind text. One warm colour, the Cue Light, appears only where something is live: the page you are on, the person who is available. Motion is calibrated rather than decorative: content is visible at rest, and the only entrances are a short page fade and the hero's cross-fade between slides.\n\nThe system rejects, by name, the three anti-references in PRODUCT.md: colourful or expressive-colour portfolios (gradients, vibrant accents, neon), generic photographer templates (centred hero, soft sans, pastel tones), and over-animated, \"look at me\" UI that competes with the work.",
     "keyCharacteristics": [
-      "Single-hue dark shell (hue 250) with one warm accent (hue 35), maximum contrast distance",
-      "Single type family (Archivo + Archivo Black), hierarchy through weight and scale only",
-      "Flat elevation — depth via tonal surface steps, no shadows",
-      "Motion is sparse, purposeful, and exponential-ease only",
-      "Spacing varies by context; monotony is prohibited"
+      "Two themes from five brutalist neutrals: Paper (`#F0F0F0`, the default) and Ink (`#111111`), each using the other as its ink.",
+      "One accent, the Cue Light (hue 35), on about 1% of any screen.",
+      "Two families: Archivo Black and Archivo carry what is read, JetBrains Mono labels everything else.",
+      "Flat: depth from tonal steps and 1px hairlines, never shadows.",
+      "Square: no radius anywhere except the two dots (theme switch, Available).",
+      "One left edge: 32px on every page and every section.",
+      "Motion is sparse and exponential-ease only; nothing pulses, bounces or loops for show."
     ],
     "rules": [
       {
-        "name": "The One Signal Rule",
-        "body": "The Warm Signal accent appears on ≤10% of any given screen surface. If it feels like it's competing for attention, it has been overused. Reduce.",
+        "name": "The One Cue Rule",
+        "body": "The Cue Light covers 10% of a screen at most, and in practice about 1%. If something glows amber, it is live or it is you. If it starts competing, it has been overused.",
         "section": "colors"
       },
       {
-        "name": "The Tint Rule",
-        "body": "Every neutral carries OKLCH hue 250 at chroma 0.01–0.014. Nothing in this system is pure grey. The tint is subtle enough to be invisible in isolation and visible the moment something untinted appears beside it.",
+        "name": "The Pure Ground, Warm Ink Rule",
+        "body": "Grounds, surfaces and the primary ink are pure neutral (zero chroma) in both themes. The warmth lives only in the text greys and hairlines, at hue 62°–89° and chroma 0.006–0.012. Never introduce a cool grey; the sister site at `/systems` follows the same curve.",
         "section": "colors"
       },
       {
-        "name": "The Single-Family Rule",
-        "body": "No additional typefaces. Solve hierarchy through weight contrast and scale, not a second family.",
+        "name": "The Name-a-Token Rule",
+        "body": "Components read every colour as `var(--color-*)`, never a hex, so both themes follow automatically. A one-off tint is `color-mix(in srgb, var(--color-text) 7%, transparent)`. The only literals are the black and white that sit on photographs (the triptych captions and their gradient, the YouTube veil and play mark), because they belong to the image, not the page. A new token must also join the `@property` list in `globals.css`, or it will cut instead of fading.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Family Rule",
+        "body": "Archivo reads, JetBrains Mono labels. If something is information (an index, a year, a role, a counter, a caption), it is mono, uppercase and tracked; if it is read, it is Archivo. No third family: Noto Sans Thai is Archivo's Thai script, never a choice for Latin.",
+        "section": "typography"
+      },
+      {
+        "name": "The 11px Floor Rule",
+        "body": "No text below 11px on screen, and nothing below 8.5pt in print.",
         "section": "typography"
       },
       {
         "name": "The Scale Rule",
-        "body": "At least a 1.25 ratio between adjacent hierarchy steps. Flat scales read as indecision.",
+        "body": "At least 1.25 between adjacent reading steps. Flat scales read as indecision.",
+        "section": "typography"
+      },
+      {
+        "name": "The Six Heads Rule",
+        "body": "Every Archivo Black head uses one of the six clamps above (plus the mobile menu's own `clamp(2rem, min(10vw, 9svh), 5rem)`). A new page picks a step; it never invents a seventh size. Until 4 October 2026 there were thirteen.",
         "section": "typography"
       },
       {
         "name": "The Flat-By-Default Rule",
-        "body": "Surfaces are flat at rest. If a component needs to feel elevated, reach for the next tonal surface step — not a shadow.",
+        "body": "If something needs to feel raised, use the next surface step, never a shadow.",
         "section": "elevation"
       },
       {
-        "name": "The No-Glass Rule",
-        "body": "The one backdrop-blur on the nav header is functional and at its limit. Do not extend glassmorphism to any other component.",
+        "name": "The One-Blur Rule",
+        "body": "`backdrop-blur-sm` appears once, on the lightbox's \"Swipe or use arrows\" pill (over the ground at 85%), so its text stays readable over any photograph. It is a functional accommodation, not a motif.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "Do use the Warm Signal accent on ≤10% of any screen surface. Its rarity is its authority.",
-      "Do vary spacing by context. Section padding, component padding, and inline spacing should all be different.",
-      "Do use tonal surface steps (bg → surface → surface-elevated) to express depth. Never shadows.",
-      "Do use exponential ease cubic-bezier(0.16, 1, 0.3, 1) for all motion. Never bounce, never elastic.",
-      "Do respect prefers-reduced-motion. FadeIn already implements this — keep it.",
-      "Do keep nav links, labels, and captions uppercase with wide tracking (0.15–0.30em).",
-      "Do tint every neutral toward hue 250.",
-      "Do cap body line length at 65–75ch on reading contexts."
+      "Do keep the Cue Light at 10% of a screen at most; about 1% is normal.",
+      "Do name a token, never a colour: `var(--color-*)`, and `color-mix()` for a tint.",
+      "Do keep every text colour at 4.5:1 or better; `text-dim` and `grey-600` are structural marks, not text.",
+      "Do set every small uppercase label in JetBrains Mono (`.mono-label`, or `font-mono font-medium text-[11px]`).",
+      "Do keep one left edge: 32px on every page and every section (`px-8`, `.section-shell`).",
+      "Do use tonal surface steps for depth, never shadows.",
+      "Do use the signature curve `cubic-bezier(0.16, 1, 0.3, 1)` (`var(--ease-out)`) for motion; the page fade is 250ms, hovers 180–250ms.",
+      "Do respect `prefers-reduced-motion` by removing travel and looping, not feedback: colour and opacity transitions stay at 120ms. Branch on `usePrefersReducedMotion()`, never framer-motion's `useReducedMotion()`, which breaks hydration.",
+      "Do give anything that moves for more than five seconds a stop control (WCAG 2.2.2).",
+      "Do give every target at least 24 × 24, and small text links 44px through `.tap-target`.",
+      "Do cap reading lines at 65–75ch.",
+      "Do keep the scrollbar thin but holdable (8px in Safari, `scrollbar-width: thin` elsewhere) with a text-grey thumb."
     ],
     "donts": [
-      "Don't use colorful or expressive-color palettes — no gradients, no vibrant accents beyond the single Warm Signal, no neon.",
-      "Don't build a generic photographer portfolio layout: no centered hero with soft sans, no pastel tones.",
-      "Don't over-animate. If the animation is about the UI, it has failed.",
-      "Don't use border-left or border-right greater than 1px as a colored stripe on any component.",
-      "Don't use gradient text (background-clip: text). Prohibited.",
-      "Don't apply glassmorphism decoratively. The nav header is at the limit.",
-      "Don't use a second typeface.",
-      "Don't add shadows. If something needs elevation, use the next surface step.",
-      "Don't make the accent compete. If more than 10% of a screen surface carries the Warm Signal, scale it back.",
-      "Don't use bounce or elastic easing. Exponential ease-out only."
+      "Don't build a colourful or expressive-colour portfolio: no gradients, no vibrant accents beyond the single Cue Light, no neon.",
+      "Don't build a generic photographer portfolio template: no centred hero, no soft sans, no pastel tones.",
+      "Don't build over-animated, \"look at me\" UI that competes with the work. If an animation is about the UI, it has failed.",
+      "Don't layer anything over the work in the hero or the featured project: no scrim, no gradient band, no text on the photograph.",
+      "Don't use `border-left` or `border-right` greater than 1px as a coloured stripe.",
+      "Don't use gradient text (`background-clip: text`).",
+      "Don't add glassmorphism; the one backdrop-blur is the lightbox pill and it is at its limit.",
+      "Don't add shadows, radii (beyond the two dots) or a third typeface.",
+      "Don't pulse anything: the Available dot is still, and there is no grain overlay.",
+      "Don't spread the slash headline (`Let's / connect.`): it is a signature on two pages, the Home contact strip and the CV name.",
+      "Don't use em dashes in copy: commas, colons, parentheses, and en dashes for ranges (`2022–Present`). Quoted titles keep their own punctuation.",
+      "Don't use bounce or elastic easing.",
+      "Don't hover with `onMouseEnter`; use CSS `hover:`.",
+      "Don't zoom images on hover. Zooming crops the work; a tile answers with a wash or a colour change instead.",
+      "Don't number things whose order means nothing (tiles, client rolls, service lists)."
     ]
   }
 }

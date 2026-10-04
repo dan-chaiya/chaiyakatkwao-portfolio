@@ -99,7 +99,7 @@ function MasonryGrid({
                 {...photoSize(item.src)}
                 sizes={sizes}
                 loading={index < 2 ? "eager" : "lazy"}
-                className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.02] group-focus-visible:scale-[1.02]"
+                className="w-full h-auto block"
               />
               <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/40 group-focus-visible:bg-[var(--color-surface-chat)]/40 transition-colors duration-500" />
             </div>

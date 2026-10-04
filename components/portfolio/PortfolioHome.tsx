@@ -7,40 +7,27 @@ import HeroStage from "@/components/HeroStage";
 import PageTransition from "@/components/PageTransition";
 import { workAssets } from "@/data/work-asset-urls";
 import { photoAlt } from "@/lib/photos";
+import { clients } from "@/data/clients";
 
 const sections = [
   {
-    index: "01",
     title: "Commercial",
     href: "/commercial",
     cover: workAssets.knack("Knack-75.jpg"),
     coverAlt: photoAlt(workAssets.knack("Knack-75.jpg"), "Knack Factory fashion show"),
   },
   {
-    index: "02",
     title: "Gallery",
     href: "/gallery",
     cover: workAssets.woven("1.jpg"),
     coverAlt: photoAlt(workAssets.woven("1.jpg"), "Woven Memories"),
   },
   {
-    index: "03",
     title: "About",
     href: "/about",
     cover: workAssets.podcast("Dan.jpg"),
     coverAlt: photoAlt(workAssets.podcast("Dan.jpg"), "Chaiya Katkwao"),
   },
-];
-
-const disciplines = [
-  "Art Direction",
-  "Creative Direction",
-  "Photography",
-  "Video Editing & Color Grading",
-  "Styling",
-  "Multi-camera Production",
-  "Lighting Design",
-  "Live Commerce Production",
 ];
 
 export default function PortfolioHome() {
@@ -66,7 +53,7 @@ export default function PortfolioHome() {
           <div className="grid grid-cols-1 sm:grid-cols-3" style={{ gap: "1px" }}>
             {sections.map((s) => (
               <div
-                key={s.index}
+                key={s.href}
                 style={{ backgroundColor: "var(--color-surface)", overflow: "hidden" }}
               >
                 <TriptychCard section={s} />
@@ -109,12 +96,15 @@ export default function PortfolioHome() {
             </div>
 
             <div className="md:col-span-4 md:col-start-9">
-              <Label>Disciplines</Label>
-              <div style={{ marginTop: "20px" }}>
-                {disciplines.map((d, i) => (
-                  <DisciplineRow key={d} label={d} index={i} total={disciplines.length} />
+              {/* The client roll, not a list of disciplines: the brands are the proof an
+                  agency is looking for, and the disciplines already sit in the hero, on
+                  About and on the CV (2026-10-04). Unnumbered: the order means nothing. */}
+              <Label>Selected clients</Label>
+              <ul style={{ marginTop: "20px", listStyle: "none" }}>
+                {clients.map((c, i) => (
+                  <ListRow key={c} label={c} last={i === clients.length - 1} />
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </section>
@@ -173,6 +163,10 @@ export default function PortfolioHome() {
                 <br />
                 connect.
               </h2>
+              <p className="copy-body" style={{ maxWidth: "44ch", marginTop: "24px" }}>
+                Shoots, live productions and studio builds. Send the brief to
+                the address here and the reply comes from me, not an inbox.
+              </p>
             </div>
 
             <div
@@ -198,21 +192,21 @@ export default function PortfolioHome() {
               >
                 chaiyakatkwao@gmail.com →
               </a>
+              {/* One primary action. The CV is a quiet text link under it, not a second
+                  box of equal weight (2026-10-04). */}
               <Link
                 href="/cv"
-                className="border border-[var(--color-border)] text-[var(--color-text-muted)] transition-[border-color,color] duration-[250ms] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]"
+                className="tap-target self-center text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text)]"
                 style={{
+                  marginTop: "14px",
                   fontFamily: "var(--font-jetbrains-mono)",
                   fontSize: "11px",
                   letterSpacing: "0.14em",
                   textTransform: "uppercase",
-                  padding: "18px 20px",
                   textDecoration: "none",
-                  display: "block",
-                  textAlign: "center",
                 }}
               >
-                View CV →
+                Or read the CV →
               </Link>
             </div>
           </div>
@@ -224,44 +218,20 @@ export default function PortfolioHome() {
   );
 }
 
-function DisciplineRow({ label, index: i, total }: { label: string; index: number; total: number }) {
-  // Not a link: hover only brightens the text. No movement, which would read as clickable.
+function ListRow({ label, last }: { label: string; last: boolean }) {
   return (
-    <div
-      className="group"
+    <li
+      className="copy-small"
       style={{
         borderTop: "1px solid var(--color-border)",
-        ...(i === total - 1 ? { borderBottom: "1px solid var(--color-border)" } : {}),
+        ...(last ? { borderBottom: "1px solid var(--color-border)" } : {}),
         padding: "13px 0",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        cursor: "default",
-        transition: "none",
+        fontWeight: 500,
+        color: "var(--color-grey-300)",
       }}
     >
-      <span
-        className="text-[var(--color-grey-300)] transition-colors duration-200 group-hover:text-[var(--color-text)]"
-        style={{
-          fontFamily: "var(--font-archivo)",
-          fontSize: "0.875rem",
-          fontWeight: 500,
-          letterSpacing: "0.005em",
-        }}
-      >
-        {label}
-      </span>
-      <span
-        className="text-[var(--color-text-muted)] transition-colors duration-200 group-hover:text-[var(--color-text)]"
-        style={{
-          fontFamily: "var(--font-jetbrains-mono)",
-          fontSize: "11px",
-          letterSpacing: "0.15em",
-        }}
-      >
-        {String(i + 1).padStart(2, "0")}
-      </span>
-    </div>
+      {label}
+    </li>
   );
 }
 
@@ -282,7 +252,7 @@ function FeaturedCard() {
           alt={photoAlt(workAssets.knack("Knack-14.jpg"), "Knack Factory Fashion Show, 2024")}
           fill
           sizes="100vw"
-          className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
+          className="object-cover"
         />
       </div>
       <div
@@ -315,7 +285,7 @@ function FeaturedCard() {
   );
 }
 
-type SectionItem = { index: string; title: string; href: string; cover: string; coverAlt: string };
+type SectionItem = { title: string; href: string; cover: string; coverAlt: string };
 
 function TriptychCard({ section: s }: { section: SectionItem }) {
   return (
@@ -326,7 +296,7 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
           alt={s.coverAlt}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover object-center transition-transform duration-[800ms] ease-out group-hover:scale-[1.05] group-focus-visible:scale-[1.05]"
+          className="object-cover object-center"
         />
         {/* Gradient overlay. Black and white in both themes on purpose: this text sits on
             the photograph, not on the page. A gradient cannot be transitioned into another
@@ -356,22 +326,10 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
           />
           <div style={{ position: "relative", width: "100%", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
             <div>
-              <p
-                className="text-[rgba(249,249,249,0.78)] transition-colors duration-300 group-hover:text-[#F9F9F9] group-focus-visible:text-[#F9F9F9]"
-                style={{
-                  fontFamily: "var(--font-jetbrains-mono)",
-                  fontSize: "11px",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  marginBottom: "6px",
-                }}
-              >
-                {s.index}
-              </p>
               <p style={{
                 fontFamily: "var(--font-heading)",
                 fontWeight: 800,
-                fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+                fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)",
                 letterSpacing: "-0.02em",
                 color: "#F9F9F9",
                 lineHeight: 1,

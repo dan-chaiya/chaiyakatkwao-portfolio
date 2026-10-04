@@ -186,7 +186,7 @@ export default function CommercialClient() {
                   alt={photoAlt(project.cover, project.title)}
                   {...photoSize(project.cover)}
                   sizes="100vw"
-                  className="img-natural transition-transform duration-700 ease-out group-hover:scale-[1.02] group-focus-visible:scale-[1.02]"
+                  className="img-natural"
                   preload={i === 0}
                 />
                 <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/30 group-focus-visible:bg-[var(--color-surface-chat)]/30 transition-colors duration-500" />
@@ -279,7 +279,7 @@ export default function CommercialClient() {
                             alt={photoAlt(src, `${project.title}, ${j + 1}`)}
                             fill
                             sizes="(max-width: 768px) 33vw, 20vw"
-                            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
+                            className="object-cover"
                           />
                         ) : (
                           <Image
@@ -287,7 +287,7 @@ export default function CommercialClient() {
                             alt={photoAlt(src, `${project.title}, ${j + 1}`)}
                             {...photoSize(src)}
                             sizes="(max-width: 768px) 33vw, 20vw"
-                            className="img-natural transition-transform duration-500 ease-out group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
+                            className="img-natural"
                           />
                         )}
                       </button>

@@ -109,7 +109,7 @@ export default function CVPage() {
         }
         .cv-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
         .cv-eyebrow { letter-spacing: 0.28em; }
-        .cv-h1 { font-size: clamp(3rem, 8vw, 7rem); line-height: 0.92; letter-spacing: -0.02em; color: var(--color-warm); margin-bottom: 64px; }
+        .cv-h1 { font-size: clamp(2.5rem, 8vw, 7rem); line-height: 0.92; letter-spacing: -0.02em; color: var(--color-warm); margin-bottom: 64px; }
         /* The name: the slash-and-break masthead on screen; one plain line on paper.
            Parsers read the printed "Chaiya /" + "Katkwao." as two fragments and find
            no name, so the sheet sets it as "Chaiya Katkwao". */
@@ -126,7 +126,8 @@ export default function CVPage() {
         .cv-row__head .mono-label { white-space: nowrap; flex-shrink: 0; }
         .cv-role { color: var(--color-warm); font-weight: 500; }
         .cv-where { margin-top: 4px; color: var(--color-grey-400); }
-        .cv-list { list-style: none; margin: 12px 0 0; padding: 0; }
+        .cv-list { list-style: none; margin: 12px 0 0; padding: 0; max-width: 68ch; }
+        .cv-where { max-width: 68ch; }
         /* Hanging indent, not position: absolute. A positioned dash paints after all
            the normal-flow text, so in the printed PDF every bullet landed at the end of
            the document, after the footer, detached from its job. Resume parsers read
@@ -179,7 +180,7 @@ export default function CVPage() {
           .cv-shell .copy-body { font-size: 9.5pt; line-height: 1.4; color: var(--cv-ink); }
           .cv-shell .copy-small { font-size: 9pt; line-height: 1.4; color: var(--cv-ink); }
           .cv-shell .mono-label { font-size: 7pt; color: var(--cv-muted); }
-          .cv-summary { max-width: none; }
+          .cv-summary, .cv-list, .cv-where { max-width: none; }
           .cv-summary > * + * { margin-top: 2.5mm; }
           .cv-section { margin-top: 6mm; }
           .cv-section--tight { margin-top: 4.5mm; }

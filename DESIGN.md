@@ -1,43 +1,54 @@
 ---
 name: Chaiya Katkwao Portfolio
-description: A production-floor portfolio for a Bangkok-based creative producer, in two themes — Light (the default) and Dark.
-# The Light theme, the default. Dark is `colors-dark` below; both live in app/globals.css.
+description: A production-floor portfolio for a Bangkok creative producer, in two themes, Paper (the default) and Ink.
+# Paper, the default theme. Ink is `colors-dark` below. Both live in app/globals.css, which is
+# the source of truth; components read every colour as var(--color-<key>).
 colors:
   bg: "#F0F0F0"
   surface: "#EAEAEA"
   surface-elevated: "#E4E4E4"
   surface-hover: "#DEDEDE"
   text: "#111111"
+  warm: "#111111"
+  grey-200: "#1C1C1C"
+  grey-300: "#3D3A37"
+  grey-400: "#57524D"
   text-muted: "#5F5A55"
+  grey-500: "#67625C"
   text-dim: "#A8A29B"
-  text-inverse: "#F0F0F0"
+  grey-600: "#BDB8B1"
+  grey-700: "#D3D0CA"
+  border-muted: "#D6D6D6"
   border-faint: "rgba(17, 17, 17, 0.07)"
   border: "rgba(17, 17, 17, 0.09)"
   border-strong: "rgba(17, 17, 17, 0.22)"
-  warm: "#111111"
+  text-inverse: "#F0F0F0"
   accent: "oklch(54% 0.19 35)"
   accent-dim: "oklch(54% 0.19 35 / 0.3)"
   focus-ring: "rgba(17, 17, 17, 0.55)"
-  selection-bg: "#111111"
-  selection-text: "#F0F0F0"
 colors-dark:
   bg: "#111111"
   surface: "#1C1C1C"
   surface-elevated: "#222222"
   surface-hover: "#2A2A2A"
   text: "#F0F0F0"
+  warm: "#F0F0F0"
+  grey-200: "#EAEAEA"
+  grey-300: "#C8C4BC"
+  grey-400: "#9A9087"
   text-muted: "#958F89"
+  grey-500: "#8F8983"
   text-dim: "#4A4744"
-  text-inverse: "#111111"
+  grey-600: "#3D3A37"
+  grey-700: "#2A2826"
+  border-muted: "#2A2A2A"
   border-faint: "rgba(240, 240, 240, 0.07)"
   border: "rgba(240, 240, 240, 0.09)"
   border-strong: "rgba(240, 240, 240, 0.22)"
-  warm: "#F0F0F0"
+  text-inverse: "#111111"
   accent: "oklch(72% 0.18 35)"
   accent-dim: "oklch(72% 0.18 35 / 0.3)"
   focus-ring: "rgba(240, 240, 240, 0.55)"
-  selection-bg: "#F0F0F0"
-  selection-text: "#111111"
 typography:
   display:
     fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
@@ -45,30 +56,51 @@ typography:
     fontWeight: 800
     lineHeight: 0.9
     letterSpacing: "-0.02em"
+  display-s:
+    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
+    fontSize: "clamp(2.5rem, 6vw, 5.5rem)"
+    fontWeight: 800
+    lineHeight: 0.9
+    letterSpacing: "-0.02em"
+  feature:
+    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
+    fontSize: "clamp(1.75rem, 4vw, 3.5rem)"
+    fontWeight: 800
+    lineHeight: 0.9
+    letterSpacing: "-0.03em"
+  roll:
+    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
+    fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)"
+    fontWeight: 800
+    lineHeight: 1.05
+    letterSpacing: "-0.02em"
   headline:
     fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
     fontSize: "clamp(1.2rem, 2.5vw, 2rem)"
     fontWeight: 800
     lineHeight: 0.95
     letterSpacing: "-0.02em"
+  title:
+    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
+    fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)"
+    fontWeight: 800
+    lineHeight: 1
+    letterSpacing: "-0.02em"
   lead:
     fontFamily: "Archivo, Noto Sans Thai, sans-serif"
     fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)"
     fontWeight: 400
     lineHeight: 1.4
-    letterSpacing: "normal"
   body:
     fontFamily: "Archivo, Noto Sans Thai, sans-serif"
     fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.55
-    letterSpacing: "normal"
   body-sm:
     fontFamily: "Archivo, Noto Sans Thai, sans-serif"
     fontSize: "14px"
     fontWeight: 400
     lineHeight: 1.5
-    letterSpacing: "normal"
   label:
     fontFamily: "JetBrains Mono, Noto Sans Thai, monospace"
     fontSize: "11px"
@@ -80,31 +112,62 @@ typography:
     fontSize: "11px"
     fontWeight: 500
     lineHeight: 1
-    letterSpacing: "0.30em"
+    letterSpacing: "0.3em"
 rounded:
   none: "0px"
-  sm: "4px"
   full: "9999px"
 spacing:
   xs: "4px"
   sm: "8px"
   md: "16px"
-  lg: "32px"
+  lg: "24px"
+  page: "32px"
   xl: "64px"
+  section: "80px"
 components:
   nav-link:
-    textColor: "{colors.text-muted}"
-    typography: "label"
+    textColor: "{colors.grey-300}"
+    typography: "{typography.label}"
   nav-link-hover:
     textColor: "{colors.text}"
-    typography: "label"
+  nav-link-active:
+    textColor: "{colors.text}"
   nav-link-active-underline:
     backgroundColor: "{colors.accent}"
     height: "1px"
-  card-accent-border:
-    backgroundColor: "{colors.bg}"
+  button-primary:
     textColor: "{colors.text}"
+    typography: "{typography.label}"
     rounded: "{rounded.none}"
+    padding: "18px 20px"
+  button-primary-hover:
+    backgroundColor: "{colors.text}"
+    textColor: "{colors.text-inverse}"
+  button-secondary:
+    textColor: "{colors.text-muted}"
+    typography: "{typography.label}"
+    rounded: "{rounded.none}"
+    padding: "18px 20px"
+  button-secondary-hover:
+    textColor: "{colors.text}"
+  control-square:
+    textColor: "{colors.grey-200}"
+    rounded: "{rounded.none}"
+    size: "44px"
+  tag:
+    textColor: "{colors.grey-400}"
+    typography: "{typography.label}"
+    rounded: "{rounded.none}"
+    padding: "4px 8px"
+  input-chat:
+    backgroundColor: "transparent"
+    textColor: "{colors.warm}"
+    rounded: "{rounded.none}"
+    padding: "14px 16px"
+  theme-toggle:
+    textColor: "{colors.text}"
+    rounded: "{rounded.full}"
+    size: "14px"
 ---
 
 # Design System: Chaiya Katkwao Portfolio
@@ -113,249 +176,170 @@ components:
 
 **Creative North Star: "The Production Floor"**
 
-This portfolio does not perform. It works. The visual system is built the way a production is built: structure first, then everything else earns its place. The shell is neutral grey in two themes — paper in Light, the default since 23 September 2026, and near-black in Dark — neutral in the same way a black stage or a white wall is neutral. It holds the work without comment.
+This portfolio does not perform; it works. It is built the way a production is built: structure first, and everything else earns its place. The shell is a neutral grey room in two lights, Paper by day and Ink after dark, neutral the way a cyclorama wall or a blackout drape is neutral. It holds the work without comment. PRODUCT.md puts it plainly: "The portfolio doesn't try hard; it simply is."
 
-The Warm Signal accent (hue 35, amber) appears where action is required. Buttons. Hover states on navigation. Text selection. It is never decorative. Its rarity is its authority — if something glows amber, the user should move there.
+Everything the visitor reads as information is labelled like gear on a studio floor: a small uppercase mono tag, a number, a hairline. Everything the visitor looks at is the work itself, at full contrast, never dimmed, never cropped behind text. One warm colour, the Cue Light, appears only where something is live: the page you are on, the person who is available. Motion is calibrated rather than decorative: content is visible at rest, and the only entrances are a short page fade and the hero's cross-fade between slides.
 
-Motion is controlled and calibrated. Content is visible at rest: since 8 September 2026 nothing on a page waits for a scroll observer, and the only entrances are the page fade on a route change and the hero's cross-fade between slides. The custom ease `cubic-bezier(0.16, 1, 0.3, 1)` (an exponential ease-out) governs those and every hover. Nothing bounces. Nothing elastic.
-
-This system explicitly rejects: colorful or expressive-color palettes (gradients, vibrant accents, neon), generic photographer portfolio templates (centered hero, soft sans, pastel tones), and over-animated UI that competes with the work.
+The system rejects, by name, the three anti-references in PRODUCT.md: colourful or expressive-colour portfolios (gradients, vibrant accents, neon), generic photographer templates (centred hero, soft sans, pastel tones), and over-animated, "look at me" UI that competes with the work.
 
 **Key Characteristics:**
-- Two themes, Light (default) and Dark, built from five brutalist neutrals, with one warm accent (hue 35)
-- Single type family (Archivo + Archivo Black), hierarchy through weight and scale only
-- Flat elevation — depth via tonal surface steps, no shadows
-- Motion is sparse, purposeful, and exponential-ease only
-- Spacing varies by context; monotony is prohibited
+- Two themes from five brutalist neutrals: Paper (`#F0F0F0`, the default) and Ink (`#111111`), each using the other as its ink.
+- One accent, the Cue Light (hue 35), on about 1% of any screen.
+- Two families: Archivo Black and Archivo carry what is read, JetBrains Mono labels everything else.
+- Flat: depth from tonal steps and 1px hairlines, never shadows.
+- Square: no radius anywhere except the two dots (theme switch, Available).
+- One left edge: 32px on every page and every section.
+- Motion is sparse and exponential-ease only; nothing pulses, bounces or loops for show.
 
-## 2. Colors: The Production-Floor Palette
+## 2. Colors: The Paper & Ink Palette
 
-Two themes built from five brutalist neutrals — `#F0F0F0` and `#EAEAEA` paper, `#111111`, `#1C1C1C` and `#222222` ink — and one warm signal. Each theme uses the other's values as its ink. The palette does not try to be beautiful — it tries to be correct.
-
-> **Two themes, 23 Sep 2026.** Until then the site was dark only, on true black
-> `#000000`. Light is now the default. Dark moved from `#000000` onto `#111111`, and
-> its two lightest text greys were raised to keep 4.5:1 on the lighter surfaces.
-> Values below are Light / Dark.
-
-> **Corrected 29 Aug 2026.** Every value in this section was previously described
-> as OKLCH hue 250 (a cool blue-grey tint), and a "Tint Rule" asserted that
-> nothing in the system was pure grey. That did not match `app/globals.css`, which
-> ships pure-neutral surfaces and *warm* text greys. The values below were read
-> from the shipped `@theme` block and converted to OKLCH by measurement. Two
-> tokens named here before — `accent-strong` and an orange focus ring — do not
-> exist in the code at all and have been removed.
+Five neutrals and one cue: the palette does not try to be beautiful, it tries to be correct.
 
 ### Primary
-- **Warm Signal** (`oklch(54% 0.19 35)` / `oklch(72% 0.18 35)`): The only saturated color in the system, used sparingly: the 1px active underlines (navigation, the Commercial view toggle, the Systems link on About), the year on a hovered Commercial list row, and the "Available" badge on the home contact strip. It is deeper in Light because the badge is 11px text and needs 4.5:1 on paper (4.87:1); the `/systems` value, `oklch(58% 0.19 35)`, measures only 4.13:1 on `#F0F0F0`.
-- **Warm Signal Dim** (the same hue at 30% alpha): for the hairline border that must not compete with text.
-- **Focus Ring** (the text colour at 55%): 1px with a 3px offset. Neutral so it reads as a system affordance rather than as the brand accent.
+- **Cue Light** (`oklch(54% 0.19 35)` on Paper, `oklch(72% 0.18 35)` on Ink): the amber of a cue light backstage, lit only when it is your turn. The 1px underline under the current nav link, the Commercial view toggle and the Systems link on About; the year on a hovered Commercial list row; the "Available" badge and its still dot on the Home contact strip. It is deeper on Paper because the badge is 11px text and needs 4.5:1 there (4.87:1).
+- **Cue Light, dimmed** (the same hue at 30%): the badge's hairline border, so the frame never competes with its text.
 
 ### Neutral
 
-| Role | Light | Dark |
-|---|---|---|
-| Ground (`bg`) | `#F0F0F0` | `#111111` |
-| Surface, elevated, hover | `#EAEAEA`, `#E4E4E4`, `#DEDEDE` | `#1C1C1C`, `#222222`, `#2A2A2A` |
-| Primary text and heading ink (`text`, `warm`) | `#111111` | `#F0F0F0` |
-| Reading text (`grey-200`) | `#1C1C1C` | `#EAEAEA` |
-| Small text (`grey-300`) | `#3D3A37` | `#C8C4BC` |
-| Data and captions (`grey-400`, `text-muted`, `grey-500`) | `#57524D`, `#5F5A55`, `#67625C` | `#9A9087`, `#958F89`, `#8F8983` |
-| Hairlines (`grey-700`, `border-muted`) | `#D3D0CA`, `#D6D6D6` | `#2A2826`, `#2A2A2A` |
-| Lines (`border-faint`, `border`, `border-strong`) | ink at 7%, 9% and 22% | ink at 7%, 9% and 22% |
+Values are Paper / Ink; the token name is what components read.
 
-`#E4E4E4`, `#DEDEDE` and `#2A2A2A` are derived steps; every other ground and ink value is one of the five neutrals. Every text grey measures 4.5:1 or better on the ground, surface and elevated surface of its own theme. Measured across every page on 23 September 2026, the lowest text contrast is 4.87:1 in Light (the Available badge) and 5.45:1 in Dark.
+- **Paper / Ink ground** (#F0F0F0 / #111111): `bg`, the page ground in each theme.
+- **Surface steps** (#EAEAEA, #E4E4E4, #DEDEDE / #1C1C1C, #222222, #2A2A2A): `surface`, `surface-elevated`, `surface-hover`, each a step toward the middle grey.
+- **Ink** (#111111 / #F0F0F0): `text` and `warm`, primary text and heading ink.
+- **Reading grey** (#1C1C1C / #EAEAEA): `grey-200`, lead and body copy.
+- **Small-text grey** (#3D3A37 / #C8C4BC): `grey-300`, small copy and nav links at rest.
+- **Data greys** (#57524D, #5F5A55, #67625C / #9A9087, #958F89, #8F8983): `grey-400`, `text-muted`, `grey-500`, for labels, captions, years and indices.
+- **Structural marks** (#A8A29B, #BDB8B1 / #4A4744, #3D3A37): `text-dim`, `grey-600`, for disabled controls; never text.
+- **Hairlines** (#D3D0CA, #D6D6D6 / #2A2826, #2A2A2A): `grey-700`, `border-muted`, for the chat field and tag frames.
+- **Lines** (rgba(17, 17, 17, 0.07 / 0.09 / 0.22) on Paper, the same in #F0F0F0 on Ink): `border-faint`, `border`, `border-strong`, for header, section and button rules.
+- **Focus ring** (rgba(17, 17, 17, 0.55) / rgba(240, 240, 240, 0.55)): `focus-ring`, a 1px outline at 3px offset.
 
-### The two themes
-- **Light is the default.** A first visit, a browser that blocks storage and a page without JavaScript all get Light, whatever the OS setting. A visitor's pick is saved in `localStorage` under `theme` and set as `<html data-theme>` by an inline script in `<head>` before the first paint (`lib/theme.ts`), so a saved Dark never flashes Light.
-- **Dark is screen-only.** The Dark block sits in `@media screen`, so a page printed or saved as PDF comes out in Light, and the CV's print sheet stays ink on white with white page margins.
-- **Name a token, never a colour.** Components read every colour through `var(--color-*)`. A one-off tint of a token is `color-mix(in srgb, var(--color-text) 7%, transparent)`, never an `rgba()` of a hex. The only literals left sit on photographs — the triptych captions and gradients, the YouTube veil and play mark — and they stay black and white in both themes because they belong to the image, not the page.
+Every text grey measures 4.5:1 or better on the ground, surface and elevated surface of its own theme; the lowest on the site is 4.87:1 on Paper (the Available badge) and 5.45:1 on Ink. axe found no contrast failure in either theme on 4 October 2026.
 
-**The One Signal Rule.** The Warm Signal accent appears on ≤10% of any given screen surface. In the shipped code it is closer to 1%. If it starts competing for attention, it has been overused. Reduce.
+**Paper is the default.** A first visit, a browser that blocks storage and a page without JavaScript all get Paper. A visitor's pick is saved in `localStorage` under `theme` and set as `<html data-theme>` by an inline script in `<head>` before the first paint (`lib/theme.ts`), so a saved Ink never flashes Paper. **Ink is screen-only**: its block sits in `@media screen`, so a printed or saved page always comes out ink on paper. A theme change fades the colour tokens themselves over 450ms (they are registered with `@property`), so the whole page shifts as one; photographs and video are never touched.
 
-**The Pure Surface, Warm Text Rule.** Replaces the old Tint Rule, which described a colour this system has never shipped. Surfaces and primary text are *pure neutral* in both themes — every ground, surface and ink value in the table above measures zero chroma. The warmth lives only in the text greys and hairlines, at hue 62°–89° and chroma 0.006–0.012. Never introduce a cool grey: the sister site at `management-portfolio` follows the same curve inverted onto white, and a blue-grey would read as foreign in either half of the pair.
+**The One Cue Rule.** The Cue Light covers 10% of a screen at most, and in practice about 1%. If something glows amber, it is live or it is you. If it starts competing, it has been overused.
+
+**The Pure Ground, Warm Ink Rule.** Grounds, surfaces and the primary ink are pure neutral (zero chroma) in both themes. The warmth lives only in the text greys and hairlines, at hue 62°–89° and chroma 0.006–0.012. Never introduce a cool grey; the sister site at `/systems` follows the same curve.
+
+**The Name-a-Token Rule.** Components read every colour as `var(--color-*)`, never a hex, so both themes follow automatically. A one-off tint is `color-mix(in srgb, var(--color-text) 7%, transparent)`. The only literals are the black and white that sit on photographs (the triptych captions and their gradient, the YouTube veil and play mark), because they belong to the image, not the page. A new token must also join the `@property` list in `globals.css`, or it will cut instead of fading.
 
 ## 3. Typography
 
-> **Rewritten 30 Aug 2026 against the code.** The previous version documented a
-> six-step ramp in `rem` (`0.72rem` labels, `9px` micro, a `1.125rem` title) and a
-> "Single-Family Rule" saying the system had no second typeface. Neither matched
-> what ships. The real system is **two** families — Archivo for reading, JetBrains
-> Mono for every label — and its ramp is expressed in `px`. 112 of the design
-> detector's 130 findings were this document disagreeing with the code, not the
-> code drifting from the system.
+**Display Font:** Archivo Black (with Noto Sans Thai, then sans-serif)
+**Body Font:** Archivo 400–800 (with Noto Sans Thai, then system-ui)
+**Label/Mono Font:** JetBrains Mono 400–500 (with Noto Sans Thai, then monospace)
 
-**Display Font:** Archivo Black, a single cut, always set at `font-weight: 800`. The face
-has no 800, so the browser synthesizes bold on top of Black; that dense faux-bold is the
-heading voice, and it is deliberate. `h1, h2, .font-heading { font-weight: 800 }` in
-`globals.css` owns it, and heads styled inline set the same. Every headline, the CK mark,
-the hero name line and the mobile navigation overlay.
-**Body Font:** Archivo (400, 500, 600, 700, 800). Weight 300 was retired on 8 September 2026: it read as whispering under the display heads.
-**Label Font:** JetBrains Mono (400, 500) — every uppercase label, index, counter,
-caption and metadata line on the site.
-**Thai:** Noto Sans Thai (variable 100–900), added 25 September 2026. It is Archivo's
-companion script, not a third voice: it sits second in every stack (`--font-archivo`,
-`--font-archivo-black`, `--font-jetbrains-mono` in `globals.css`), so Latin always sets
-in Archivo and only Thai characters reach Noto. It was chosen over LINE Seed Sans TH,
-Kanit, Prompt, Anuphan and IBM Plex Sans Thai because it matches the 800 heading weight
-and stays neutral; Kanit reads as generic Thai advertising and LINE Seed as LINE's brand.
-A Thai headline sets in a real Noto 800 beside the synthesized Archivo Black. Labels stay
-English: Thai in the mono layer is a fallback, not a style. The file loads only when a
-Thai character is on the page (`preload: false`). Mark Thai passages `lang="th"`.
+**Character:** Archivo Black is structural, set tight (-0.02em to -0.03em) on a 0.88–0.95 line-height, so a headline reads as a built object. It ships as one cut and every head asks for 800, so the browser synthesizes bold on top of Black: that dense faux-bold is the heading voice, and it is deliberate. JetBrains Mono carries the whole information layer, and it is why the site reads as a working document rather than a brochure.
 
-**Character:** Archivo Black is structural, not decorative: it is used at size, tight
-(-0.02em to -0.03em), on a 0.88–0.95 line-height, so headlines read as built objects.
-Archivo carries running text. JetBrains Mono carries the entire information layer —
-this is the "production floor" voice, and it is the reason the site reads as a working
-document rather than a brochure.
+### Hierarchy
+- **Display** (Archivo Black, 800, 0.9 line-height, -0.02em): `clamp(2.5rem, 8vw, 7rem)`. Page titles (Commercial, Gallery, About, CV, 404).
+- **Display S** (Archivo Black, 800, 0.9 line-height, -0.02em to -0.03em): `clamp(2.5rem, 6vw, 5.5rem)`. Case-study titles, the contact strips, the "Next" project.
+- **Feature** (Archivo Black, 800, 0.9 line-height, -0.03em): `clamp(1.75rem, 4vw, 3.5rem)`. The featured project caption and the chat name.
+- **Roll** (Archivo Black, 800, 1.05 line-height, -0.02em): `clamp(1.5rem, 3.5vw, 2.75rem)`. The About client and service rolls.
+- **Headline** (Archivo Black, 800, 0.95 line-height, -0.02em): `clamp(1.2rem, 2.5vw, 2rem)`. Section and project titles, Commercial list rows.
+- **Title** (Archivo Black, 800, 1 line-height, -0.02em): `clamp(1.25rem, 1.6vw, 1.5rem)`. The hero's one-line name, `Chaiya Katkwao.`
+- **Lead** (Archivo, 400, 1.4 line-height, grey-200): `clamp(1.25rem, 1.6vw, 1.5rem)`. Bios, positioning lines, project descriptions (`.copy-lead`).
+- **Body** (Archivo, 400, 17px, 1.55 line-height, grey-200): everything that is read (`.copy-body`, and `body` itself), capped at 52–75ch.
+- **Small** (Archivo, 400, 14px, 1.5 line-height, grey-300): captions and list cells (`.copy-small`).
+- **Label** (JetBrains Mono, 500, 11px, 0.18em, uppercase, text-muted): nav, footer, tags, years, indices, counters (`.mono-label`).
+- **Label wide** (JetBrains Mono, 500, 11px, 0.28–0.35em, uppercase): eyebrows and section markers.
 
-### The ramp
+**Thai.** Noto Sans Thai sits second in every stack (`--font-archivo`, `--font-archivo-black`, `--font-jetbrains-mono`), so Latin always sets in Archivo and only Thai characters reach Noto. It loads only when a Thai character renders. Mark Thai passages `lang="th"`. Labels stay English.
 
-| Step | Family | Size | Tracking | Used for |
-|---|---|---|---|---|
-| Display | Archivo Black 800 (synthesized) | `clamp(2.5rem, 8vw, 7rem)` | -0.02em | Page titles, the featured and contact titles |
-| Headline | Archivo Black 800 (synthesized) | `clamp(1.2rem, 2.5vw, 2rem)` | -0.02em | Section and project titles |
-| Name line | Archivo Black 800 (synthesized) | `clamp(1.25rem, 1.6vw, 1.5rem)` | -0.02em | The hero's `Chaiya Katkwao.`, one line |
-| Lead | Archivo 400 | `clamp(1.25rem, 1.6vw, 1.5rem)` / 1.4 | normal | Bios, positioning lines, project descriptions (`.copy-lead`) |
-| Body | Archivo 400 | `17px` / 1.55 | normal | Everything that is read: briefs, section descriptions (`.copy-body`) |
-| Small | Archivo 400 | `14px` / 1.5 | normal | Captions, list cells, roles and years in prose (`.copy-small`) |
-| Label | JetBrains Mono 500 | `11px` | 0.18em | Nav, footer, tags, years, indices, captions |
-| Label wide | JetBrains Mono 500 | `11px` | 0.28–0.35em | Eyebrows, section markers |
+**The Two-Family Rule.** Archivo reads, JetBrains Mono labels. If something is information (an index, a year, a role, a counter, a caption), it is mono, uppercase and tracked; if it is read, it is Archivo. No third family: Noto Sans Thai is Archivo's Thai script, never a choice for Latin.
 
-Reading text is grey-200 (Lead, Body) or grey-300 (Small); grey 400 and 500 are for
-data and captions only. The three reading steps are the `.copy-lead`, `.copy-body` and
-`.copy-small` classes in `globals.css`, and `body` itself is set to the Body step.
+**The 11px Floor Rule.** No text below 11px on screen, and nothing below 8.5pt in print.
 
-The display step is fluid rather than fixed: every headline on the site is a `clamp()`
-whose endpoints vary by context (`7rem` on index pages, `5.5rem` on the contact strip,
-`3.5rem` on the featured card). The table records the dominant pair; a headline that
-needs a different ceiling sets one, and that is intentional, not drift.
+**The Scale Rule.** At least 1.25 between adjacent reading steps. Flat scales read as indecision.
 
-**The Two-Family Rule.** Archivo and JetBrains Mono. No third family; Noto Sans Thai
-is Archivo's Thai script, not a family choice, and never sets Latin. If something
-needs to read as *information* — an index, a year, a role, a counter, a caption — it is
-Mono, uppercase, tracked. If it needs to be *read*, it is Archivo. This split is the
-system, and it is what `.mono-label` in `globals.css` encodes.
-
-**The 11px Floor.** No text below 11px. The system previously ran labels at 9px and
-8px; they were illegible and several failed contrast at the same time. `.mono-label`
-is 11px and that is the floor for every label, in print units too: the CV prints at
-8.5pt labels and nothing smaller. On screen the CV is set in the site's reading steps
-like every other page (since 8 September 2026; before that it was an A4 facsimile at
-print sizes), and only `@media print` compacts it onto one sheet.
-
-**The Scale Rule.** At least a 1.25 ratio between adjacent reading steps. Flat scales
-read as indecision.
+**The Six Heads Rule.** Every Archivo Black head uses one of the six clamps above (plus the mobile menu's own `clamp(2rem, min(10vw, 9svh), 5rem)`). A new page picks a step; it never invents a seventh size. Until 4 October 2026 there were thirteen.
 
 ## 4. Elevation
 
-This system is flat by default. There are no box shadows at rest. Depth is communicated through tonal surface steps (ground → surface → elevated surface, `#F0F0F0 → #EAEAEA → #E4E4E4` in Light and `#111111 → #1C1C1C → #222222` in Dark: in both themes each step moves toward the middle grey) and through the hairline borders.
+Flat. There are no box shadows anywhere. Depth comes from tonal steps that move toward the middle grey (ground → surface → elevated: `#F0F0F0 → #EAEAEA → #E4E4E4` on Paper, `#111111 → #1C1C1C → #222222` on Ink) and from 1px hairlines in the `border-*` tokens. The lightbox isolates the work with the page ground at 97%, the only intentional semi-transparency.
 
-The Lightbox uses a near-opaque overlay (the page ground at 97%) — this is the only intentional use of semi-transparency in the system, and it serves a functional isolation role, not a decorative one.
+**The Flat-By-Default Rule.** If something needs to feel raised, use the next surface step, never a shadow.
 
-**The Flat-By-Default Rule.** Surfaces are flat at rest. If a component needs to feel elevated, reach for the next tonal surface step — not a shadow. Shadows are not part of this system.
-
-**The No-Glass Rule.** Backdrop-blur appears exactly once, on the lightbox caption pill (`backdrop-blur-sm` over the page ground at 85%), so a caption stays readable above an arbitrary photograph. It is a functional accommodation, not a motif. Do not apply it to any other element.
-
-*Corrected 29 Aug 2026: this rule previously located the blur on the navigation header. The header has no backdrop-filter and no translucent background — it is `sticky top-0` over the page background with a 1px bottom border.*
+**The One-Blur Rule.** `backdrop-blur-sm` appears once, on the lightbox's "Swipe or use arrows" pill (over the ground at 85%), so its text stays readable over any photograph. It is a functional accommodation, not a motif.
 
 ## 5. Components
 
-> **Rewritten 29 Aug 2026 against the code.** The previous version of this section
-> documented a "Primary CTA Button" with a Warm Signal background and a fully
-> rounded shape. No such component exists: `borderRadius` and `rounded-full` appear
-> nowhere in `Navigation.tsx`, and the accent is used in exactly two places in the
-> whole app. Type scales, paddings and border values below were read from the
-> components rather than carried over.
+Labelled like gear: flat, square, named in mono, and answering instantly. No decoration, no radius, no shadow. Every hover is a CSS `hover:` variant (Tailwind applies it only where a pointer can hover), never `onMouseEnter`, so a tap on a phone never leaves anything stuck.
 
-### Navigation Header
-`sticky top-0`, full width, z-50. Not fixed, not translucent, and not blurred.
-- **Shell:** the page ground, opaque, with a 1px `--color-border-faint` bottom border. There is no backdrop-filter and no opacity on the header. (Until 23 September 2026 the code set no background at all, so the page scrolled through under the mark and the links.)
-- **Theme switch:** the header's last item on every breakpoint (beside the hamburger on mobile), after Contact on desktop. One 14px dot in a 1.5px ink ring, half ink and half clear: the ink half is on the left in Light and turns to the right in Dark (420ms, the signature curve); it grows 18% on hover. 44px to the finger. No words and no accent: amber stays the active page's underline. The dot's side is decided in CSS from `<html data-theme>`, so it is right from the first frame; the button's label names the action ("Switch to dark theme"). A pick fades the colour tokens themselves into the other theme over 450ms (slow in, slow out; 200ms under reduced motion): the tokens are registered with `@property` as colours, `<html>` transitions them while it carries `.theme-fading`, and every element follows because every colour is read through a token. Element transitions are off for those 450ms, so nothing ripples or lags. Only colours move: images and video are never copied or faded, so a playing video stays one clean picture. Tried and dropped the same day: a view-transition cross-fade (every video showed twice mid-fade) and a transition on every element (Chrome kept restarting it on some text, which then snapped at the end). A new colour token must be added to the `@property` list in globals.css, or it will cut instead of fading. Corrections that restore a saved pick cut, with element transitions suspended for that frame. `/systems` carries the same dot, fade and saved pick (27 September 2026). (Until 27 September 2026 it was two mono labels, `Light` and `Dark`, in a hairline box.)
-- **Logo:** Archivo Black 800, 1.15rem, tracking -0.02em. Links to root, and it is the only link there: the nav has no `Home` item and the logo carries no `/ Page` label beside it since 27 September 2026 (the underlined nav link and each page's own label already name the page). Its accessible name is "Chaiya Katkwao, home".
-- **Desktop links:** 0.8rem, tracking 0.18em, uppercase. Muted text at rest, Primary Text on hover, 180ms. The current page's link carries `aria-current="page"`, so the underline is not the only "you are here" cue. Hover is a CSS `hover:` variant (Tailwind applies it only where a pointer can hover), never `onMouseEnter`, so a tap never leaves a link stuck at full ink. The same goes for every hover on the site (4 October 2026).
-- **Active underline:** a 1px bar in Warm Signal. This is one of only two accent appearances in the app.
-- **Mobile hamburger:** three 1px lines, inline-drawn, animating to a cross. No icon library.
+### Buttons
+- **Shape:** square (`0px`), 1px border, label typography (11px mono, uppercase, 0.14em).
+- **Primary** (the email CTA): ink text in a `border-strong` frame, `18px 20px`. Hover inverts to ink ground and `text-inverse` text over 250ms.
+- **Secondary** ("Print / Save PDF →"): `text-muted` in a `border` frame. Hover lifts the text to ink and the frame to `border-strong`.
+- **One primary per decision.** The Home contact strip has one box, the email; the CV under it is a quiet text link ("Or read the CV →"), not a second box of equal weight.
+- **Control square** (lightbox close, prev and next; hero pause): 44 × 44 (48 for the lightbox arrows), inline SVG glyph, no icon library. In the lightbox the glyph is `grey-200` in a `grey-500` frame; hover takes the glyph to ink, the frame to `grey-300` and adds a 10% ink wash; disabled is `text-dim` on `grey-600`. The hero's pause square is ink at 86% in an ink frame at 28%.
+- **Image tiles are buttons.** Anything that opens the lightbox is a real `<button class="gallery-tile">` (UA chrome stripped). Never a `div` with an `onClick`: that kept the gallery from the keyboard until 29 August and the case studies until 4 October 2026.
 
-### Mobile Navigation Overlay
-Full-screen, full-bleed, no modal chrome. A signature component.
-- **Surface:** the page background, no backdrop.
-- **Links:** `clamp(2rem, min(10vw, 9svh), 5rem)`, Archivo Black 800, tracking -0.03em, separated by 1px `--color-border-faint` lines. Sized on the smaller of width and height, centred with auto margins inside an overlay that scrolls itself, and the name line sits in flow below them. Until 4 October 2026 the list was `justify-center` on a locked page at `10vw`: on a phone turned sideways, Commercial sat behind the header and Contact below the screen, out of reach.
-- **Keyboard:** Escape closes; Tab loops through the links and the close button in the header.
-- **Animation:** staggered entrance, 0.05s between items, `cubic-bezier(0.16, 1, 0.3, 1)`, 0.3s.
+### Chips
+- **Tags:** mono label in `grey-400`, 1px `border-muted` frame, `4px 8px`, square. Information, not actions: they do not respond to the pointer.
+- **Chat suggestions:** 11px mono at 0.08em in `grey-300`, 1px `border-muted` frame, `8px 14px`; hover takes the text to ink and the frame to `grey-500`. One row that swipes sideways on phones.
+
+### Cards / Containers
+- There are no cards. Work sits directly on the ground; sections are separated by `border` hairlines and 80px of vertical space.
+- The home triptych is three image links in a 1px-gap grid on `surface`, titles in white on a black gradient (they belong to the photograph). No index numbers: the order means nothing.
+- Under the Home bio, the **Selected clients** roll (`data/clients.ts`, shared with About) is the producer proof an agency scans for; it replaced a list of disciplines that repeated About and the CV.
+- A case study's meta column leads with **Client**, then Role, Year, Discipline; it ends on the next project's title beside its cover.
+
+### Inputs / Fields
+- **Chat field:** transparent, 16px Archivo in ink, inside a 1px `grey-700` frame, square. 16px is a floor: iOS zooms into anything smaller.
+- **Focus:** the frame carries the ring (`:focus-within`, 1px `focus-ring`, 2px offset), because the input suppresses its own outline.
+- **Placeholder:** `text-muted` at full opacity (5.67:1), never the browser's half-strength default.
+
+### Navigation
+- **Header:** `sticky top-0`, opaque on the page ground, 1px `border-faint` below, 58px tall (72px under 1024px). The CK mark at left is the only way home (accessible name "Chaiya Katkwao, home").
+- **Links:** 0.8rem mono, uppercase, 0.18em, `grey-300` at rest, ink on hover (180ms). The current page carries `aria-current="page"` and a 1px Cue Light underline.
+- **Small links get 44px to the finger** through `.tap-target`, an invisible centred box; the label keeps its own size.
+- **Mobile menu:** a full-screen overlay on the page ground with no modal chrome. Links are Archivo Black 800 at `clamp(2rem, min(10vw, 9svh), 5rem)`, uppercase, separated by `border-faint` hairlines, staggered in at 0.05s over 0.3s. The overlay scrolls itself and centres with auto margins, so a phone turned sideways still reaches every link. Escape closes; Tab loops through the links and the close button.
+
+### Theme Switch (Signature Component)
+One 14px dot in a 1.5px ink ring, half ink and half clear. The ink half sits left on Paper and turns right on Ink (420ms, the signature curve); it grows 18% on hover. 44px to the finger, no words, no accent. Its side is decided in CSS from `<html data-theme>`, so it is right from the first frame; its label names the action ("Switch to dark theme").
+
+### Hero Stage (Signature Component)
+Three rows inside `100svh` minus the header: the name line with "Creative Producer, Bangkok" beside it, the stage, and the caption row with the controls. Commercial work comes first (Fitflop, Knack Factory, Rojukiss, Modal Creative Studio, Nestlé), the art series last, and the caption names the client and role of the slide on screen ("Fitflop · Live production, Ad The Top, 2026"), so an agency meets a brand on the first screen. Each slide is the original work, `object-contain` on the page ground, at full contrast: no scrim, no gradient, no blur. Slides cross-fade over 1200ms, 300ms when the visitor picks one, a hard cut under reduced motion. Controls: a 44px pause square (WCAG 2.2.2) and one 16px bar per slide inside a 24 × 44 button (WCAG 2.5.8), active in ink and the rest at 34%; on phones a `01 / 06` counter replaces the bars.
 
 ### Lightbox (Signature Component)
-The gallery viewer. Focused, keyboard-native, and in the page's theme: paper in Light, near-black in Dark.
-- **Overlay:** the page ground at 97% — nearly opaque.
-- **Controls:** SVG-drawn arrows and close, no icon library. Enabled state uses `--color-grey-200` with a `--color-grey-500` border, moving to `--color-text` on `--color-grey-300` with a wash of the text colour at 10%. Disabled boundary state is `--color-text-dim` on `--color-grey-600`.
-- **Caption pill:** the system's only backdrop-blur — `backdrop-blur-sm` over the page ground at 85% (40% until 23 September 2026, when its text failed on dark photos in Light), inside a `--color-border-strong` hairline.
-- **Image:** `next/image` at `sizes="100vw"`, `object-fit: contain`, capped at `100dvh` minus the chrome, swipeable (`dragElastic: 0.08`), spring transition (damping 30, stiffness 250). The photos either side are fetched ahead, so a step shows at once. Never a plain `<img>` of the original: until 4 October 2026 it was, and opening Knack Factory and stepping three times fetched 29.6 MB (one photo 11.8 MB); the same steps now fetch under 1 MB.
-- **Counter:** `aria-live="polite"`, with the photo's description in an `sr-only` span, so a screen reader hears each step.
+The gallery viewer, keyboard-native and in the page's theme. The photo is `next/image` at `sizes="100vw"`, `object-fit: contain`, capped at `100dvh` minus the chrome, swipeable, with a spring arrival (damping 30, stiffness 250); the photos either side are fetched ahead so a step shows at once. Never a plain `<img>` of the original: opening Knack Factory and stepping three times once fetched 29.6 MB, and now fetches under 1 MB. The counter is `aria-live` and reads the photo's description. Focus moves in on open, is trapped inside, and returns to the tile on close.
 
 ### Footer
-- **Structure:** a 1px `--color-border-faint` top border, 24px padding top and bottom, two-column flex that wraps, 16px gap. Inside `.section-shell`, which is full width with the same 32px side padding as every page's `px-8`, so the footer and the home page's About and Contact rows share the logo's left edge (until 4 October 2026 it was a centred 1280px box with 24px gutters).
-- **Typography:** JetBrains Mono, 11px, tracking 0.18em, uppercase — the same label treatment the sister site calls `mono-label`. Muted text at rest, Primary Text on hover, 180ms.
-- **Links:** 28px apart. Includes the cross-site link to `/systems`, which is a plain `<a>` rather than `next/link` because the destination is a static file in `public/`, not a route.
+A 1px `border-faint` rule, 24px above and below, inside `.section-shell` (full width, 32px sides). Mono labels in `text-muted`, ink on hover, links 28px apart. `/systems` is a plain `<a>` because it is a static file, not a route.
 
-### Hero Controls
-Bottom-right of the hero.
-- **Pause/play:** 44x44, 1px border of `--color-warm` at 28%, glyph at 86%, inline-drawn SVG. Hidden entirely under `prefers-reduced-motion`, where nothing is rotating.
-- **Slide marks:** one 16px, 1px bar per slide, centred in a 24 x 44 button (WCAG 2.5.8; the buttons were 16px wide until 4 October 2026); active is `--color-warm`, rest `--color-warm` at 34%.
-- **Counter:** `mono-label`, tabular numerals, `--color-warm`. Phones only, where the slide marks are hidden; on wider screens the marks already show the position (27 September 2026).
-
-### Hero Stage
-Three rows inside the fold (`100svh` minus the header): the header line, the stage, and the disciplines row with the controls. The header line is the name, `Chaiya Katkwao.`, as one small line of Archivo Black (`clamp(1.25rem, 1.6vw, 1.5rem)`) with the positioning label beside it; since 8 September 2026 the name no longer takes a display step in the hero, and the height it held went to the stage, which takes everything the two text rows do not. The stage shows each slide `object-contain` on the page ground (paper in Light, `#111111` in Dark) at full contrast: no scrim, no gradient bands, no blurred fill. All three were removed on 8 September 2026, together with the 96px backdrop derivatives and their build script. Nothing is layered over the work; the text rows are in flow, so legibility never costs the photograph anything. Slides cross-fade in 1200ms, a hard cut under reduced motion, and the hero does not fade or drift as the page scrolls.
-
-### Featured Project
-The photograph in a 16:9 frame at full contrast, then its caption below in flow, on the page ground: the `Selected Work` label, the title at `clamp(1.75rem, 4vw, 3.5rem)`, and the category label right. The dark gradient wash that carried white text over the image was removed on 8 September 2026, the same move as the hero: nothing is layered over the work. Hover scales the image 1.04 over 1000ms.
-
-### Components that do not exist
-No card and no chip. This is a portfolio, not an application; its interactive surface
-is links, image tiles, the lightbox, the mobile menu, and the hero controls. There is
-one input (the chat field) and no general button style — buttons here are either a
-44px bordered square (lightbox, hero) or an unstyled tile wrapper (`.gallery-tile`).
-Do not add a button style to this file speculatively — document one when one ships.
-
-**Image tiles are buttons.** Anything that opens the lightbox is a real `<button>`
-carrying `.gallery-tile`, which strips the UA chrome. It must never go back to a
-`div` with an `onClick`: that made all 38 gallery images unreachable by keyboard
-until 29 Aug 2026, and every case-study photo until 4 Oct 2026.
-
-**Every photo has its size and its description.** `photoSize(src)` and `photoAlt(src)`
-in `lib/photos.ts` read `data/image-sizes.json` (written by `node scripts/image-sizes.mjs`;
-re-run it after adding a photo) and `data/alt-text.json`. The size goes to `next/image`
-as `width`/`height`, so the page reserves the box and does not jump: never `width={0}
-height={0}`, which cost `/commercial` a CLS of 0.113 and made every 0 x 0 gallery photo
-load at once. The alt says what is in the frame, like a museum caption: no
-" - Creative Producer" tag, no photographer's name.
+### Photos
+Every photo has a size and a description. `photoSize(src)` and `photoAlt(src)` in `lib/photos.ts` read `data/image-sizes.json` (written by `node scripts/image-sizes.mjs`; re-run after adding a photo) and `data/alt-text.json`. The size goes to `next/image` as `width`/`height`, so the page reserves the box and never jumps; never `width={0} height={0}`. The alt says what is in the frame, like a museum caption: no SEO tag, no photographer's name.
 
 ## 6. Do's and Don'ts
 
 ### Do:
-- **Do** use the Warm Signal accent on ≤10% of any screen surface. Its rarity is its authority.
-- **Do** vary spacing by context. Section padding, component padding, and inline spacing should all be different.
-- **Do** use tonal surface steps (bg → surface → surface-elevated) to express depth. Never shadows.
-- **Do** use exponential ease `cubic-bezier(0.16, 1, 0.3, 1)` for all motion. Never bounce, never elastic.
-- **Do** respect `prefers-reduced-motion` by removing *travel and looping*, not feedback. The global rule keeps colour and opacity transitions at 120ms; components branch on `usePrefersReducedMotion()` (`lib/use-prefers-reduced-motion.ts`), never framer-motion's `useReducedMotion()`, which renders differently on the server and made React throw away the home page's HTML under reduced motion until 23 September 2026. Never clamp all durations to 0.01ms — that flashes infinite animations rather than stopping them.
-- **Do** keep every text colour at 4.5:1 or better. `text-dim` is for structural marks only and is not a text colour.
-- **Do** give anything that moves for more than five seconds a stop control (WCAG 2.2.2). The hero carousel has one.
-- **Do** keep nav links, labels, and captions uppercase with wide tracking (0.15–0.30em). It is part of the system's identity.
-- **Do** keep surfaces pure neutral and let the warmth live in the text greys (hue 62-89, chroma 0.006-0.012). Never introduce a cool grey.
-- **Do** cap body line length at 65–75ch on reading contexts.
+- **Do** keep the Cue Light at 10% of a screen at most; about 1% is normal.
+- **Do** name a token, never a colour: `var(--color-*)`, and `color-mix()` for a tint.
+- **Do** keep every text colour at 4.5:1 or better; `text-dim` and `grey-600` are structural marks, not text.
+- **Do** set every small uppercase label in JetBrains Mono (`.mono-label`, or `font-mono font-medium text-[11px]`).
 - **Do** keep one left edge: 32px on every page and every section (`px-8`, `.section-shell`).
-- **Do** set every small uppercase label in JetBrains Mono (`.mono-label`, or `font-mono font-medium text-[11px]`). Until 4 October 2026, 49 labels on Commercial, Gallery, About and the case studies were Archivo.
+- **Do** use tonal surface steps for depth, never shadows.
+- **Do** use the signature curve `cubic-bezier(0.16, 1, 0.3, 1)` (`var(--ease-out)`) for motion; the page fade is 250ms, hovers 180–250ms.
+- **Do** respect `prefers-reduced-motion` by removing travel and looping, not feedback: colour and opacity transitions stay at 120ms. Branch on `usePrefersReducedMotion()`, never framer-motion's `useReducedMotion()`, which breaks hydration.
+- **Do** give anything that moves for more than five seconds a stop control (WCAG 2.2.2).
+- **Do** give every target at least 24 × 24, and small text links 44px through `.tap-target`.
+- **Do** cap reading lines at 65–75ch.
 - **Do** keep the scrollbar thin but holdable (8px in Safari, `scrollbar-width: thin` elsewhere) with a text-grey thumb.
 
 ### Don't:
-- **Don't** use colorful or expressive-color palettes — no gradients, no vibrant accents beyond the single Warm Signal, no neon.
-- **Don't** build a generic photographer portfolio layout: no centered hero with soft sans, no pastel tones, no decorative white space as a personality.
-- **Don't** over-animate. If the animation is about the UI, it has failed. Motion serves the content, not the other way around.
-- **Don't** use `border-left` or `border-right` greater than 1px as a colored stripe on any component. Never intentional. Rewrite with full borders or background tints.
-- **Don't** use gradient text (`background-clip: text`). Prohibited. Use Warm Signal solid if emphasis is needed.
-- **Don't** apply glassmorphism decoratively. The one backdrop-blur is on the lightbox caption pill, is functional, and is already at its limit. Do not extend it.
-- **Don't** add a third typeface. Archivo reads, JetBrains Mono labels; that split is the system. Solve anything else through weight and scale. Noto Sans Thai is the one exception, and it is a script, not a typeface choice: never use it to set Latin.
-- **Don't** add shadows. If something needs elevation, use the next surface step.
-- **Don't** make the accent compete. If more than 10% of a screen surface carries the Warm Signal, scale it back.
-- **Don't** use bounce or elastic easing. Exponential ease-out only.
-- **Don't** pulse anything. The "Available" dot is still (4 October 2026), and so is the page: the grain overlay that sat over everything was removed the same day.
-- **Don't** spread the slash headline (`Let's / connect.`). It is a signature on two pages, the Home contact strip and the CV name; on the other six it read as a template and was dropped on 4 October 2026.
-- **Don't** use em dashes in copy. Commas, colons, parentheses, and en dashes for ranges (`2022–Present`). Quoted titles (YouTube episodes) keep their own punctuation.
+- **Don't** build a colourful or expressive-colour portfolio: no gradients, no vibrant accents beyond the single Cue Light, no neon.
+- **Don't** build a generic photographer portfolio template: no centred hero, no soft sans, no pastel tones.
+- **Don't** build over-animated, "look at me" UI that competes with the work. If an animation is about the UI, it has failed.
+- **Don't** layer anything over the work in the hero or the featured project: no scrim, no gradient band, no text on the photograph.
+- **Don't** use `border-left` or `border-right` greater than 1px as a coloured stripe.
+- **Don't** use gradient text (`background-clip: text`).
+- **Don't** add glassmorphism; the one backdrop-blur is the lightbox pill and it is at its limit.
+- **Don't** add shadows, radii (beyond the two dots) or a third typeface.
+- **Don't** pulse anything: the Available dot is still, and there is no grain overlay.
+- **Don't** spread the slash headline (`Let's / connect.`): it is a signature on two pages, the Home contact strip and the CV name.
+- **Don't** use em dashes in copy: commas, colons, parentheses, and en dashes for ranges (`2022–Present`). Quoted titles keep their own punctuation.
+- **Don't** use bounce or elastic easing.
+- **Don't** hover with `onMouseEnter`; use CSS `hover:`.
+- **Don't** zoom images on hover. Zooming crops the work; a tile answers with a wash or a colour change instead.
+- **Don't** number things whose order means nothing (tiles, client rolls, service lists).

@@ -119,7 +119,7 @@ export default function ChatInterface() {
           className="border-b pb-6 mb-6 lg:w-72 lg:pr-10 lg:border-b-0 lg:border-r lg:pb-0 lg:mb-0"
         >
           <p style={{ ...mono, marginBottom: "12px" }}>Speaking with</p>
-          <h1 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 0.92, letterSpacing: "-0.03em", color: "var(--color-warm)", textTransform: "uppercase", marginBottom: "16px" }}>
+          <h1 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(1.75rem, 4vw, 3.5rem)", lineHeight: 0.92, letterSpacing: "-0.03em", color: "var(--color-warm)", marginBottom: "16px" }}>
             Chaiya<br />Katkwao.
           </h1>
           <p style={{ fontFamily: "var(--font-archivo)", fontSize: "0.875rem", color: "var(--color-grey-300)", lineHeight: 1.5 }}>
@@ -157,7 +157,11 @@ export default function ChatInterface() {
             ))}
             {error && (
               <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                <div role="alert" style={{ padding: "12px 16px", backgroundColor: "var(--color-surface-dark)", border: "1px solid var(--color-border-muted)", color: "var(--color-grey-400)", fontFamily: "var(--font-archivo)", fontSize: "14px" }}>{error}</div>
+                <div role="alert" style={{ padding: "12px 16px", backgroundColor: "var(--color-surface-dark)", border: "1px solid var(--color-border-muted)", color: "var(--color-grey-400)", fontFamily: "var(--font-archivo)", fontSize: "14px" }}>
+                  {error}{" "}
+                  {/* A way forward, not only a dead end (2026-10-04). */}
+                  <a href="mailto:chaiyakatkwao@gmail.com" className="text-[var(--color-text)] underline underline-offset-4">Or email Chaiya directly.</a>
+                </div>
               </div>
             )}
             <div ref={bottomRef} />

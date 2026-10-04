@@ -25,7 +25,7 @@ export default function NotFound() {
             transition={{ duration: 1.1, delay: 0.08, ease: EASE.out }}
             className="font-heading text-[var(--color-warm)] mb-10"
             style={{
-              fontSize: "clamp(3rem, 8vw, 7rem)",
+              fontSize: "clamp(2.5rem, 8vw, 7rem)",
               lineHeight: 0.9,
               letterSpacing: "-0.02em",
             }}
