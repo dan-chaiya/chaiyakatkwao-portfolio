@@ -56,6 +56,24 @@ typography:
     fontWeight: 800
     lineHeight: 0.9
     letterSpacing: "-0.02em"
+  display-s:
+    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
+    fontSize: "clamp(2.5rem, 6vw, 5.5rem)"
+    fontWeight: 800
+    lineHeight: 0.9
+    letterSpacing: "-0.02em"
+  feature:
+    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
+    fontSize: "clamp(1.75rem, 4vw, 3.5rem)"
+    fontWeight: 800
+    lineHeight: 0.9
+    letterSpacing: "-0.03em"
+  roll:
+    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
+    fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)"
+    fontWeight: 800
+    lineHeight: 1.05
+    letterSpacing: "-0.02em"
   headline:
     fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
     fontSize: "clamp(1.2rem, 2.5vw, 2rem)"
@@ -215,7 +233,10 @@ Every text grey measures 4.5:1 or better on the ground, surface and elevated sur
 **Character:** Archivo Black is structural, set tight (-0.02em to -0.03em) on a 0.88–0.95 line-height, so a headline reads as a built object. It ships as one cut and every head asks for 800, so the browser synthesizes bold on top of Black: that dense faux-bold is the heading voice, and it is deliberate. JetBrains Mono carries the whole information layer, and it is why the site reads as a working document rather than a brochure.
 
 ### Hierarchy
-- **Display** (Archivo Black, 800, 0.9 line-height, -0.02em): `clamp(2.5rem, 8vw, 7rem)`. Page titles; the ceiling varies by context (`5.5rem` on the contact strip, `3.5rem` on the featured caption), and that is intentional.
+- **Display** (Archivo Black, 800, 0.9 line-height, -0.02em): `clamp(2.5rem, 8vw, 7rem)`. Page titles (Commercial, Gallery, About, CV, 404).
+- **Display S** (Archivo Black, 800, 0.9 line-height, -0.02em to -0.03em): `clamp(2.5rem, 6vw, 5.5rem)`. Case-study titles, the contact strips, the "Next" project.
+- **Feature** (Archivo Black, 800, 0.9 line-height, -0.03em): `clamp(1.75rem, 4vw, 3.5rem)`. The featured project caption and the chat name.
+- **Roll** (Archivo Black, 800, 1.05 line-height, -0.02em): `clamp(1.5rem, 3.5vw, 2.75rem)`. The About client and service rolls.
 - **Headline** (Archivo Black, 800, 0.95 line-height, -0.02em): `clamp(1.2rem, 2.5vw, 2rem)`. Section and project titles, Commercial list rows.
 - **Title** (Archivo Black, 800, 1 line-height, -0.02em): `clamp(1.25rem, 1.6vw, 1.5rem)`. The hero's one-line name, `Chaiya Katkwao.`
 - **Lead** (Archivo, 400, 1.4 line-height, grey-200): `clamp(1.25rem, 1.6vw, 1.5rem)`. Bios, positioning lines, project descriptions (`.copy-lead`).
@@ -232,6 +253,8 @@ Every text grey measures 4.5:1 or better on the ground, surface and elevated sur
 
 **The Scale Rule.** At least 1.25 between adjacent reading steps. Flat scales read as indecision.
 
+**The Six Heads Rule.** Every Archivo Black head uses one of the six clamps above (plus the mobile menu's own `clamp(2rem, min(10vw, 9svh), 5rem)`). A new page picks a step; it never invents a seventh size. Until 4 October 2026 there were thirteen.
+
 ## 4. Elevation
 
 Flat. There are no box shadows anywhere. Depth comes from tonal steps that move toward the middle grey (ground → surface → elevated: `#F0F0F0 → #EAEAEA → #E4E4E4` on Paper, `#111111 → #1C1C1C → #222222` on Ink) and from 1px hairlines in the `border-*` tokens. The lightbox isolates the work with the page ground at 97%, the only intentional semi-transparency.
@@ -247,7 +270,8 @@ Labelled like gear: flat, square, named in mono, and answering instantly. No dec
 ### Buttons
 - **Shape:** square (`0px`), 1px border, label typography (11px mono, uppercase, 0.14em).
 - **Primary** (the email CTA): ink text in a `border-strong` frame, `18px 20px`. Hover inverts to ink ground and `text-inverse` text over 250ms.
-- **Secondary** ("View CV →", "Print / Save PDF →"): `text-muted` in a `border` frame. Hover lifts the text to ink and the frame to `border-strong`.
+- **Secondary** ("Print / Save PDF →"): `text-muted` in a `border` frame. Hover lifts the text to ink and the frame to `border-strong`.
+- **One primary per decision.** The Home contact strip has one box, the email; the CV under it is a quiet text link ("Or read the CV →"), not a second box of equal weight.
 - **Control square** (lightbox close, prev and next; hero pause): 44 × 44 (48 for the lightbox arrows), inline SVG glyph, no icon library. In the lightbox the glyph is `grey-200` in a `grey-500` frame; hover takes the glyph to ink, the frame to `grey-300` and adds a 10% ink wash; disabled is `text-dim` on `grey-600`. The hero's pause square is ink at 86% in an ink frame at 28%.
 - **Image tiles are buttons.** Anything that opens the lightbox is a real `<button class="gallery-tile">` (UA chrome stripped). Never a `div` with an `onClick`: that kept the gallery from the keyboard until 29 August and the case studies until 4 October 2026.
 
@@ -257,7 +281,9 @@ Labelled like gear: flat, square, named in mono, and answering instantly. No dec
 
 ### Cards / Containers
 - There are no cards. Work sits directly on the ground; sections are separated by `border` hairlines and 80px of vertical space.
-- The home triptych is three image links in a 1px-gap grid on `surface`, captions in white on a black gradient (they belong to the photograph).
+- The home triptych is three image links in a 1px-gap grid on `surface`, titles in white on a black gradient (they belong to the photograph). No index numbers: the order means nothing.
+- Under the Home bio, the **Selected clients** roll (`data/clients.ts`, shared with About) is the producer proof an agency scans for; it replaced a list of disciplines that repeated About and the CV.
+- A case study's meta column leads with **Client**, then Role, Year, Discipline; it ends on the next project's title beside its cover.
 
 ### Inputs / Fields
 - **Chat field:** transparent, 16px Archivo in ink, inside a 1px `grey-700` frame, square. 16px is a floor: iOS zooms into anything smaller.
@@ -274,7 +300,7 @@ Labelled like gear: flat, square, named in mono, and answering instantly. No dec
 One 14px dot in a 1.5px ink ring, half ink and half clear. The ink half sits left on Paper and turns right on Ink (420ms, the signature curve); it grows 18% on hover. 44px to the finger, no words, no accent. Its side is decided in CSS from `<html data-theme>`, so it is right from the first frame; its label names the action ("Switch to dark theme").
 
 ### Hero Stage (Signature Component)
-Three rows inside `100svh` minus the header: the name line with "Creative Producer, Bangkok" beside it, the stage, and the disciplines row with the controls. Each slide is the original work, `object-contain` on the page ground, at full contrast: no scrim, no gradient, no blur. Slides cross-fade over 1200ms, 300ms when the visitor picks one, a hard cut under reduced motion. Controls: a 44px pause square (WCAG 2.2.2) and one 16px bar per slide inside a 24 × 44 button (WCAG 2.5.8), active in ink and the rest at 34%; on phones a `01 / 06` counter replaces the bars.
+Three rows inside `100svh` minus the header: the name line with "Creative Producer, Bangkok" beside it, the stage, and the caption row with the controls. Commercial work comes first (Fitflop, Knack Factory, Rojukiss, Modal Creative Studio, Nestlé), the art series last, and the caption names the client and role of the slide on screen ("Fitflop · Live production, Ad The Top, 2026"), so an agency meets a brand on the first screen. Each slide is the original work, `object-contain` on the page ground, at full contrast: no scrim, no gradient, no blur. Slides cross-fade over 1200ms, 300ms when the visitor picks one, a hard cut under reduced motion. Controls: a 44px pause square (WCAG 2.2.2) and one 16px bar per slide inside a 24 × 44 button (WCAG 2.5.8), active in ink and the rest at 34%; on phones a `01 / 06` counter replaces the bars.
 
 ### Lightbox (Signature Component)
 The gallery viewer, keyboard-native and in the page's theme. The photo is `next/image` at `sizes="100vw"`, `object-fit: contain`, capped at `100dvh` minus the chrome, swipeable, with a spring arrival (damping 30, stiffness 250); the photos either side are fetched ahead so a step shows at once. Never a plain `<img>` of the original: opening Knack Factory and stepping three times once fetched 29.6 MB, and now fetches under 1 MB. The counter is `aria-live` and reads the photo's description. Focus moves in on open, is trapped inside, and returns to the tile on close.
@@ -315,3 +341,5 @@ Every photo has a size and a description. `photoSize(src)` and `photoAlt(src)` i
 - **Don't** use em dashes in copy: commas, colons, parentheses, and en dashes for ranges (`2022–Present`). Quoted titles keep their own punctuation.
 - **Don't** use bounce or elastic easing.
 - **Don't** hover with `onMouseEnter`; use CSS `hover:`.
+- **Don't** zoom images on hover. Zooming crops the work; a tile answers with a wash or a colour change instead.
+- **Don't** number things whose order means nothing (tiles, client rolls, service lists).

@@ -30,7 +30,7 @@ export default function CommercialList({ projects }: { projects: Project[] }) {
             style={{
               fontFamily: "var(--font-heading)",
               fontWeight: 800,
-              fontSize: "clamp(1.15rem, 2.4vw, 1.9rem)",
+              fontSize: "clamp(1.2rem, 2.5vw, 2rem)",
               lineHeight: 1,
               letterSpacing: "-0.02em",
               color: "var(--color-warm)",

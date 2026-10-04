@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-04T14:36:33Z",
+  "generatedAt": "2026-10-04T15:15:13Z",
   "title": "Design System: Chaiya Katkwao Portfolio",
   "extensions": {
     "colorMeta": {
@@ -384,6 +384,18 @@
         "displayName": "Display",
         "purpose": "Page titles. Archivo Black 800 (synthesized), fluid clamp, -0.02em, 0.9 line-height."
       },
+      "display-s": {
+        "displayName": "Display S",
+        "purpose": "Case-study titles, contact strips, the Next project."
+      },
+      "feature": {
+        "displayName": "Feature",
+        "purpose": "Featured project caption, the chat name."
+      },
+      "roll": {
+        "displayName": "Roll",
+        "purpose": "About client and service rolls."
+      },
       "headline": {
         "displayName": "Headline",
         "purpose": "Section and project titles, Commercial list rows."
@@ -604,6 +616,11 @@
         "section": "typography"
       },
       {
+        "name": "The Six Heads Rule",
+        "body": "Every Archivo Black head uses one of the six clamps above (plus the mobile menu's own `clamp(2rem, min(10vw, 9svh), 5rem)`). A new page picks a step; it never invents a seventh size. Until 4 October 2026 there were thirteen.",
+        "section": "typography"
+      },
+      {
         "name": "The Flat-By-Default Rule",
         "body": "If something needs to feel raised, use the next surface step, never a shadow.",
         "section": "elevation"
@@ -641,7 +658,9 @@
       "Don't spread the slash headline (`Let's / connect.`): it is a signature on two pages, the Home contact strip and the CV name.",
       "Don't use em dashes in copy: commas, colons, parentheses, and en dashes for ranges (`2022–Present`). Quoted titles keep their own punctuation.",
       "Don't use bounce or elastic easing.",
-      "Don't hover with `onMouseEnter`; use CSS `hover:`."
+      "Don't hover with `onMouseEnter`; use CSS `hover:`.",
+      "Don't zoom images on hover. Zooming crops the work; a tile answers with a wash or a colour change instead.",
+      "Don't number things whose order means nothing (tiles, client rolls, service lists)."
     ]
   }
 }

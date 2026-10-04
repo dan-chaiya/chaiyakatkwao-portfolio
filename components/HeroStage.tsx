@@ -20,13 +20,17 @@ import { HERO_INTERVAL_MS } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 import { photoAlt } from "@/lib/photos";
 
-type Slide =
+// caption: who it was for and what CK did, in the words the rest of the site uses
+// (data/commercial.ts, the Live Commerce section of /commercial, the gallery).
+type Slide = { caption: string } & (
   | { kind: "video"; sources: { src: string; type: string }[]; poster: string; alt: string }
-  | { kind: "image"; src: string; alt: string };
+  | { kind: "image"; src: string; alt: string }
+);
 
-// Verified assets: art originals via workAssets (never altered) + the optimized live loops.
+// Commercial work first (2026-10-04): an agency deciding in a few seconds should meet a
+// client and a role on the first screen, not only a fine-art frame. The art series
+// closes the loop. Art originals via workAssets (never altered) + the optimized live loops.
 const SLIDES: Slide[] = [
-  { kind: "image", src: workAssets.woven("0.jpg"), alt: photoAlt(workAssets.woven("0.jpg"), "Woven Memories, 2025") },
   {
     kind: "video",
     sources: [
@@ -35,8 +39,14 @@ const SLIDES: Slide[] = [
     ],
     poster: "/videos/motion/live-fitflop-may.poster.jpg",
     alt: "Fitflop live commerce stream",
+    caption: "Fitflop · Live production, Ad The Top, 2026",
   },
-  { kind: "image", src: workAssets.knack("Knack-75.jpg"), alt: photoAlt(workAssets.knack("Knack-75.jpg"), "Knack Factory Fashion Show, 2024") },
+  {
+    kind: "image",
+    src: workAssets.knack("Knack-75.jpg"),
+    alt: photoAlt(workAssets.knack("Knack-75.jpg"), "Knack Factory Fashion Show, 2024"),
+    caption: "Knack Factory · Photographer, 2024",
+  },
   {
     kind: "video",
     sources: [
@@ -45,8 +55,14 @@ const SLIDES: Slide[] = [
     ],
     poster: "/videos/motion/live-rojukiss-may.poster.jpg",
     alt: "Rojukiss live commerce stream",
+    caption: "Rojukiss · Live production, Ad The Top, 2026",
   },
-  { kind: "image", src: workAssets.podcast("_MG_8860.JPG"), alt: photoAlt(workAssets.podcast("_MG_8860.JPG"), "Podcast studio at Modal Creative Studio") },
+  {
+    kind: "image",
+    src: workAssets.podcast("_MG_8860.JPG"),
+    alt: photoAlt(workAssets.podcast("_MG_8860.JPG"), "Podcast studio at Modal Creative Studio"),
+    caption: "Modal Creative Studio · Creative producer and AV engineer, 2025–2026",
+  },
   {
     kind: "video",
     sources: [
@@ -55,6 +71,13 @@ const SLIDES: Slide[] = [
     ],
     poster: "/videos/motion/live-nestle.poster.jpg",
     alt: "Nestlé live commerce stream",
+    caption: "Nestlé Health Science · Live production, Ad The Top, 2026",
+  },
+  {
+    kind: "image",
+    src: workAssets.woven("0.jpg"),
+    alt: photoAlt(workAssets.woven("0.jpg"), "Woven Memories, 2025"),
+    caption: "Woven Memories · Photographs, 2025",
   },
 ];
 
@@ -177,8 +200,11 @@ export default function HeroStage() {
         className="flex shrink-0 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
         style={{ padding: `16px ${PAD_X} 24px` }}
       >
-        <p className="mono-label" style={{ color: "var(--color-warm)" }}>
-          Art Direction · Production · Photography
+        {/* The current slide's client and role. aria-hidden: the slide itself and its
+            control already carry the description, and a caption that changes every six
+            seconds must not talk over the page. */}
+        <p className="mono-label" aria-hidden="true" style={{ color: "var(--color-warm)", lineHeight: 1.6 }}>
+          {SLIDES[active].caption}
         </p>
         {/* The counter implied controls that did not exist. Now it is one: pause
             stops the rotation, and the slide marks step it. Hidden entirely under

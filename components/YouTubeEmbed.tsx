@@ -34,7 +34,7 @@ export default function YouTubeEmbed({ id, title }: Props) {
             src={thumb}
             alt={title}
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            className="absolute inset-0 w-full h-full object-cover"
           />
           {/* Dark veil and paper play mark in both themes: they sit on the thumbnail, not on the page */}
           <div className="absolute inset-0 bg-[#0D0D0D]/60 group-hover:bg-[#0D0D0D]/40 transition-colors duration-500" />
