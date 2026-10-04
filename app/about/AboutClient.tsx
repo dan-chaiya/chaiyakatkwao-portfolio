@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { photoAlt } from "@/lib/photos";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
 
@@ -8,19 +9,19 @@ const experience = [
   {
     role: "Live Production & Visual Coordinator",
     company: "Ad The Top Agency",
-    period: "2026 — Present",
+    period: "2026–Present",
     location: "Bangkok",
   },
   {
     role: "Audio/Visual Engineer",
     company: "Modal Creative Studio",
-    period: "2025 — 2026",
+    period: "2025–2026",
     location: "Bangkok",
   },
   {
     role: "Freelance Creative",
     company: "Independent",
-    period: "2022 — Present",
+    period: "2022–Present",
     location: "Thailand",
   },
 ];
@@ -89,7 +90,7 @@ export default function AboutClient() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
           {/* Left column */}
           <div className="lg:col-span-7">
-            <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8">
+            <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8">
               About
             </p>
 
@@ -100,7 +101,7 @@ export default function AboutClient() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Chaiya /
+              Chaiya
               <br />
               Katkwao.
             </h1>
@@ -150,11 +151,11 @@ export default function AboutClient() {
             </div>
 
             <div className="mt-16">
-              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-2">
+              <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-2">
                 Education
               </p>
               <p className="copy-small">
-                BFA Photography — Chiang Mai University, 2020–2025
+                BFA Photography, Chiang Mai University, 2020–2025
               </p>
             </div>
           </div>
@@ -165,17 +166,17 @@ export default function AboutClient() {
             <div className="relative aspect-[3/4] overflow-hidden bg-[var(--color-surface-dark)] mb-12">
               <Image
                 src="/images/portrait/dan.jpg"
-                alt="Chaiya Katkwao | Creative Producer in Bangkok"
+                alt={photoAlt("/images/portrait/dan.jpg", "Chaiya Katkwao")}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 40vw"
-                priority
+                preload
               />
             </div>
 
             {/* Experience timeline */}
             <div>
-              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
+              <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
                 Experience
               </p>
               <div className="space-y-px">
@@ -185,12 +186,12 @@ export default function AboutClient() {
                       <p className="copy-small flex-1 min-w-0 pr-4">
                         {item.role}
                       </p>
-                      <span className="font-body text-[11px] text-[var(--color-grey-400)] tracking-[0.05em] shrink-0 whitespace-nowrap">
+                      <span className="font-mono font-medium text-[11px] text-[var(--color-grey-400)] tracking-[0.05em] shrink-0 whitespace-nowrap">
                         {item.period}
                       </span>
                     </div>
                     <p className="font-body text-[13px] tracking-[0.04em] text-[var(--color-grey-400)]">
-                      {item.company} — {item.location}
+                      {item.company}, {item.location}
                     </p>
                   </div>
                 ))}
@@ -200,7 +201,7 @@ export default function AboutClient() {
 
             {/* Capabilities */}
             <div className="mt-12">
-              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
+              <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
                 Capabilities
               </p>
               <div>
@@ -220,10 +221,10 @@ export default function AboutClient() {
       <section className="border-t border-[var(--color-grey-700)] px-8 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-3">
-            <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-2">
+            <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-2">
               Selected
             </p>
-            <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)]">
+            <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)]">
               Clients
             </p>
           </div>
@@ -244,7 +245,7 @@ export default function AboutClient() {
                   >
                     {name}
                   </span>
-                  <span className="font-body text-[11px] tracking-[0.18em] text-[var(--color-grey-400)]">
+                  <span className="font-mono font-medium text-[11px] tracking-[0.18em] text-[var(--color-grey-400)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </li>
@@ -269,7 +270,7 @@ export default function AboutClient() {
                 global h2 rule sets weight 800 outside Tailwind's layers, so only
                 an inline weight can bring it back to 400. */}
             <h2
-              className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)]"
+              className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)]"
               style={{ fontWeight: 400 }}
             >
               <span className="block mb-2">Studio</span>
@@ -294,7 +295,7 @@ export default function AboutClient() {
                     >
                       {service.name}
                     </h3>
-                    <span className="font-body text-[11px] tracking-[0.18em] text-[var(--color-grey-400)]">
+                    <span className="font-mono font-medium text-[11px] tracking-[0.18em] text-[var(--color-grey-400)]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
@@ -304,7 +305,7 @@ export default function AboutClient() {
             </ul>
 
             <div className="mt-16">
-              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
+              <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
                 How it works
               </p>
               <ol className="grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -323,7 +324,7 @@ export default function AboutClient() {
       {/* Contact section */}
       <section className="border-t border-[var(--color-grey-700)] px-8 py-24">
         <div className="max-w-3xl">
-          <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8">
+          <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8">
             Contact
           </p>
           <h2
@@ -333,7 +334,7 @@ export default function AboutClient() {
               letterSpacing: "-0.02em",
             }}
           >
-            Let&apos;s /
+            Let&apos;s
             <br />
             connect.
           </h2>

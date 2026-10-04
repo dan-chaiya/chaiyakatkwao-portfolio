@@ -1,8 +1,26 @@
 "use client";
 
 import { useEffect, useCallback, useRef, useState } from "react";
+import Image, { getImageProps } from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { EASE } from "@/lib/motion";
+import { photoSize } from "@/lib/photos";
+
+// The full view goes through the image optimizer at the screen's width, like every
+// other photo on the site. Until 2026-10-04 it was a plain <img> of the original file:
+// opening Knack Factory and stepping three times fetched 29.6 MB, one photo 11.8 MB.
+// The originals on disk are untouched; only what is sent changes.
+const FULL_SIZES = "100vw";
+
+// Fetch the photos either side of the open one, so stepping through a set shows the
+// next picture at once instead of waiting on the network.
+function warm(src: string) {
+  const { props } = getImageProps({ src, alt: "", sizes: FULL_SIZES, ...photoSize(src) });
+  const img = new window.Image();
+  if (props.sizes) img.sizes = props.sizes;
+  if (props.srcSet) img.srcset = props.srcSet;
+  img.src = props.src;
+}
 
 export interface LightboxProps {
   src: string;
@@ -13,6 +31,9 @@ export interface LightboxProps {
   total?: number;
   hasPrev?: boolean;
   hasNext?: boolean;
+  /** The photos either side, fetched ahead so a step shows at once. */
+  prevSrc?: string;
+  nextSrc?: string;
   onClose: () => void;
   onPrev?: () => void;
   onNext?: () => void;
@@ -20,7 +41,7 @@ export interface LightboxProps {
 
 export default function Lightbox({
   src, alt, title, series, index, total,
-  hasPrev, hasNext, onClose, onPrev, onNext,
+  hasPrev, hasNext, prevSrc, nextSrc, onClose, onPrev, onNext,
 }: LightboxProps) {
   const hasMultiple = (total ?? 0) > 1;
 
@@ -45,6 +66,11 @@ export default function Lightbox({
   }, [hasNext, onNext]);
 
   const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (nextSrc) warm(nextSrc);
+    if (prevSrc) warm(prevSrc);
+  }, [prevSrc, nextSrc]);
 
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -99,7 +125,7 @@ export default function Lightbox({
       ref={dialogRef}
       role="dialog"
       aria-modal="true"
-      aria-label={title ? `${title}${series ? ` — ${series}` : ""}` : alt}
+      aria-label={title ? `${title}${series ? `, ${series}` : ""}` : alt}
       tabIndex={-1}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -114,13 +140,20 @@ export default function Lightbox({
         className="flex items-center justify-between px-8 py-5 flex-shrink-0"
         onClick={(e) => e.stopPropagation()}
       >
-        <span className="text-[11px] tracking-[0.3em] uppercase text-[var(--color-text-muted)]">
+        <span className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-text-muted)]">
           {series ?? ""}
         </span>
         <div className="flex items-center gap-6">
+          {/* Live, so a step is heard: the arrow keys change the photo while focus
+              stays where it is, and until 2026-10-04 a screen reader heard nothing. */}
           {index != null && total != null && (
-            <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] tabular-nums">
+            <span
+              aria-live="polite"
+              aria-atomic="true"
+              className="font-mono font-medium text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] tabular-nums"
+            >
               {String(index).padStart(2, "0")} / {String(total).padStart(2, "0")}
+              <span className="sr-only">: {alt}</span>
             </span>
           )}
           {/* X close button — 44px hit target (B6) */}
@@ -175,16 +208,22 @@ export default function Lightbox({
             else if (info.offset.x > 60 || info.velocity.x > 110) handlePrev();
           }}
           className="relative flex items-center justify-center w-full select-none"
-          style={{ maxHeight: "calc(100vh - 140px)", cursor: "grab" }}
+          style={{ maxHeight: "calc(100dvh - 140px)", cursor: "grab" }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          {/* dvh, not vh: on a phone 100vh is the height with the browser bars
+              hidden, so the bottom of a portrait photo sat under the toolbar. */}
+          <Image
             src={src}
             alt={alt}
+            {...photoSize(src)}
+            sizes={FULL_SIZES}
+            loading="eager"
             draggable={false}
             style={{
               objectFit: "contain",
-              maxHeight: "calc(100vh - 140px)",
+              width: "auto",
+              height: "auto",
+              maxHeight: "calc(100dvh - 140px)",
               maxWidth: "100%",
               display: "block",
               pointerEvents: "none",
@@ -220,7 +259,7 @@ export default function Lightbox({
               className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 border border-[var(--color-border-strong)] bg-[var(--color-bg)]/85 backdrop-blur-sm"
             >
               <span className="text-[13px] leading-none text-[var(--color-grey-300)]">‹</span>
-              <span className="text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-300)]">
+              <span className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-300)]">
                 Swipe or use arrows
               </span>
               <span className="text-[13px] leading-none text-[var(--color-grey-300)]">›</span>
@@ -235,7 +274,7 @@ export default function Lightbox({
           className="flex-shrink-0 px-8 pb-6"
           onClick={(e) => e.stopPropagation()}
         >
-          <span className="text-[11px] tracking-[0.08em] text-[var(--color-text-muted)]">{title}</span>
+          <span className="font-mono font-medium text-[11px] tracking-[0.08em] text-[var(--color-text-muted)]">{title}</span>
         </div>
       )}
     </motion.div>

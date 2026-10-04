@@ -18,6 +18,7 @@ import Image from "next/image";
 import { workAssets } from "@/data/work-asset-urls";
 import { HERO_INTERVAL_MS } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
+import { photoAlt } from "@/lib/photos";
 
 type Slide =
   | { kind: "video"; sources: { src: string; type: string }[]; poster: string; alt: string }
@@ -25,7 +26,7 @@ type Slide =
 
 // Verified assets: art originals via workAssets (never altered) + the optimized live loops.
 const SLIDES: Slide[] = [
-  { kind: "image", src: workAssets.woven("0.jpg"), alt: "Woven Memories, 2025 - Creative Producer" },
+  { kind: "image", src: workAssets.woven("0.jpg"), alt: photoAlt(workAssets.woven("0.jpg"), "Woven Memories, 2025") },
   {
     kind: "video",
     sources: [
@@ -33,9 +34,9 @@ const SLIDES: Slide[] = [
       { src: "/videos/motion/live-fitflop-may.mp4", type: "video/mp4" },
     ],
     poster: "/videos/motion/live-fitflop-may.poster.jpg",
-    alt: "Fitflop live commerce production - Creative Producer",
+    alt: "Fitflop live commerce stream",
   },
-  { kind: "image", src: workAssets.knack("Knack-75.jpg"), alt: "Knack Factory Fashion Show, 2024 - Creative Producer" },
+  { kind: "image", src: workAssets.knack("Knack-75.jpg"), alt: photoAlt(workAssets.knack("Knack-75.jpg"), "Knack Factory Fashion Show, 2024") },
   {
     kind: "video",
     sources: [
@@ -43,9 +44,9 @@ const SLIDES: Slide[] = [
       { src: "/videos/motion/live-rojukiss-may.mp4", type: "video/mp4" },
     ],
     poster: "/videos/motion/live-rojukiss-may.poster.jpg",
-    alt: "Rojukiss live commerce production - Creative Producer",
+    alt: "Rojukiss live commerce stream",
   },
-  { kind: "image", src: workAssets.podcast("_MG_8860.JPG"), alt: "Podcast Producer at Modal Creative Studio - Creative Producer" },
+  { kind: "image", src: workAssets.podcast("_MG_8860.JPG"), alt: photoAlt(workAssets.podcast("_MG_8860.JPG"), "Podcast studio at Modal Creative Studio") },
   {
     kind: "video",
     sources: [
@@ -53,7 +54,7 @@ const SLIDES: Slide[] = [
       { src: "/videos/motion/live-nestle.mp4", type: "video/mp4" },
     ],
     poster: "/videos/motion/live-nestle.poster.jpg",
-    alt: "Nestlé live commerce production - Creative Producer",
+    alt: "Nestlé live commerce stream",
   },
 ];
 
@@ -126,7 +127,7 @@ export default function HeroStage() {
           Chaiya Katkwao.
         </h1>
         <p className="mono-label" style={{ color: "var(--color-warm)" }}>
-          Creative Producer — Bangkok
+          Creative Producer, Bangkok
         </p>
       </div>
 
@@ -162,7 +163,7 @@ export default function HeroStage() {
                 src={slide.src}
                 alt={slide.alt}
                 fill
-                priority={i === 0}
+                preload={i === 0}
                 sizes="100vw"
                 className="object-contain"
               />
@@ -207,7 +208,9 @@ export default function HeroStage() {
             </button>
           )}
 
-          <div className="hidden sm:flex items-center gap-[6px]" role="group" aria-label="Slides">
+          {/* Each mark is a 24 x 44 button around a 16px bar, so the bars sit 8px
+              apart and every target meets WCAG 2.5.8 (they were 16px wide). */}
+          <div className="hidden sm:flex items-center" role="group" aria-label="Slides">
             {SLIDES.map((slide, i) => (
               <button
                 key={i}
@@ -215,12 +218,12 @@ export default function HeroStage() {
                 onClick={() => { setPicked(true); setActive(i); }}
                 aria-label={`Show slide ${i + 1}: ${slide.alt}`}
                 aria-current={i === active ? "true" : undefined}
-                className="flex h-11 w-4 items-center justify-center"
+                className="flex h-11 w-6 items-center justify-center"
               >
                 <span
                   style={{
                     display: "block",
-                    width: "100%",
+                    width: "16px",
                     height: "1px",
                     backgroundColor: i === active ? "var(--color-warm)" : "color-mix(in srgb, var(--color-warm) 34%, transparent)",
                     transition: "background-color 220ms ease",

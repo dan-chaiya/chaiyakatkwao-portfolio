@@ -11,6 +11,7 @@ import YouTubeEmbed from "@/components/YouTubeEmbed";
 import CommercialList from "@/components/CommercialList";
 import { projects } from "@/data/commercial";
 import { selectedEpisodes } from "@/data/youtube";
+import { photoAlt, photoSize } from "@/lib/photos";
 
 const liveCommerceVideos = [
   {
@@ -55,7 +56,7 @@ const liveCommerceVideos = [
   },
   {
     id: "lc-08",
-    title: "Guess — April",
+    title: "Guess, April",
     brand: "Guess",
     src: "/videos/live-commerce/guess.mp4",
     poster: "/images/live-posters/guess.jpg",
@@ -63,7 +64,7 @@ const liveCommerceVideos = [
   },
   {
     id: "lc-10",
-    title: "Colgate — May",
+    title: "Colgate, May",
     brand: "Colgate",
     src: "/videos/live-commerce/colgate-may.mp4",
     poster: "/images/live-posters/colgate-may.jpg",
@@ -71,7 +72,7 @@ const liveCommerceVideos = [
   },
   {
     id: "lc-11",
-    title: "Dutchmil Delivery — May",
+    title: "Dutchmil Delivery, May",
     brand: "Dutchmil Delivery",
     src: "/videos/live-commerce/dutchmil-may.mp4",
     poster: "/images/live-posters/dutchmil-may.jpg",
@@ -79,7 +80,7 @@ const liveCommerceVideos = [
   },
   {
     id: "lc-12",
-    title: "F&N Dairies — May",
+    title: "F&N Dairies, May",
     brand: "F&N Dairies",
     src: "/videos/live-commerce/fn-dairies-may.mp4",
     poster: "/images/live-posters/fn-dairies-may.jpg",
@@ -103,7 +104,7 @@ const liveCommerceVideos = [
   },
   {
     id: "lc-15",
-    title: "Shop at Nestlé — May",
+    title: "Shop at Nestlé, May",
     brand: "Shop at Nestlé",
     src: "/videos/live-commerce/shop-at-nestle-may.mp4",
     poster: "/images/live-posters/shop-at-nestle-may.jpg",
@@ -131,7 +132,7 @@ export default function CommercialClient() {
       <main id="main-content" className="pt-16 px-8 pb-8">
         {/* Header */}
         <div className="mb-20">
-          <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)] mb-5">
+          <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)] mb-5">
             Commercial
           </p>
           <h1
@@ -142,7 +143,7 @@ export default function CommercialClient() {
               letterSpacing: "-0.02em",
             }}
           >
-            Selected /
+            Selected
             <br />
             commissions.
           </h1>
@@ -182,18 +183,17 @@ export default function CommercialClient() {
               >
                 <Image
                   src={project.cover}
-                  alt={`${project.title} - Creative Producer`}
-                  width={0}
-                  height={0}
+                  alt={photoAlt(project.cover, project.title)}
+                  {...photoSize(project.cover)}
                   sizes="100vw"
-                  className="img-natural transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                  priority={i === 0}
+                  className="img-natural transition-transform duration-700 ease-out group-hover:scale-[1.02] group-focus-visible:scale-[1.02]"
+                  preload={i === 0}
                 />
-                <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/30 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/30 group-focus-visible:bg-[var(--color-surface-chat)]/30 transition-colors duration-500" />
                 {/* A solid block of the page ground, because it sits on the photograph:
                     see-through, it failed on dark covers in Light. */}
-                <div className="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-[opacity,transform] duration-200 ease-out">
-                  <span className="font-body text-[11px] tracking-[0.25em] uppercase text-[var(--color-warm)] bg-[var(--color-bg)] border border-[var(--color-warm)] px-3 py-2">
+                <div className="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 translate-y-1 group-hover:translate-y-0 group-focus-visible:translate-y-0 transition-[opacity,transform] duration-200 ease-out">
+                  <span className="font-mono font-medium text-[11px] tracking-[0.25em] uppercase text-[var(--color-warm)] bg-[var(--color-bg)] border border-[var(--color-warm)] px-3 py-2">
                     View case study →
                   </span>
                 </div>
@@ -202,14 +202,14 @@ export default function CommercialClient() {
               {/* Metadata row */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-8">
                 <div className="md:col-span-1">
-                  <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">
+                  <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">
                     {project.id}
                   </span>
                 </div>
                 <div className="md:col-span-4">
                   <Link
                     href={`/commercial/${project.slug}`}
-                    className="inline-block group"
+                    className="tap-target inline-block group"
                   >
                     <h2
                       className="font-heading text-[var(--color-warm)] mb-1 transition-opacity duration-300 group-hover:opacity-70"
@@ -222,7 +222,7 @@ export default function CommercialClient() {
                       {project.title}
                     </h2>
                   </Link>
-                  <p className="font-body text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
+                  <p className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
                     {project.role}
                   </p>
                 </div>
@@ -234,7 +234,7 @@ export default function CommercialClient() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="font-body text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
+                        className="font-mono font-medium text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
                       >
                         {tag}
                       </span>
@@ -242,7 +242,7 @@ export default function CommercialClient() {
                   </div>
                 </div>
                 <div className="md:col-span-2 md:text-right">
-                  <span className="font-body text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">
+                  <span className="font-mono font-medium text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">
                     {project.year}
                   </span>
                 </div>
@@ -265,7 +265,7 @@ export default function CommercialClient() {
                           setLightbox({
                             images: project.images.map((s, k) => ({
                               src: s,
-                              alt: `${project.title} — ${k + 2} - Creative Producer`,
+                              alt: photoAlt(s, `${project.title}, ${k + 1}`),
                               title: project.title,
                               series: project.subtitle,
                             })),
@@ -276,7 +276,7 @@ export default function CommercialClient() {
                         {isPodcast ? (
                           <Image
                             src={src}
-                            alt={`${project.title} ${j + 2} - Creative Producer`}
+                            alt={photoAlt(src, `${project.title}, ${j + 1}`)}
                             fill
                             sizes="(max-width: 768px) 33vw, 20vw"
                             className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
@@ -284,9 +284,8 @@ export default function CommercialClient() {
                         ) : (
                           <Image
                             src={src}
-                            alt={`${project.title} ${j + 2} - Creative Producer`}
-                            width={0}
-                            height={0}
+                            alt={photoAlt(src, `${project.title}, ${j + 1}`)}
+                            {...photoSize(src)}
                             sizes="(max-width: 768px) 33vw, 20vw"
                             className="img-natural transition-transform duration-500 ease-out group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
                           />
@@ -305,7 +304,7 @@ export default function CommercialClient() {
         <section className="mt-32 pt-16 border-t border-[var(--color-border-muted)]">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
             <div className="md:col-span-1">
-              <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">06</span>
+              <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">06</span>
             </div>
             <div className="md:col-span-4">
               <h2
@@ -314,7 +313,7 @@ export default function CommercialClient() {
               >
                 Selected Episodes
               </h2>
-              <p className="font-body text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
+              <p className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
                 Producer / Studio
               </p>
             </div>
@@ -326,7 +325,7 @@ export default function CommercialClient() {
                 {["Podcast", "Long-form", "Studio Production"].map((tag) => (
                   <span
                     key={tag}
-                    className="font-body text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
+                    className="font-mono font-medium text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
                   >
                     {tag}
                   </span>
@@ -334,7 +333,7 @@ export default function CommercialClient() {
               </div>
             </div>
             <div className="md:col-span-2 md:text-right">
-              <span className="font-body text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">2025–2026</span>
+              <span className="font-mono font-medium text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">2025–2026</span>
             </div>
           </div>
 
@@ -346,7 +345,7 @@ export default function CommercialClient() {
                   <p className="copy-small line-clamp-2">
                     {video.title}
                   </p>
-                  <span className="font-body text-[11px] tracking-[0.15em] uppercase text-[var(--color-text-muted)] shrink-0">
+                  <span className="font-mono font-medium text-[11px] tracking-[0.15em] uppercase text-[var(--color-text-muted)] shrink-0">
                     {video.show}
                   </span>
                 </div>
@@ -358,11 +357,11 @@ export default function CommercialClient() {
         {/* Live Commerce section */}
         <section className="mt-24">
           <div style={{ borderTop: "1px solid color-mix(in srgb, var(--color-text) 18%, transparent)", paddingTop: "20px", marginBottom: "48px", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-            <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">Live Commerce</p>
+            <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">Live Commerce</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
             <div className="md:col-span-1">
-              <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">07</span>
+              <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">07</span>
             </div>
             <div className="md:col-span-4">
               <h2
@@ -371,7 +370,7 @@ export default function CommercialClient() {
               >
                 Live Commerce
               </h2>
-              <p className="font-body text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
+              <p className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
                 Live Production &amp; Visual Coordinator
               </p>
             </div>
@@ -383,7 +382,7 @@ export default function CommercialClient() {
                 {["Live Production", "Art Direction", "AV Engineering"].map((tag) => (
                   <span
                     key={tag}
-                    className="font-body text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
+                    className="font-mono font-medium text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
                   >
                     {tag}
                   </span>
@@ -391,7 +390,7 @@ export default function CommercialClient() {
               </div>
             </div>
             <div className="md:col-span-2 md:text-right">
-              <span className="font-body text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">2026</span>
+              <span className="font-mono font-medium text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">2026</span>
             </div>
           </div>
 
@@ -403,7 +402,7 @@ export default function CommercialClient() {
                   playsInline
                   preload="none"
                   poster={video.poster}
-                  aria-label={`${video.brand} — live commerce production`}
+                  aria-label={`${video.brand}, live commerce production`}
                   className="w-full h-auto block"
                 >
                   <source src={video.src} type={video.type} />
@@ -441,6 +440,8 @@ export default function CommercialClient() {
             total={lightbox.images.length}
             hasPrev={lightbox.index > 0}
             hasNext={lightbox.index < lightbox.images.length - 1}
+            prevSrc={lightbox.images[lightbox.index - 1]?.src}
+            nextSrc={lightbox.images[lightbox.index + 1]?.src}
             onClose={() => setLightbox(null)}
             onPrev={() => setLightbox((lb) => lb && { ...lb, index: lb.index - 1 })}
             onNext={() => setLightbox((lb) => lb && { ...lb, index: lb.index + 1 })}

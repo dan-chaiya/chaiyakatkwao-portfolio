@@ -167,38 +167,35 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle grain overlay — barely visible, purely tactile */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9000;
-  opacity: 0.038;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px 200px;
-}
-
 ::selection {
   background-color: var(--color-selection-bg);
   color: var(--color-selection-text);
 }
 
-/* Scrollbar — architectural minimal */
-::-webkit-scrollbar { width: 1px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb { background: var(--color-grey-700); }
+/* Scrollbar: thin, but a thumb a mouse can hold. Until 2026-10-04 it was 1px wide in
+   Chrome and Safari, a line nobody could grab. The thumb is a text grey so it reads
+   at 3:1 or better on the ground in both themes (WCAG 1.4.11). Chrome and Firefox take
+   the standard properties; Safari only reads the ::-webkit-scrollbar rules. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-grey-500) transparent;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-grey-500); border: 2px solid var(--color-bg); }
 
 *:focus-visible {
   outline: 1px solid var(--color-focus-ring);
   outline-offset: 3px;
 }
 
-/* Layout shell */
+/* Layout shell. The same 32px edge as every page's px-8, so the footer and the home
+   page's About and Contact rows line up with the logo, the hero and the page titles.
+   Until 2026-10-04 it was a centred 1280px box with 24px gutters: an 8px step on
+   phones and a 48px step on wide screens. */
 .section-shell {
-  margin-inline: auto;
-  width: min(1280px, calc(100% - 3rem));
+  width: 100%;
+  padding-inline: 2rem;
 }
 
 /* Bauhaus architectural rule — 0.5px visual weight via opacity */
@@ -423,24 +420,6 @@ html.theme-fading *::after {
    lighter native cut; heads styled inline set fontWeight: 800 for the same reason. */
 h1, h2, .font-heading { font-weight: 800; }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-/* Gentle, non-destructive Ken-Burns for pristine art in the hero.
-   Presentation only — the source image file is never modified. */
-@keyframes kenburns {
-  from { transform: scale(1); }
-  to   { transform: scale(1.06); }
-}
-.kenburns {
-  animation: kenburns 7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-@media (prefers-reduced-motion: reduce) {
-  .kenburns { animation: none; }
-}
-
 /* Reduced motion is a request for less movement, not for no feedback. Killing
    every duration to 0.01ms removes hover, focus and state changes users still
    need — and an infinite animation clamped to 0.01ms flashes rather than stops.
@@ -457,6 +436,4 @@ h1, h2, .font-heading { font-weight: 800; }
     transition-property: color, background-color, border-color, opacity, outline-color !important;
     animation-duration: 1ms !important;
   }
-
-  .kenburns { animation: none !important; }
 }

@@ -6,6 +6,7 @@ import Image from "next/image";
 import PageTransition from "@/components/PageTransition";
 import Lightbox from "@/components/Lightbox";
 import Footer from "@/components/Footer";
+import { photoAlt, photoSize } from "@/lib/photos";
 
 const wovenMemories = Array.from({ length: 12 }, (_, i) => ({
   id: i + 1,
@@ -94,11 +95,10 @@ function MasonryGrid({
             <div className="relative overflow-hidden bg-[var(--color-surface-elevated)]">
               <Image
                 src={item.src}
-                alt={`${item.title} - ${item.series} - Chaiya Katkwao Creative Producer`}
-                width={0}
-                height={0}
+                alt={photoAlt(item.src, `${item.series}, ${item.title}`)}
+                {...photoSize(item.src)}
                 sizes={sizes}
-                priority={index < 2}
+                loading={index < 2 ? "eager" : "lazy"}
                 className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.02] group-focus-visible:scale-[1.02]"
               />
               <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/40 group-focus-visible:bg-[var(--color-surface-chat)]/40 transition-colors duration-500" />
@@ -127,7 +127,7 @@ export default function GalleryClient() {
       <main id="main-content" className="pt-16 px-8 pb-8">
         {/* Header */}
         <div className="mb-20">
-          <p className="font-body text-[11px] tracking-[0.35em] uppercase text-[var(--color-grey-400)] mb-5">
+          <p className="font-mono font-medium text-[11px] tracking-[0.35em] uppercase text-[var(--color-grey-400)] mb-5">
             Gallery
           </p>
           <h1
@@ -138,7 +138,7 @@ export default function GalleryClient() {
               letterSpacing: "-0.02em",
             }}
           >
-            Photographs /
+            Photographs
             <br />
             &amp; prints.
           </h1>
@@ -147,11 +147,11 @@ export default function GalleryClient() {
         {/* Woven Memories series */}
         <div className="mb-28">
           <div className="flex items-center gap-8 mb-12">
-            <span className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
+            <span className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
               Woven Memories
             </span>
             <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
-            <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2025</span>
+            <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2025</span>
           </div>
           <MasonryGrid
             items={wovenMemories}
@@ -163,11 +163,11 @@ export default function GalleryClient() {
         {/* Selected Work — unified */}
         <div className="mb-28">
           <div className="flex items-center gap-8 mb-12">
-            <span className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
+            <span className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
               Selected Work
             </span>
             <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
-            <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2024–2025</span>
+            <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2024–2025</span>
           </div>
           <MasonryGrid
             items={selectedWork}
@@ -183,13 +183,15 @@ export default function GalleryClient() {
         {lightbox && activeLbItem && (
           <Lightbox
             src={activeLbItem.src}
-            alt={activeLbItem.title}
+            alt={photoAlt(activeLbItem.src, `${activeLbItem.series}, ${activeLbItem.title}`)}
             title={activeLbItem.title}
             series={activeLbItem.series}
             index={lightbox.index + 1}
             total={lightbox.items.length}
             hasPrev={lightbox.index > 0}
             hasNext={lightbox.index < lightbox.items.length - 1}
+            prevSrc={lightbox.items[lightbox.index - 1]?.src}
+            nextSrc={lightbox.items[lightbox.index + 1]?.src}
             onClose={() => setLightbox(null)}
             onPrev={() => setLightbox((lb) => lb && { ...lb, index: lb.index - 1 })}
             onNext={() => setLightbox((lb) => lb && { ...lb, index: lb.index + 1 })}

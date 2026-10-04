@@ -41,7 +41,9 @@ export default function Navigation() {
   }
 
   // While the overlay is up it is the only thing on screen: lock the page behind
-  // it, close on Escape, and keep Tab inside it.
+  // it, close on Escape, and keep Tab inside it. The loop runs through the close
+  // button too: it sits in the header, outside the overlay, and until 2026-10-04 Tab
+  // never reached it, so a keyboard could close the menu only with Escape.
   useEffect(() => {
     if (!open) return;
 
@@ -51,7 +53,10 @@ export default function Navigation() {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") { setOpen(false); triggerRef.current?.focus(); return; }
       if (e.key !== "Tab" || !menuRef.current) return;
-      const focusable = menuRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
+      const focusable = [
+        ...(triggerRef.current ? [triggerRef.current] : []),
+        ...menuRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'),
+      ];
       if (focusable.length === 0) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
@@ -124,16 +129,11 @@ export default function Navigation() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="tap-target"
-                      style={{
-                        ...MONO,
-                        color: active ? "var(--color-text)" : "var(--color-grey-300)",
-                        transition: "color 180ms ease",
-                        position: "relative",
-                        paddingBottom: "1px",
-                      }}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = active ? "var(--color-text)" : "var(--color-grey-300)"; }}
+                      aria-current={active ? "page" : undefined}
+                      className={`tap-target relative pb-px transition-colors duration-[180ms] hover:text-[var(--color-text)] ${
+                        active ? "text-[var(--color-text)]" : "text-[var(--color-grey-300)]"
+                      }`}
+                      style={MONO}
                     >
                       {link.label}
                       {active && (
@@ -149,14 +149,8 @@ export default function Navigation() {
 
               <a
                 href="mailto:chaiyakatkwao@gmail.com"
-                className="tap-target"
-                style={{
-                  ...MONO,
-                  color: "var(--color-grey-300)",
-                  transition: "color 180ms ease",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-grey-300)"; }}
+                className="tap-target text-[var(--color-grey-300)] transition-colors duration-[180ms] hover:text-[var(--color-text)]"
+                style={MONO}
               >
                 Contact
               </a>
@@ -185,7 +179,12 @@ export default function Navigation() {
         </div>
       </header>
 
-      {/* Mobile full-screen overlay */}
+      {/* Mobile full-screen overlay. It scrolls itself and centres the links with auto
+          margins, which fall back to the top instead of pushing past it: on a phone
+          turned sideways (844 x 390) the centred list used to run off both ends of a
+          locked page, with Commercial behind the header and Contact below the screen.
+          The links size on the smaller of width and height for the same reason, and
+          the name line sits in flow under them rather than over them. */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -195,10 +194,10 @@ export default function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-40 flex flex-col justify-center px-8"
-            style={{ backgroundColor: "var(--color-bg)" }}
+            className="fixed inset-0 z-40 flex flex-col overflow-y-auto overscroll-contain px-8"
+            style={{ backgroundColor: "var(--color-bg)", paddingTop: "var(--header-h)" }}
           >
-            <nav className="flex flex-col">
+            <nav className="my-auto flex flex-col py-8" aria-label="Menu">
               {[...navLinks, { href: "mailto:chaiyakatkwao@gmail.com", label: "Contact" }].map((link, i) => (
                 <motion.div
                   key={link.href}
@@ -209,22 +208,20 @@ export default function Navigation() {
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
+                    aria-current={pathname === link.href ? "page" : undefined}
+                    className="block transition-opacity duration-[180ms] hover:opacity-40"
                     style={{
-                      display: "block",
                       fontFamily: "var(--font-heading)",
                       fontWeight: 800,
                       textTransform: "uppercase",
                       color: "var(--color-text)",
                       letterSpacing: "-0.03em",
                       lineHeight: 0.9,
-                      fontSize: "clamp(2.5rem, 10vw, 5rem)",
+                      fontSize: "clamp(2rem, min(10vw, 9svh), 5rem)",
                       padding: "14px 0",
                       borderBottom: "1px solid var(--color-border-faint)",
                       textDecoration: "none",
-                      transition: "opacity 180ms ease",
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.4"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
                   >
                     {link.label}
                   </Link>
@@ -232,10 +229,7 @@ export default function Navigation() {
               ))}
             </nav>
 
-            <p
-              className="absolute bottom-10 left-8"
-              style={{ ...MONO, color: "var(--color-text-muted)" }}
-            >
+            <p className="shrink-0 pb-10" style={{ ...MONO, color: "var(--color-text-muted)" }}>
               Chaiya Katkwao / Creative Producer
             </p>
           </motion.div>

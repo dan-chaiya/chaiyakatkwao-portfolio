@@ -10,6 +10,7 @@ import YouTubeEmbed from "@/components/YouTubeEmbed";
 import Footer from "@/components/Footer";
 import { projects, type Project } from "@/data/commercial";
 import { selectedEpisodes } from "@/data/youtube";
+import { photoAlt, photoSize } from "@/lib/photos";
 
 // The interactive body of a case study: lightbox state, motion, the next link.
 // page.tsx (a server component) resolves the slug, owns the search and share
@@ -28,10 +29,10 @@ export default function CaseStudyClient({ project }: { project: Project }) {
   const galleryImages = uniqueImages.filter((src) => src !== project.cover);
 
   const allImages: LbImage[] = [
-    { src: project.cover, alt: `${project.title} - Creative Producer`, title: project.title, series: project.subtitle },
+    { src: project.cover, alt: photoAlt(project.cover, project.title), title: project.title, series: project.subtitle },
     ...galleryImages.map((src, i) => ({
       src,
-      alt: `${project.title} — ${i + 2} - Creative Producer`,
+      alt: photoAlt(src, `${project.title}, ${i + 2}`),
       title: project.title,
       series: project.subtitle,
     })),
@@ -47,7 +48,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         <div className="mb-12">
           <Link
             href="/commercial"
-            className="tap-target font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] hover:text-[var(--color-warm)] transition-colors duration-300"
+            className="tap-target font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] hover:text-[var(--color-warm)] transition-colors duration-300"
           >
             ← Commercial
           </Link>
@@ -56,12 +57,12 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         {/* Header */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-16">
           <div className="md:col-span-1">
-            <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">
+            <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">
               {project.id}
             </span>
           </div>
           <div className="md:col-span-7">
-            <p className="font-body text-[11px] tracking-[0.35em] uppercase text-[var(--color-grey-500)] mb-5">
+            <p className="font-mono font-medium text-[11px] tracking-[0.35em] uppercase text-[var(--color-grey-500)] mb-5">
               {project.subtitle}
             </p>
             <h1
@@ -80,7 +81,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
           </div>
           <div className="md:col-span-4 md:pl-8 flex flex-col gap-6 md:gap-8 mt-4 md:mt-0">
             <div>
-              <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
+              <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
                 Role
               </p>
               <p className="copy-small">
@@ -88,7 +89,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
               </p>
             </div>
             <div>
-              <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
+              <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
                 Year
               </p>
               <p className="copy-small">
@@ -96,14 +97,14 @@ export default function CaseStudyClient({ project }: { project: Project }) {
               </p>
             </div>
             <div>
-              <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
+              <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-2">
                 Discipline
               </p>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="font-body text-[11px] tracking-[0.15em] uppercase text-[var(--color-grey-500)] border border-[var(--color-border)] px-2 py-1"
+                    className="font-mono font-medium text-[11px] tracking-[0.15em] uppercase text-[var(--color-grey-500)] border border-[var(--color-border)] px-2 py-1"
                   >
                     {tag}
                   </span>
@@ -113,37 +114,40 @@ export default function CaseStudyClient({ project }: { project: Project }) {
           </div>
         </div>
 
-        {/* Hero image — capped at 80vh so portrait images don't dominate the scroll */}
-        <div
-          className="relative w-full overflow-hidden bg-[var(--color-surface)] mb-4 cursor-pointer group"
+        {/* Hero image — capped at 80vh so portrait images don't dominate the scroll.
+            Every photo that opens the lightbox is a real <button> (.gallery-tile), as on
+            /gallery and /commercial: until 2026-10-04 these were divs with an onClick,
+            and the keyboard could not open a single case-study photo. */}
+        <button
+          type="button"
+          className="gallery-tile relative block w-full overflow-hidden bg-[var(--color-surface)] mb-4 cursor-pointer group"
           style={{ maxHeight: "80vh" }}
           onClick={() => setLightbox({ images: allImages, index: 0 })}
         >
           <Image
             src={project.cover}
-            alt={`${project.title} - Creative Producer`}
-            width={0}
-            height={0}
+            alt={allImages[0].alt}
+            {...photoSize(project.cover)}
             sizes="100vw"
-            className="img-natural transition-transform duration-700 ease-out group-hover:scale-[1.01]"
-            priority
+            className="img-natural"
+            preload
           />
-          <div className="absolute inset-0 bg-[var(--color-bg)]/0 group-hover:bg-[var(--color-bg)]/20 transition-colors duration-500" />
+          <div className="absolute inset-0 bg-[var(--color-bg)]/0 group-hover:bg-[var(--color-bg)]/20 group-focus-visible:bg-[var(--color-bg)]/20 transition-colors duration-500" />
           {/* Hint that clicking opens the full image. A solid block of the page ground, because
               it sits on the photograph: see-through, it failed on dark covers in Light. */}
-          <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="font-body text-[11px] tracking-[0.2em] uppercase text-[var(--color-warm)] bg-[var(--color-bg)] border border-[var(--color-border-strong)] px-3 py-2">
+          <div aria-hidden="true" className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
+            <span className="font-mono font-medium text-[11px] tracking-[0.2em] uppercase text-[var(--color-warm)] bg-[var(--color-bg)] border border-[var(--color-border-strong)] px-3 py-2">
               View full ↗
             </span>
           </div>
-        </div>
+        </button>
 
         {/* Brief — long-form context */}
         {project.brief && (
           <section className="py-24 md:py-32">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
               <div className="md:col-span-3">
-                <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">
+                <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">
                   The Brief
                 </p>
               </div>
@@ -161,21 +165,21 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         {/* Supporting images — natural aspect ratios, no cropping */}
         <div className="space-y-2">
           {galleryImages.map((src, i) => (
-            <div
+            <button
               key={src}
-              className="relative w-full overflow-hidden bg-[var(--color-surface)] cursor-pointer group"
+              type="button"
+              className="gallery-tile relative block w-full overflow-hidden bg-[var(--color-surface)] cursor-pointer group"
               onClick={() => setLightbox({ images: allImages, index: i + 1 })}
             >
               <Image
                 src={src}
-                alt={`${project.title} ${i + 2} - Creative Producer`}
-                width={0}
-                height={0}
+                alt={allImages[i + 1].alt}
+                {...photoSize(src)}
                 sizes="100vw"
-                className="img-natural transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+                className="img-natural"
               />
-              <div className="absolute inset-0 bg-[var(--color-bg)]/0 group-hover:bg-[var(--color-bg)]/20 transition-colors duration-500" />
-            </div>
+              <div className="absolute inset-0 bg-[var(--color-bg)]/0 group-hover:bg-[var(--color-bg)]/20 group-focus-visible:bg-[var(--color-bg)]/20 transition-colors duration-500" />
+            </button>
           ))}
         </div>
 
@@ -183,11 +187,11 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         {project.youtubeIds && project.youtubeIds.length > 0 && (
           <section className="mt-32 pt-16 border-t border-[var(--color-border)]">
             <div className="flex items-center gap-8 mb-12">
-              <span className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">
+              <span className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)]">
                 Selected Episodes
               </span>
               <div className="flex-1 h-px bg-[var(--color-border)]" />
-              <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">
+              <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">
                 {String(project.youtubeIds.length).padStart(2, "0")}
               </span>
             </div>
@@ -202,7 +206,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
                       <p className="copy-small line-clamp-2">
                         {meta.title}
                       </p>
-                      <span className="font-body text-[11px] tracking-[0.15em] uppercase text-[var(--color-grey-500)] shrink-0">
+                      <span className="font-mono font-medium text-[11px] tracking-[0.15em] uppercase text-[var(--color-grey-500)] shrink-0">
                         {meta.show}
                       </span>
                     </div>
@@ -215,7 +219,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
 
         {/* Next project */}
         <section className="mt-32 pt-16 border-t border-[var(--color-border)]">
-          <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-6">
+          <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-500)] mb-6">
             Next
           </p>
           <Link
@@ -232,8 +236,8 @@ export default function CaseStudyClient({ project }: { project: Project }) {
             >
               {next.title} →
             </h2>
-            <p className="font-body text-[11px] tracking-[0.2em] uppercase text-[var(--color-grey-500)] mt-3">
-              {next.subtitle} — {next.year}
+            <p className="font-mono font-medium text-[11px] tracking-[0.2em] uppercase text-[var(--color-grey-500)] mt-3">
+              {next.subtitle}, {next.year}
             </p>
           </Link>
         </section>
@@ -254,6 +258,8 @@ export default function CaseStudyClient({ project }: { project: Project }) {
             total={lightbox.images.length}
             hasPrev={lightbox.index > 0}
             hasNext={lightbox.index < lightbox.images.length - 1}
+            prevSrc={lightbox.images[lightbox.index - 1]?.src}
+            nextSrc={lightbox.images[lightbox.index + 1]?.src}
             onClose={() => setLightbox(null)}
             onPrev={() => setLightbox((lb) => lb && { ...lb, index: lb.index - 1 })}
             onNext={() => setLightbox((lb) => lb && { ...lb, index: lb.index + 1 })}
