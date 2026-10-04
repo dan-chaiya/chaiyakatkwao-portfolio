@@ -10,8 +10,8 @@ const links = [
   // external: true renders a plain <a>, which is required here and not a style
   // choice. /systems is a static HTML file served out of public/, not a Next
   // route, so next/link's client-side navigation would fail to find it.
-  { href: "/systems", label: "Systems", external: true },
-  { href: "mailto:chaiyakatkwao@gmail.com", label: "Email", external: true },
+  { href: "/systems", label: "Systems", external: true, hint: "Internal software Chaiya built for the studio" },
+  { href: "mailto:chaiyakatkwao@gmail.com", label: "Contact", external: true },
 ];
 
 const MONO: React.CSSProperties = {
@@ -43,6 +43,7 @@ export default function Footer() {
               <a
                 key={item.label}
                 href={item.href}
+                title={"hint" in item ? item.hint : undefined}
                 className={LINK}
                 style={MONO}
               >

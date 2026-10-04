@@ -103,6 +103,9 @@ export default function HeroStage() {
   // True when the visitor picked the current slide. A pick is answered in 300ms; the
   // unattended slideshow keeps its slow 1200ms cross-fade.
   const [picked, setPicked] = useState(false);
+  // The slide mark under the pointer or keyboard focus: the caption names it before it
+  // is picked, so the thin bars say which work they lead to (2026-10-04).
+  const [preview, setPreview] = useState<number | null>(null);
   const count = SLIDES.length;
 
   // Continuous auto-loop. WCAG 2.2.2 requires that anything moving for more than
@@ -229,7 +232,7 @@ export default function HeroStage() {
             control already carry the description, and a caption that changes every six
             seconds must not talk over the page. */}
         <p className="mono-label" aria-hidden="true" style={{ color: "var(--color-warm)", lineHeight: 1.6 }}>
-          {SLIDES[active].caption}
+          {SLIDES[preview ?? active].caption}
         </p>
         {/* The counter implied controls that did not exist. Now it is one: pause
             stops the rotation, and the slide marks step it. Hidden entirely under
@@ -267,6 +270,10 @@ export default function HeroStage() {
                 key={i}
                 type="button"
                 onClick={() => { setPicked(true); setActive(i); }}
+                onMouseEnter={() => setPreview(i)}
+                onMouseLeave={() => setPreview(null)}
+                onFocus={() => setPreview(i)}
+                onBlur={() => setPreview(null)}
                 aria-label={`Show slide ${i + 1}: ${slide.alt}`}
                 aria-current={i === active ? "true" : undefined}
                 className="flex h-11 w-6 items-center justify-center"

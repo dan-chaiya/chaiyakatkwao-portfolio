@@ -31,6 +31,7 @@ export default function ChatInterface() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [lastPrompt, setLastPrompt] = useState<string | null>(null);
   const hasUserMessages = messages.some(m => m.role === "user");
   const idRef = useRef(0);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -55,11 +56,14 @@ export default function ChatInterface() {
   // A suggestion is a finished question, so a tap sends it, as quick replies do in
   // messaging apps; filling the field and waiting for Enter left visitors unsure
   // anything had happened (2026-09-27).
-  async function send(text: string) {
+  async function send(text: string, retry = false) {
     if (!text.trim() || isLoading) return;
 
+    // A retry replaces the failed question instead of asking it twice.
+    const base = retry && messages[messages.length - 1]?.role === "user" ? messages.slice(0, -1) : messages;
+    setLastPrompt(text);
     const userMsg: Message = { id: String(++idRef.current), role: "user", content: text };
-    const allMessages = [...messages, userMsg];
+    const allMessages = [...base, userMsg];
     setMessages(allMessages);
     setInput("");
     setIsLoading(true);
@@ -174,8 +178,20 @@ export default function ChatInterface() {
               <div style={{ display: "flex", justifyContent: "flex-start" }}>
                 <div role="alert" style={{ padding: "12px 16px", backgroundColor: "var(--color-surface-dark)", border: "1px solid var(--color-border-muted)", color: "var(--color-grey-400)", fontFamily: "var(--font-archivo)", fontSize: "14px" }}>
                   {error}{" "}
-                  {/* A way forward, not only a dead end (2026-10-04). */}
-                  <a href="mailto:chaiyakatkwao@gmail.com" className="text-[var(--color-text)] underline underline-offset-4">Or email Chaiya directly.</a>
+                  {/* One-click retry that keeps the question, and email as the way out
+                      (2026-10-04): an error should never cost the visitor their words. */}
+                  {lastPrompt && (
+                    <button
+                      type="button"
+                      onClick={() => send(lastPrompt, true)}
+                      disabled={isLoading}
+                      className="text-[var(--color-text)] underline underline-offset-4"
+                      style={{ background: "transparent", border: 0, padding: 0, cursor: "pointer", font: "inherit" }}
+                    >
+                      Try again
+                    </button>
+                  )}{lastPrompt ? " or " : ""}
+                  <a href="mailto:chaiyakatkwao@gmail.com" className="text-[var(--color-text)] underline underline-offset-4">{lastPrompt ? "email Chaiya directly." : "Or email Chaiya directly."}</a>
                 </div>
               </div>
             )}
