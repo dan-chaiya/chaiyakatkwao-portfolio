@@ -328,9 +328,9 @@ export default function AboutClient() {
             </a>
             <a
               href="/cv"
-              className="font-body inline-block text-xs tracking-[0.2em] uppercase text-[var(--color-grey-500)] border border-[var(--color-grey-700)] px-8 py-4 hover:border-[var(--color-warm)] hover:text-[var(--color-warm)] transition-colors duration-200"
+              className="tap-target font-mono font-medium text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text)]"
             >
-              View CV →
+              Or read the CV →
             </a>
           </div>
         </div>

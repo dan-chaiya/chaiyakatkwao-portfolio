@@ -283,6 +283,8 @@ Labelled like gear: flat, square, named in mono, and answering instantly. No dec
 - There are no cards. Work sits directly on the ground; sections are separated by `border` hairlines and 80px of vertical space.
 - The home triptych is three image links in a 1px-gap grid, each photograph clean and its title under it in flow (Title step, "Gallery →"), never over it. No index numbers: the order means nothing.
 - Under the Home bio, the **Selected clients** roll (`data/clients.ts`, shared with About) is the producer proof an agency scans for; it replaced a list of disciplines that repeated About and the CV.
+- Production scale comes from `data/live-studio.ts` (counted from the Live Studio OS sheet; aggregates only, never names, phones or prices): a sentence under the Home bio, the Team / Studio / Gear / System credits on the /commercial Live Commerce section, and the live slides' captions. Never as a row of big numbers with small labels: that is the banned hero-metric template.
+- The Home client roll is one run of names in the Lead step, not ruled rows.
 - A case study's meta column leads with **Client**, then Role, Year, Discipline; it ends on the next project's title beside its cover.
 
 ### Inputs / Fields

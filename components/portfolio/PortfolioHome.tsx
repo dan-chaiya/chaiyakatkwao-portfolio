@@ -8,6 +8,7 @@ import PageTransition from "@/components/PageTransition";
 import { workAssets } from "@/data/work-asset-urls";
 import { photoAlt } from "@/lib/photos";
 import { clients } from "@/data/clients";
+import { liveStudio as L } from "@/data/live-studio";
 
 const sections = [
   {
@@ -94,6 +95,16 @@ export default function PortfolioHome() {
               >
                 Full Profile →
               </Link>
+
+              {/* Production proof with a scale, from the studio's own records
+                  (data/live-studio.ts). A sentence, not a row of big numbers: the
+                  stat-tile block is a banned template (2026-10-04). */}
+              <p className="copy-body" style={{ marginTop: "40px", maxWidth: "52ch", color: "var(--color-grey-300)" }}>
+                At Ad The Top that means {L.rooms} live rooms on {L.floors} floors, a live
+                department of {L.department}, {L.gear} pieces of gear tracked in software I
+                built, and {L.faultsResolved} of {L.faultsLogged} logged faults resolved
+                between {L.faultWindow.replace("–", " and ")}.
+              </p>
             </div>
 
             <div className="md:col-span-4 md:col-start-9">
@@ -101,11 +112,11 @@ export default function PortfolioHome() {
                   agency is looking for, and the disciplines already sit in the hero, on
                   About and on the CV (2026-10-04). Unnumbered: the order means nothing. */}
               <Label>Selected clients</Label>
-              <ul style={{ marginTop: "20px", listStyle: "none" }}>
-                {clients.map((c, i) => (
-                  <ListRow key={c} label={c} last={i === clients.length - 1} />
-                ))}
-              </ul>
+              {/* One run of names, not eleven ruled rows: the rows repeated the hairline
+                  list every page uses, and left the bio column empty beside them. */}
+              <p className="copy-lead" style={{ marginTop: "20px" }}>
+                {clients.join(", ")}.
+              </p>
             </div>
           </div>
         </section>
@@ -217,22 +228,6 @@ export default function PortfolioHome() {
   );
 }
 
-function ListRow({ label, last }: { label: string; last: boolean }) {
-  return (
-    <li
-      className="copy-small"
-      style={{
-        borderTop: "1px solid var(--color-border)",
-        ...(last ? { borderBottom: "1px solid var(--color-border)" } : {}),
-        padding: "13px 0",
-        fontWeight: 500,
-        color: "var(--color-grey-300)",
-      }}
-    >
-      {label}
-    </li>
-  );
-}
 
 // The featured project: the photograph at full contrast in a 16:9 frame, then its
 // caption below in flow, on the page ground. The dark gradient wash that carried
