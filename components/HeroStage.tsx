@@ -65,7 +65,7 @@ const SLIDES: Slide[] = [
     ],
     poster: "/videos/motion/live-fitflop-may.poster.jpg",
     alt: "Fitflop live commerce stream",
-    caption: "Fitflop · Live production, Ad The Top, 2026",
+    caption: "Fitflop · Live production, one of 15 rooms run at Ad The Top, 2026",
   },
   {
     kind: "image",
@@ -81,7 +81,7 @@ const SLIDES: Slide[] = [
     ],
     poster: "/videos/motion/live-nestle.poster.jpg",
     alt: "Nestlé live commerce stream",
-    caption: "Nestlé Health Science · Live production, Ad The Top, 2026",
+    caption: "Nestlé Health Science · Live production, one of 15 rooms run at Ad The Top, 2026",
   },
   {
     kind: "image",
@@ -286,7 +286,7 @@ export default function HeroStage() {
 
           {/* The count is for phones, where the slide marks are hidden; on wider
               screens the marks already say where you are (2026-09-27). */}
-          <span className="mono-label tabular-nums sm:hidden" style={{ color: "var(--color-warm)" }}>
+          <span className="mono-label tabular-nums" style={{ color: "var(--color-warm)" }}>
             {String(active + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
           </span>
         </div>

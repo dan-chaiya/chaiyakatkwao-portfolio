@@ -12,6 +12,7 @@ import CommercialList from "@/components/CommercialList";
 import { projects } from "@/data/commercial";
 import { selectedEpisodes } from "@/data/youtube";
 import { photoAlt, photoSize } from "@/lib/photos";
+import { liveStudio as L } from "@/data/live-studio";
 
 const liveCommerceVideos = [
   {
@@ -175,7 +176,7 @@ export default function CommercialClient() {
         </nav>
 
         {/* View toggle (B3) */}
-        <div className="mb-12 flex items-center gap-1" role="group" aria-label="View mode">
+        <div className="mb-12 hidden sm:flex items-center gap-1" role="group" aria-label="View mode">
           {(["grid", "list"] as const).map((v) => (
             <button
               key={v}
@@ -400,9 +401,25 @@ export default function CommercialClient() {
               </p>
             </div>
             <div className="md:col-span-5">
-              <p className="copy-body mb-4">
-                Live commerce productions for fashion and lifestyle brands at Ad The Top Agency.
+              <p className="copy-body mb-6">
+                Live commerce productions for fashion and lifestyle brands at Ad The Top Agency,
+                from the client brief to the live feed.
               </p>
+              {/* The producer's credits, from the studio's own records (data/live-studio.ts):
+                  what an agency hiring a producer scans for (2026-10-04). */}
+              <dl className="mb-6 border-t border-[var(--color-border)]">
+                {[
+                  ["Team", `A live department of ${L.department}: hosts, live coordinators and an ${L.adminCrew}-person admin crew`],
+                  ["Studio", `${L.rooms} live rooms on ${L.floors} floors, running brands side by side`],
+                  ["Gear", `${L.gear} tracked pieces: ${L.cameras} cameras, ${L.switchers} switchers, ${L.lights} LED lights, ${L.pcs} PCs`],
+                  ["System", `Live Studio OS, built in-house: daily health checks and a fault log. ${L.faultsLogged} faults logged ${L.faultWindow}, ${L.faultsResolved} resolved`],
+                ].map(([k, v]) => (
+                  <div key={k} className="grid grid-cols-[5.5rem_1fr] gap-4 border-b border-[var(--color-border)] py-3">
+                    <dt className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-text-muted)] pt-[3px]">{k}</dt>
+                    <dd className="copy-small">{v}</dd>
+                  </div>
+                ))}
+              </dl>
               <div className="flex flex-wrap gap-2">
                 {["Live Production", "Art Direction", "AV Engineering"].map((tag) => (
                   <span
