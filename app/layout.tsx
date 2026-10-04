@@ -53,7 +53,7 @@ const notoSansThai = Noto_Sans_Thai({
 
 // Site-wide defaults. Each page sets its own title, description, canonical and
 // share card through pageMetadata() in lib/seo.ts; the template below turns a
-// page title like "About" into "About — Chaiya Katkwao".
+// page title like "About" into "About · Chaiya Katkwao".
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: DEFAULT_TITLE, template: TITLE_TEMPLATE },

@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import HeroStage from "@/components/HeroStage";
 import PageTransition from "@/components/PageTransition";
 import { workAssets } from "@/data/work-asset-urls";
-import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
+import { photoAlt } from "@/lib/photos";
 
 const sections = [
   {
@@ -14,21 +14,21 @@ const sections = [
     title: "Commercial",
     href: "/commercial",
     cover: workAssets.knack("Knack-75.jpg"),
-    coverAlt: "Knack Factory fashion show - Creative Producer",
+    coverAlt: photoAlt(workAssets.knack("Knack-75.jpg"), "Knack Factory fashion show"),
   },
   {
     index: "02",
     title: "Gallery",
     href: "/gallery",
     cover: workAssets.woven("1.jpg"),
-    coverAlt: "Woven Memories - Creative Producer",
+    coverAlt: photoAlt(workAssets.woven("1.jpg"), "Woven Memories"),
   },
   {
     index: "03",
     title: "About",
     href: "/about",
     cover: workAssets.podcast("Dan.jpg"),
-    coverAlt: "Chaiya Katkwao Portrait - Creative Producer",
+    coverAlt: photoAlt(workAssets.podcast("Dan.jpg"), "Chaiya Katkwao"),
   },
 ];
 
@@ -44,8 +44,6 @@ const disciplines = [
 ];
 
 export default function PortfolioHome() {
-  const reduced = usePrefersReducedMotion();
-
   return (
     <PageTransition>
       <main id="main-content">
@@ -95,7 +93,7 @@ export default function PortfolioHome() {
               </p>
               <Link
                 href="/about"
-                className="tap-target"
+                className="tap-target text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text)]"
                 style={{
                   display: "inline-block",
                   marginTop: "28px",
@@ -103,12 +101,8 @@ export default function PortfolioHome() {
                   fontSize: "11px",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "var(--color-text-muted)",
                   textDecoration: "none",
-                  transition: "color 200ms ease",
                 }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "var(--color-text)"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "var(--color-text-muted)"; }}
               >
                 Full Profile →
               </Link>
@@ -152,13 +146,14 @@ export default function PortfolioHome() {
                     padding: "3px 9px",
                   }}
                 >
-                  <span style={{
+                  {/* Still, not pulsing (2026-10-04): the pulsing "available" dot is the
+                      most-copied move on portfolios, and stillness is this site's voice. */}
+                  <span aria-hidden="true" style={{
                     width: "5px",
                     height: "5px",
                     borderRadius: "50%",
                     backgroundColor: "var(--color-accent)",
                     display: "inline-block",
-                    animation: reduced ? "none" : "pulse 2s ease-in-out infinite",
                   }} />
                   Available
                 </span>
@@ -184,43 +179,38 @@ export default function PortfolioHome() {
               className="md:col-span-4 md:col-start-9"
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
             >
+              {/* Hover in CSS, not onMouseEnter: a tap on a phone used to leave this
+                  button inverted after the mail app opened. */}
               <a
                 href="mailto:chaiyakatkwao@gmail.com"
+                className="text-[var(--color-text)] transition-[background-color,color] duration-[250ms] hover:bg-[var(--color-text)] hover:text-[var(--color-text-inverse)]"
                 style={{
                   fontFamily: "var(--font-jetbrains-mono)",
                   fontSize: "11px",
                   letterSpacing: "0.14em",
                   textTransform: "uppercase",
-                  color: "var(--color-text)",
                   border: "1px solid var(--color-border-strong)",
                   padding: "18px 20px",
                   textDecoration: "none",
                   display: "block",
                   textAlign: "center",
-                  transition: "background 250ms ease, color 250ms ease",
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "var(--color-text)"; e.currentTarget.style.color = "var(--color-text-inverse)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--color-text)"; }}
               >
                 chaiyakatkwao@gmail.com →
               </a>
               <Link
                 href="/cv"
+                className="border border-[var(--color-border)] text-[var(--color-text-muted)] transition-[border-color,color] duration-[250ms] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]"
                 style={{
                   fontFamily: "var(--font-jetbrains-mono)",
                   fontSize: "11px",
                   letterSpacing: "0.14em",
                   textTransform: "uppercase",
-                  color: "var(--color-text-muted)",
-                  border: "1px solid var(--color-border)",
                   padding: "18px 20px",
                   textDecoration: "none",
                   display: "block",
                   textAlign: "center",
-                  transition: "border-color 250ms ease, color 250ms ease",
                 }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--color-border-strong)"; (e.currentTarget as HTMLAnchorElement).style.color = "var(--color-text)"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--color-border)"; (e.currentTarget as HTMLAnchorElement).style.color = "var(--color-text-muted)"; }}
               >
                 View CV →
               </Link>
@@ -289,7 +279,7 @@ function FeaturedCard() {
       <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "var(--color-surface)" }}>
         <Image
           src={workAssets.knack("Knack-14.jpg")}
-          alt="Knack Factory Fashion Show 2024 — Creative Producer Portfolio"
+          alt={photoAlt(workAssets.knack("Knack-14.jpg"), "Knack Factory Fashion Show, 2024")}
           fill
           sizes="100vw"
           className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
@@ -367,7 +357,7 @@ function TriptychCard({ section: s }: { section: SectionItem }) {
           <div style={{ position: "relative", width: "100%", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
             <div>
               <p
-                className="text-[rgba(249,249,249,0.5)] transition-colors duration-300 group-hover:text-[rgba(249,249,249,0.9)] group-focus-visible:text-[rgba(249,249,249,0.9)]"
+                className="text-[rgba(249,249,249,0.78)] transition-colors duration-300 group-hover:text-[#F9F9F9] group-focus-visible:text-[#F9F9F9]"
                 style={{
                   fontFamily: "var(--font-jetbrains-mono)",
                   fontSize: "11px",

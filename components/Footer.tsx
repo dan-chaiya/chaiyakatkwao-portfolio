@@ -20,8 +20,11 @@ const MONO: React.CSSProperties = {
   letterSpacing: "0.18em",
   textTransform: "uppercase" as const,
   textDecoration: "none",
-  transition: "color 180ms ease",
 };
+
+// Hover in CSS, not onMouseEnter: Tailwind's hover: applies only where a pointer can
+// hover, so a tap on a phone no longer leaves a link stuck at full ink.
+const LINK = "tap-target text-[var(--color-text-muted)] transition-colors duration-[180ms] hover:text-[var(--color-text)]";
 
 export default function Footer() {
   return (
@@ -31,7 +34,7 @@ export default function Footer() {
         style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}
       >
         <p style={{ ...MONO, color: "var(--color-text-muted)" }}>
-          © 2026 Chaiya Katkwao — Bangkok
+          © 2026 Chaiya Katkwao, Bangkok
         </p>
 
         <nav aria-label="Footer navigation" style={{ display: "flex", alignItems: "center", gap: "28px", flexWrap: "wrap" }}>
@@ -40,10 +43,8 @@ export default function Footer() {
               <a
                 key={item.label}
                 href={item.href}
-                className="tap-target"
-                style={{ ...MONO, color: "var(--color-text-muted)" }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-text-muted)"; }}
+                className={LINK}
+                style={MONO}
               >
                 {item.label}
               </a>
@@ -51,10 +52,8 @@ export default function Footer() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="tap-target"
-                style={{ ...MONO, color: "var(--color-text-muted)" }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-text)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-text-muted)"; }}
+                className={LINK}
+                style={MONO}
               >
                 {item.label}
               </Link>

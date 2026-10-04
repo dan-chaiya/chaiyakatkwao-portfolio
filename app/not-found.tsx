@@ -15,7 +15,7 @@ export default function NotFound() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE.out }}
-            className="font-body text-[11px] tracking-[0.35em] uppercase text-[var(--color-text-muted)] mb-5"
+            className="font-mono font-medium text-[11px] tracking-[0.35em] uppercase text-[var(--color-text-muted)] mb-5"
           >
             404
           </motion.p>
@@ -30,7 +30,7 @@ export default function NotFound() {
               letterSpacing: "-0.02em",
             }}
           >
-            Nothing here /
+            Nothing here
             <br />
             yet.
           </motion.h1>
@@ -41,7 +41,7 @@ export default function NotFound() {
           >
             <Link
               href="/"
-              className="inline-flex min-h-11 items-center font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-text-muted)] hover:text-[var(--color-warm)] transition-colors duration-300"
+              className="inline-flex min-h-11 items-center font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-text-muted)] hover:text-[var(--color-warm)] transition-colors duration-300"
             >
               ← Back to home
             </Link>

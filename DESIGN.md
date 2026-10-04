@@ -272,32 +272,34 @@ The Lightbox uses a near-opaque overlay (the page ground at 97%) — this is the
 - **Shell:** the page ground, opaque, with a 1px `--color-border-faint` bottom border. There is no backdrop-filter and no opacity on the header. (Until 23 September 2026 the code set no background at all, so the page scrolled through under the mark and the links.)
 - **Theme switch:** the header's last item on every breakpoint (beside the hamburger on mobile), after Contact on desktop. One 14px dot in a 1.5px ink ring, half ink and half clear: the ink half is on the left in Light and turns to the right in Dark (420ms, the signature curve); it grows 18% on hover. 44px to the finger. No words and no accent: amber stays the active page's underline. The dot's side is decided in CSS from `<html data-theme>`, so it is right from the first frame; the button's label names the action ("Switch to dark theme"). A pick fades the colour tokens themselves into the other theme over 450ms (slow in, slow out; 200ms under reduced motion): the tokens are registered with `@property` as colours, `<html>` transitions them while it carries `.theme-fading`, and every element follows because every colour is read through a token. Element transitions are off for those 450ms, so nothing ripples or lags. Only colours move: images and video are never copied or faded, so a playing video stays one clean picture. Tried and dropped the same day: a view-transition cross-fade (every video showed twice mid-fade) and a transition on every element (Chrome kept restarting it on some text, which then snapped at the end). A new colour token must be added to the `@property` list in globals.css, or it will cut instead of fading. Corrections that restore a saved pick cut, with element transitions suspended for that frame. `/systems` carries the same dot, fade and saved pick (27 September 2026). (Until 27 September 2026 it was two mono labels, `Light` and `Dark`, in a hairline box.)
 - **Logo:** Archivo Black 800, 1.15rem, tracking -0.02em. Links to root, and it is the only link there: the nav has no `Home` item and the logo carries no `/ Page` label beside it since 27 September 2026 (the underlined nav link and each page's own label already name the page). Its accessible name is "Chaiya Katkwao, home".
-- **Desktop links:** 0.8rem, tracking 0.18em, uppercase. Muted text at rest, Primary Text on hover, 200ms.
+- **Desktop links:** 0.8rem, tracking 0.18em, uppercase. Muted text at rest, Primary Text on hover, 180ms. The current page's link carries `aria-current="page"`, so the underline is not the only "you are here" cue. Hover is a CSS `hover:` variant (Tailwind applies it only where a pointer can hover), never `onMouseEnter`, so a tap never leaves a link stuck at full ink. The same goes for every hover on the site (4 October 2026).
 - **Active underline:** a 1px bar in Warm Signal. This is one of only two accent appearances in the app.
 - **Mobile hamburger:** three 1px lines, inline-drawn, animating to a cross. No icon library.
 
 ### Mobile Navigation Overlay
 Full-screen, full-bleed, no modal chrome. A signature component.
 - **Surface:** the page background, no backdrop.
-- **Links:** `clamp(2.5rem, 10vw, 5rem)`, Archivo Black 800, tracking -0.03em, separated by 1px `--color-border-faint` lines.
-- **Animation:** staggered entrance, 0.07s between items, `cubic-bezier(0.16, 1, 0.3, 1)`, 0.5s.
+- **Links:** `clamp(2rem, min(10vw, 9svh), 5rem)`, Archivo Black 800, tracking -0.03em, separated by 1px `--color-border-faint` lines. Sized on the smaller of width and height, centred with auto margins inside an overlay that scrolls itself, and the name line sits in flow below them. Until 4 October 2026 the list was `justify-center` on a locked page at `10vw`: on a phone turned sideways, Commercial sat behind the header and Contact below the screen, out of reach.
+- **Keyboard:** Escape closes; Tab loops through the links and the close button in the header.
+- **Animation:** staggered entrance, 0.05s between items, `cubic-bezier(0.16, 1, 0.3, 1)`, 0.3s.
 
 ### Lightbox (Signature Component)
 The gallery viewer. Focused, keyboard-native, and in the page's theme: paper in Light, near-black in Dark.
 - **Overlay:** the page ground at 97% — nearly opaque.
 - **Controls:** SVG-drawn arrows and close, no icon library. Enabled state uses `--color-grey-200` with a `--color-grey-500` border, moving to `--color-text` on `--color-grey-300` with a wash of the text colour at 10%. Disabled boundary state is `--color-text-dim` on `--color-grey-600`.
 - **Caption pill:** the system's only backdrop-blur — `backdrop-blur-sm` over the page ground at 85% (40% until 23 September 2026, when its text failed on dark photos in Light), inside a `--color-border-strong` hairline.
-- **Image:** `object-fit: contain`, swipeable (`dragElastic: 0.08`), spring transition (damping 30, stiffness 250).
+- **Image:** `next/image` at `sizes="100vw"`, `object-fit: contain`, capped at `100dvh` minus the chrome, swipeable (`dragElastic: 0.08`), spring transition (damping 30, stiffness 250). The photos either side are fetched ahead, so a step shows at once. Never a plain `<img>` of the original: until 4 October 2026 it was, and opening Knack Factory and stepping three times fetched 29.6 MB (one photo 11.8 MB); the same steps now fetch under 1 MB.
+- **Counter:** `aria-live="polite"`, with the photo's description in an `sr-only` span, so a screen reader hears each step.
 
 ### Footer
-- **Structure:** a 1px `--color-border-faint` top border, 24px padding top and bottom, two-column flex that wraps, 16px gap.
+- **Structure:** a 1px `--color-border-faint` top border, 24px padding top and bottom, two-column flex that wraps, 16px gap. Inside `.section-shell`, which is full width with the same 32px side padding as every page's `px-8`, so the footer and the home page's About and Contact rows share the logo's left edge (until 4 October 2026 it was a centred 1280px box with 24px gutters).
 - **Typography:** JetBrains Mono, 11px, tracking 0.18em, uppercase — the same label treatment the sister site calls `mono-label`. Muted text at rest, Primary Text on hover, 180ms.
 - **Links:** 28px apart. Includes the cross-site link to `/systems`, which is a plain `<a>` rather than `next/link` because the destination is a static file in `public/`, not a route.
 
 ### Hero Controls
 Bottom-right of the hero.
 - **Pause/play:** 44x44, 1px border of `--color-warm` at 28%, glyph at 86%, inline-drawn SVG. Hidden entirely under `prefers-reduced-motion`, where nothing is rotating.
-- **Slide marks:** one 1px bar per slide in a 44px-tall hit area; active is `--color-warm`, rest `--color-warm` at 34%.
+- **Slide marks:** one 16px, 1px bar per slide, centred in a 24 x 44 button (WCAG 2.5.8; the buttons were 16px wide until 4 October 2026); active is `--color-warm`, rest `--color-warm` at 34%.
 - **Counter:** `mono-label`, tabular numerals, `--color-warm`. Phones only, where the slide marks are hidden; on wider screens the marks already show the position (27 September 2026).
 
 ### Hero Stage
@@ -316,7 +318,15 @@ Do not add a button style to this file speculatively — document one when one s
 **Image tiles are buttons.** Anything that opens the lightbox is a real `<button>`
 carrying `.gallery-tile`, which strips the UA chrome. It must never go back to a
 `div` with an `onClick`: that made all 38 gallery images unreachable by keyboard
-until 29 Aug 2026.
+until 29 Aug 2026, and every case-study photo until 4 Oct 2026.
+
+**Every photo has its size and its description.** `photoSize(src)` and `photoAlt(src)`
+in `lib/photos.ts` read `data/image-sizes.json` (written by `node scripts/image-sizes.mjs`;
+re-run it after adding a photo) and `data/alt-text.json`. The size goes to `next/image`
+as `width`/`height`, so the page reserves the box and does not jump: never `width={0}
+height={0}`, which cost `/commercial` a CLS of 0.113 and made every 0 x 0 gallery photo
+load at once. The alt says what is in the frame, like a museum caption: no
+" - Creative Producer" tag, no photographer's name.
 
 ## 6. Do's and Don'ts
 
@@ -331,6 +341,9 @@ until 29 Aug 2026.
 - **Do** keep nav links, labels, and captions uppercase with wide tracking (0.15–0.30em). It is part of the system's identity.
 - **Do** keep surfaces pure neutral and let the warmth live in the text greys (hue 62-89, chroma 0.006-0.012). Never introduce a cool grey.
 - **Do** cap body line length at 65–75ch on reading contexts.
+- **Do** keep one left edge: 32px on every page and every section (`px-8`, `.section-shell`).
+- **Do** set every small uppercase label in JetBrains Mono (`.mono-label`, or `font-mono font-medium text-[11px]`). Until 4 October 2026, 49 labels on Commercial, Gallery, About and the case studies were Archivo.
+- **Do** keep the scrollbar thin but holdable (8px in Safari, `scrollbar-width: thin` elsewhere) with a text-grey thumb.
 
 ### Don't:
 - **Don't** use colorful or expressive-color palettes — no gradients, no vibrant accents beyond the single Warm Signal, no neon.
@@ -343,3 +356,6 @@ until 29 Aug 2026.
 - **Don't** add shadows. If something needs elevation, use the next surface step.
 - **Don't** make the accent compete. If more than 10% of a screen surface carries the Warm Signal, scale it back.
 - **Don't** use bounce or elastic easing. Exponential ease-out only.
+- **Don't** pulse anything. The "Available" dot is still (4 October 2026), and so is the page: the grain overlay that sat over everything was removed the same day.
+- **Don't** spread the slash headline (`Let's / connect.`). It is a signature on two pages, the Home contact strip and the CV name; on the other six it read as a template and was dropped on 4 October 2026.
+- **Don't** use em dashes in copy. Commas, colons, parentheses, and en dashes for ranges (`2022–Present`). Quoted titles (YouTube episodes) keep their own punctuation.

@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     path: `/commercial/${project.slug}`,
     // The cover photo. Portrait covers get centre-cropped by share previews;
     // a per-project 1200x630 card would fix that if it ever matters.
-    image: { url: project.cover, alt: `${project.title} — ${project.subtitle}` },
+    image: { url: project.cover, alt: `${project.title}, ${project.subtitle}` },
     noIndex: project.hidden,
   });
 }

@@ -7,7 +7,7 @@ type Message = { id: string; role: "user" | "assistant"; content: string };
 const OPENING: Message = {
   id: "opening",
   role: "assistant",
-  content: "Hey — I'm Chaiya. Ask me anything about my work, or just say hi.",
+  content: "Hey, I'm Chaiya. Ask me anything about my work, or just say hi.",
 };
 
 const SUGGESTIONS = [
@@ -77,11 +77,11 @@ export default function ChatInterface() {
         const wait = res.headers.get("Retry-After");
         throw new Error(
           wait
-            ? `That's a lot of questions at once — try again in ${wait}s.`
-            : "That's a lot of questions at once — try again shortly."
+            ? `That's a lot of questions at once. Try again in ${wait}s.`
+            : "That's a lot of questions at once. Try again shortly."
         );
       }
-      if (!res.ok || !res.body) throw new Error("Something went wrong — try again.");
+      if (!res.ok || !res.body) throw new Error("Something went wrong. Try again.");
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
@@ -95,7 +95,7 @@ export default function ChatInterface() {
         setMessages(prev => prev.map(m => m.id === assistantId ? { ...m, content } : m));
       }
     } catch (err) {
-      setError(err instanceof Error && err.message ? err.message : "Something went wrong — try again.");
+      setError(err instanceof Error && err.message ? err.message : "Something went wrong. Try again.");
       setMessages(prev => prev.filter(m => m.id !== assistantId));
     } finally {
       setIsLoading(false);
@@ -120,7 +120,7 @@ export default function ChatInterface() {
         >
           <p style={{ ...mono, marginBottom: "12px" }}>Speaking with</p>
           <h1 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 0.92, letterSpacing: "-0.03em", color: "var(--color-warm)", textTransform: "uppercase", marginBottom: "16px" }}>
-            Chaiya /<br />Katkwao.
+            Chaiya<br />Katkwao.
           </h1>
           <p style={{ fontFamily: "var(--font-archivo)", fontSize: "0.875rem", color: "var(--color-grey-300)", lineHeight: 1.5 }}>
             Creative Producer<br />Bangkok, Thailand
@@ -136,6 +136,9 @@ export default function ChatInterface() {
             role="log"
             aria-live="polite"
             aria-relevant="additions text"
+            // Busy while a reply streams in, so a screen reader reads the finished
+            // answer once instead of announcing it a few words at a time.
+            aria-busy={isLoading}
             aria-label="Conversation"
             style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: "12px", paddingBottom: "16px" }}
           >
@@ -176,18 +179,14 @@ export default function ChatInterface() {
                       fontFamily: "var(--font-jetbrains-mono)",
                       fontSize: "11px",
                       letterSpacing: "0.08em",
-                      color: "var(--color-grey-300)",
                       background: "transparent",
-                      border: "1px solid var(--color-border-muted)",
                       padding: "8px 14px",
                       cursor: "pointer",
                       textAlign: "left",
                       whiteSpace: "nowrap",
                       flexShrink: 0,
-                      transition: "border-color 180ms ease, color 180ms ease",
                     }}
-                    onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--color-grey-500)"; e.currentTarget.style.color = "var(--color-text)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--color-border-muted)"; e.currentTarget.style.color = "var(--color-grey-300)"; }}
+                    className="border border-[var(--color-border-muted)] text-[var(--color-grey-300)] transition-[border-color,color] duration-[180ms] hover:border-[var(--color-grey-500)] hover:text-[var(--color-text)]"
                   >
                     {s} →
                   </button>
@@ -198,6 +197,8 @@ export default function ChatInterface() {
               Ask Chaiya about his work
             </label>
             <div className="chat-field" style={{ border: "1px solid var(--color-grey-700)", display: "flex", alignItems: "center" }}>
+              {/* 16px: iOS Safari zooms into any field set smaller, which threw the
+                  one-screen chat off the screen on focus (14px until 2026-10-04). */}
               <input
                 id="chat-input"
                 ref={inputRef}
@@ -205,7 +206,7 @@ export default function ChatInterface() {
                 onChange={e => setInput(e.target.value)}
                 placeholder="Ask something..."
                 disabled={isLoading}
-                style={{ flex: 1, background: "transparent", border: "none", outline: "none", padding: "14px 16px", fontFamily: "var(--font-archivo)", fontSize: "14px", color: "var(--color-warm)", caretColor: "var(--color-warm)" }}
+                style={{ flex: 1, background: "transparent", border: "none", outline: "none", padding: "14px 16px", fontFamily: "var(--font-archivo)", fontSize: "16px", color: "var(--color-warm)", caretColor: "var(--color-warm)" }}
               />
               <button
                 type="submit"

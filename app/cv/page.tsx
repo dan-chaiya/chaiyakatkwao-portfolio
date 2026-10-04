@@ -18,7 +18,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "CV",
-  description: "Chaiya Katkwao — Creative Producer, Bangkok. Curriculum vitae.",
+  description: "Chaiya Katkwao, Creative Producer, Bangkok. Curriculum vitae.",
   path: "/cv",
 });
 
@@ -27,7 +27,7 @@ const experience = [
     role: "Live Production & Visual Coordinator",
     company: "Ad The Top Agency",
     location: "Bangkok",
-    period: "2026 — Present",
+    period: "2026–Present",
     points: [
       "Runs live commerce broadcasts for several brands at once on TikTok and other social platforms, from the client brief to the live feed",
       "Plans the look for each brand brief and designs lighting and camera setups the crew can reuse from one client to the next",
@@ -40,7 +40,7 @@ const experience = [
     role: "Audio/Visual Engineer",
     company: "Modal Creative Studio",
     location: "Bangkok",
-    period: "2025 — 2026",
+    period: "2025–2026",
     points: [
       "Designed and ran the studio's multi-camera podcast and video systems",
       "Produced Built From Scratch, Grapple Asia and The Rise of Intelligence",
@@ -52,7 +52,7 @@ const experience = [
     role: "Freelance Creative",
     company: "Independent",
     location: "Thailand",
-    period: "2022 — Present",
+    period: "2022–Present",
     points: [
       "Fashion photography and art direction for emerging Thai labels, including the BAKAO lookbook",
       "Photographed Knack Factory #18, the senior fashion showcase at Suan Sunandha Rajabhat University",
@@ -64,7 +64,7 @@ const experience = [
 const exhibitions = [
   // "Chiang Mai": the city name never breaks across a line beside the year label.
   { title: "Woven Memories, ID Thesis Exhibition, Red Dog Gallery, Chiang Mai", year: "2025" },
-  { title: "Assistant Photographer, Khun Chang Khian Thesis Project", year: "2023 — 2024" },
+  { title: "Assistant Photographer, Khun Chang Khian Thesis Project", year: "2023–2024" },
   { title: "Fuiyoh, Art Thesis Exhibition, CMU Art Centre, Chiang Mai", year: "2021" },
 ];
 
@@ -136,7 +136,11 @@ export default function CVPage() {
         .cv-list li::before { content: "—"; display: inline-block; width: 16px; text-indent: 0; color: var(--color-grey-500); }
         .cv-lines > * + * { margin-top: 6px; }
         .cv-lines a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-border); transition: border-color 180ms ease, color 180ms ease; }
-        .cv-lines a:hover { color: var(--color-warm); border-color: var(--color-border-strong); }
+        @media (hover: hover) { .cv-lines a:hover { color: var(--color-warm); border-color: var(--color-border-strong); } }
+        /* 24px to the finger (WCAG 2.5.8) without moving the line or its underline:
+           the lines sit 27px apart, so the boxes never touch. */
+        .cv-lines a { position: relative; }
+        .cv-lines a::after { content: ""; position: absolute; inset: -4px 0; }
         .cv-skill + .cv-skill { margin-top: 14px; }
         .cv-skill b { color: var(--color-warm); font-weight: 500; }
         .cv-foot { margin-top: 96px; border-top: 1px solid var(--color-grey-700); padding-top: 16px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; }
@@ -244,7 +248,7 @@ export default function CVPage() {
                         <p className="copy-body cv-role">{job.role}</p>
                         <span className="mono-label">{job.period}</span>
                       </div>
-                      <p className="copy-small cv-where">{job.company} — {job.location}</p>
+                      <p className="copy-small cv-where">{job.company}, {job.location}</p>
                       <ul className="cv-list copy-small">
                         {job.points.map((pt) => <li key={pt}>{pt}</li>)}
                       </ul>
@@ -286,16 +290,16 @@ export default function CVPage() {
               <section className="cv-section cv-section--tight" aria-label="Education">
                 <p className="mono-label cv-eyebrow" style={{ marginBottom: "16px" }}>Education</p>
                 <div className="cv-row__head">
-                  <p className="copy-small">BFA Photography — Chiang&nbsp;Mai University</p>
-                  <span className="mono-label">2020 — 2025</span>
+                  <p className="copy-small">BFA Photography, Chiang&nbsp;Mai University</p>
+                  <span className="mono-label">2020–2025</span>
                 </div>
               </section>
 
               <section className="cv-section cv-section--tight" aria-label="Languages">
                 <p className="mono-label cv-eyebrow" style={{ marginBottom: "16px" }}>Languages</p>
                 <div className="cv-lines copy-small">
-                  <p>Thai — Native</p>
-                  <p>English — Upper Intermediate</p>
+                  <p>Thai, native</p>
+                  <p>English, upper intermediate</p>
                 </div>
               </section>
 
@@ -303,7 +307,7 @@ export default function CVPage() {
                 <p className="mono-label cv-eyebrow" style={{ marginBottom: "16px" }}>Skills</p>
                 {skills.map((s) => (
                   <p key={s.group} className="copy-small cv-skill">
-                    <b>{s.group}</b> — {s.items}
+                    <b>{s.group}:</b> {s.items}
                   </p>
                 ))}
               </section>
@@ -324,7 +328,7 @@ export default function CVPage() {
 
           <div className="cv-foot">
             <p className="mono-label">© 2026 Chaiya Katkwao</p>
-            <p className="mono-label">Updated — September 2026</p>
+            <p className="mono-label">Updated September 2026</p>
           </div>
         </main>
       </PageTransition>
