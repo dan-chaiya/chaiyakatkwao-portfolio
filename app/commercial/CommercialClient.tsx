@@ -347,7 +347,7 @@ export default function CommercialClient() {
         <section id="episodes" className="mt-32 pt-16 border-t border-[var(--color-border-muted)] scroll-mt-24">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
             <div className="md:col-span-1">
-              <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">06</span>
+              <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">05</span>
             </div>
             <div className="md:col-span-4">
               <h2
@@ -404,7 +404,7 @@ export default function CommercialClient() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
             <div className="md:col-span-1">
-              <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">07</span>
+              <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">06</span>
             </div>
             <div className="md:col-span-4">
               <h2

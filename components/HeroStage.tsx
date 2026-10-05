@@ -33,7 +33,7 @@ type Slide = { caption: string } & (
 const frame = (src: string, fallback: string) => ({ src, alt: photoAlt(src, fallback) });
 
 // The strongest editorial work first (2026-10-04, after a second critique): Knack Factory
-// and the KOL lookbook as three-frame sets, then the live productions and the studio, the
+// as a three-frame set, then the live productions and the studio, the
 // art series last. A live-commerce sale banner as the first frame read as retail
 // operations, not "stylish"; every slide still names its client and role. Art originals via workAssets (never altered) + the optimized live loops.
 const SLIDES: Slide[] = [
@@ -46,16 +46,6 @@ const SLIDES: Slide[] = [
     ],
     alt: "Knack Factory Fashion Show, three runway frames",
     caption: "Knack Factory · Photographer, 2024",
-  },
-  {
-    kind: "set",
-    frames: [
-      frame("/images/kol-lookbook/02.jpg", "KOL casting portrait"),
-      frame("/images/kol-lookbook/04.jpg", "KOL casting portrait"),
-      frame("/images/kol-lookbook/05.jpg", "KOL casting portrait"),
-    ],
-    alt: "KOL Casting Lookbook, three casting portraits",
-    caption: "KOL Casting Lookbook · Photographer and art direction, Ad The Top, 2026",
   },
   {
     kind: "video",
