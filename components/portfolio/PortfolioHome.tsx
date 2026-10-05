@@ -15,8 +15,8 @@ const sections = [
     title: "Commercial",
     href: "/commercial",
     // Not Knack-75: that frame now opens the hero, two screens up.
-    cover: "/images/kol-lookbook/01.jpg",
-    coverAlt: photoAlt("/images/kol-lookbook/01.jpg", "KOL Casting Lookbook"),
+    cover: "/images/bakao/01.jpg",
+    coverAlt: photoAlt("/images/bakao/01.jpg", "BAKAO"),
   },
   {
     title: "Gallery",

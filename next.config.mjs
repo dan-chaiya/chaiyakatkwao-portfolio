@@ -11,6 +11,8 @@ const nextConfig = {
   async redirects() {
     return [
       { source: "/work", destination: "/commercial", permanent: true },
+      // KOL Casting Lookbook was taken off the site on 2026-10-05.
+      { source: "/commercial/kol-casting-lookbook", destination: "/commercial", permanent: true },
     ];
   },
   async rewrites() {

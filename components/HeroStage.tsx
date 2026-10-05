@@ -33,8 +33,9 @@ type Slide = { caption: string } & (
 const frame = (src: string, fallback: string) => ({ src, alt: photoAlt(src, fallback) });
 
 // The strongest editorial work first (2026-10-04, after a second critique): Knack Factory
-// and the KOL lookbook as three-frame sets, then the live productions and the studio, the
-// art series last. A live-commerce sale banner as the first frame read as retail
+// and BAKAO as three-frame sets, then the live productions and the studio, the
+// art series last. BAKAO took the KOL lookbook's place on 2026-10-05; its 01 frame
+// is the Home Commercial tile, so the set starts at 02. A live-commerce sale banner as the first frame read as retail
 // operations, not "stylish"; every slide still names its client and role. Art originals via workAssets (never altered) + the optimized live loops.
 const SLIDES: Slide[] = [
   {
@@ -50,12 +51,12 @@ const SLIDES: Slide[] = [
   {
     kind: "set",
     frames: [
-      frame("/images/kol-lookbook/02.jpg", "KOL casting portrait"),
-      frame("/images/kol-lookbook/04.jpg", "KOL casting portrait"),
-      frame("/images/kol-lookbook/05.jpg", "KOL casting portrait"),
+      frame("/images/bakao/02.jpg", "BAKAO lookbook"),
+      frame("/images/bakao/03.jpg", "BAKAO lookbook"),
+      frame("/images/bakao/05.jpg", "BAKAO lookbook"),
     ],
-    alt: "KOL Casting Lookbook, three casting portraits",
-    caption: "KOL Casting Lookbook · Photographer and art direction, Ad The Top, 2026",
+    alt: "BAKAO lookbook, three portrait frames",
+    caption: "BAKAO · Photographer and art direction, 2024",
   },
   {
     kind: "video",

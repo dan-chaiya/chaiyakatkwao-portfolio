@@ -20,28 +20,6 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "01",
-    slug: "kol-casting-lookbook",
-    title: "KOL Casting Lookbook",
-    subtitle: "Ad The Top, Bangkok",
-    year: "2026",
-    role: "Photographer and art direction",
-    description:
-      "Casting portraits of KOLs, shot and art-directed in-house for a fashion brand pitch.",
-    brief: [
-      "Ad The Top needed casting pictures of a group of KOLs to put in front of a fashion brand ahead of a marketing content shoot. Each frame had to show one person as they read on camera, in plain clothes that kept the attention on them.",
-      "The set, the photography and the retouching were done in-house: a grey wall and a concrete floor, half-length frames for the face, full-length frames for how each person carries the clothes.",
-    ],
-    tags: ["Fashion Photography", "Art Direction", "Casting"],
-    cover: "/images/kol-lookbook/01.jpg",
-    images: [
-      "/images/kol-lookbook/02.jpg",
-      "/images/kol-lookbook/03.jpg",
-      "/images/kol-lookbook/04.jpg",
-      "/images/kol-lookbook/05.jpg",
-    ],
-  },
-  {
-    id: "02",
     slug: "knack-factory",
     title: "Knack Factory",
     subtitle: "Suan Sunandha Rajabhat University",
@@ -73,7 +51,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "03",
+    id: "02",
     slug: "bakao",
     title: "BAKAO",
     subtitle: "BAKAO, Bangkok",
@@ -102,7 +80,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "04",
+    id: "03",
     slug: "khun-chang-khian",
     title: "Khun Chang Khian",
     subtitle: "Khun Chang Khian, Chiang Mai",
@@ -123,7 +101,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "05",
+    id: "04",
     slug: "podcast-studio",
     title: "Podcast & Studio",
     subtitle: "Modal Creative Studio",

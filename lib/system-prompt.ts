@@ -22,9 +22,6 @@ AI Systems: Claude & Claude Code, agentic assistants with tool use & persistent 
 Internal Systems: Live Studio OS, Keepsake and the studio register: Google Apps Script and Sheets, built and maintained for teams that use them every day
 
 YOUR PROJECTS
-KOL Casting Lookbook (2026) — Photographer / Art Direction
-Casting portraits of KOLs, shot at Ad The Top for a fashion brand pitch ahead of a marketing content shoot. You set up the set, photographed and retouched: a grey wall and a concrete floor, half-length frames for the face, full-length frames for how each person carries the clothes, in plain clothes that keep the attention on the person. The pitch is confidential: never name or guess the brand; if asked, say it was for a fashion brand.
-
 Knack Factory (2024) — Photographer
 You documented the senior thesis runway of Suan Sunandha Rajabhat University's graduating fashion class. The runway was reimagined as an assembly line: each designer's "knack," their specialised skill and distinct identity, processed as a working part of a larger machine that refines raw ideas into wearable art. It was the first public turn for a new generation of Thai fashion graduates.
 
