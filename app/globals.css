@@ -106,13 +106,14 @@
 
 /* Thai rides behind every Latin face. next/font loads the Latin faces as *-latin
    (app/layout.tsx); these rebuild the names the rest of the site uses, with Noto Sans
-   Thai second. Archivo has no Thai glyphs, so Latin always sets in Archivo and Thai
-   characters fall through to Noto. One stack per face, so a component that writes
-   var(--font-archivo) inline gets Thai for free. */
+   Thai second. Neither Latin face has Thai glyphs, so Thai characters fall through to
+   Noto. One stack per face, so a component that writes var(--font-archivo) inline gets
+   Thai for free. Since 2026-10-28 the body and label names both point at Inter: the
+   names stay so the 100+ references across the site keep working unchanged. */
 :root {
-  --font-archivo:        var(--font-archivo-latin), var(--font-noto-sans-thai);
+  --font-archivo:        var(--font-inter-latin), var(--font-noto-sans-thai);
   --font-archivo-black:  var(--font-archivo-black-latin), var(--font-noto-sans-thai);
-  --font-jetbrains-mono: var(--font-jetbrains-mono-latin), var(--font-noto-sans-thai);
+  --font-jetbrains-mono: var(--font-inter-latin), var(--font-noto-sans-thai);
 }
 
 @theme inline {
@@ -261,9 +262,12 @@ html {
   height: auto;
 }
 
-/* Mono label — the system's label infrastructure */
+/* Label — the system's label infrastructure. Set in Inter since 2026-10-28 (the class
+   keeps its old name). Inter's figures are proportional by default; labels carry
+   counters, years and indexes, so they take the tabular figures the mono face had. */
+.mono-label, .font-mono { font-variant-numeric: tabular-nums; }
 .mono-label {
-  font-family: var(--font-jetbrains-mono), monospace;
+  font-family: var(--font-jetbrains-mono), sans-serif;
   font-size: 11px;        /* B2: raised from 9px so labels are legible */
   font-weight: 500;       /* B2: 500 per type scale */
   letter-spacing: 0.18em; /* B2: eased from 0.25em at the larger size */

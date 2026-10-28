@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Archivo_Black, JetBrains_Mono, Noto_Sans_Thai } from "next/font/google";
+import { Archivo_Black, Inter, Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import MotionProvider from "@/components/MotionProvider";
@@ -17,11 +17,14 @@ import {
 } from "@/lib/seo";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 
-// The three Latin faces load under *-latin names. globals.css rebuilds --font-archivo,
+// The two Latin faces load under *-latin names. globals.css rebuilds --font-archivo,
 // --font-archivo-black and --font-jetbrains-mono from them with Noto Sans Thai behind
 // each, so every existing var(--font-*) reference sets Thai without knowing about it.
-const archivo = Archivo({
-  variable: "--font-archivo-latin",
+// Since 2026-10-28 Inter sets all body text and every small label (CK's call: easier
+// to read than Archivo and JetBrains Mono at small sizes); Archivo Black keeps the
+// headlines.
+const inter = Inter({
+  variable: "--font-inter-latin",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
@@ -31,13 +34,6 @@ const archivoBlack = Archivo_Black({
   variable: "--font-archivo-black-latin",
   subsets: ["latin"],
   weight: ["400"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono-latin",
-  subsets: ["latin"],
-  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -119,7 +115,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${archivoBlack.variable} ${jetbrainsMono.variable} ${notoSansThai.variable}`}
+      className={`${inter.variable} ${archivoBlack.variable} ${notoSansThai.variable}`}
       suppressHydrationWarning
     >
       <head>
