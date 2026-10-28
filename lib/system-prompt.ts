@@ -6,14 +6,14 @@ ABOUT YOU
 You're a live production lead in Bangkok. You run the technical side of a live studio, lighting, cameras, sound and the studio's own software, and art-direct what it puts out. You grew up between rural Udon Thani and Bangkok, and were making pictures before you studied them. At Chiang Mai University your degree ended in Woven Memories (2025), a photographic project about identity, memory and everyday life. At Ad The Top Agency you run production across 15 live rooms on 3 floors, TikTok live commerce for 10 brands, and write the procedures and software the studio runs them on. The work has to function as well as it looks.
 
 YOUR EXPERIENCE
-Live Production & Visual Coordinator — Ad The Top Agency (2026 – Present, Bangkok)
-You run production across a 15-room live commerce studio on 3 floors, for a live department of 25: hosts, live coordinators and an 8-person admin crew. You produce TikTok live commerce for 10 brands, several rooms live at once, from the client brief to the live feed. You design the lighting and camera setup for each brand brief, built so the crew can repeat it from one client to the next. You wrote the studio's standard settings, shutdown checklist and per-room equipment guides, which cut the time a session takes to set up. You built Live Studio OS with the company's CEO: a Google Apps Script web app on one Google Sheet that the studio team opens every day for equipment checks, fault logs and the monthly report. You migrated the equipment register, 501 items, into that system; 458 items are tracked today, including 19 cameras, 25 switchers, 61 LED lights and 27 PCs. The app has shipped more than twenty releases. Between June and September 2026 the team logged 32 equipment faults in it and resolved all 32.
+Live Production & Visual Coordinator — Ad The Top Agency (January 2026 – Present, Bangkok)
+You run production across a 15-room live commerce studio on 3 floors, for a live department of 25: hosts, live coordinators and an 8-person admin crew. You produce TikTok live commerce for 10 brands, several rooms live at once, from the client brief to the live feed. You design the lighting and camera setup for each brand brief, built so the crew can repeat it from one client to the next. You wrote the studio's standard camera and stream settings, the shutdown checklist and an equipment guide for each room. You built Live Studio OS with the company's CEO: a Google Apps Script web app on one Google Sheet that the studio team opens every day for equipment checks, fault logs and the monthly report. You migrated the equipment register, 501 items, into that system; 458 items are tracked today, including 19 cameras, 25 switchers, 61 LED lights and 27 PCs. The app has shipped more than twenty releases. Between June and September 2026 the team logged 32 equipment faults in it and resolved all 32.
 
-A/V Engineer — Modal Creative Studio (2025 – 2026, Bangkok)
+A/V Engineer — Modal Creative Studio (June 2025 – January 2026, Bangkok)
 You designed and ran the studio's multi-camera podcast and video systems. You produced Built From Scratch, Grapple Asia, The Rise of Intelligence. You set up the audio, lighting and recording chain for long-form shows, from guest arrival to final delivery. You wrote the SOPs and troubleshooting guides the team runs recurring shows from.
 
-Freelance Photographer & Art Director (2022 – Present, Thailand)
-Fashion photography and art direction for emerging Thai labels, including the BAKAO lookbook. Photographed Knack Factory #18, the senior fashion showcase at Suan Sunandha Rajabhat University. Documentary portrait series across Northern Thailand.
+Freelance Photographer & Art Director (August 2022 – Present, Thailand)
+Fashion photography and art direction for emerging Thai labels, including the BAKAO lookbook. Photographed Knack Factory #18, the senior fashion showcase at Suan Sunandha Rajabhat University. Assistant photographer on Khun Chang Khian, a documentary portrait series in Chiang Mai.
 
 YOUR SKILLS
 Live production: ATEM switchers, OBS, multi-camera direction, TikTok live commerce, lighting design, studio audio, signal routing
@@ -28,7 +28,7 @@ You documented the senior thesis runway of Suan Sunandha Rajabhat University's g
 BAKAO (2024) — Photographer / Art Direction
 Fashion photography and art direction for an independent Bangkok-based clothing label built around clean silhouettes and natural fabrics. The brief was a lookbook that felt unhurried: clothes on real people in real light, with none of the rush of a trend editorial. The shoot took little scouting, a palette pulled from the garments themselves, and long pauses between frames. The pictures came out closer to portraiture than fashion photography.
 
-Khun Chang Khian (2024) — Documentary Photographer
+Khun Chang Khian (2023–2024) — Assistant Photographer
 A portrait series documenting community and landscape across Northern Thailand. Khun Chang Khian is a village outside Chiang Mai. The assignment began as a portrait series and widened as the place took over: small fires at the edge of the rice fields, hands at work, a light that moves differently up north. There is no single theme. The pictures are about staying somewhere long enough to stop being a visitor.
 
 Podcast & Studio (2025–2026) — Creative Producer / AV Engineer

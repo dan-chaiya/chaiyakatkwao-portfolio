@@ -26,19 +26,23 @@ export const metadata: Metadata = pageMetadata({
 // Every number below comes from data/live-studio.ts (counted from the Live Studio OS
 // sheet on 4 October 2026) or from /systems, so the CV, Home, Commercial and the chat
 // say the same thing. 501 is the register as migrated; 458 is what is tracked today.
-// TODO(CK): add start and end months to each period ("Mar 2026–Present"). Year-only
-// dates on two short roles read as shorter than they were.
+// Periods carry months (CK, 2026-10-28): year-only dates on two short roles read as
+// shorter than they were. The set-up bullet states what was written, not a time saved:
+// there is no before/after measurement to quote.
+// Copy checked against the humanizer list (Wikipedia, "Signs of AI writing") and
+// worded in the terms Bangkok live-stream job ads use: OBS Studio, camera switching,
+// audio routing, multi-camera.
 const experience = [
   {
     role: "Live Production & Visual Coordinator",
     company: "Ad The Top Agency",
     location: "Bangkok",
-    period: "2026–Present",
+    period: "Jan 2026–Present",
     points: [
       `Runs production across a ${L.rooms}-room live commerce studio on ${L.floors} floors for a live department of ${L.department}: hosts, live coordinators and an ${L.adminCrew}-person admin crew`,
       "Produces TikTok live commerce for 10 brands, including Nestlé, Colgate, Guess, Fitflop and Dutchmil Delivery, with several rooms live at once",
-      "Designs the lighting and camera setup for each brand brief, built so the crew can repeat it from one client to the next",
-      "Wrote the studio's standard settings, shutdown checklist and per-room equipment guides, which cut the time a session takes to set up",
+      "Designs the lighting and camera setup for each brand brief, so the crew can rebuild it for the next session without him",
+      "Wrote the studio's standard camera and stream settings, the shutdown checklist and an equipment guide for each room",
       `Built Live Studio OS with the CEO: a Google Apps Script web app the team opens every day for equipment checks, fault logs and the monthly report; 20+ releases. Migrated the 501-item register into it; ${L.gear} items tracked today, including ${L.cameras} cameras, ${L.switchers} switchers, ${L.lights} LED lights and ${L.pcs} PCs`,
       `Logged ${L.faultsLogged} equipment faults in ${L.faultWindow} and resolved all ${L.faultsResolved}`,
     ],
@@ -47,9 +51,9 @@ const experience = [
     role: "Audio/Visual Engineer",
     company: "Modal Creative Studio",
     location: "Bangkok",
-    period: "2025–2026",
+    period: "Jun 2025–Jan 2026",
     points: [
-      "Designed and ran the studio's multi-camera podcast set: audio, lighting, signal routing and recording",
+      "Designed and ran the studio's multi-camera podcast set: camera switching, audio routing, lighting and recording",
       "Produced three long-form shows, Built From Scratch, Grapple Asia and The Rise of Intelligence, from guest coordination to final delivery",
       "Wrote the SOPs and troubleshooting guides the team runs recurring shows from",
     ],
@@ -58,7 +62,7 @@ const experience = [
     role: "Freelance Photographer & Art Director",
     company: "Independent",
     location: "Thailand",
-    period: "2022–Present",
+    period: "Aug 2022–Present",
     points: [
       "Lookbook photography and art direction for BAKAO, a Bangkok clothing label (2024)",
       "Runway photography for Knack Factory #18, the senior fashion show at Suan Sunandha Rajabhat University (2024)",
@@ -77,7 +81,7 @@ const exhibitions = [
 const skills = [
   {
     group: "Live production",
-    items: "ATEM switchers, OBS, multi-camera direction, TikTok live commerce, lighting design, studio audio, signal routing",
+    items: "ATEM switchers, OBS Studio, multi-camera switching, TikTok live commerce, lighting design, audio routing",
   },
   {
     group: "Creative",
@@ -230,15 +234,14 @@ export default function CVPage() {
                 {/* The target role first, then the scale in numbers. The job title
                     held is in Experience; this line is what the next one is. */}
                 <p className="copy-lead">
-                  Live Production Lead. Runs a {L.rooms}-room TikTok live commerce
-                  studio for 10 brands, from the lighting plan to the software
-                  the crew checks the gear in.
+                  Live Production Lead. Runs production for a {L.rooms}-room
+                  TikTok live commerce studio: 10 brands, a live department
+                  of {L.department}, {L.gear} pieces of gear.
                 </p>
                 <p className="copy-body">
-                  Trained as a photographer (BFA, Chiang Mai University), so the
-                  look of a broadcast is part of the job, not handed off. Three
-                  internal tools built and in daily use, documented at
-                  chaiyakatkwao.com/systems.
+                  BFA in Photography, Chiang Mai University. Plans the lighting
+                  and camera look for each brand, and built three internal tools
+                  that teams use every day: chaiyakatkwao.com/systems.
                 </p>
               </div>
 

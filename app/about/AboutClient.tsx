@@ -11,19 +11,19 @@ const experience = [
   {
     role: "Live Production & Visual Coordinator",
     company: "Ad The Top Agency",
-    period: "2026–Present",
+    period: "Jan 2026–Present",
     location: "Bangkok",
   },
   {
     role: "Audio/Visual Engineer",
     company: "Modal Creative Studio",
-    period: "2025–2026",
+    period: "Jun 2025–Jan 2026",
     location: "Bangkok",
   },
   {
     role: "Freelance Creative",
     company: "Independent",
-    period: "2022–Present",
+    period: "Aug 2022–Present",
     location: "Thailand",
   },
 ];

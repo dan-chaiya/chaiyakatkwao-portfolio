@@ -122,7 +122,7 @@ export const projects: Project[] = [
     title: "Khun Chang Khian",
     subtitle: "Khun Chang Khian, Chiang Mai",
     year: "2024",
-    role: "Documentary photographer",
+    role: "Assistant photographer",
     description:
       "Portrait series documenting community and landscape across Northern Thailand.",
     brief: [
