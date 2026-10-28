@@ -109,7 +109,7 @@ export default function AboutClient() {
               </p>
 
               <p className="copy-body">
-                At Ad The Top Agency he runs production across {L.rooms} live rooms on
+                At Ad The Top Agency he runs production across {L.rooms} live rooms on{" "}
                 {L.floors} floors, TikTok live commerce for 10 brands, and writes the
                 procedures and software the studio runs them on.
               </p>

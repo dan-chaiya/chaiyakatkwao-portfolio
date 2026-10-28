@@ -9,7 +9,7 @@ import { liveStudio as L } from "@/data/live-studio";
 // reference layout CK picked): name and role on the left with the contact block
 // top-right, a full-width summary, then Experience in the wide left column and
 // Education, Skills, Brands and Languages in the narrow right one. Section heads are
-// large bold words over a rule; body text is Inter in full ink; black on white, not
+// large Archivo Black words over a rule; body text is Inter in full ink; black on white, not
 // the reference's blue, to stay in the site's palette. It replaced the site-kit CV
 // (mono labels, grey dates, Archivo Black masthead), which CK found hard to read.
 // Screen and print share the markup; @media print sets it at document sizes on one A4
@@ -109,12 +109,14 @@ export default function CVPage() {
         .cv-tools { display: flex; justify-content: flex-end; margin-bottom: 24px; }
 
         .cv-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px 32px; }
-        .cv-name { font-weight: 800; font-size: clamp(2.25rem, 5vw, 3rem); line-height: 1; letter-spacing: -0.02em; color: var(--color-warm); }
+        /* Name and section heads in Archivo Black, the headline face on every other page;
+           everything read is Inter. */
+        .cv-name { font-family: var(--font-heading); font-weight: 400; font-size: clamp(2.25rem, 5vw, 3rem); line-height: 1; letter-spacing: -0.02em; color: var(--color-warm); }
         .cv-role { margin-top: 8px; font-size: 1rem; }
         .cv-contact { font-size: 0.9375rem; line-height: 1.65; }
         @media (min-width: 640px) { .cv-contact { text-align: right; } }
 
-        .cv-h2 { margin-top: 36px; padding-bottom: 6px; border-bottom: 2px solid var(--color-warm); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; color: var(--color-warm); }
+        .cv-h2 { margin-top: 36px; padding-bottom: 6px; border-bottom: 2px solid var(--color-warm); font-family: var(--font-heading); font-size: 1.5rem; font-weight: 400; letter-spacing: -0.01em; line-height: 1.2; color: var(--color-warm); }
         .cv-summary { margin-top: 12px; font-size: 1rem; line-height: 1.6; }
 
         .cv-cols { display: grid; grid-template-columns: 1fr; column-gap: 40px; }

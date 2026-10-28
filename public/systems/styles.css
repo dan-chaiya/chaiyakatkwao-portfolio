@@ -12,11 +12,14 @@
    URLs are relative to this stylesheet, so they resolve on both sides.
    ========================================================================== */
 
-/* --- FONTS: the parent's three families, self-hosted from ./fonts/ ---------- */
+/* --- FONTS: the parent's two families, self-hosted from ./fonts/ ------------
+   Since 2026-10-28 the parent sets body text and labels in Inter and keeps Archivo
+   Black for headlines; this page follows. --font-mono keeps its name and points at
+   Inter, with tabular figures so counts and years still line up. */
 @font-face {
-  font-family: "Archivo";
-  src: url("./fonts/archivo-variable.woff2") format("woff2");
-  font-weight: 300 800;
+  font-family: "Inter";
+  src: url("./fonts/inter-variable.woff2") format("woff2");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -24,13 +27,6 @@
   font-family: "Archivo Black";
   src: url("./fonts/archivo-black-400.woff2") format("woff2");
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("./fonts/jetbrains-mono-variable.woff2") format("woff2");
-  font-weight: 400 500;
   font-style: normal;
   font-display: swap;
 }
@@ -58,9 +54,9 @@
   --color-accent-dim:       oklch(54% 0.19 35 / 0.3);
   --color-focus-ring:       rgba(17, 17, 17, 0.55);
 
-  --font-display: "Archivo Black", "Archivo", system-ui, sans-serif;
-  --font-body:    "Archivo", system-ui, sans-serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: "Archivo Black", "Inter", system-ui, sans-serif;
+  --font-body:    "Inter", system-ui, sans-serif;
+  --font-mono:    "Inter", system-ui, sans-serif;
 
   /* Type: the parent's steps, by role */
   --step-display:  clamp(3rem, 8vw, 7rem);        /* page title */
@@ -115,6 +111,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--step-body);
   line-height: 1.6;
+  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
