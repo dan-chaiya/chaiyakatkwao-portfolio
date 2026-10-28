@@ -5,7 +5,7 @@ import AboutClient from "./AboutClient";
 export const metadata: Metadata = pageMetadata({
   title: "About",
   description:
-    "Chaiya Katkwao, Creative Producer in Bangkok. Art direction on one side; lighting, cameras, sound and the studio's own software on the other.",
+    "Chaiya Katkwao, Live Production Lead in Bangkok. Runs a 15-room TikTok live commerce studio for 10 brands, and art-directs the look of what goes out.",
   path: "/about",
 });
 

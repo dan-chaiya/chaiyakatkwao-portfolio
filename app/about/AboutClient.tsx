@@ -5,6 +5,7 @@ import { photoAlt } from "@/lib/photos";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
 import { clients } from "@/data/clients";
+import { liveStudio as L } from "@/data/live-studio";
 
 const experience = [
   {
@@ -95,9 +96,9 @@ export default function AboutClient() {
 
             <div className="space-y-8 max-w-xl">
               <p className="copy-lead">
-                Chaiya is a Creative Producer in Bangkok. He art-directs the
-                work and builds the technical side that carries it: lighting,
-                cameras, sound and the studio&apos;s own software.
+                Chaiya is a live production lead in Bangkok. He runs the
+                technical side of a live studio, lighting, cameras, sound and
+                the studio&apos;s own software, and art-directs what it puts out.
               </p>
 
               <p className="copy-body">
@@ -108,9 +109,9 @@ export default function AboutClient() {
               </p>
 
               <p className="copy-body">
-                At Ad The Top Agency he runs multi-camera productions and live
-                commerce sessions for several brands, and writes the procedures
-                and software the studio runs them on.
+                At Ad The Top Agency he runs production across {L.rooms} live rooms on
+                {L.floors} floors, TikTok live commerce for 10 brands, and writes the
+                procedures and software the studio runs them on.
               </p>
 
               <p className="copy-body" style={{ color: "var(--color-warm)", fontWeight: 500 }}>

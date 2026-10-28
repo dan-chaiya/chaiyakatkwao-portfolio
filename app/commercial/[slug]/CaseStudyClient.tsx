@@ -8,7 +8,7 @@ import PageTransition from "@/components/PageTransition";
 import Lightbox from "@/components/Lightbox";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import Footer from "@/components/Footer";
-import { projects, type Project } from "@/data/commercial";
+import { visibleProjects, type Project } from "@/data/commercial";
 import { selectedEpisodes } from "@/data/youtube";
 import { photoAlt, photoSize } from "@/lib/photos";
 
@@ -38,8 +38,9 @@ export default function CaseStudyClient({ project }: { project: Project }) {
     })),
   ];
 
-  const currentIndex = projects.findIndex((p) => p.slug === project.slug);
-  const next = projects[(currentIndex + 1) % projects.length];
+  // A hidden case study (still reachable by its old URL) points to the first listed one.
+  const currentIndex = visibleProjects.findIndex((p) => p.slug === project.slug);
+  const next = visibleProjects[(currentIndex + 1) % visibleProjects.length];
 
   return (
     <PageTransition>

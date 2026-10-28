@@ -3,6 +3,7 @@ import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
 import PrintButton from "@/components/PrintButton";
 import { pageMetadata } from "@/lib/seo";
+import { liveStudio as L } from "@/data/live-studio";
 
 // app/cv/page.tsx — the CV, set in the site's own kit.
 // On screen it is a page like About: the mono eyebrow, the Archivo Black title in
@@ -18,10 +19,15 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "CV",
-  description: "Chaiya Katkwao, Creative Producer, Bangkok. Curriculum vitae.",
+  description: "Chaiya Katkwao, Live Production Lead, Bangkok. Curriculum vitae.",
   path: "/cv",
 });
 
+// Every number below comes from data/live-studio.ts (counted from the Live Studio OS
+// sheet on 4 October 2026) or from /systems, so the CV, Home, Commercial and the chat
+// say the same thing. 501 is the register as migrated; 458 is what is tracked today.
+// TODO(CK): add start and end months to each period ("Mar 2026–Present"). Year-only
+// dates on two short roles read as shorter than they were.
 const experience = [
   {
     role: "Live Production & Visual Coordinator",
@@ -29,11 +35,12 @@ const experience = [
     location: "Bangkok",
     period: "2026–Present",
     points: [
-      "Runs live commerce broadcasts for several brands at once on TikTok and other social platforms, from the client brief to the live feed",
-      "Plans the look for each brand brief and designs lighting and camera setups the crew can reuse from one client to the next",
+      `Runs production across a ${L.rooms}-room live commerce studio on ${L.floors} floors for a live department of ${L.department}: hosts, live coordinators and an ${L.adminCrew}-person admin crew`,
+      "Produces TikTok live commerce for 10 brands, including Nestlé, Colgate, Guess, Fitflop and Dutchmil Delivery, with several rooms live at once",
+      "Designs the lighting and camera setup for each brand brief, built so the crew can repeat it from one client to the next",
       "Wrote the studio's standard settings, shutdown checklist and per-room equipment guides, which cut the time a session takes to set up",
-      "Built Live Studio OS with the company's CEO: a Google Apps Script web app on one Google Sheet that the team opens every day for equipment checks, fault logs and the monthly report",
-      "Moved the 501-item equipment register into it",
+      `Built Live Studio OS with the CEO: a Google Apps Script web app the team opens every day for equipment checks, fault logs and the monthly report; 20+ releases. Migrated the 501-item register into it; ${L.gear} items tracked today, including ${L.cameras} cameras, ${L.switchers} switchers, ${L.lights} LED lights and ${L.pcs} PCs`,
+      `Logged ${L.faultsLogged} equipment faults in ${L.faultWindow} and resolved all ${L.faultsResolved}`,
     ],
   },
   {
@@ -42,54 +49,49 @@ const experience = [
     location: "Bangkok",
     period: "2025–2026",
     points: [
-      "Designed and ran the studio's multi-camera podcast and video systems",
-      "Produced Built From Scratch, Grapple Asia and The Rise of Intelligence",
-      "Set up audio, lighting and recording for long-form shows",
-      "Wrote SOPs and troubleshooting guides for recurring shows",
+      "Designed and ran the studio's multi-camera podcast set: audio, lighting, signal routing and recording",
+      "Produced three long-form shows, Built From Scratch, Grapple Asia and The Rise of Intelligence, from guest coordination to final delivery",
+      "Wrote the SOPs and troubleshooting guides the team runs recurring shows from",
     ],
   },
   {
-    role: "Freelance Creative",
+    role: "Freelance Photographer & Art Director",
     company: "Independent",
     location: "Thailand",
     period: "2022–Present",
     points: [
-      "Fashion photography and art direction for emerging Thai labels, including the BAKAO lookbook",
-      "Photographed Knack Factory #18, the senior fashion showcase at Suan Sunandha Rajabhat University",
-      "Documentary portrait series across Northern Thailand",
+      "Lookbook photography and art direction for BAKAO, a Bangkok clothing label (2024)",
+      "Runway photography for Knack Factory #18, the senior fashion show at Suan Sunandha Rajabhat University (2024)",
+      "Assistant photographer on Khun Chang Khian, a documentary portrait series in Chiang Mai (2023–2024)",
     ],
   },
 ];
 
 const exhibitions = [
-  // "Chiang Mai": the city name never breaks across a line beside the year label.
-  { title: "Woven Memories, ID Thesis Exhibition, Red Dog Gallery, Chiang Mai", year: "2025" },
-  { title: "Assistant Photographer, Khun Chang Khian Thesis Project", year: "2023–2024" },
-  { title: "Fuiyoh, Art Thesis Exhibition, CMU Art Centre, Chiang Mai", year: "2021" },
+  { title: "Woven Memories, Red Dog Gallery, Chiang\u00a0Mai", year: "2025" },
+  { title: "Fuiyoh, CMU Art Centre, Chiang\u00a0Mai", year: "2021" },
 ];
 
+// Grouped the way a live-production job ad is written, so the tools it searches for
+// (ATEM, OBS, multi-camera) are on the page in its words.
 const skills = [
   {
+    group: "Live production",
+    items: "ATEM switchers, OBS, multi-camera direction, TikTok live commerce, lighting design, studio audio, signal routing",
+  },
+  {
     group: "Creative",
-    items: "Art Direction, Creative Direction, Photography, Video Editing & Color Grading (DaVinci Resolve), Styling, Lighting Design, Visual Storytelling",
+    items: "Art direction, photography, styling, DaVinci Resolve (edit and colour), Canva",
   },
   {
-    group: "Production",
-    items: "Live Commerce Production, Live Switching & Streaming (OBS), Live Content Systems, Multi-camera Production, Studio Production, Audio-Visual Engineering",
-  },
-  {
-    group: "AI Systems",
-    items: "Claude & Claude Code, agentic assistants with tool use & persistent memory (SQLite), MCP & Vercel AI SDK; creative automation with self-hosted n8n + Obsidian; AI video pipelines (Higgsfield, ElevenLabs)",
-  },
-  {
-    group: "Internal Systems",
-    items: "Live Studio OS, Keepsake and the studio register: Google Apps Script and Sheets, built and maintained for teams that use them every day",
+    group: "Systems",
+    items: "Google Apps Script, Google Sheets and Workspace, SOP writing, Claude Code",
   },
 ];
 
-const clients = [
-  "Colgate", "Dutchmil Delivery", "Fitflop", "Guess", "Her Hyness", "Nestlé",
-  "Rojukiss", "Sunnies Studio Thailand", "Tokfashion", "Knack Factory", "BAKAO",
+const liveBrands = [
+  "Colgate", "Dutchmil Delivery", "F&N Dairies", "Fitflop", "Guess",
+  "Her Hyness", "Nestlé", "Rojukiss", "Sunnies Studio", "Tokfashion",
 ];
 
 export default function CVPage() {
@@ -225,17 +227,17 @@ export default function CVPage() {
               </h1>
 
               <div className="cv-summary">
-                {/* No "in Bangkok" here: on paper the longer line runs to three
-                    lines with "other." alone on the third, and the page is
-                    full. Bangkok is in the contact block beside it. */}
+                {/* The target role first, then the scale in numbers. The job title
+                    held is in Experience; this line is what the next one is. */}
                 <p className="copy-lead">
-                  Creative Producer. Art direction on one side; lighting,
-                  cameras, sound and the studio&apos;s own software on the other.
+                  Live Production Lead. Runs a {L.rooms}-room TikTok live commerce
+                  studio for 10 brands, from the lighting plan to the software
+                  the crew checks the gear in.
                 </p>
                 <p className="copy-body">
-                  Turns briefs into broadcast-quality output, from multi-camera
-                  podcasts to multi-brand live commerce, and builds the systems the
-                  studio runs on: three internal tools in daily use, documented at
+                  Trained as a photographer (BFA, Chiang Mai University), so the
+                  look of a broadcast is part of the job, not handed off. Three
+                  internal tools built and in daily use, documented at
                   chaiyakatkwao.com/systems.
                 </p>
               </div>
@@ -258,17 +260,6 @@ export default function CVPage() {
                 </div>
               </section>
 
-              <section className="cv-section cv-section--tight" aria-label="Art and exhibition">
-                <p className="mono-label cv-eyebrow">Art &amp; Exhibition</p>
-                <div className="cv-rows">
-                  {exhibitions.map((ex) => (
-                    <div key={ex.title} className="cv-row cv-row__head">
-                      <p className="copy-small">{ex.title}</p>
-                      <span className="mono-label">{ex.year}</span>
-                    </div>
-                  ))}
-                </div>
-              </section>
             </div>
 
             {/* Right rail: the facts. */}
@@ -296,6 +287,18 @@ export default function CVPage() {
                 </div>
               </section>
 
+              <section className="cv-section cv-section--tight" aria-label="Exhibitions">
+                <p className="mono-label cv-eyebrow">Exhibitions</p>
+                <div className="cv-rows">
+                  {exhibitions.map((ex) => (
+                    <div key={ex.title} className="cv-row cv-row__head">
+                      <p className="copy-small">{ex.title}</p>
+                      <span className="mono-label">{ex.year}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
               <section className="cv-section cv-section--tight" aria-label="Languages">
                 <p className="mono-label cv-eyebrow" style={{ marginBottom: "16px" }}>Languages</p>
                 <div className="cv-lines copy-small">
@@ -313,23 +316,18 @@ export default function CVPage() {
                 ))}
               </section>
 
-              <section className="cv-section cv-section--tight" aria-label="Selected clients">
-                <p className="mono-label cv-eyebrow">Selected Clients</p>
-                <div className="cv-rows">
-                  {clients.map((name, i) => (
-                    <div key={name} className="cv-row cv-row__head">
-                      <p className="copy-small">{name}</p>
-                      <span className="mono-label">{String(i + 1).padStart(2, "0")}</span>
-                    </div>
-                  ))}
-                </div>
+              <section className="cv-section cv-section--tight" aria-label="Live commerce brands">
+                <p className="mono-label cv-eyebrow" style={{ marginBottom: "16px" }}>Live Commerce Brands</p>
+                {/* One run of names, not eleven numbered rows: the list is proof, not
+                    a ranking, and the rows took a third of the column. */}
+                <p className="copy-small">{liveBrands.join(", ")}.</p>
               </section>
             </div>
           </div>
 
           <div className="cv-foot">
-            <p className="mono-label">© 2026 Chaiya Katkwao</p>
-            <p className="mono-label">Updated September 2026</p>
+            <p className="mono-label">Chaiya Katkwao, chaiyakatkwao.com</p>
+            <p className="mono-label">Updated October 2026</p>
           </div>
         </main>
       </PageTransition>

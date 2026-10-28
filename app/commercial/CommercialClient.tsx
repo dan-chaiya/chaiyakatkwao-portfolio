@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 import Lightbox from "@/components/Lightbox";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import CommercialList from "@/components/CommercialList";
-import { projects } from "@/data/commercial";
+import { visibleProjects } from "@/data/commercial";
 import { selectedEpisodes } from "@/data/youtube";
 import { photoAlt, photoSize } from "@/lib/photos";
 import { liveStudio as L } from "@/data/live-studio";
@@ -175,9 +175,9 @@ export default function CommercialClient() {
         <nav aria-label="On this page" className="mb-16 border-t border-[var(--color-border)]">
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              ...projects.map((p) => ({ href: `#${p.slug}`, label: p.title, meta: p.year })),
-              { href: "#episodes", label: "Selected Episodes", meta: "2025–2026" },
               { href: "#live-commerce", label: "Live Commerce", meta: "2026" },
+              ...visibleProjects.map((p) => ({ href: `#${p.slug}`, label: p.title, meta: p.year })),
+              { href: "#episodes", label: "Selected Episodes", meta: "2025–2026" },
             ].map((item) => (
               <li key={item.href} className="border-b border-[var(--color-border)]">
                 <a
@@ -191,6 +191,104 @@ export default function CommercialClient() {
             ))}
           </ul>
         </nav>
+
+        {/* Live Commerce, first since 2026-10-28: it is the current job and the work with
+            a scale, so an employer meets it before the photography. */}
+        <section id="live-commerce" className="mb-32 scroll-mt-24">
+          <div style={{ borderTop: "1px solid color-mix(in srgb, var(--color-text) 18%, transparent)", paddingTop: "20px", marginBottom: "48px", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+            <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">Live Commerce</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
+            <div className="md:col-span-1">
+              <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">01</span>
+            </div>
+            <div className="md:col-span-4">
+              <h2
+                className="font-heading text-[var(--color-warm)] mb-1"
+                style={{ fontSize: "clamp(1.2rem, 2.5vw, 2rem)", lineHeight: 0.95, letterSpacing: "-0.02em" }}
+              >
+                Live Commerce
+              </h2>
+              <p className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
+                Live Production &amp; Visual Coordinator
+              </p>
+            </div>
+            <div className="md:col-span-5">
+              <p className="copy-body mb-6">
+                TikTok live commerce for 10 brands at Ad The Top Agency, several rooms live at
+                once, from the client brief to the live feed. I plan the lighting and camera
+                setup for each brief and run the studio it goes out from.
+              </p>
+              {/* The producer's credits, from the studio's own records (data/live-studio.ts):
+                  what an agency hiring a producer scans for (2026-10-04). */}
+              <dl className="mb-6 border-t border-[var(--color-border)]">
+                {[
+                  ["Brands", "Colgate, Dutchmil Delivery, F&N Dairies, Fitflop, Guess, Her Hyness, Nestlé, Rojukiss, Sunnies Studio, Tokfashion"],
+                  ["Team", `A live department of ${L.department}: hosts, live coordinators and an ${L.adminCrew}-person admin crew`],
+                  ["Studio", `${L.rooms} live rooms on ${L.floors} floors, running brands side by side`],
+                  ["Gear", `${L.gear} tracked pieces: ${L.cameras} cameras, ${L.switchers} switchers, ${L.lights} LED lights, ${L.pcs} PCs`],
+                  ["System", `Live Studio OS, built in-house: daily health checks and a fault log, 20+ releases. ${L.faultsLogged} faults logged ${L.faultWindow}, ${L.faultsResolved} resolved`],
+                ].map(([k, v]) => (
+                  <div key={k} className="grid grid-cols-[5.5rem_1fr] gap-4 border-b border-[var(--color-border)] py-3">
+                    <dt className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-text-muted)] pt-[3px]">{k}</dt>
+                    <dd className="copy-small">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="flex flex-wrap gap-2">
+                {["Live Production", "Art Direction", "AV Engineering"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-mono font-medium text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="md:col-span-2 md:text-right">
+              <span className="font-mono font-medium text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">2026</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "1px" }}>
+            {shownLive.map((video) => (
+              <div key={video.id} style={{ backgroundColor: "var(--color-bg)" }}>
+                <video
+                  controls
+                  playsInline
+                  preload="none"
+                  poster={video.poster}
+                  aria-label={`${video.brand}, live commerce production`}
+                  className="w-full h-auto block"
+                >
+                  <source src={video.src} type={video.type} />
+                </video>
+                <div style={{
+                  padding: "14px 20px",
+                  borderTop: "1px solid var(--color-border)",
+                  display: "flex",
+                  alignItems: "baseline",
+                  justifyContent: "space-between",
+                  gap: "16px",
+                }}>
+                  <span className="font-heading" style={{ fontSize: "0.85rem", letterSpacing: "-0.01em", color: "var(--color-warm)" }}>
+                    {video.brand}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          {!allLive && (
+            <button
+              type="button"
+              onClick={() => setAllLive(true)}
+              className="mt-8 w-full border border-[var(--color-border)] py-[18px] font-mono font-medium text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] transition-[border-color,color] duration-[250ms] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]"
+            >
+              Show all {liveCommerceVideos.length} recordings
+            </button>
+          )}
+        </section>
 
         {/* View toggle (B3) */}
         <div className="mb-12 hidden sm:flex items-center gap-1" role="group" aria-label="View mode">
@@ -213,11 +311,11 @@ export default function CommercialClient() {
         {/* Photo / production projects */}
         {view === "list" ? (
           <div key="list" className={viewEnter}>
-            <CommercialList projects={projects} />
+            <CommercialList projects={visibleProjects} />
           </div>
         ) : (
         <div key="grid" className={`space-y-32 ${viewEnter}`}>
-          {projects.map((project, i) => (
+          {visibleProjects.map((project, i) => (
             <article key={project.id} id={project.slug} className="scroll-mt-24">
               {/* Cover — natural aspect ratio, no cropping */}
               <Link
@@ -397,100 +495,6 @@ export default function CommercialClient() {
           </div>
         </section>
 
-        {/* Live Commerce section */}
-        <section id="live-commerce" className="mt-24 scroll-mt-24">
-          <div style={{ borderTop: "1px solid color-mix(in srgb, var(--color-text) 18%, transparent)", paddingTop: "20px", marginBottom: "48px", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-            <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">Live Commerce</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
-            <div className="md:col-span-1">
-              <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">06</span>
-            </div>
-            <div className="md:col-span-4">
-              <h2
-                className="font-heading text-[var(--color-warm)] mb-1"
-                style={{ fontSize: "clamp(1.2rem, 2.5vw, 2rem)", lineHeight: 0.95, letterSpacing: "-0.02em" }}
-              >
-                Live Commerce
-              </h2>
-              <p className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
-                Live Production &amp; Visual Coordinator
-              </p>
-            </div>
-            <div className="md:col-span-5">
-              <p className="copy-body mb-6">
-                Live commerce productions for fashion and lifestyle brands at Ad The Top Agency,
-                from the client brief to the live feed.
-              </p>
-              {/* The producer's credits, from the studio's own records (data/live-studio.ts):
-                  what an agency hiring a producer scans for (2026-10-04). */}
-              <dl className="mb-6 border-t border-[var(--color-border)]">
-                {[
-                  ["Team", `A live department of ${L.department}: hosts, live coordinators and an ${L.adminCrew}-person admin crew`],
-                  ["Studio", `${L.rooms} live rooms on ${L.floors} floors, running brands side by side`],
-                  ["Gear", `${L.gear} tracked pieces: ${L.cameras} cameras, ${L.switchers} switchers, ${L.lights} LED lights, ${L.pcs} PCs`],
-                  ["System", `Live Studio OS, built in-house: daily health checks and a fault log. ${L.faultsLogged} faults logged ${L.faultWindow}, ${L.faultsResolved} resolved`],
-                ].map(([k, v]) => (
-                  <div key={k} className="grid grid-cols-[5.5rem_1fr] gap-4 border-b border-[var(--color-border)] py-3">
-                    <dt className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-text-muted)] pt-[3px]">{k}</dt>
-                    <dd className="copy-small">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-              <div className="flex flex-wrap gap-2">
-                {["Live Production", "Art Direction", "AV Engineering"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-mono font-medium text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="md:col-span-2 md:text-right">
-              <span className="font-mono font-medium text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">2026</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "1px" }}>
-            {shownLive.map((video) => (
-              <div key={video.id} style={{ backgroundColor: "var(--color-bg)" }}>
-                <video
-                  controls
-                  playsInline
-                  preload="none"
-                  poster={video.poster}
-                  aria-label={`${video.brand}, live commerce production`}
-                  className="w-full h-auto block"
-                >
-                  <source src={video.src} type={video.type} />
-                </video>
-                <div style={{
-                  padding: "14px 20px",
-                  borderTop: "1px solid var(--color-border)",
-                  display: "flex",
-                  alignItems: "baseline",
-                  justifyContent: "space-between",
-                  gap: "16px",
-                }}>
-                  <span className="font-heading" style={{ fontSize: "0.85rem", letterSpacing: "-0.01em", color: "var(--color-warm)" }}>
-                    {video.brand}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-          {!allLive && (
-            <button
-              type="button"
-              onClick={() => setAllLive(true)}
-              className="mt-8 w-full border border-[var(--color-border)] py-[18px] font-mono font-medium text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] transition-[border-color,color] duration-[250ms] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]"
-            >
-              Show all {liveCommerceVideos.length} recordings
-            </button>
-          )}
-        </section>
       </main>
 
       <div className="mt-32">

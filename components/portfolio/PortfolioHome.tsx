@@ -76,9 +76,8 @@ export default function PortfolioHome() {
             <div className="md:col-span-7">
               <Label>About</Label>
               <p className="copy-lead" style={{ maxWidth: "52ch", marginTop: "20px" }}>
-                Creative Producer in Bangkok. Art direction on one side;
-                lighting, cameras, sound and the studio&apos;s own software on
-                the other.
+                Live production lead in Bangkok. I run the technical side of a
+                live commerce studio and art-direct what it puts out.
               </p>
               <Link
                 href="/about"
@@ -132,32 +131,11 @@ export default function PortfolioHome() {
             style={{ paddingTop: "80px", paddingBottom: "80px" }}
           >
             <div className="md:col-span-7">
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <Label>Contact</Label>
-                <span
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "7px",
-                    fontFamily: "var(--font-jetbrains-mono)",
-                    fontSize: "11px",
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                    color: "var(--color-accent)",
-                  }}
-                >
-                  {/* A plain line, not a pill, and a still dot (2026-10-04): the boxed,
-                      pulsing "available" badge is the most-copied move on portfolios. */}
-                  <span aria-hidden="true" style={{
-                    width: "5px",
-                    height: "5px",
-                    borderRadius: "50%",
-                    backgroundColor: "var(--color-accent)",
-                    display: "inline-block",
-                  }} />
-                  Available for projects
-                </span>
-              </div>
+              {/* No "Available for projects" status (2026-10-28): it spoke only to
+                  freelance clients, and an employer reads it as a side business. The
+                  strip now speaks to both, and says nothing the current employer
+                  would read as a notice. */}
+              <Label>Contact</Label>
               <h2
                 style={{
                   fontFamily: "var(--font-heading)",
@@ -169,13 +147,13 @@ export default function PortfolioHome() {
                   marginTop: "20px",
                 }}
               >
-                Send the
+                Let&apos;s
                 <br />
-                brief.
+                talk.
               </h2>
               <p className="copy-body" style={{ maxWidth: "44ch", marginTop: "24px" }}>
-                Shoots, live productions and studio builds. Send the brief to
-                the address here and the reply comes from me, not an inbox.
+                Live production, shoots and studio builds. Write to the address
+                here and the reply comes from me, not an inbox.
               </p>
             </div>
 
@@ -229,32 +207,41 @@ export default function PortfolioHome() {
 }
 
 
-// The featured project: the photograph at full contrast in a 16:9 frame, then its
-// caption below in flow, on the page ground. The dark gradient wash that carried
-// white text over the image went on 2026-09-08, the same move as the hero: nothing
-// is layered over the work, so legibility never costs the photograph anything.
+// The featured project: the live studio, since 2026-10-28. It is the current job and
+// the work with a scale, so it is what an employer should meet first (it used to be
+// Knack Factory, which still opens the hero). Three stills from the live rooms side by
+// side in the 16:9 frame: each is 9:16, so three across lose almost nothing to the
+// crop. The caption sits below in flow, on the page ground; nothing is layered over
+// the work.
+const FEATURED_LIVE = [
+  { src: "/images/live-posters/nestle.jpg", alt: "Nestlé Health Science live commerce stream" },
+  { src: "/images/live-posters/fitflop-may.jpg", alt: "Fitflop live commerce stream" },
+  { src: "/images/live-posters/guess.jpg", alt: "Guess live commerce stream" },
+];
+
 function FeaturedCard() {
   return (
     <Link
-      href="/commercial/knack-factory"
+      href="/commercial#live-commerce"
       className="group"
       style={{ display: "block", color: "inherit", textDecoration: "none" }}
     >
-      <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "var(--color-surface)" }}>
-        <Image
-          src={workAssets.knack("Knack-14.jpg")}
-          alt={photoAlt(workAssets.knack("Knack-14.jpg"), "Knack Factory Fashion Show, 2024")}
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
+      <div
+        className="grid grid-cols-3"
+        style={{ aspectRatio: "16/9", gap: "1px", backgroundColor: "var(--color-border)" }}
+      >
+        {FEATURED_LIVE.map((f) => (
+          <div key={f.src} style={{ position: "relative", overflow: "hidden", backgroundColor: "var(--color-surface)" }}>
+            <Image src={f.src} alt={f.alt} fill sizes="34vw" className="object-cover" />
+          </div>
+        ))}
       </div>
       <div
         className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6"
         style={{ padding: "24px 32px 32px" }}
       >
         <div>
-          <p className="mono-label">Selected Work</p>
+          <p className="mono-label">Current Work</p>
           <h2
             style={{
               fontFamily: "var(--font-heading)",
@@ -266,13 +253,13 @@ function FeaturedCard() {
               marginTop: "14px",
             }}
           >
-            Knack Factory
+            Live Commerce,
             <br />
-            Fashion Show, 2024
+            {L.rooms} rooms, 2026
           </h2>
         </div>
         <p className="mono-label transition-colors duration-200 group-hover:text-[var(--color-text)]! group-focus-visible:text-[var(--color-text)]!">
-          View the project →
+          See the studio →
         </p>
       </div>
     </Link>

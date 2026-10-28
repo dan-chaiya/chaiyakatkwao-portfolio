@@ -164,7 +164,7 @@ export default function HeroStage() {
           Chaiya Katkwao.
         </h1>
         <p className="mono-label" style={{ color: "var(--color-warm)" }}>
-          Creative Producer, Bangkok
+          Live Production Lead, Bangkok
         </p>
       </div>
 
