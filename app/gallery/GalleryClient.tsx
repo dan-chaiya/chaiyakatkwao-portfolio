@@ -17,6 +17,16 @@ const wovenMemories = Array.from({ length: 12 }, (_, i) => ({
   src: `/images/woven-memories/${String(i + 1).padStart(2, "0")}.jpg`,
 }));
 
+// Documentary, not a commission: moved here from /commercial on 2026-10-28.
+const khunChangKhian = Array.from({ length: 4 }, (_, i) => ({
+  id: 100 + i + 1,
+  slug: `khun-chang-khian-${String(i + 1).padStart(2, "0")}`,
+  title: `No. ${String(i + 1).padStart(2, "0")}`,
+  series: "Khun Chang Khian",
+  year: "2024",
+  src: `/images/khun-chang-khian/${String(i + 1).padStart(2, "0")}.jpg`,
+}));
+
 function toRoman(num: number): string {
   const map: [number, string][] = [[10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
   let n = num;
@@ -118,7 +128,7 @@ function MasonryGrid({
 
 // The open photo lives in the URL hash (#woven-03, #untitled-7), so a photo can be
 // linked to, a reload keeps it, and the back button closes it (2026-10-04).
-const SERIES: GalleryItem[][] = [wovenMemories, selectedWork];
+const SERIES: GalleryItem[][] = [wovenMemories, khunChangKhian, selectedWork];
 
 function subscribeHash(onChange: () => void) {
   window.addEventListener("hashchange", onChange);
@@ -185,6 +195,22 @@ export default function GalleryClient() {
           <MasonryGrid
             items={wovenMemories}
             onOpen={openLightbox(wovenMemories)}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        </div>
+
+        {/* Khun Chang Khian */}
+        <div className="mb-28">
+          <div className="flex items-center gap-8 mb-12">
+            <span className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
+              Khun Chang Khian
+            </span>
+            <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
+            <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2024</span>
+          </div>
+          <MasonryGrid
+            items={khunChangKhian}
+            onOpen={openLightbox(khunChangKhian)}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>

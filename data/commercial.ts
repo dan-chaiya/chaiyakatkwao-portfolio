@@ -17,91 +17,11 @@ export type Project = {
   hidden?: boolean;
 };
 
+// Order (2026-10-28): production first, then the photography. 01 is the Live
+// Commerce section on /commercial, so the case studies number from 02.
 export const projects: Project[] = [
   {
-    id: "01",
-    slug: "knack-factory",
-    title: "Knack Factory",
-    subtitle: "Suan Sunandha Rajabhat University",
-    year: "2024",
-    role: "Photographer",
-    description:
-      "Documenting the senior thesis runway of Suan Sunandha Rajabhat University's graduating fashion class.",
-    brief: [
-      "Knack Factory #18 is the senior thesis showcase of Suan Sunandha Rajabhat University's graduating fashion class. The runway is reimagined as an assembly line: each designer's \"knack,\" their specialised skill and distinct identity, processed as a working part of a larger machine that refines raw ideas into wearable art.",
-      "It was the first public turn for a new generation of Thai fashion graduates.",
-    ],
-    tags: ["Photography", "Fashion"],
-    cover: workAssets.knack("Knack-75.jpg"),
-    images: [
-      workAssets.knack("Knack-14.jpg"),
-      workAssets.knack("Knack-75.jpg"),
-      workAssets.knack("Knack-79.jpg"),
-      workAssets.knack("Knack-94.jpg"),
-      workAssets.knack("Knack-120.jpg"),
-      workAssets.knack("Knack-131.jpg"),
-      workAssets.knack("Knack-143.jpg"),
-    ],
-    listingImages: [
-      workAssets.knack("Knack-14.jpg"),
-      workAssets.knack("Knack-79.jpg"),
-      workAssets.knack("Knack-94.jpg"),
-      workAssets.knack("Knack-120.jpg"),
-      workAssets.knack("Knack-131.jpg"),
-    ],
-  },
-  {
     id: "02",
-    slug: "bakao",
-    title: "BAKAO",
-    subtitle: "BAKAO, Bangkok",
-    year: "2024",
-    role: "Photographer and art direction",
-    description:
-      "Fashion photography and art direction for an emerging Thai clothing label.",
-    brief: [
-      "BAKAO is an independent Bangkok-based clothing label built around clean silhouettes and natural fabrics. The brief was a lookbook that felt unhurried: clothes on real people in real light, with none of the rush of a trend editorial.",
-      "The shoot took little scouting, a palette pulled from the garments themselves, and long pauses between frames. The pictures came out closer to portraiture than fashion photography.",
-    ],
-    tags: ["Fashion Photography", "Art Direction"],
-    cover: "/images/bakao/01.jpg",
-    images: [
-      "/images/bakao/02.jpg",
-      "/images/bakao/03.jpg",
-      "/images/bakao/04.jpg",
-      "/images/bakao/05.jpg",
-      "/images/bakao/06.jpg",
-    ],
-    listingImages: [
-      "/images/bakao/02.jpg",
-      "/images/bakao/04.jpg",
-      "/images/bakao/05.jpg",
-      "/images/bakao/06.jpg",
-    ],
-  },
-  {
-    id: "03",
-    slug: "khun-chang-khian",
-    title: "Khun Chang Khian",
-    subtitle: "Khun Chang Khian, Chiang Mai",
-    year: "2024",
-    role: "Documentary photographer",
-    description:
-      "Portrait series documenting community and landscape across Northern Thailand.",
-    brief: [
-      "Khun Chang Khian is a village outside Chiang Mai. The assignment began as a portrait series and widened as the place took over: small fires at the edge of the rice fields, hands at work, a light that moves differently up north.",
-      "There is no single theme. The pictures are about staying somewhere long enough to stop being a visitor.",
-    ],
-    tags: ["Documentary", "Portrait"],
-    cover: "/images/khun-chang-khian/01.jpg",
-    images: [
-      "/images/khun-chang-khian/02.jpg",
-      "/images/khun-chang-khian/03.jpg",
-      "/images/khun-chang-khian/04.jpg",
-    ],
-  },
-  {
-    id: "04",
     slug: "podcast-studio",
     title: "Podcast & Studio",
     subtitle: "Modal Creative Studio",
@@ -133,6 +53,91 @@ export const projects: Project[] = [
       "eL6XtPuvpJs",
       "Nv1eOGsYhGk",
       "swJAnw13zR4",
+    ],
+  },
+  {
+    id: "03",
+    slug: "knack-factory",
+    title: "Knack Factory",
+    subtitle: "Suan Sunandha Rajabhat University",
+    year: "2024",
+    role: "Photographer",
+    description:
+      "Documenting the senior thesis runway of Suan Sunandha Rajabhat University's graduating fashion class.",
+    brief: [
+      "Knack Factory #18 is the senior thesis showcase of Suan Sunandha Rajabhat University's graduating fashion class. The runway is reimagined as an assembly line: each designer's \"knack,\" their specialised skill and distinct identity, processed as a working part of a larger machine that refines raw ideas into wearable art.",
+      "It was the first public turn for a new generation of Thai fashion graduates.",
+    ],
+    tags: ["Photography", "Fashion"],
+    cover: workAssets.knack("Knack-75.jpg"),
+    images: [
+      workAssets.knack("Knack-14.jpg"),
+      workAssets.knack("Knack-75.jpg"),
+      workAssets.knack("Knack-79.jpg"),
+      workAssets.knack("Knack-94.jpg"),
+      workAssets.knack("Knack-120.jpg"),
+      workAssets.knack("Knack-131.jpg"),
+      workAssets.knack("Knack-143.jpg"),
+    ],
+    listingImages: [
+      workAssets.knack("Knack-14.jpg"),
+      workAssets.knack("Knack-79.jpg"),
+      workAssets.knack("Knack-94.jpg"),
+      workAssets.knack("Knack-120.jpg"),
+      workAssets.knack("Knack-131.jpg"),
+    ],
+  },
+  {
+    id: "04",
+    slug: "bakao",
+    title: "BAKAO",
+    subtitle: "BAKAO, Bangkok",
+    year: "2024",
+    role: "Photographer and art direction",
+    description:
+      "Fashion photography and art direction for an emerging Thai clothing label.",
+    brief: [
+      "BAKAO is an independent Bangkok-based clothing label built around clean silhouettes and natural fabrics. The brief was a lookbook that felt unhurried: clothes on real people in real light, with none of the rush of a trend editorial.",
+      "The shoot took little scouting, a palette pulled from the garments themselves, and long pauses between frames. The pictures came out closer to portraiture than fashion photography.",
+    ],
+    tags: ["Fashion Photography", "Art Direction"],
+    cover: "/images/bakao/01.jpg",
+    images: [
+      "/images/bakao/02.jpg",
+      "/images/bakao/03.jpg",
+      "/images/bakao/04.jpg",
+      "/images/bakao/05.jpg",
+      "/images/bakao/06.jpg",
+    ],
+    listingImages: [
+      "/images/bakao/02.jpg",
+      "/images/bakao/04.jpg",
+      "/images/bakao/05.jpg",
+      "/images/bakao/06.jpg",
+    ],
+  },
+  {
+    id: "05",
+    slug: "khun-chang-khian",
+    title: "Khun Chang Khian",
+    subtitle: "Khun Chang Khian, Chiang Mai",
+    year: "2024",
+    role: "Assistant photographer",
+    description:
+      "Portrait series documenting community and landscape across Northern Thailand.",
+    brief: [
+      "Khun Chang Khian is a village outside Chiang Mai. The assignment began as a portrait series and widened as the place took over: small fires at the edge of the rice fields, hands at work, a light that moves differently up north.",
+      "There is no single theme. The pictures are about staying somewhere long enough to stop being a visitor.",
+    ],
+    tags: ["Documentary", "Portrait"],
+    // Documentary work, not a commission: shown as a series on /gallery since
+    // 2026-10-28. The case-study URL stays up for old links, out of the listing.
+    hidden: true,
+    cover: "/images/khun-chang-khian/01.jpg",
+    images: [
+      "/images/khun-chang-khian/02.jpg",
+      "/images/khun-chang-khian/03.jpg",
+      "/images/khun-chang-khian/04.jpg",
     ],
   },
 ];

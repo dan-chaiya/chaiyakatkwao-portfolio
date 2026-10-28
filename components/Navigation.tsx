@@ -235,7 +235,7 @@ export default function Navigation() {
             </nav>
 
             <p className="shrink-0 pb-10" style={{ ...MONO, color: "var(--color-text-muted)" }}>
-              Chaiya Katkwao / Creative Producer
+              Chaiya Katkwao / Live Production Lead
             </p>
           </motion.div>
         )}

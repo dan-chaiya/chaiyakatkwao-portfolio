@@ -129,7 +129,7 @@ export default function ChatInterface() {
             Chaiya<br />Katkwao.
           </h1>
           <p style={{ fontFamily: "var(--font-archivo)", fontSize: "0.875rem", color: "var(--color-grey-300)", lineHeight: 1.5 }}>
-            Creative Producer<br />Bangkok, Thailand
+            Live Production Lead<br />Bangkok, Thailand
           </p>
           <p style={{ fontFamily: "var(--font-archivo)", fontSize: "0.875rem", color: "var(--color-grey-400)", lineHeight: 1.5, marginTop: "10px" }}>
             Answers come from his CV and project notes and can be wrong. Briefs and

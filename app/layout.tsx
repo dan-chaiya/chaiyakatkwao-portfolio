@@ -85,7 +85,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         "@type": "Person",
         "@id": `${SITE_URL}/#person`,
         name: "Chaiya Katkwao",
-        jobTitle: "Creative Producer",
+        jobTitle: "Live Production Lead",
         url: SITE_URL,
         image: absoluteUrl(PORTRAIT_PATH),
         sameAs: [INSTAGRAM_URL],

@@ -1,8 +1,11 @@
-// data/clients.ts — brands the work was made for, in the order they are listed.
-// Shared by Home (the producer signal, under the bio) and About (the full roll).
+// data/clients.ts — brands the work was made for: the ten live commerce brands run
+// at Ad The Top (the same ten as the Live Commerce reel on /commercial), then BAKAO,
+// the freelance lookbook. Knack Factory is a university show, not a client, so it is
+// credited as a project instead (2026-10-28). Shared by Home and About.
 export const clients = [
   "Colgate",
   "Dutchmil Delivery",
+  "F&N Dairies",
   "Fitflop",
   "Guess",
   "Her Hyness",
@@ -10,6 +13,5 @@ export const clients = [
   "Rojukiss",
   "Sunnies Studio Thailand",
   "Tokfashion",
-  "Knack Factory",
   "BAKAO",
 ];
