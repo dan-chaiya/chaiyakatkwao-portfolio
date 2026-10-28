@@ -87,28 +87,28 @@ typography:
     lineHeight: 1
     letterSpacing: "-0.02em"
   lead:
-    fontFamily: "Archivo, Noto Sans Thai, sans-serif"
+    fontFamily: "Inter, Noto Sans Thai, sans-serif"
     fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)"
     fontWeight: 400
     lineHeight: 1.4
   body:
-    fontFamily: "Archivo, Noto Sans Thai, sans-serif"
+    fontFamily: "Inter, Noto Sans Thai, sans-serif"
     fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.55
   body-sm:
-    fontFamily: "Archivo, Noto Sans Thai, sans-serif"
+    fontFamily: "Inter, Noto Sans Thai, sans-serif"
     fontSize: "14px"
     fontWeight: 400
     lineHeight: 1.5
   label:
-    fontFamily: "JetBrains Mono, Noto Sans Thai, monospace"
+    fontFamily: "Inter, Noto Sans Thai, sans-serif"
     fontSize: "11px"
     fontWeight: 500
     lineHeight: 1
     letterSpacing: "0.18em"
   label-wide:
-    fontFamily: "JetBrains Mono, Noto Sans Thai, monospace"
+    fontFamily: "Inter, Noto Sans Thai, sans-serif"
     fontSize: "11px"
     fontWeight: 500
     lineHeight: 1
@@ -185,7 +185,7 @@ The system rejects, by name, the three anti-references in PRODUCT.md: colourful 
 **Key Characteristics:**
 - Two themes from five brutalist neutrals: Paper (`#F0F0F0`, the default) and Ink (`#111111`), each using the other as its ink.
 - One accent, the Cue Light (hue 35), on about 1% of any screen.
-- Two families: Archivo Black and Archivo carry what is read, JetBrains Mono labels everything else.
+- Two families: Archivo Black for headlines; Inter for body text and every label (since 2026-10-28, replacing Archivo and JetBrains Mono).
 - Flat: depth from tonal steps and 1px hairlines, never shadows.
 - Square: no radius anywhere except the two dots (theme switch, Available).
 - One left edge: 32px on every page and every section.
@@ -227,10 +227,10 @@ Every text grey measures 4.5:1 or better on the ground, surface and elevated sur
 ## 3. Typography
 
 **Display Font:** Archivo Black (with Noto Sans Thai, then sans-serif)
-**Body Font:** Archivo 400–800 (with Noto Sans Thai, then system-ui)
-**Label/Mono Font:** JetBrains Mono 400–500 (with Noto Sans Thai, then monospace)
+**Body Font:** Inter 400–800 (with Noto Sans Thai, then system-ui)
+**Label Font:** Inter 500, uppercase, tracked, tabular figures (with Noto Sans Thai, then sans-serif). The CSS names `--font-jetbrains-mono`, `.mono-label` and `font-mono` are kept and point at Inter.
 
-**Character:** Archivo Black is structural, set tight (-0.02em to -0.03em) on a 0.88–0.95 line-height, so a headline reads as a built object. It ships as one cut and every head asks for 800, so the browser synthesizes bold on top of Black: that dense faux-bold is the heading voice, and it is deliberate. JetBrains Mono carries the whole information layer, and it is why the site reads as a working document rather than a brochure.
+**Character:** Archivo Black is structural, set tight (-0.02em to -0.03em) on a 0.88–0.95 line-height, so a headline reads as a built object. It ships as one cut and every head asks for 800, so the browser synthesizes bold on top of Black: that dense faux-bold is the heading voice, and it is deliberate. Inter carries the whole information layer in small tracked capitals, chosen for legibility at 11px.
 
 ### Hierarchy
 - **Display** (Archivo Black, 800, 0.9 line-height, -0.02em): `clamp(2.5rem, 8vw, 7rem)`. Page titles (Commercial, Gallery, About, CV, 404).
@@ -239,15 +239,15 @@ Every text grey measures 4.5:1 or better on the ground, surface and elevated sur
 - **Roll** (Archivo Black, 800, 1.05 line-height, -0.02em): `clamp(1.5rem, 3.5vw, 2.75rem)`. The About client and service rolls.
 - **Headline** (Archivo Black, 800, 0.95 line-height, -0.02em): `clamp(1.2rem, 2.5vw, 2rem)`. Section and project titles, Commercial list rows.
 - **Title** (Archivo Black, 800, 1 line-height, -0.02em): `clamp(1.25rem, 1.6vw, 1.5rem)`. The hero's one-line name, `Chaiya Katkwao.`
-- **Lead** (Archivo, 400, 1.4 line-height, grey-200): `clamp(1.25rem, 1.6vw, 1.5rem)`. Bios, positioning lines, project descriptions (`.copy-lead`).
-- **Body** (Archivo, 400, 17px, 1.55 line-height, grey-200): everything that is read (`.copy-body`, and `body` itself), capped at 52–75ch.
-- **Small** (Archivo, 400, 14px, 1.5 line-height, grey-300): captions and list cells (`.copy-small`).
-- **Label** (JetBrains Mono, 500, 11px, 0.18em, uppercase, text-muted): nav, footer, tags, years, indices, counters (`.mono-label`).
-- **Label wide** (JetBrains Mono, 500, 11px, 0.28–0.35em, uppercase): eyebrows and section markers.
+- **Lead** (Inter, 400, 1.4 line-height, grey-200): `clamp(1.25rem, 1.6vw, 1.5rem)`. Bios, positioning lines, project descriptions (`.copy-lead`).
+- **Body** (Inter, 400, 17px, 1.55 line-height, grey-200): everything that is read (`.copy-body`, and `body` itself), capped at 52–75ch.
+- **Small** (Inter, 400, 14px, 1.5 line-height, grey-300): captions and list cells (`.copy-small`).
+- **Label** (Inter, 500, 11px, 0.18em, uppercase, text-muted): nav, footer, tags, years, indices, counters (`.mono-label`).
+- **Label wide** (Inter, 500, 11px, 0.28–0.35em, uppercase): eyebrows and section markers.
 
 **Thai.** Noto Sans Thai sits second in every stack (`--font-archivo`, `--font-archivo-black`, `--font-jetbrains-mono`), so Latin always sets in Archivo and only Thai characters reach Noto. It loads only when a Thai character renders. Mark Thai passages `lang="th"`. Labels stay English.
 
-**The Two-Family Rule.** Archivo reads, JetBrains Mono labels. If something is information (an index, a year, a role, a counter, a caption), it is mono, uppercase and tracked; if it is read, it is Archivo. No third family: Noto Sans Thai is Archivo's Thai script, never a choice for Latin.
+**The Two-Family Rule.** Archivo Black heads, Inter reads and labels. If something is information (an index, a year, a role, a counter, a caption), it is an Inter label: uppercase, tracked, tabular figures; if it is read, it is Inter in sentence case. No third family: Noto Sans Thai is the Thai script, never a choice for Latin.
 
 **The 11px Floor Rule.** No text below 11px on screen, and nothing below 8.5pt in print.
 
@@ -319,7 +319,7 @@ Every photo has a size and a description. `photoSize(src)` and `photoAlt(src)` i
 - **Do** keep the Cue Light at 10% of a screen at most; about 1% is normal.
 - **Do** name a token, never a colour: `var(--color-*)`, and `color-mix()` for a tint.
 - **Do** keep every text colour at 4.5:1 or better; `text-dim` and `grey-600` are structural marks, not text.
-- **Do** set every small uppercase label in JetBrains Mono (`.mono-label`, or `font-mono font-medium text-[11px]`).
+- **Do** set every small uppercase label as an Inter label (`.mono-label`, or `font-mono font-medium text-[11px]`; both names point at Inter).
 - **Do** keep one left edge: 32px on every page and every section (`px-8`, `.section-shell`).
 - **Do** use tonal surface steps for depth, never shadows.
 - **Do** use the signature curve `cubic-bezier(0.16, 1, 0.3, 1)` (`var(--ease-out)`) for motion; the page fade is 250ms, hovers 180–250ms.

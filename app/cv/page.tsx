@@ -131,7 +131,7 @@ export default function CVPage() {
         .cv-rows b { font-weight: 600; }
         .cv-foot { margin-top: 48px; font-size: 0.8125rem; color: var(--color-text-muted); }
 
-        @page { size: A4 portrait; margin: 13mm 16mm; }
+        @page { size: A4 portrait; margin: 11mm 15mm; }
         @media print {
           html, body { background: #fff !important; color: #111 !important; }
           header, footer, .cv-print, body::after { display: none !important; }
@@ -144,7 +144,7 @@ export default function CVPage() {
           .cv-role { margin-top: 1.5mm; font-size: 11.5pt; }
           .cv-contact { margin-top: 1mm; font-size: 9.5pt; color: #333; }
           .cv-summary { margin-top: 3.5mm; font-size: 10pt; line-height: 1.45; }
-          .cv-h2 { margin-top: 5mm; padding-bottom: 1mm; font-size: 9.5pt; color: #111; border-color: #999; border-bottom-width: 0.6pt; }
+          .cv-h2 { margin-top: 4.5mm; padding-bottom: 1mm; font-size: 9.5pt; color: #111; border-color: #999; border-bottom-width: 0.6pt; }
           .cv-job { margin-top: 2.6mm; break-inside: avoid; }
           .cv-line { font-size: 10pt; line-height: 1.4; }
           .cv-job__where { font-size: 9.5pt; color: #333; }
