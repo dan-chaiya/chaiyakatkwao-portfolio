@@ -2,9 +2,9 @@
    chaiyakatkwao.com/systems — the production floor, inverted onto paper
    ----------------------------------------------------------------------------
    The same kit as the parent site, chaiyakatkwao.com: Archivo Black for every
-   heading, Archivo for reading, JetBrains Mono for every label; the parent's
-   sizes, its 58 px header with the CK mark and tracked links, its 1280 px
-   shell and 128 px section rhythm, its hairlines, greys and one warm accent.
+   heading, Inter for reading and for every label; the parent's sizes, its 58 px
+   header with the CK mark and tracked links, its full-width shell at a 32 px
+   edge and 128 px section rhythm, its hairlines, greys and one warm accent.
    Inverted here onto the parent's own paper tone, each grey re-measured so it
    still passes WCAG AA on a light ground. No script anywhere on the page.
 
@@ -98,7 +98,7 @@
   }
 }
 @media (max-width: 1023px) { :root { --header-h: 72px; } }
-@media (max-width: 767px)  { :root { --margin: 24px; --section: 96px; } }
+@media (max-width: 767px)  { :root { --section: 96px; } } /* 32px edge at every width, as on the parent */
 
 /* --- RESET AND GROUND --------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -111,24 +111,13 @@ body {
   font-family: var(--font-body);
   font-size: var(--step-body);
   line-height: 1.6;
-  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* The parent's grain, lighter because dark grain on paper reads heavier. */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9000;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px 200px;
-}
+/* No grain: the parent dropped its grain overlay on 2026-10-04, and this page
+   follows (2026-10-28). */
 
 ::selection { background: var(--color-text); color: var(--color-bg); }
 
@@ -206,7 +195,7 @@ table { border-collapse: collapse; width: 100%; }
   font-variant-numeric: tabular-nums;
 }
 .t-lead {
-  font-weight: 300;
+  font-weight: 400;
   font-size: var(--step-body);
   line-height: 1.7;
   color: var(--color-text-body);
@@ -230,11 +219,14 @@ table { border-collapse: collapse; width: 100%; }
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--color-text-muted);
-  font-variant-numeric: tabular-nums;
+  /* No tabular figures here: in Inter they also widen the hyphen, and these
+     labels carry words like ROUND-TRIP; none of them is a counter that ticks. */
 }
 
 /* --- SHELL AND GRID ----------------------------------------------------------- */
-.shell { margin-inline: auto; width: min(var(--shell-max), calc(100% - 2 * var(--margin))); }
+/* Full width at the parent's edge (its .section-shell, 32px since 2026-10-04), not a
+   centred 1280px box: the page's left edge now lines up with the header's CK mark. */
+.shell { margin-inline: auto; width: calc(100% - 2 * var(--margin)); }
 .g12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
 .hairline   { border-top: 1px solid var(--color-border-strong); }
 .hairline-b { border-bottom: 1px solid var(--color-border); }
@@ -463,20 +455,21 @@ html:has(.menu[open]) { overflow: hidden; }
 .case__intro {
   margin-top: 20px;
   max-width: 52ch;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.7;
   color: var(--color-text-body);
 }
 .case__facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 24px; align-content: start; }
 .case__facts dd { margin-top: 8px; }
 
-/* The parent's status chip: the one place the accent speaks. */
+/* The status line: the one place the accent speaks. A plain line with a still dot,
+   not a boxed pill, like the parent's own status line (2026-10-04). */
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   margin-top: 14px;
-  padding: 3px 9px;
+  padding: 0;
   font-family: var(--font-mono);
   font-size: var(--step-label);
   font-weight: 500;
@@ -484,7 +477,6 @@ html:has(.menu[open]) { overflow: hidden; }
   text-transform: uppercase;
   line-height: 1.4;
   color: var(--color-accent);
-  border: 1px solid var(--color-accent-dim);
 }
 .chip__dot {
   width: 5px;

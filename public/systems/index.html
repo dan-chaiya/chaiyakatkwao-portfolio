@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Internal systems — Chaiya Katkwao</title>
+  <title>Internal systems · Chaiya Katkwao</title>
   <meta name="description" content="Three internal systems for small teams: studio operations, an equipment register, and a private two-person archive. Built and maintained hands-on.">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Internal systems — Chaiya Katkwao">
+  <meta property="og:title" content="Internal systems · Chaiya Katkwao">
   <meta property="og:description" content="Three internal systems for small teams, built and maintained hands-on.">
-  <meta name="twitter:title" content="Internal systems — Chaiya Katkwao">
+  <meta name="twitter:title" content="Internal systems · Chaiya Katkwao">
   <meta name="twitter:description" content="Three internal systems for small teams, built and maintained hands-on.">
 
   <!-- The site is served from the parent portfolio at /systems, published by
@@ -148,12 +148,12 @@
 </header>
 
 <!-- ==========================================================================
-     MASTHEAD — the parent's page header: mono eyebrow, the slash title in
-     Archivo Black, one lead paragraph.
+     MASTHEAD — the parent's page header: label eyebrow, the title in Archivo
+     Black (no slash since 2026-10-28, like the parent's other pages), one lead.
      ======================================================================= -->
 <section class="masthead shell" aria-labelledby="masthead-title">
   <p class="masthead__eyebrow mono-label">Systems</p>
-  <h1 id="masthead-title" class="t-masthead masthead__name">Internal /<br>systems.</h1>
+  <h1 id="masthead-title" class="t-masthead masthead__name">Internal<br>systems.</h1>
   <p class="t-lead masthead__lead">Built and maintained by Chaiya Katkwao. Google Apps Script, Sheets, and a team that uses them every day.</p>
 </section>
 
@@ -213,15 +213,15 @@
     <dd class="t-body">Studio procedure, equipment records and fault history lived in separate documents that had begun to contradict one another. The answer to &ldquo;what is in this room, and does it still work&rdquo; depended on who you asked.</dd>
 
     <dt class="t-data">What I built</dt>
-    <dd class="t-body">One web app the team opens on whatever is to hand &mdash; a phone on the studio floor, a desktop at the office. Standard settings and a shutdown checklist, per-room equipment guides, a health check that turns a walkthrough into action items, and a fault log that exports the monthly report. Google Apps Script serves a single page; a Google Sheet is the database, addressed by column name rather than position so staff can reorder and rename it without a migration.</dd>
+    <dd class="t-body">One web app the team opens on whatever is to hand: a phone on the studio floor, a desktop at the office. Standard settings and a shutdown checklist, per-room equipment guides, a health check that turns a walkthrough into action items, and a fault log that exports the monthly report. Google Apps Script serves a single page; a Google Sheet is the database, addressed by column name rather than position so staff can reorder and rename it without a migration.</dd>
 
     <dt class="t-data">Constraints</dt>
-    <dd class="t-body">No budget for hosting or licences, no staging environment, and a team with no technical background. It runs on the Google Workspace the company already pays for. Every change deploys straight against the data the team is using that day &mdash; the database is a document they have open while the code is writing to it.</dd>
+    <dd class="t-body">No budget for hosting or licences, no staging environment, and a team with no technical background. It runs on the Google Workspace the company already pays for. Every change deploys straight against the data the team is using that day: the database is a document they have open while the code is writing to it.</dd>
 
     <dt class="t-data">Outcome</dt>
     <dd class="t-body">
-      <p>In daily use by the studio team, with more than twenty releases shipped. Requests now arrive as feature ideas rather than workarounds. The data layer is round-trip tested &mdash; written, read back, compared &mdash; so reordering a column no longer breaks anything. The save path has since been rebuilt to write one row at a time, so two people can log at once without overwriting each other. The limits that remain &mdash; check results tied to row order, no audit trail &mdash; are documented and deliberately unfixed.</p>
-      <p>The split was by strength: the CEO brought the engineering depth, I brought the studio floor and the operational discipline. The database rules the system is now held to, and the deploy order that stops old code redeploying over live data, exist because I asked for them &mdash; after both had already gone wrong once.</p>
+      <p>In daily use by the studio team, with more than twenty releases shipped. Requests now arrive as feature ideas rather than workarounds. The data layer is round-trip tested (written, read back, compared), so reordering a column no longer breaks anything. The save path has since been rebuilt to write one row at a time, so two people can log at once without overwriting each other. The limits that remain, check results tied to row order and no audit trail, are documented and deliberately unfixed.</p>
+      <p>The split was by strength: the CEO brought the engineering depth, I brought the studio floor and the operational discipline. The database rules the system is now held to, and the deploy order that stops old code redeploying over live data, exist because I asked for them, after both had already gone wrong once.</p>
     </dd>
   </dl>
 
@@ -432,7 +432,7 @@
     <dd class="t-body">One of the two users is non-technical and had to manage on his own Android handset without instruction. Exactly one runtime dependency was permitted. The backup was not allowed to sit with the same vendor as the data.</dd>
 
     <dt class="t-data">Outcome</dt>
-    <dd class="t-body">Deployed August 2026 with a nightly backup to a different vendor and a thirty-day retention sweep. The acceptance test was not a passing suite &mdash; it was the non-technical user creating a memory unassisted, on his own phone. He did.</dd>
+    <dd class="t-body">Deployed August 2026 with a nightly backup to a different vendor and a thirty-day retention sweep. The acceptance test was not a passing suite; it was the non-technical user creating a memory unassisted, on his own phone. He did.</dd>
   </dl>
 
   <figure class="g12 case__figure">
@@ -593,14 +593,14 @@
      ======================================================================= -->
 <footer class="colophon">
   <div class="shell colophon__row">
-    <p class="mono-label">&copy; 2026 Chaiya Katkwao &mdash; Bangkok</p>
+    <p class="mono-label">&copy; 2026 Chaiya Katkwao, Bangkok</p>
     <nav class="colophon__links" aria-label="Footer navigation">
       <a class="colophon__link" href="https://chaiyakatkwao.com/commercial">Commercial</a>
       <a class="colophon__link" href="https://chaiyakatkwao.com/gallery">Gallery</a>
       <a class="colophon__link" href="https://chaiyakatkwao.com/about">About</a>
       <a class="colophon__link" href="https://chaiyakatkwao.com/cv">CV</a>
       <a class="colophon__link colophon__link--current" href="https://chaiyakatkwao.com/systems" aria-current="page">Systems</a>
-      <a class="colophon__link" href="mailto:chaiyakatkwao@gmail.com">Email</a>
+      <a class="colophon__link" href="mailto:chaiyakatkwao@gmail.com">Contact</a>
     </nav>
   </div>
 </footer>
