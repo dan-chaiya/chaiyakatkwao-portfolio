@@ -173,7 +173,9 @@ body:has(.v2)::after { display: none; }
 .v2-info__list li:last-child { border-bottom: 1px solid var(--rule); }
 .v2-info__contact { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .v2-info__contact a { text-decoration: underline; text-underline-offset: 3px; }
-.v2-info__portrait { margin: 0; align-self: start; position: sticky; top: 96px; }
+/* width: 100% — with align-self: start the figure shrank to the photo, which has no width
+   until it loads, so on phones the text below jumped when it arrived (CLS 0.46). */
+.v2-info__portrait { margin: 0; width: 100%; align-self: start; position: sticky; top: 96px; }
 .v2-info__portrait img { width: 100%; height: auto; display: block; }
 
 /* ------------------------------------------------------------ systems */
