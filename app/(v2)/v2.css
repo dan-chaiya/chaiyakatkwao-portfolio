@@ -176,6 +176,40 @@ body:has(.v2)::after { display: none; }
 .v2-info__portrait { margin: 0; align-self: start; position: sticky; top: 96px; }
 .v2-info__portrait img { width: 100%; height: auto; display: block; }
 
+/* ------------------------------------------------------------ systems */
+
+.v2-sys { padding: 96px var(--gutter) 96px; }
+.v2-sys__intro { max-width: 640px; margin-bottom: 96px; }
+.v2-sys__intro .v2-info__bio { margin-bottom: 12px; }
+.v2-sys__intro p { margin: 0; color: var(--ink-soft); }
+.v2-sys__case { padding-top: 24px; border-top: 1px solid var(--ink); margin-bottom: 120px; scroll-margin-top: 72px; }
+.v2-sys__count { margin: 0 0 24px; color: var(--ink-soft); }
+.v2-sys__title {
+  font-family: var(--display); font-weight: 850; font-variation-settings: "wdth" 62;
+  font-size: clamp(44px, 8vw, 120px); line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase; margin: 0 0 20px;
+}
+.v2-sys__lede { font-size: clamp(18px, 1.8vw, 24px); line-height: 1.25; max-width: 34ch; margin: 0 0 48px; }
+.v2-sys__stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 0 0 56px; }
+.v2-sys__stats div { border-top: 1px solid var(--rule); padding-top: 10px; }
+.v2-sys__stats dt { font-size: clamp(32px, 4vw, 56px); line-height: 1; margin-bottom: 8px; }
+.v2-sys__stats dd { margin: 0; color: var(--ink-soft); }
+.v2-sys__body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 48px; max-width: 1100px; }
+.v2-sys__body h3 { font-size: 13px; font-weight: 400; color: var(--ink-soft); margin: 0 0 6px; }
+.v2-sys__body p { margin: 0 0 10px; max-width: 62ch; line-height: 1.5; }
+.v2-sys__figure { margin: 64px 0 0; max-width: 1100px; }
+.v2-sys__figure figcaption { margin-top: 10px; color: var(--ink-soft); }
+.v2-dg { width: 100%; height: auto; display: block; }
+.v2-dg__node, .v2-dg__edge { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.v2-dg__head { fill: var(--ink); }
+.v2-dg__label { font-family: var(--ui); font-size: 15px; font-weight: 500; fill: var(--ink); }
+.v2-dg__small, .v2-dg__index { font-family: var(--mono); font-size: 11px; fill: var(--ink-soft); }
+.v2-sys__table { width: 100%; max-width: 1100px; border-collapse: collapse; margin-top: 56px; }
+.v2-sys__table caption { text-align: left; font-weight: 500; padding-bottom: 10px; }
+.v2-sys__table th, .v2-sys__table td { text-align: left; vertical-align: baseline; padding: 8px 12px 8px 0; border-top: 1px solid var(--rule); font-weight: 400; }
+.v2-sys__table thead th { color: var(--ink-soft); }
+.v2-sys__table tbody th { width: 28%; }
+.v2-sys__table tr:last-child > * { border-bottom: 1px solid var(--rule); }
+
 /* ------------------------------------------------------------ phone */
 
 @media (max-width: 767px) {
@@ -197,6 +231,17 @@ body:has(.v2)::after { display: none; }
   .v2-viewer__hit { display: none; } /* swipe instead */
   .v2-viewer__credits { bottom: 76px; right: var(--gutter); max-width: none; }
   .v2-viewer__strip img { height: 36px; }
+
+  .v2-sys { padding-top: 84px; }
+  .v2-sys__intro { margin-bottom: 64px; }
+  .v2-sys__case { margin-bottom: 80px; }
+  .v2-sys__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px; }
+  .v2-sys__body { grid-template-columns: 1fr; gap: 24px; }
+  /* The diagram keeps a readable size and scrolls inside its own box; the page doesn't. */
+  .v2-sys__figure { overflow-x: auto; }
+  .v2-dg { min-width: 760px; }
+  .v2-sys__table { font-size: 12px; }
+  .v2-sys__table tbody th { width: 34%; }
   .v2-viewer__info { bottom: 76px; }
 
   .v2-info { display: flex; flex-direction: column-reverse; padding-top: 84px; gap: 32px; }

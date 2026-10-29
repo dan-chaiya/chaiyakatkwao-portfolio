@@ -32,6 +32,8 @@ export type Work = {
   /** Longest edge the work may be shown at, in CSS px (1800 for the small series). */
   maxEdge: number;
   frames: Frame[];
+  /** Text-only rows that live elsewhere on the site (Systems → /systems#case). */
+  href?: string;
 };
 
 const data = raw as unknown as { hero: ImageFrame; portrait: ImageFrame; works: Work[] };
@@ -42,6 +44,9 @@ export const works = data.works;
 
 /** Text-only rows (no frames yet) have no project page. */
 export const hasPage = (w: Work) => w.frames.length > 0;
+
+/** Where an Index row links: its project page, its own href, or nowhere. */
+export const linkOf = (w: Work) => (hasPage(w) ? `/work/${w.slug}` : w.href);
 
 export const getWork = (slug: string) => works.find((w) => w.slug === slug);
 

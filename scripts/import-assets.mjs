@@ -98,8 +98,10 @@ const EXTRA_ROWS = [
       "misc-02", "forms-02", "forms-04", "misc-03", "forms-03", "film-02",
     ]),
   },
-  { slug: "live-studio-os", title: "Live Studio OS", discipline: "Systems", year: "2026", credit: "Studio operations web app" },
-  { slug: "equipment-loan-system", title: "Equipment inventory and loan system", discipline: "Systems", year: "" },
+  // Systems rows link to their case on /systems (written from systems-page-redacted.md).
+  { slug: "live-studio-os", title: "Live Studio OS", discipline: "Systems", year: "2026", credit: "Studio operations web app", href: "/systems#live-studio-os" },
+  { slug: "keepsake", title: "Keepsake", discipline: "Systems", year: "2026", credit: "Private two-person archive", href: "/systems#keepsake" },
+  { slug: "equipment-loan-system", title: "Equipment inventory and loan system", discipline: "Systems", year: "", href: "/systems#equipment-register" },
   { slug: "podcast-studio-build", title: "Podcast studio build", discipline: "Production", year: "2026", credit: "Freelance" },
 ];
 
@@ -205,7 +207,11 @@ const curation = parseCuration(await readFile(path.join(NEW, "_curation.md"), "u
 if (curation.length !== 19) throw new Error(`expected 19 works in _curation.md, parsed ${curation.length}`);
 
 const works = [];
+// Works Dan withdrew after seeing them on the site (curation number). 16 cream set: 29 Oct 2026.
+const WITHDRAWN = new Set(["16"]);
+
 for (const w of curation) {
+  if (WITHDRAWN.has(w.no)) continue;
   const dir = path.join(NEW, w.folder);
   const picks = PICKS[w.no];
   const names = picks
@@ -221,7 +227,7 @@ for (const w of curation) {
   if (w.no === "19") for (const ep of PODCAST_EPISODES) frames.push({ type: "youtube", ...ep });
 
   works.push({
-    no: `0${w.no}`,
+    no: "", // numbered after the list is complete, below
     slug: w.folder.slice(3),
     title: w.title,
     discipline: w.discipline,
@@ -234,13 +240,13 @@ for (const w of curation) {
   });
 }
 
-for (const [i, row] of EXTRA_ROWS.entries()) {
+for (const row of EXTRA_ROWS) {
   const frames = [
     ...(row.videos ? await loops(row.videos) : []),
     ...(row.sources ? await encodeAll(row.slug, row.sources) : []),
   ];
   works.push({
-    no: String(20 + i).padStart(3, "0"),
+    no: "",
     slug: row.slug,
     title: row.title,
     discipline: row.discipline,
@@ -250,8 +256,12 @@ for (const [i, row] of EXTRA_ROWS.entries()) {
     statement: row.statement ?? "",
     maxEdge: FULL,
     frames,
+    ...(row.href ? { href: row.href } : {}),
   });
 }
+
+// Index numbers run 001… in display order with no gaps, so a withdrawn work leaves none.
+works.forEach((w, i) => (w.no = String(i + 1).padStart(3, "0")));
 
 // Home hero and the Information portrait.
 const hero = await encode(path.join(NEW, "00-hero/01.jpg"), path.join(OUT, "home"), "hero", FULL);

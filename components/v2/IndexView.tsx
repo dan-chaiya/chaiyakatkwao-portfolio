@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import Picture from "@/components/v2/Picture";
-import { DISCIPLINES, coverOf, hasPage, type Discipline, type Work } from "@/data/works";
+import { DISCIPLINES, coverOf, hasPage, linkOf, type Discipline, type Work } from "@/data/works";
 
 type Filter = "All" | Discipline;
 
@@ -45,17 +45,18 @@ export default function IndexView({ works }: { works: Work[] }) {
           </thead>
           <tbody>
             {shown.map((w) => {
-              const linked = hasPage(w);
+              const href = linkOf(w);
+              const linked = Boolean(href);
               return (
                 <tr
                   key={w.slug}
                   className={linked ? "is-linked" : undefined}
-                  onPointerEnter={() => setHover(linked ? w : null)}
+                  onPointerEnter={() => setHover(hasPage(w) ? w : null)}
                 >
                   <td className="v2-mono">{w.no}</td>
                   <td>
-                    {linked ? (
-                      <Link href={`/work/${w.slug}`} onFocus={() => setHover(w)} onBlur={() => setHover(null)}>
+                    {href ? (
+                      <Link href={href} onFocus={() => setHover(hasPage(w) ? w : null)} onBlur={() => setHover(null)}>
                         {w.title}
                       </Link>
                     ) : (

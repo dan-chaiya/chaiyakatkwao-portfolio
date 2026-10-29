@@ -19,20 +19,10 @@ const nextConfig = {
       { source: "/about", destination: "/information", permanent: true },
     ];
   },
-  async rewrites() {
-    return [
-      // The management portfolio ("The Day Shift") is a static site that lives
-      // in its own repo at ~/Projects/management-portfolio and is copied into
-      // public/systems/ by that repo's ./sync-to-parent.sh. It is plain HTML,
-      // not a Next route, so it is served rather than rendered.
-      //
-      // Only /systems is mapped. A request for /systems/ is redirected to
-      // /systems first by Next's default trailingSlash: false, and lands here.
-      // The page's asset paths are absolute (/systems/styles.css, not
-      // styles.css) precisely so both URL forms resolve identically.
-      { source: "/systems", destination: "/systems/index.html" },
-    ];
-  },
+  // v2 (2026-10-29): /systems is a Next page again (app/(v2)/systems), written from
+  // the redacted draft. The old static copy synced from ~/Projects/management-portfolio
+  // by its ./sync-to-parent.sh now sits in legacy/public/systems, unserved: it names the
+  // company, so don't run that sync into public/ again.
 };
 
 export default nextConfig;
