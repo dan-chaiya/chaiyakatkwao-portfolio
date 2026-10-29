@@ -23,12 +23,13 @@ export type ShareImage = {
   height?: number;
 };
 
-// Purpose-built 1200x630 card. Regenerate from scripts/share-card.html.
+// Purpose-built 1200x630 card, regenerated from scripts/share-card.html. A new design gets
+// a new filename (-v2 since 2026-10-29): LINE and Facebook cache link images by URL.
 export const SHARE_CARD: ShareImage = {
-  url: "/images/share-card.jpg",
+  url: "/images/share-card-v2.jpg",
   width: 1200,
   height: 630,
-  alt: "Chaiya Katkwao, Live Production Lead, Bangkok",
+  alt: "Chaiya Katkwao: a mirrored self-portrait between red temple gates, over the name in condensed capitals",
 };
 
 type PageMetadataInput = {

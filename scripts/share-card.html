@@ -1,67 +1,49 @@
 <!doctype html>
-<html>
+<!--
+  scripts/share-card.html — the 1200 × 630 card for links shared to LINE, Facebook, X
+  (public/images/share-card-v2.jpg, set in lib/seo.ts). v2, 2026-10-29: the home page's
+  opening in miniature, the hero photograph over a paper line with the name.
+
+  To regenerate: open this file in Chrome at exactly 1200 × 630 (DevTools device toolbar),
+  wait for the fonts, and capture a screenshot; or run
+    npx playwright screenshot --viewport-size=1200,630 scripts/share-card.html public/images/share-card.png
+  then save it as a JPEG (quality ~85) under a new name, and point lib/seo.ts at it.
+-->
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@400;500&family=IBM+Plex+Mono&display=block" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html, body { width:1200px; height:630px; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
   body {
-    background:#000;
-    color:#F2F0EB;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    padding:72px 80px;
-    position:relative;
-    overflow:hidden;
+    display: grid; grid-template-rows: minmax(0, 1fr) auto;
+    background: #fbfbfb; color: #111111;
+    font-family: Inter, sans-serif;
   }
-  /* the system's one accent, at the scale it is used on the site: a hairline */
-  .rule { position:absolute; left:0; top:0; width:100%; height:2px; background:oklch(72% 0.18 35); }
-  .label {
-    font-family:"JetBrains Mono", monospace;
-    font-size:17px; font-weight:500;
-    letter-spacing:0.28em; text-transform:uppercase;
-    color:#8B857F;
+  .photo { position: relative; overflow: hidden; background: #111111; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 34%; display: block; }
+  .strip { display: flex; justify-content: space-between; align-items: flex-end; padding: 22px 48px 26px; }
+  .name {
+    font-family: Archivo, sans-serif; font-weight: 850; font-variation-settings: "wdth" 62;
+    font-size: 104px; line-height: 0.82; letter-spacing: -0.01em; text-transform: uppercase;
   }
-  h1 {
-    font-family:"Archivo Black", sans-serif;
-    font-weight:400;
-    font-size:118px;
-    line-height:0.88;
-    letter-spacing:-0.03em;
-    color:#F2F0EB;
-  }
-  .foot { display:flex; justify-content:space-between; align-items:baseline; }
-  .foot .disciplines {
-    font-family:"JetBrains Mono", monospace;
-    font-size:17px; font-weight:500;
-    letter-spacing:0.2em; text-transform:uppercase;
-    color:#C8C4BC;
-  }
-  .foot .site {
-    font-family:"JetBrains Mono", monospace;
-    font-size:17px; font-weight:500;
-    letter-spacing:0.2em; text-transform:uppercase;
-    color:#8B857F;
-  }
-  /* grain, same recipe and opacity as the site */
-  body::after {
-    content:''; position:absolute; inset:0; pointer-events:none; opacity:0.038;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size:200px 200px;
-  }
+  .meta { text-align: right; font-size: 21px; line-height: 1.45; }
+  .meta .site { font-family: "IBM Plex Mono", monospace; font-size: 19px; color: rgb(17 17 17 / 0.64); }
 </style>
 </head>
 <body>
-  <div class="rule"></div>
-  <p class="label">Live Production Lead — Bangkok</p>
-  <h1>Chaiya /<br>Katkwao.</h1>
-  <div class="foot">
-    <span class="disciplines">Art Direction · Production · Photography</span>
-    <span class="site">chaiyakatkwao.com</span>
+  <div class="photo">
+    <img src="../public/v2/home/hero.webp" alt="">
+  </div>
+  <div class="strip">
+    <p class="name">Chaiya Katkwao</p>
+    <div class="meta">
+      <p>Photography, Art, Production, Systems</p>
+      <p class="site">chaiyakatkwao.com</p>
+    </div>
   </div>
 </body>
 </html>
