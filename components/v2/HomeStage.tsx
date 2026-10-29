@@ -32,11 +32,19 @@ export default function HomeStage({ hero, column }: { hero: ImageFrame; column: 
     return () => window.removeEventListener("resize", fit);
   }, []);
 
-  // Pin the stage and run the image column up through the centre. Opacity/translate only.
+  // Hold the stage with CSS sticky and run the image column up through the centre,
+  // transform only. Not a GSAP pin: toggling the pin's position counted as a layout
+  // shift on every visit (CLS 0.63 at 1440, 1.0 at 390; audit 2026-10-29).
   useLayoutEffect(() => {
-    if (reduced || !stageRef.current || !columnRef.current) return;
+    const stage = stageRef.current;
+    const col = columnRef.current;
+    if (reduced || !stage || !col) return;
+    // The section is as tall as the run, so the sticky layer holds for exactly that long.
+    const run = () => col.offsetHeight + window.innerHeight;
+    const size = () => stage.style.setProperty("--run", `${run()}px`);
+    size();
+    ScrollTrigger.addEventListener("refreshInit", size);
     const ctx = gsap.context(() => {
-      const col = columnRef.current!;
       gsap.fromTo(
         col,
         { y: () => window.innerHeight },
@@ -44,17 +52,20 @@ export default function HomeStage({ hero, column }: { hero: ImageFrame; column: 
           y: () => -col.offsetHeight,
           ease: "none",
           scrollTrigger: {
-            trigger: stageRef.current,
+            trigger: stage,
             start: "top top",
-            end: () => `+=${col.offsetHeight + window.innerHeight}`,
-            pin: true,
+            end: () => `+=${run()}`,
             scrub: true,
             invalidateOnRefresh: true,
           },
         },
       );
-    }, stageRef);
-    return () => ctx.revert();
+    }, stage);
+    return () => {
+      ScrollTrigger.removeEventListener("refreshInit", size);
+      ctx.revert();
+      stage.style.removeProperty("--run");
+    };
   }, [reduced]);
 
   return (
@@ -70,22 +81,24 @@ export default function HomeStage({ hero, column }: { hero: ImageFrame; column: 
       </section>
 
       <section ref={stageRef} className={`v2-stage${reduced ? " v2-stage--static" : ""}`}>
-        <p ref={nameRef} className="v2-stage__name" aria-hidden="true">
-          Chaiya Katkwao
-        </p>
-        <div ref={columnRef} className="v2-stage__column">
-          {column.map((item) => (
-            <Link key={item.slug} href={`/work/${item.slug}`} className="v2-stage__item">
-              <Picture frame={item.frame} alt={item.title} sizes="140px" />
-              <span className="v2-mono">{item.no}</span>
-            </Link>
-          ))}
+        <div className="v2-stage__hold">
+          <p ref={nameRef} className="v2-stage__name" aria-hidden="true">
+            Chaiya Katkwao
+          </p>
+          <div ref={columnRef} className="v2-stage__column">
+            {column.map((item) => (
+              <Link key={item.slug} href={`/work/${item.slug}`} className="v2-stage__item">
+                <Picture frame={item.frame} alt={item.title} sizes="140px" />
+                <span className="v2-mono">{item.no}</span>
+              </Link>
+            ))}
+          </div>
+          <p className="v2-stage__bio">
+            Photographer, artist and producer.
+            <br />
+            Bangkok, Thailand.
+          </p>
         </div>
-        <p className="v2-stage__bio">
-          Photographer, artist and producer.
-          <br />
-          Bangkok, Thailand.
-        </p>
       </section>
     </main>
   );

@@ -6,33 +6,41 @@ brand
 
 ## Users
 
-Creative agencies in Thailand and internationally, looking to hire or commission a creative producer.
-They visit to judge whether Chaiya's work meets their standard — and leave with a hire/no-hire decision.
+Primary: creative agencies and brands, in Thailand and abroad, looking to hire or commission a producer or
+photographer. They visit to judge whether Chaiya's work meets their standard, and leave with a hire/no-hire
+decision. They scan fast: the Index, two or three projects, the credits, then Information for contact.
+
+Secondary: the art world (curators, galleries, residencies, editors). The series and exhibitions give the
+commercial work depth and show an eye that isn't only for hire; for this visitor they are the reason to stay.
 
 ## Product Purpose
 
-A portfolio that positions Chaiya Katkwao as a talented, reliable, and stylish creative producer.
-Success means an agency reaches out. The work must speak confidently enough to do that without explanation.
+An archive of Chaiya Katkwao's work across photography, art, production and systems, presented as one numbered
+body of work. Success means an agency reaches out with a brief; an invitation from the art side is the second
+measure. The work has to make the case on its own, without a pitch.
 
 ## Brand Personality
 
-Talented. Reliable. Stylish. Minimal with edge — modern brutalist clarity, not decorative minimalism.
-Tone is confident and quiet. The portfolio doesn't try hard; it simply is.
+Quiet, exact, archival. A body of work presented with precision and no selling: numbered, dated, credited, and
+then left alone. The tone is a catalogue entry, not a headline. Confidence shows in what is left out.
 
 ## Anti-references
 
-- Colorful or expressive-color portfolios (gradients, vibrant accents, neon)
-- Generic photographer portfolio templates (centered hero, soft sans, pastel tones)
-- Over-animated, "look at me" UI that competes with the work
+- Colour in the interface: gradients, accents, tints or neon. The photographs carry all the colour.
+- Templated portfolio layouts: same-sized card grids, soft-sans landing heroes with a tagline and a button.
+- Over-animated, "look at me" UI that competes with the work.
+- SaaS conventions: big-number stat rows, feature cards, testimonials, badges.
 
 ## Design Principles
 
-1. **Let the work lead.** The UI steps back. Photography and production work are the hero; every chrome element earns its presence.
-2. **Confident restraint.** Minimal doesn't mean empty. Each element is placed with intention, not omitted by default.
-3. **Brutalist clarity.** Structure is honest and visible — grid, type, space — not hidden behind decoration.
-4. **Stillness signals quality.** Calm layouts and controlled motion communicate creative confidence without noise.
-5. **Function is credibility.** A creative producer who "makes work that functions as well as it looks" should have a portfolio that proves it.
+1. **Let the work lead.** Photographs and production work are the content; every piece of chrome earns its place, and none sits on the work except the name on the opening image.
+2. **Catalogue precision.** Every work has a number, title, discipline, year and role, set the same way everywhere. Exactness is the tone.
+3. **Stillness signals quality.** Calm layouts and motion that moves the work, never the interface for its own sake.
+4. **Range is evidence.** Photography, art, production and systems sit in one Index; an agency should see that one person shoots, produces and builds what the work runs on.
+5. **Function is credibility.** A producer who ships working systems should have a site that loads fast, never jumps and works by keyboard.
 
 ## Accessibility & Inclusion
 
-WCAG AA. High-contrast dark theme already in use. Respect reduced-motion preferences.
+WCAG 2.2 AA. Text holds 4.5:1, focus is visible on every surface (including the difference-blend header), every
+photo reserves its space, and anything that moves for more than five seconds can be stopped. Respect
+`prefers-reduced-motion`: no scroll scrub, no smooth scroll, no autoplaying loops.
