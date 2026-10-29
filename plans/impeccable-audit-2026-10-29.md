@@ -1,5 +1,11 @@
 # Impeccable audit: 2026-10-29 (v2)
 
+**Status: closed, 2026-10-29.** Every P1 and P2 below is fixed and live (#33, #34, #35), and
+every page now runs on v2. Closing pass: the share card was redrawn in v2 (`share-card-v2.jpg`;
+the old one said "Creative Producer" in the v1 style), the README replaced the create-next-app
+boilerplate, and `New/` (the originals) is git-ignored. One decision stays with CK: the Index
+order (PRODUCT.md puts agencies first; the Index opens on three art series).
+
 Run with the vendored skill (`.agents/skills/impeccable`, `audit`) against `647685a`, the first audit of
 v2 (the artist's archive, merged in #32). Report only; nothing in the app was changed.
 
