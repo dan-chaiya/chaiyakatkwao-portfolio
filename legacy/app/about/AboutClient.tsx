@@ -1,26 +1,29 @@
 "use client";
 
 import Image from "next/image";
+import { photoAlt } from "@/lib/photos";
 import PageTransition from "@/components/PageTransition";
 import Footer from "@/components/Footer";
+import { clients } from "@/data/clients";
+import { liveStudio as L } from "@/data/live-studio";
 
 const experience = [
   {
     role: "Live Production & Visual Coordinator",
     company: "Ad The Top Agency",
-    period: "2026 — Present",
+    period: "Jan 2026–Present",
     location: "Bangkok",
   },
   {
     role: "Audio/Visual Engineer",
     company: "Modal Creative Studio",
-    period: "2025 — 2026",
+    period: "Jun 2025–Jan 2026",
     location: "Bangkok",
   },
   {
     role: "Freelance Creative",
     company: "Independent",
-    period: "2022 — Present",
+    period: "Aug 2022–Present",
     location: "Thailand",
   },
 ];
@@ -38,20 +41,6 @@ const capabilities = [
   "Studio Production",
   "Visual Storytelling",
   "Audio-Visual Engineering",
-];
-
-const clients = [
-  "Colgate",
-  "Dutchmil Delivery",
-  "Fitflop",
-  "Guess",
-  "Her Hyness",
-  "Nestlé",
-  "Rojukiss",
-  "Sunnies Studio Thailand",
-  "Tokfashion",
-  "Knack Factory",
-  "BAKAO",
 ];
 
 const services = [
@@ -89,27 +78,27 @@ export default function AboutClient() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
           {/* Left column */}
           <div className="lg:col-span-7">
-            <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8">
+            <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8">
               About
             </p>
 
             <h1
               className="font-heading text-[var(--color-warm)] leading-[0.92] mb-16"
               style={{
-                fontSize: "clamp(3rem, 8vw, 7rem)",
+                fontSize: "clamp(2.5rem, 8vw, 7rem)",
                 letterSpacing: "-0.02em",
               }}
             >
-              Chaiya /
+              Chaiya
               <br />
               Katkwao.
             </h1>
 
             <div className="space-y-8 max-w-xl">
               <p className="copy-lead">
-                Chaiya is a Creative Producer in Bangkok. He art-directs the
-                work and builds the technical side that carries it: lighting,
-                cameras, sound and the studio&apos;s own software.
+                Chaiya is a live production lead in Bangkok. He runs the
+                technical side of a live studio, lighting, cameras, sound and
+                the studio&apos;s own software, and art-directs what it puts out.
               </p>
 
               <p className="copy-body">
@@ -120,9 +109,9 @@ export default function AboutClient() {
               </p>
 
               <p className="copy-body">
-                At Ad The Top Agency he runs multi-camera productions and live
-                commerce sessions for several brands, and writes the procedures
-                and software the studio runs them on.
+                At Ad The Top Agency he runs production across {L.rooms} live rooms on{" "}
+                {L.floors} floors, TikTok live commerce for 10 brands, and writes the
+                procedures and software the studio runs them on.
               </p>
 
               <p className="copy-body" style={{ color: "var(--color-warm)", fontWeight: 500 }}>
@@ -150,11 +139,11 @@ export default function AboutClient() {
             </div>
 
             <div className="mt-16">
-              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-2">
+              <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-2">
                 Education
               </p>
               <p className="copy-small">
-                BFA Photography — Chiang Mai University, 2020–2025
+                BFA Photography, Chiang Mai University, 2020–2025
               </p>
             </div>
           </div>
@@ -165,17 +154,17 @@ export default function AboutClient() {
             <div className="relative aspect-[3/4] overflow-hidden bg-[var(--color-surface-dark)] mb-12">
               <Image
                 src="/images/portrait/dan.jpg"
-                alt="Chaiya Katkwao | Creative Producer in Bangkok"
+                alt={photoAlt("/images/portrait/dan.jpg", "Chaiya Katkwao")}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 40vw"
-                priority
+                preload
               />
             </div>
 
             {/* Experience timeline */}
             <div>
-              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
+              <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
                 Experience
               </p>
               <div className="space-y-px">
@@ -185,12 +174,12 @@ export default function AboutClient() {
                       <p className="copy-small flex-1 min-w-0 pr-4">
                         {item.role}
                       </p>
-                      <span className="font-body text-[11px] text-[var(--color-grey-400)] tracking-[0.05em] shrink-0 whitespace-nowrap">
+                      <span className="font-mono font-medium text-[11px] text-[var(--color-grey-400)] tracking-[0.05em] shrink-0 whitespace-nowrap">
                         {item.period}
                       </span>
                     </div>
-                    <p className="font-body text-[13px] tracking-[0.04em] text-[var(--color-grey-400)]">
-                      {item.company} — {item.location}
+                    <p className="copy-small text-[var(--color-grey-400)]!">
+                      {item.company}, {item.location}
                     </p>
                   </div>
                 ))}
@@ -200,7 +189,7 @@ export default function AboutClient() {
 
             {/* Capabilities */}
             <div className="mt-12">
-              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
+              <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
                 Capabilities
               </p>
               <div>
@@ -220,16 +209,16 @@ export default function AboutClient() {
       <section className="border-t border-[var(--color-grey-700)] px-8 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-3">
-            <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-2">
+            <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-2">
               Selected
             </p>
-            <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)]">
+            <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)]">
               Clients
             </p>
           </div>
           <div className="lg:col-span-9">
             <ul>
-              {clients.map((name, i) => (
+              {clients.map((name) => (
                 <li
                   key={name}
                   className="border-t border-[var(--color-grey-700)] py-4 flex items-baseline justify-between last:border-b"
@@ -243,9 +232,6 @@ export default function AboutClient() {
                     }}
                   >
                     {name}
-                  </span>
-                  <span className="font-body text-[11px] tracking-[0.18em] text-[var(--color-grey-400)]">
-                    {String(i + 1).padStart(2, "0")}
                   </span>
                 </li>
               ))}
@@ -269,7 +255,7 @@ export default function AboutClient() {
                 global h2 rule sets weight 800 outside Tailwind's layers, so only
                 an inline weight can bring it back to 400. */}
             <h2
-              className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)]"
+              className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)]"
               style={{ fontWeight: 400 }}
             >
               <span className="block mb-2">Studio</span>
@@ -278,7 +264,7 @@ export default function AboutClient() {
           </div>
           <div className="lg:col-span-9">
             <ul>
-              {services.map((service, i) => (
+              {services.map((service) => (
                 <li
                   key={service.name}
                   className="border-t border-[var(--color-grey-700)] py-6 last:border-b"
@@ -294,9 +280,6 @@ export default function AboutClient() {
                     >
                       {service.name}
                     </h3>
-                    <span className="font-body text-[11px] tracking-[0.18em] text-[var(--color-grey-400)]">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
                   </div>
                   <p className="copy-small mt-3 max-w-xl">{service.description}</p>
                 </li>
@@ -304,7 +287,7 @@ export default function AboutClient() {
             </ul>
 
             <div className="mt-16">
-              <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
+              <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-6">
                 How it works
               </p>
               <ol className="grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -323,7 +306,7 @@ export default function AboutClient() {
       {/* Contact section */}
       <section className="border-t border-[var(--color-grey-700)] px-8 py-24">
         <div className="max-w-3xl">
-          <p className="font-body text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8">
+          <p className="font-mono font-medium text-[11px] tracking-[0.28em] uppercase text-[var(--color-grey-400)] mb-8">
             Contact
           </p>
           <h2
@@ -333,7 +316,7 @@ export default function AboutClient() {
               letterSpacing: "-0.02em",
             }}
           >
-            Let&apos;s /
+            Let&apos;s
             <br />
             connect.
           </h2>
@@ -346,9 +329,9 @@ export default function AboutClient() {
             </a>
             <a
               href="/cv"
-              className="font-body inline-block text-xs tracking-[0.2em] uppercase text-[var(--color-grey-500)] border border-[var(--color-grey-700)] px-8 py-4 hover:border-[var(--color-warm)] hover:text-[var(--color-warm)] transition-colors duration-200"
+              className="tap-target font-mono font-medium text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text)]"
             >
-              View CV →
+              Or read the CV →
             </a>
           </div>
         </div>

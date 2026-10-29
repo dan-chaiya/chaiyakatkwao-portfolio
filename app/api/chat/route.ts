@@ -89,7 +89,7 @@ export async function POST(req: Request) {
     const { success, reset } = await rl.limit(ip);
     if (!success) {
       const retryAfter = Math.max(1, Math.ceil((reset - Date.now()) / 1000));
-      return new Response("Too many requests — give it a minute.", {
+      return new Response("Too many requests. Give it a minute.", {
         status: 429,
         headers: { "Retry-After": String(retryAfter) },
       });

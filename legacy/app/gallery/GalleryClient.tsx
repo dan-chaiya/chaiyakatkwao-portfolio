@@ -1,18 +1,30 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useSyncExternalStore } from "react";
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import PageTransition from "@/components/PageTransition";
 import Lightbox from "@/components/Lightbox";
 import Footer from "@/components/Footer";
+import { photoAlt, photoSize } from "@/lib/photos";
 
 const wovenMemories = Array.from({ length: 12 }, (_, i) => ({
   id: i + 1,
+  slug: `woven-${String(i + 1).padStart(2, "0")}`,
   title: `No. ${String(i + 1).padStart(2, "0")}`,
   series: "Woven Memories",
   year: "2025",
   src: `/images/woven-memories/${String(i + 1).padStart(2, "0")}.jpg`,
+}));
+
+// Documentary, not a commission: moved here from /commercial on 2026-10-28.
+const khunChangKhian = Array.from({ length: 4 }, (_, i) => ({
+  id: 100 + i + 1,
+  slug: `khun-chang-khian-${String(i + 1).padStart(2, "0")}`,
+  title: `No. ${String(i + 1).padStart(2, "0")}`,
+  series: "Khun Chang Khian",
+  year: "2024",
+  src: `/images/khun-chang-khian/${String(i + 1).padStart(2, "0")}.jpg`,
 }));
 
 function toRoman(num: number): string {
@@ -51,6 +63,7 @@ const selectedWorkSrcs = [
 
 const selectedWork = selectedWorkSrcs.map((src, i) => ({
   id: 200 + i,
+  slug: `untitled-${i + 1}`,
   title: `Untitled ${toRoman(i + 1)}`,
   series: "Selected Work",
   year: "2024",
@@ -64,6 +77,7 @@ type LightboxState = {
 
 type GalleryItem = {
   id: number;
+  slug: string;
   title: string;
   series: string;
   year: string;
@@ -94,12 +108,11 @@ function MasonryGrid({
             <div className="relative overflow-hidden bg-[var(--color-surface-elevated)]">
               <Image
                 src={item.src}
-                alt={`${item.title} - ${item.series} - Chaiya Katkwao Creative Producer`}
-                width={0}
-                height={0}
+                alt={photoAlt(item.src, `${item.series}, ${item.title}`)}
+                {...photoSize(item.src)}
                 sizes={sizes}
-                priority={index < 2}
-                className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.02] group-focus-visible:scale-[1.02]"
+                loading={index < 2 ? "eager" : "lazy"}
+                className="w-full h-auto block"
               />
               <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/40 group-focus-visible:bg-[var(--color-surface-chat)]/40 transition-colors duration-500" />
             </div>
@@ -113,12 +126,38 @@ function MasonryGrid({
   );
 }
 
-export default function GalleryClient() {
-  const [lightbox, setLightbox] = useState<LightboxState>(null);
+// The open photo lives in the URL hash (#woven-03, #untitled-7), so a photo can be
+// linked to, a reload keeps it, and the back button closes it (2026-10-04).
+const SERIES: GalleryItem[][] = [wovenMemories, khunChangKhian, selectedWork];
 
-  const openLightbox = useCallback((seriesItems: GalleryItem[]) => (_item: GalleryItem, index: number) => {
-    setLightbox({ items: seriesItems, index });
-  }, []);
+function subscribeHash(onChange: () => void) {
+  window.addEventListener("hashchange", onChange);
+  window.addEventListener("popstate", onChange);
+  return () => {
+    window.removeEventListener("hashchange", onChange);
+    window.removeEventListener("popstate", onChange);
+  };
+}
+
+// Steps within an open set replace the entry rather than piling up history.
+function replaceHash(slug: string | null) {
+  const url = window.location.pathname + window.location.search + (slug ? `#${slug}` : "");
+  window.history.replaceState(null, "", url);
+  window.dispatchEvent(new Event("hashchange"));
+}
+
+export default function GalleryClient() {
+  const hash = useSyncExternalStore(subscribeHash, () => window.location.hash.slice(1), () => "");
+
+  let lightbox: LightboxState = null;
+  for (const items of SERIES) {
+    const index = items.findIndex((it) => it.slug === hash);
+    if (index >= 0) lightbox = { items, index };
+  }
+
+  const openLightbox = (seriesItems: GalleryItem[]) => (_item: GalleryItem, index: number) => {
+    window.location.hash = seriesItems[index].slug;
+  };
 
   const activeLbItem = lightbox ? lightbox.items[lightbox.index] : null;
 
@@ -127,7 +166,7 @@ export default function GalleryClient() {
       <main id="main-content" className="pt-16 px-8 pb-8">
         {/* Header */}
         <div className="mb-20">
-          <p className="font-body text-[11px] tracking-[0.35em] uppercase text-[var(--color-grey-400)] mb-5">
+          <p className="font-mono font-medium text-[11px] tracking-[0.35em] uppercase text-[var(--color-grey-400)] mb-5">
             Gallery
           </p>
           <h1
@@ -138,7 +177,7 @@ export default function GalleryClient() {
               letterSpacing: "-0.02em",
             }}
           >
-            Photographs /
+            Photographs
             <br />
             &amp; prints.
           </h1>
@@ -147,11 +186,11 @@ export default function GalleryClient() {
         {/* Woven Memories series */}
         <div className="mb-28">
           <div className="flex items-center gap-8 mb-12">
-            <span className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
+            <span className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
               Woven Memories
             </span>
             <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
-            <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2025</span>
+            <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2025</span>
           </div>
           <MasonryGrid
             items={wovenMemories}
@@ -160,14 +199,30 @@ export default function GalleryClient() {
           />
         </div>
 
+        {/* Khun Chang Khian */}
+        <div className="mb-28">
+          <div className="flex items-center gap-8 mb-12">
+            <span className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
+              Khun Chang Khian
+            </span>
+            <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
+            <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2024</span>
+          </div>
+          <MasonryGrid
+            items={khunChangKhian}
+            onOpen={openLightbox(khunChangKhian)}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        </div>
+
         {/* Selected Work — unified */}
         <div className="mb-28">
           <div className="flex items-center gap-8 mb-12">
-            <span className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
+            <span className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">
               Selected Work
             </span>
             <div className="flex-1 h-px bg-[var(--color-border-muted)]" />
-            <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2024–2025</span>
+            <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">2024–2025</span>
           </div>
           <MasonryGrid
             items={selectedWork}
@@ -183,16 +238,18 @@ export default function GalleryClient() {
         {lightbox && activeLbItem && (
           <Lightbox
             src={activeLbItem.src}
-            alt={activeLbItem.title}
+            alt={photoAlt(activeLbItem.src, `${activeLbItem.series}, ${activeLbItem.title}`)}
             title={activeLbItem.title}
             series={activeLbItem.series}
             index={lightbox.index + 1}
             total={lightbox.items.length}
             hasPrev={lightbox.index > 0}
             hasNext={lightbox.index < lightbox.items.length - 1}
-            onClose={() => setLightbox(null)}
-            onPrev={() => setLightbox((lb) => lb && { ...lb, index: lb.index - 1 })}
-            onNext={() => setLightbox((lb) => lb && { ...lb, index: lb.index + 1 })}
+            prevSrc={lightbox.items[lightbox.index - 1]?.src}
+            nextSrc={lightbox.items[lightbox.index + 1]?.src}
+            onClose={() => replaceHash(null)}
+            onPrev={() => lightbox && lightbox.index > 0 && replaceHash(lightbox.items[lightbox.index - 1].slug)}
+            onNext={() => lightbox && lightbox.index < lightbox.items.length - 1 && replaceHash(lightbox.items[lightbox.index + 1].slug)}
           />
         )}
       </AnimatePresence>

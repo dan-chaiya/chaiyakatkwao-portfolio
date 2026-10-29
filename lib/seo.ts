@@ -8,10 +8,10 @@ import type { Metadata } from "next";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://chaiyakatkwao.com";
 export const SITE_NAME = "Chaiya Katkwao";
-export const DEFAULT_TITLE = "Chaiya Katkwao | Creative Producer - Bangkok";
-export const TITLE_TEMPLATE = "%s — Chaiya Katkwao";
+export const DEFAULT_TITLE = "Chaiya Katkwao | Live Production Lead - Bangkok";
+export const TITLE_TEMPLATE = "%s · Chaiya Katkwao";
 export const DEFAULT_DESCRIPTION =
-  "Creative producer in Bangkok. Live commerce, multi-camera production, podcasts and photography.";
+  "Live production lead in Bangkok. A 15-room TikTok live commerce studio, multi-camera podcasts, and photography.";
 
 export const INSTAGRAM_URL = "https://www.instagram.com/chaiya.a";
 export const PORTRAIT_PATH = "/images/portrait/dan.jpg";
@@ -28,11 +28,11 @@ export const SHARE_CARD: ShareImage = {
   url: "/images/share-card.jpg",
   width: 1200,
   height: 630,
-  alt: "Chaiya Katkwao — Creative Producer, Bangkok",
+  alt: "Chaiya Katkwao, Live Production Lead, Bangkok",
 };
 
 type PageMetadataInput = {
-  /** Page-only title; the layout template appends " — Chaiya Katkwao". */
+  /** Page-only title; the layout template appends " · Chaiya Katkwao". */
   title: string;
   description: string;
   /** Route path, e.g. "/about". Becomes the canonical and share URL. */

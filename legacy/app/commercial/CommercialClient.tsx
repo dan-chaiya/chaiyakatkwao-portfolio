@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,8 +9,10 @@ import Footer from "@/components/Footer";
 import Lightbox from "@/components/Lightbox";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import CommercialList from "@/components/CommercialList";
-import { projects } from "@/data/commercial";
+import { visibleProjects } from "@/data/commercial";
 import { selectedEpisodes } from "@/data/youtube";
+import { photoAlt, photoSize } from "@/lib/photos";
+import { liveStudio as L } from "@/data/live-studio";
 
 const liveCommerceVideos = [
   {
@@ -55,7 +57,7 @@ const liveCommerceVideos = [
   },
   {
     id: "lc-08",
-    title: "Guess — April",
+    title: "Guess, April",
     brand: "Guess",
     src: "/videos/live-commerce/guess.mp4",
     poster: "/images/live-posters/guess.jpg",
@@ -63,7 +65,7 @@ const liveCommerceVideos = [
   },
   {
     id: "lc-10",
-    title: "Colgate — May",
+    title: "Colgate, May",
     brand: "Colgate",
     src: "/videos/live-commerce/colgate-may.mp4",
     poster: "/images/live-posters/colgate-may.jpg",
@@ -71,7 +73,7 @@ const liveCommerceVideos = [
   },
   {
     id: "lc-11",
-    title: "Dutchmil Delivery — May",
+    title: "Dutchmil Delivery, May",
     brand: "Dutchmil Delivery",
     src: "/videos/live-commerce/dutchmil-may.mp4",
     poster: "/images/live-posters/dutchmil-may.jpg",
@@ -79,7 +81,7 @@ const liveCommerceVideos = [
   },
   {
     id: "lc-12",
-    title: "F&N Dairies — May",
+    title: "F&N Dairies, May",
     brand: "F&N Dairies",
     src: "/videos/live-commerce/fn-dairies-may.mp4",
     poster: "/images/live-posters/fn-dairies-may.jpg",
@@ -103,7 +105,7 @@ const liveCommerceVideos = [
   },
   {
     id: "lc-15",
-    title: "Shop at Nestlé — May",
+    title: "Shop at Nestlé, May",
     brand: "Shop at Nestlé",
     src: "/videos/live-commerce/shop-at-nestle-may.mp4",
     poster: "/images/live-posters/shop-at-nestle-may.jpg",
@@ -119,11 +121,32 @@ type LightboxState = {
 export default function CommercialClient() {
   const [lightbox, setLightbox] = useState<LightboxState>(null);
   const activeLbItem = lightbox ? lightbox.images[lightbox.index] : null;
-  const [view, setView] = useState<"grid" | "list">("grid");
+  // The view lives in the URL (?view=list), so a reload or a shared link keeps it
+  // (2026-10-04). The server always renders the grid; the client reads the URL right
+  // after hydration, and a press overrides it.
+  const urlView = useSyncExternalStore<"grid" | "list">(
+    () => () => {},
+    () => (new URLSearchParams(window.location.search).get("view") === "list" ? "list" : "grid"),
+    () => "grid",
+  );
+  const [pickedView, setPickedView] = useState<"grid" | "list" | null>(null);
+  const view = pickedView ?? urlView;
+  const chooseView = (v: "grid" | "list") => {
+    setPickedView(v);
+    setToggled(true);
+    const url = new URL(window.location.href);
+    if (v === "list") url.searchParams.set("view", "list");
+    else url.searchParams.delete("view");
+    window.history.replaceState(null, "", url);
+  };
   // True after the first toggle. The view that mounts after a toggle fades in (opacity
   // only: the page height already jumps by thousands of pixels). Before any toggle the grid
   // is the first paint and must not fade on top of the route fade in PageTransition.
   const [toggled, setToggled] = useState(false);
+  // Live commerce shows its four strongest recordings; the rest are one press away. A
+  // wall of a dozen near-identical sale streams read as "can't edit" (2026-10-04).
+  const [allLive, setAllLive] = useState(false);
+  const shownLive = allLive ? liveCommerceVideos : liveCommerceVideos.slice(0, 4);
   const viewEnter = toggled ? "transition-opacity duration-200 ease-out starting:opacity-0" : "";
 
   return (
@@ -131,7 +154,7 @@ export default function CommercialClient() {
       <main id="main-content" className="pt-16 px-8 pb-8">
         {/* Header */}
         <div className="mb-20">
-          <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)] mb-5">
+          <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)] mb-5">
             Commercial
           </p>
           <h1
@@ -142,18 +165,137 @@ export default function CommercialClient() {
               letterSpacing: "-0.02em",
             }}
           >
-            Selected /
+            Selected
             <br />
             commissions.
           </h1>
         </div>
 
+        {/* Index: every section of a long page, one tap away (2026-10-04). */}
+        <nav aria-label="On this page" className="mb-16 border-t border-[var(--color-border)]">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { href: "#live-commerce", label: "Live Commerce", meta: "2026" },
+              ...visibleProjects.map((p) => ({ href: `#${p.slug}`, label: p.title, meta: p.year })),
+              { href: "#episodes", label: "Selected Episodes", meta: "2025–2026" },
+            ].map((item) => (
+              <li key={item.href} className="border-b border-[var(--color-border)]">
+                <a
+                  href={item.href}
+                  className="flex items-baseline justify-between gap-4 py-3 pr-6 text-[var(--color-grey-300)] transition-colors duration-[180ms] hover:text-[var(--color-text)]"
+                >
+                  <span className="copy-small" style={{ color: "inherit", fontWeight: 500 }}>{item.label}</span>
+                  <span className="font-mono font-medium text-[11px] tracking-[0.12em] text-[var(--color-text-muted)]">{item.meta}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Live Commerce, first since 2026-10-28: it is the current job and the work with
+            a scale, so an employer meets it before the photography. */}
+        <section id="live-commerce" className="mb-32 scroll-mt-24">
+          <div style={{ borderTop: "1px solid color-mix(in srgb, var(--color-text) 18%, transparent)", paddingTop: "20px", marginBottom: "48px", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+            <p className="font-mono font-medium text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">Live Commerce</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
+            <div className="md:col-span-1">
+              <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">01</span>
+            </div>
+            <div className="md:col-span-4">
+              <h2
+                className="font-heading text-[var(--color-warm)] mb-1"
+                style={{ fontSize: "clamp(1.2rem, 2.5vw, 2rem)", lineHeight: 0.95, letterSpacing: "-0.02em" }}
+              >
+                Live Commerce
+              </h2>
+              <p className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
+                Live Production &amp; Visual Coordinator
+              </p>
+            </div>
+            <div className="md:col-span-5">
+              <p className="copy-body mb-6">
+                TikTok live commerce for 10 brands at Ad The Top Agency, several rooms live at
+                once, from the client brief to the live feed. I plan the lighting and camera
+                setup for each brief and run the studio it goes out from.
+              </p>
+              {/* The producer's credits, from the studio's own records (data/live-studio.ts):
+                  what an agency hiring a producer scans for (2026-10-04). */}
+              <dl className="mb-6 border-t border-[var(--color-border)]">
+                {[
+                  ["Brands", "Colgate, Dutchmil Delivery, F&N Dairies, Fitflop, Guess, Her Hyness, Nestlé, Rojukiss, Sunnies Studio, Tokfashion"],
+                  ["Team", `A live department of ${L.department}: hosts, live coordinators and an ${L.adminCrew}-person admin crew`],
+                  ["Studio", `${L.rooms} live rooms on ${L.floors} floors, running brands side by side`],
+                  ["Gear", `${L.gear} tracked pieces: ${L.cameras} cameras, ${L.switchers} switchers, ${L.lights} LED lights, ${L.pcs} PCs`],
+                  ["System", `Live Studio OS, built in-house: daily health checks and a fault log, 20+ releases. ${L.faultsLogged} faults logged ${L.faultWindow}, ${L.faultsResolved} resolved`],
+                ].map(([k, v]) => (
+                  <div key={k} className="grid grid-cols-[5.5rem_1fr] gap-4 border-b border-[var(--color-border)] py-3">
+                    <dt className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-text-muted)] pt-[3px]">{k}</dt>
+                    <dd className="copy-small">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="flex flex-wrap gap-2">
+                {["Live Production", "Art Direction", "AV Engineering"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-mono font-medium text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="md:col-span-2 md:text-right">
+              <span className="font-mono font-medium text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">2026</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "1px" }}>
+            {shownLive.map((video) => (
+              <div key={video.id} style={{ backgroundColor: "var(--color-bg)" }}>
+                <video
+                  controls
+                  playsInline
+                  preload="none"
+                  poster={video.poster}
+                  aria-label={`${video.brand}, live commerce production`}
+                  className="w-full h-auto block"
+                >
+                  <source src={video.src} type={video.type} />
+                </video>
+                <div style={{
+                  padding: "14px 20px",
+                  borderTop: "1px solid var(--color-border)",
+                  display: "flex",
+                  alignItems: "baseline",
+                  justifyContent: "space-between",
+                  gap: "16px",
+                }}>
+                  <span className="font-heading" style={{ fontSize: "0.85rem", letterSpacing: "-0.01em", color: "var(--color-warm)" }}>
+                    {video.brand}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          {!allLive && (
+            <button
+              type="button"
+              onClick={() => setAllLive(true)}
+              className="mt-8 w-full border border-[var(--color-border)] py-[18px] font-mono font-medium text-[11px] tracking-[0.14em] uppercase text-[var(--color-text-muted)] transition-[border-color,color] duration-[250ms] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]"
+            >
+              Show all {liveCommerceVideos.length} recordings
+            </button>
+          )}
+        </section>
+
         {/* View toggle (B3) */}
-        <div className="mb-12 flex items-center gap-1" role="group" aria-label="View mode">
+        <div className="mb-12 hidden sm:flex items-center gap-1" role="group" aria-label="View mode">
           {(["grid", "list"] as const).map((v) => (
             <button
               key={v}
-              onClick={() => { setView(v); setToggled(true); }}
+              onClick={() => chooseView(v)}
               aria-pressed={view === v}
               className="mono-label flex h-11 items-center px-3 transition-colors duration-200"
               style={{
@@ -169,12 +311,12 @@ export default function CommercialClient() {
         {/* Photo / production projects */}
         {view === "list" ? (
           <div key="list" className={viewEnter}>
-            <CommercialList projects={projects} />
+            <CommercialList projects={visibleProjects} />
           </div>
         ) : (
         <div key="grid" className={`space-y-32 ${viewEnter}`}>
-          {projects.map((project, i) => (
-            <article key={project.id}>
+          {visibleProjects.map((project, i) => (
+            <article key={project.id} id={project.slug} className="scroll-mt-24">
               {/* Cover — natural aspect ratio, no cropping */}
               <Link
                 href={`/commercial/${project.slug}`}
@@ -182,18 +324,17 @@ export default function CommercialClient() {
               >
                 <Image
                   src={project.cover}
-                  alt={`${project.title} - Creative Producer`}
-                  width={0}
-                  height={0}
+                  alt={photoAlt(project.cover, project.title)}
+                  {...photoSize(project.cover)}
                   sizes="100vw"
-                  className="img-natural transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                  priority={i === 0}
+                  className="img-natural"
+                  preload={i === 0}
                 />
-                <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/30 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-[var(--color-surface-chat)]/0 group-hover:bg-[var(--color-surface-chat)]/30 group-focus-visible:bg-[var(--color-surface-chat)]/30 transition-colors duration-500" />
                 {/* A solid block of the page ground, because it sits on the photograph:
                     see-through, it failed on dark covers in Light. */}
-                <div className="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-[opacity,transform] duration-200 ease-out">
-                  <span className="font-body text-[11px] tracking-[0.25em] uppercase text-[var(--color-warm)] bg-[var(--color-bg)] border border-[var(--color-warm)] px-3 py-2">
+                <div className="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 translate-y-1 group-hover:translate-y-0 group-focus-visible:translate-y-0 transition-[opacity,transform] duration-200 ease-out">
+                  <span className="font-mono font-medium text-[11px] tracking-[0.25em] uppercase text-[var(--color-warm)] bg-[var(--color-bg)] border border-[var(--color-warm)] px-3 py-2">
                     View case study →
                   </span>
                 </div>
@@ -202,14 +343,14 @@ export default function CommercialClient() {
               {/* Metadata row */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-8">
                 <div className="md:col-span-1">
-                  <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">
+                  <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">
                     {project.id}
                   </span>
                 </div>
                 <div className="md:col-span-4">
                   <Link
                     href={`/commercial/${project.slug}`}
-                    className="inline-block group"
+                    className="tap-target inline-block group"
                   >
                     <h2
                       className="font-heading text-[var(--color-warm)] mb-1 transition-opacity duration-300 group-hover:opacity-70"
@@ -222,7 +363,7 @@ export default function CommercialClient() {
                       {project.title}
                     </h2>
                   </Link>
-                  <p className="font-body text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
+                  <p className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
                     {project.role}
                   </p>
                 </div>
@@ -234,7 +375,7 @@ export default function CommercialClient() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="font-body text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
+                        className="font-mono font-medium text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
                       >
                         {tag}
                       </span>
@@ -242,7 +383,7 @@ export default function CommercialClient() {
                   </div>
                 </div>
                 <div className="md:col-span-2 md:text-right">
-                  <span className="font-body text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">
+                  <span className="font-mono font-medium text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">
                     {project.year}
                   </span>
                 </div>
@@ -265,7 +406,7 @@ export default function CommercialClient() {
                           setLightbox({
                             images: project.images.map((s, k) => ({
                               src: s,
-                              alt: `${project.title} — ${k + 2} - Creative Producer`,
+                              alt: photoAlt(s, `${project.title}, ${k + 1}`),
                               title: project.title,
                               series: project.subtitle,
                             })),
@@ -276,19 +417,18 @@ export default function CommercialClient() {
                         {isPodcast ? (
                           <Image
                             src={src}
-                            alt={`${project.title} ${j + 2} - Creative Producer`}
+                            alt={photoAlt(src, `${project.title}, ${j + 1}`)}
                             fill
                             sizes="(max-width: 768px) 33vw, 20vw"
-                            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
+                            className="object-cover"
                           />
                         ) : (
                           <Image
                             src={src}
-                            alt={`${project.title} ${j + 2} - Creative Producer`}
-                            width={0}
-                            height={0}
+                            alt={photoAlt(src, `${project.title}, ${j + 1}`)}
+                            {...photoSize(src)}
                             sizes="(max-width: 768px) 33vw, 20vw"
-                            className="img-natural transition-transform duration-500 ease-out group-hover:scale-[1.03] group-focus-visible:scale-[1.03]"
+                            className="img-natural"
                           />
                         )}
                       </button>
@@ -302,10 +442,10 @@ export default function CommercialClient() {
         )}
 
         {/* Selected Episodes — long-form video & podcast work */}
-        <section className="mt-32 pt-16 border-t border-[var(--color-border-muted)]">
+        <section id="episodes" className="mt-32 pt-16 border-t border-[var(--color-border-muted)] scroll-mt-24">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
             <div className="md:col-span-1">
-              <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">06</span>
+              <span className="font-mono font-medium text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">05</span>
             </div>
             <div className="md:col-span-4">
               <h2
@@ -314,7 +454,7 @@ export default function CommercialClient() {
               >
                 Selected Episodes
               </h2>
-              <p className="font-body text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
+              <p className="font-mono font-medium text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
                 Producer / Studio
               </p>
             </div>
@@ -326,7 +466,7 @@ export default function CommercialClient() {
                 {["Podcast", "Long-form", "Studio Production"].map((tag) => (
                   <span
                     key={tag}
-                    className="font-body text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
+                    className="font-mono font-medium text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
                   >
                     {tag}
                   </span>
@@ -334,7 +474,7 @@ export default function CommercialClient() {
               </div>
             </div>
             <div className="md:col-span-2 md:text-right">
-              <span className="font-body text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">2025–2026</span>
+              <span className="font-mono font-medium text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">2025–2026</span>
             </div>
           </div>
 
@@ -346,7 +486,7 @@ export default function CommercialClient() {
                   <p className="copy-small line-clamp-2">
                     {video.title}
                   </p>
-                  <span className="font-body text-[11px] tracking-[0.15em] uppercase text-[var(--color-text-muted)] shrink-0">
+                  <span className="font-mono font-medium text-[11px] tracking-[0.15em] uppercase text-[var(--color-text-muted)] shrink-0">
                     {video.show}
                   </span>
                 </div>
@@ -355,75 +495,6 @@ export default function CommercialClient() {
           </div>
         </section>
 
-        {/* Live Commerce section */}
-        <section className="mt-24">
-          <div style={{ borderTop: "1px solid color-mix(in srgb, var(--color-text) 18%, transparent)", paddingTop: "20px", marginBottom: "48px", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-            <p className="font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-grey-400)]">Live Commerce</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
-            <div className="md:col-span-1">
-              <span className="font-body text-[11px] tracking-[0.2em] text-[var(--color-grey-500)]">07</span>
-            </div>
-            <div className="md:col-span-4">
-              <h2
-                className="font-heading text-[var(--color-warm)] mb-1"
-                style={{ fontSize: "clamp(1.2rem, 2.5vw, 2rem)", lineHeight: 0.95, letterSpacing: "-0.02em" }}
-              >
-                Live Commerce
-              </h2>
-              <p className="font-body text-[11px] tracking-[0.18em] uppercase text-[var(--color-grey-400)]">
-                Live Production &amp; Visual Coordinator
-              </p>
-            </div>
-            <div className="md:col-span-5">
-              <p className="copy-body mb-4">
-                Live commerce productions for fashion and lifestyle brands at Ad The Top Agency.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {["Live Production", "Art Direction", "AV Engineering"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-body text-[11px] tracking-[0.12em] uppercase text-[var(--color-grey-400)] border border-[var(--color-border-muted)] px-2 py-1"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="md:col-span-2 md:text-right">
-              <span className="font-body text-[11px] tracking-[0.12em] text-[var(--color-grey-400)]">2026</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "1px" }}>
-            {liveCommerceVideos.map((video) => (
-              <div key={video.id} style={{ backgroundColor: "var(--color-bg)" }}>
-                <video
-                  controls
-                  playsInline
-                  preload="none"
-                  poster={video.poster}
-                  aria-label={`${video.brand} — live commerce production`}
-                  className="w-full h-auto block"
-                >
-                  <source src={video.src} type={video.type} />
-                </video>
-                <div style={{
-                  padding: "14px 20px",
-                  borderTop: "1px solid var(--color-border)",
-                  display: "flex",
-                  alignItems: "baseline",
-                  justifyContent: "space-between",
-                  gap: "16px",
-                }}>
-                  <span className="font-heading" style={{ fontSize: "0.85rem", letterSpacing: "-0.01em", color: "var(--color-warm)" }}>
-                    {video.brand}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
       </main>
 
       <div className="mt-32">
@@ -441,6 +512,8 @@ export default function CommercialClient() {
             total={lightbox.images.length}
             hasPrev={lightbox.index > 0}
             hasNext={lightbox.index < lightbox.images.length - 1}
+            prevSrc={lightbox.images[lightbox.index - 1]?.src}
+            nextSrc={lightbox.images[lightbox.index + 1]?.src}
             onClose={() => setLightbox(null)}
             onPrev={() => setLightbox((lb) => lb && { ...lb, index: lb.index - 1 })}
             onNext={() => setLightbox((lb) => lb && { ...lb, index: lb.index + 1 })}

@@ -18,14 +18,46 @@ import Image from "next/image";
 import { workAssets } from "@/data/work-asset-urls";
 import { HERO_INTERVAL_MS } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
+import { photoAlt } from "@/lib/photos";
 
-type Slide =
+// caption: who it was for and what CK did, in the words the rest of the site uses
+// (data/commercial.ts, the Live Commerce section of /commercial, the gallery).
+type Slide = { caption: string } & (
   | { kind: "video"; sources: { src: string; type: string }[]; poster: string; alt: string }
-  | { kind: "image"; src: string; alt: string };
+  | { kind: "image"; src: string; alt: string }
+  // Portrait frames from one shoot, side by side on wider screens so a 4:5 set fills
+  // the stage instead of standing in a narrow column; phones show the first frame.
+  | { kind: "set"; frames: { src: string; alt: string }[]; alt: string }
+);
 
-// Verified assets: art originals via workAssets (never altered) + the optimized live loops.
+const frame = (src: string, fallback: string) => ({ src, alt: photoAlt(src, fallback) });
+
+// The strongest editorial work first (2026-10-04, after a second critique): Knack Factory
+// and BAKAO as three-frame sets, then the live productions and the studio, the
+// art series last. BAKAO took the KOL lookbook's place on 2026-10-05; its 01 frame
+// is the Home Commercial tile, so the set starts at 02. A live-commerce sale banner as the first frame read as retail
+// operations, not "stylish"; every slide still names its client and role. Art originals via workAssets (never altered) + the optimized live loops.
 const SLIDES: Slide[] = [
-  { kind: "image", src: workAssets.woven("0.jpg"), alt: "Woven Memories, 2025 - Creative Producer" },
+  {
+    kind: "set",
+    frames: [
+      frame(workAssets.knack("Knack-75.jpg"), "Knack Factory runway"),
+      frame(workAssets.knack("Knack-120.jpg"), "Knack Factory runway"),
+      frame(workAssets.knack("Knack-131.jpg"), "Knack Factory runway"),
+    ],
+    alt: "Knack Factory Fashion Show, three runway frames",
+    caption: "Knack Factory · Photographer, 2024",
+  },
+  {
+    kind: "set",
+    frames: [
+      frame("/images/bakao/02.jpg", "BAKAO lookbook"),
+      frame("/images/bakao/03.jpg", "BAKAO lookbook"),
+      frame("/images/bakao/05.jpg", "BAKAO lookbook"),
+    ],
+    alt: "BAKAO lookbook, three portrait frames",
+    caption: "BAKAO · Photographer and art direction, 2024",
+  },
   {
     kind: "video",
     sources: [
@@ -33,19 +65,15 @@ const SLIDES: Slide[] = [
       { src: "/videos/motion/live-fitflop-may.mp4", type: "video/mp4" },
     ],
     poster: "/videos/motion/live-fitflop-may.poster.jpg",
-    alt: "Fitflop live commerce production - Creative Producer",
+    alt: "Fitflop live commerce stream",
+    caption: "Fitflop · Live production, one of 15 rooms run at Ad The Top, 2026",
   },
-  { kind: "image", src: workAssets.knack("Knack-75.jpg"), alt: "Knack Factory Fashion Show, 2024 - Creative Producer" },
   {
-    kind: "video",
-    sources: [
-      { src: "/videos/motion/live-rojukiss-may.webm", type: "video/webm" },
-      { src: "/videos/motion/live-rojukiss-may.mp4", type: "video/mp4" },
-    ],
-    poster: "/videos/motion/live-rojukiss-may.poster.jpg",
-    alt: "Rojukiss live commerce production - Creative Producer",
+    kind: "image",
+    src: workAssets.podcast("_MG_8860.JPG"),
+    alt: photoAlt(workAssets.podcast("_MG_8860.JPG"), "Podcast studio at Modal Creative Studio"),
+    caption: "Modal Creative Studio · Creative producer and AV engineer, 2025–2026",
   },
-  { kind: "image", src: workAssets.podcast("_MG_8860.JPG"), alt: "Podcast Producer at Modal Creative Studio - Creative Producer" },
   {
     kind: "video",
     sources: [
@@ -53,7 +81,14 @@ const SLIDES: Slide[] = [
       { src: "/videos/motion/live-nestle.mp4", type: "video/mp4" },
     ],
     poster: "/videos/motion/live-nestle.poster.jpg",
-    alt: "Nestlé live commerce production - Creative Producer",
+    alt: "Nestlé live commerce stream",
+    caption: "Nestlé Health Science · Live production, one of 15 rooms run at Ad The Top, 2026",
+  },
+  {
+    kind: "image",
+    src: workAssets.woven("0.jpg"),
+    alt: photoAlt(workAssets.woven("0.jpg"), "Woven Memories, 2025"),
+    caption: "Woven Memories · Photographs, 2025",
   },
 ];
 
@@ -69,6 +104,9 @@ export default function HeroStage() {
   // True when the visitor picked the current slide. A pick is answered in 300ms; the
   // unattended slideshow keeps its slow 1200ms cross-fade.
   const [picked, setPicked] = useState(false);
+  // The slide mark under the pointer or keyboard focus: the caption names it before it
+  // is picked, so the thin bars say which work they lead to (2026-10-04).
+  const [preview, setPreview] = useState<number | null>(null);
   const count = SLIDES.length;
 
   // Continuous auto-loop. WCAG 2.2.2 requires that anything moving for more than
@@ -126,7 +164,7 @@ export default function HeroStage() {
           Chaiya Katkwao.
         </h1>
         <p className="mono-label" style={{ color: "var(--color-warm)" }}>
-          Creative Producer — Bangkok
+          Live Production Lead, Bangkok
         </p>
       </div>
 
@@ -150,19 +188,34 @@ export default function HeroStage() {
                 muted
                 loop
                 playsInline
-                autoPlay={i === 0 && !reduced}
+                autoPlay={false}
                 preload={i === 0 ? "auto" : "metadata"}
                 aria-label={slide.alt}
                 className="absolute inset-0 h-full w-full object-contain"
               >
                 {slide.sources.map((s) => <source key={s.src} src={s.src} type={s.type} />)}
               </video>
+            ) : slide.kind === "set" ? (
+              <div className="absolute inset-0 flex justify-center gap-[1px]">
+                {slide.frames.map((f, j) => (
+                  <div key={f.src} className={`relative h-full flex-1 ${j > 0 ? "hidden sm:block" : ""}`}>
+                    <Image
+                      src={f.src}
+                      alt={f.alt}
+                      fill
+                      preload={i === 0 && j === 0}
+                      sizes="(max-width: 640px) 100vw, 33vw"
+                      className="object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
             ) : (
               <Image
                 src={slide.src}
                 alt={slide.alt}
                 fill
-                priority={i === 0}
+                preload={i === 0}
                 sizes="100vw"
                 className="object-contain"
               />
@@ -176,8 +229,11 @@ export default function HeroStage() {
         className="flex shrink-0 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
         style={{ padding: `16px ${PAD_X} 24px` }}
       >
-        <p className="mono-label" style={{ color: "var(--color-warm)" }}>
-          Art Direction · Production · Photography
+        {/* The current slide's client and role. aria-hidden: the slide itself and its
+            control already carry the description, and a caption that changes every six
+            seconds must not talk over the page. */}
+        <p className="mono-label" aria-hidden="true" style={{ color: "var(--color-warm)", lineHeight: 1.6 }}>
+          {SLIDES[preview ?? active].caption}
         </p>
         {/* The counter implied controls that did not exist. Now it is one: pause
             stops the rotation, and the slide marks step it. Hidden entirely under
@@ -207,20 +263,26 @@ export default function HeroStage() {
             </button>
           )}
 
-          <div className="hidden sm:flex items-center gap-[6px]" role="group" aria-label="Slides">
+          {/* Each mark is a 24 x 44 button around a 16px bar, so the bars sit 8px
+              apart and every target meets WCAG 2.5.8 (they were 16px wide). */}
+          <div className="hidden sm:flex items-center" role="group" aria-label="Slides">
             {SLIDES.map((slide, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => { setPicked(true); setActive(i); }}
+                onMouseEnter={() => setPreview(i)}
+                onMouseLeave={() => setPreview(null)}
+                onFocus={() => setPreview(i)}
+                onBlur={() => setPreview(null)}
                 aria-label={`Show slide ${i + 1}: ${slide.alt}`}
                 aria-current={i === active ? "true" : undefined}
-                className="flex h-11 w-4 items-center justify-center"
+                className="flex h-11 w-6 items-center justify-center"
               >
                 <span
                   style={{
                     display: "block",
-                    width: "100%",
+                    width: "16px",
                     height: "1px",
                     backgroundColor: i === active ? "var(--color-warm)" : "color-mix(in srgb, var(--color-warm) 34%, transparent)",
                     transition: "background-color 220ms ease",
@@ -232,7 +294,7 @@ export default function HeroStage() {
 
           {/* The count is for phones, where the slide marks are hidden; on wider
               screens the marks already say where you are (2026-09-27). */}
-          <span className="mono-label tabular-nums sm:hidden" style={{ color: "var(--color-warm)" }}>
+          <span className="mono-label tabular-nums" style={{ color: "var(--color-warm)" }}>
             {String(active + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
           </span>
         </div>

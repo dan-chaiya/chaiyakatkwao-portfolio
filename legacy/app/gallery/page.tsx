@@ -5,7 +5,7 @@ import GalleryClient from "./GalleryClient";
 export const metadata: Metadata = pageMetadata({
   title: "Gallery",
   description:
-    "Photographs and prints by Chaiya Katkwao — Woven Memories (2025) and selected work from Bangkok and Northern Thailand.",
+    "Photographs and prints by Chaiya Katkwao: Woven Memories (2025) and selected work from Bangkok and Northern Thailand.",
   path: "/gallery",
 });
 

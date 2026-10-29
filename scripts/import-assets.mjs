@@ -63,12 +63,7 @@ const EXTRA_ROWS = [
     credit: "Commissioned Photographer, the101.World Magazine, 2023",
     sources: ["09", "10", "11", "12"].map((n) => path.join(NEW, "13-portraits", `${n}.jpg`)),
   },
-  {
-    slug: "kol-casting-lookbook", title: "KOL Casting Lookbook", discipline: "Photography", year: "2026",
-    credit: "Photographer and art direction",
-    statement: "Casting portraits of KOLs, shot and art-directed in-house for a fashion brand pitch.",
-    sources: pub(...["01", "02", "03", "04", "05"].map((n) => `images/kol-lookbook/${n}.jpg`)),
-  },
+  // KOL Casting Lookbook: taken off the site 2026-10-05 (main 123165c), stays off in v2.
   {
     slug: "live-commerce", title: "Live commerce studio", discipline: "Production", year: "2026",
     credit: "Live Production & Visual Coordinator, Bangkok",

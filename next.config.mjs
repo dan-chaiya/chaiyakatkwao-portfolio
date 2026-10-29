@@ -14,6 +14,8 @@ const nextConfig = {
     return [
       { source: "/work", destination: "/works", permanent: true },
       { source: "/commercial", destination: "/works", permanent: true },
+      // KOL Casting Lookbook was taken off the site on 2026-10-05; before the catch-all below.
+      { source: "/commercial/kol-casting-lookbook", destination: "/works", permanent: true },
       { source: "/commercial/:slug", destination: "/work/:slug", permanent: true },
       { source: "/gallery", destination: "/works", permanent: true },
       { source: "/about", destination: "/information", permanent: true },

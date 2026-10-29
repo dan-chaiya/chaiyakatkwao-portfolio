@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T06:27:13.673Z",
+  "generatedAt": "2026-10-29T07:13:57.248Z",
   "hero": {
     "type": "image",
     "src": "/v2/home/hero",
@@ -929,49 +929,6 @@
     },
     {
       "no": "020",
-      "slug": "kol-casting-lookbook",
-      "title": "KOL Casting Lookbook",
-      "discipline": "Photography",
-      "year": "2026",
-      "credit": "Photographer and art direction",
-      "exhibited": "",
-      "statement": "Casting portraits of KOLs, shot and art-directed in-house for a fashion brand pitch.",
-      "maxEdge": 2400,
-      "frames": [
-        {
-          "type": "image",
-          "src": "/v2/kol-casting-lookbook/01",
-          "w": 1920,
-          "h": 2400
-        },
-        {
-          "type": "image",
-          "src": "/v2/kol-casting-lookbook/02",
-          "w": 1920,
-          "h": 2400
-        },
-        {
-          "type": "image",
-          "src": "/v2/kol-casting-lookbook/03",
-          "w": 1920,
-          "h": 2400
-        },
-        {
-          "type": "image",
-          "src": "/v2/kol-casting-lookbook/04",
-          "w": 1920,
-          "h": 2400
-        },
-        {
-          "type": "image",
-          "src": "/v2/kol-casting-lookbook/05",
-          "w": 1876,
-          "h": 2345
-        }
-      ]
-    },
-    {
-      "no": "021",
       "slug": "live-commerce",
       "title": "Live commerce studio",
       "discipline": "Production",
@@ -1158,7 +1115,7 @@
       ]
     },
     {
-      "no": "022",
+      "no": "021",
       "slug": "knack-factory",
       "title": "Knack Factory",
       "discipline": "Photography",
@@ -1213,7 +1170,7 @@
       ]
     },
     {
-      "no": "023",
+      "no": "022",
       "slug": "bakao",
       "title": "BAKAO",
       "discipline": "Photography",
@@ -1262,7 +1219,7 @@
       ]
     },
     {
-      "no": "024",
+      "no": "023",
       "slug": "untitled",
       "title": "Untitled",
       "discipline": "Art",
@@ -1383,7 +1340,7 @@
       ]
     },
     {
-      "no": "025",
+      "no": "024",
       "slug": "live-studio-os",
       "title": "Live Studio OS",
       "discipline": "Systems",
@@ -1396,7 +1353,7 @@
       "href": "/systems#live-studio-os"
     },
     {
-      "no": "026",
+      "no": "025",
       "slug": "keepsake",
       "title": "Keepsake",
       "discipline": "Systems",
@@ -1409,7 +1366,7 @@
       "href": "/systems#keepsake"
     },
     {
-      "no": "027",
+      "no": "026",
       "slug": "equipment-loan-system",
       "title": "Equipment inventory and loan system",
       "discipline": "Systems",
@@ -1422,7 +1379,7 @@
       "href": "/systems#equipment-register"
     },
     {
-      "no": "028",
+      "no": "027",
       "slug": "podcast-studio-build",
       "title": "Podcast studio build",
       "discipline": "Production",
