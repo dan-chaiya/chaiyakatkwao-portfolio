@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Archivo, Archivo_Black, JetBrains_Mono, Noto_Sans_Thai } from "next/font/google";
+import { Archivo, Archivo_Black, IBM_Plex_Mono, Inter, JetBrains_Mono, Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
-import MotionProvider from "@/components/MotionProvider";
 import {
   absoluteUrl,
   DEFAULT_DESCRIPTION,
@@ -20,18 +18,38 @@ import { THEME_INIT_SCRIPT } from "@/lib/theme";
 // The three Latin faces load under *-latin names. globals.css rebuilds --font-archivo,
 // --font-archivo-black and --font-jetbrains-mono from them with Noto Sans Thai behind
 // each, so every existing var(--font-*) reference sets Thai without knowing about it.
+// Variable with the width axis: legacy pages use it at normal width, v2 sets the
+// name at wdth 62 (condensed).
 const archivo = Archivo({
   variable: "--font-archivo-latin",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  axes: ["wdth"],
   display: "swap",
 });
 
+// v2 UI and metadata faces (font set A, chosen 2026-10-29).
+const inter = Inter({
+  variable: "--font-inter-latin",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono-latin",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
+
+// Archivo Black and JetBrains Mono serve only the legacy /cv and /chat pages since v2,
+// so they don't preload: on v2 pages they'd compete with the fonts the page uses.
 const archivoBlack = Archivo_Black({
   variable: "--font-archivo-black-latin",
   subsets: ["latin"],
   weight: ["400"],
   display: "swap",
+  preload: false,
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -39,6 +57,7 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   display: "swap",
+  preload: false,
 });
 
 // Thai companion to Archivo, not a third voice (DESIGN.md §3). Variable, so a Thai
@@ -119,7 +138,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${archivoBlack.variable} ${jetbrainsMono.variable} ${notoSansThai.variable}`}
+      className={`${archivo.variable} ${archivoBlack.variable} ${jetbrainsMono.variable} ${inter.variable} ${plexMono.variable} ${notoSansThai.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -132,12 +151,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{ __html: jsonLd(structuredData) }}
         />
       </head>
-      <body>
-        <MotionProvider>
-          <Navigation />
-          {children}
-        </MotionProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

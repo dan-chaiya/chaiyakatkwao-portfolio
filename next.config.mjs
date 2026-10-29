@@ -9,8 +9,14 @@ const nextConfig = {
   // Parent folder also has a package-lock.json; pin tracing to this app root.
   outputFileTracingRoot: path.join(__dirname),
   async redirects() {
+    // v2 (2026-10-29): the old pages fold into Index (/works — Next serves /index as the home page), project pages and Information.
+    // Case-study slugs carried over unchanged, so /commercial/:slug maps one to one.
     return [
-      { source: "/work", destination: "/commercial", permanent: true },
+      { source: "/work", destination: "/works", permanent: true },
+      { source: "/commercial", destination: "/works", permanent: true },
+      { source: "/commercial/:slug", destination: "/work/:slug", permanent: true },
+      { source: "/gallery", destination: "/works", permanent: true },
+      { source: "/about", destination: "/information", permanent: true },
     ];
   },
   async rewrites() {

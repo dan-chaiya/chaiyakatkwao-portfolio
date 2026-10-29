@@ -1,54 +1,21 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { EASE } from "@/lib/motion";
 import Link from "next/link";
-import PageTransition from "@/components/PageTransition";
-import Footer from "@/components/Footer";
+import Header from "@/components/v2/Header";
+import "./(v2)/v2.css";
 
+// Sits outside the (v2) group so it catches every route; wears the v2 look directly.
 export default function NotFound() {
   return (
-    <PageTransition>
-      <main id="main-content" className="pt-32 px-8 pb-8 min-h-[80vh] flex flex-col justify-between">
+    <div className="v2">
+      <Header />
+      <main id="main-content" className="v2-info">
         <div>
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: EASE.out }}
-            className="font-body text-[11px] tracking-[0.35em] uppercase text-[var(--color-text-muted)] mb-5"
-          >
-            404
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, delay: 0.08, ease: EASE.out }}
-            className="font-heading text-[var(--color-warm)] mb-10"
-            style={{
-              fontSize: "clamp(3rem, 8vw, 7rem)",
-              lineHeight: 0.9,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Nothing here /
-            <br />
-            yet.
-          </motion.h1>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-          >
-            <Link
-              href="/"
-              className="inline-flex min-h-11 items-center font-body text-[11px] tracking-[0.3em] uppercase text-[var(--color-text-muted)] hover:text-[var(--color-warm)] transition-colors duration-300"
-            >
-              ← Back to home
-            </Link>
-          </motion.div>
+          <p className="v2-mono">404</p>
+          <h1 className="v2-info__bio">Nothing at this address.</h1>
+          <p>
+            <Link href="/works">Go to the Index</Link>
+          </p>
         </div>
       </main>
-      <Footer />
-    </PageTransition>
+    </div>
   );
 }
