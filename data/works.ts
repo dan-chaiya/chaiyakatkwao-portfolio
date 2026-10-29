@@ -37,11 +37,52 @@ export type Work = {
   href?: string;
 };
 
-const data = raw as unknown as { hero: ImageFrame; portrait: ImageFrame; works: Work[] };
+const data = raw as unknown as { hero: ImageFrame; portrait: ImageFrame; works: Omit<Work, "no">[] };
+
+// Display order, agency style (29 Oct 2026): client and professional work first, newest
+// first, so an agency meets the work it would hire for; then personal work, then art.
+// Index, Home, the Information credits and the numbers all follow it. A work missing
+// from this list goes to the end, so a new import still shows up.
+const ORDER = [
+  // Client and professional work
+  "live-commerce",
+  "podcast-studio-build",
+  "live-studio-os",
+  "equipment-loan-system",
+  "podcast-studio",
+  "bakao",
+  "knack-factory",
+  "cmdw-2024",
+  "commission-2024-silk",
+  "khun-chang-khian",
+  "the101-writers",
+  "sculpture",
+  "commission-2022",
+  // Personal work
+  "keepsake",
+  "portraits",
+  "afterparty",
+  "diarys-human-life",
+  "beauty-or-nature",
+  "vacation-time",
+  "yeeeeee",
+  "work-life-balance",
+  // Art
+  "woven-memories",
+  "untitled",
+  "self",
+  "nowhere",
+  "nattachai",
+];
+
+const rank = (slug: string) => (ORDER.includes(slug) ? ORDER.indexOf(slug) : ORDER.length);
 
 export const hero = data.hero;
 export const portrait = data.portrait;
-export const works = data.works;
+/** Numbers run 001… in display order with no gaps, so a withdrawn work leaves none. */
+export const works: Work[] = [...data.works]
+  .sort((a, b) => rank(a.slug) - rank(b.slug))
+  .map((w, i) => ({ ...w, no: String(i + 1).padStart(3, "0") }));
 
 /** Text-only rows (no frames yet) have no project page. */
 export const hasPage = (w: Work) => w.frames.length > 0;

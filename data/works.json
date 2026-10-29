@@ -14,7 +14,6 @@
   },
   "works": [
     {
-      "no": "001",
       "slug": "woven-memories",
       "title": "Woven memories",
       "discipline": "Art",
@@ -99,7 +98,6 @@
       ]
     },
     {
-      "no": "002",
       "slug": "nattachai",
       "title": "Nattachai",
       "discipline": "Art",
@@ -142,7 +140,6 @@
       ]
     },
     {
-      "no": "003",
       "slug": "nowhere",
       "title": "Nowhere",
       "discipline": "Art",
@@ -203,7 +200,6 @@
       ]
     },
     {
-      "no": "004",
       "slug": "khun-chang-khian",
       "title": "Khun Chang Khian",
       "discipline": "Photography",
@@ -240,7 +236,6 @@
       ]
     },
     {
-      "no": "005",
       "slug": "afterparty",
       "title": "Afterparty",
       "discipline": "Photography",
@@ -271,7 +266,6 @@
       ]
     },
     {
-      "no": "006",
       "slug": "diarys-human-life",
       "title": "Diary's human life",
       "discipline": "Photography",
@@ -320,7 +314,6 @@
       ]
     },
     {
-      "no": "007",
       "slug": "beauty-or-nature",
       "title": "Beauty or Nature",
       "discipline": "Photography",
@@ -357,7 +350,6 @@
       ]
     },
     {
-      "no": "008",
       "slug": "vacation-time",
       "title": "Vacation time",
       "discipline": "Photography",
@@ -394,7 +386,6 @@
       ]
     },
     {
-      "no": "009",
       "slug": "yeeeeee",
       "title": "YEEEEEE",
       "discipline": "Photography",
@@ -437,7 +428,6 @@
       ]
     },
     {
-      "no": "010",
       "slug": "work-life-balance",
       "title": "Work-life balance",
       "discipline": "Photography",
@@ -474,7 +464,6 @@
       ]
     },
     {
-      "no": "011",
       "slug": "commission-2022",
       "title": "Commission (textile set)",
       "discipline": "Photography",
@@ -517,7 +506,6 @@
       ]
     },
     {
-      "no": "012",
       "slug": "portraits",
       "title": "Portraits",
       "discipline": "Photography",
@@ -572,7 +560,6 @@
       ]
     },
     {
-      "no": "013",
       "slug": "cmdw-2024",
       "title": "CMDW 2024",
       "discipline": "Photography",
@@ -651,7 +638,6 @@
       ]
     },
     {
-      "no": "014",
       "slug": "commission-2024-silk",
       "title": "Commission (silk set)",
       "discipline": "Photography",
@@ -718,7 +704,6 @@
       ]
     },
     {
-      "no": "015",
       "slug": "sculpture",
       "title": "Sculpture",
       "discipline": "Photography",
@@ -737,7 +722,6 @@
       ]
     },
     {
-      "no": "016",
       "slug": "self",
       "title": "Self",
       "discipline": "Art",
@@ -774,7 +758,6 @@
       ]
     },
     {
-      "no": "017",
       "slug": "podcast-studio",
       "title": "Podcast studio",
       "discipline": "Production",
@@ -830,7 +813,6 @@
       ]
     },
     {
-      "no": "018",
       "slug": "the101-writers",
       "title": "10/10 Influential Writers of CMU",
       "discipline": "Photography",
@@ -867,7 +849,6 @@
       ]
     },
     {
-      "no": "019",
       "slug": "live-commerce",
       "title": "Live commerce studio",
       "discipline": "Production",
@@ -1054,7 +1035,6 @@
       ]
     },
     {
-      "no": "020",
       "slug": "knack-factory",
       "title": "Knack Factory",
       "discipline": "Photography",
@@ -1109,7 +1089,6 @@
       ]
     },
     {
-      "no": "021",
       "slug": "bakao",
       "title": "BAKAO",
       "discipline": "Photography",
@@ -1158,7 +1137,6 @@
       ]
     },
     {
-      "no": "022",
       "slug": "untitled",
       "title": "Untitled",
       "discipline": "Art",
@@ -1279,7 +1257,6 @@
       ]
     },
     {
-      "no": "023",
       "slug": "live-studio-os",
       "title": "Live Studio OS",
       "discipline": "Systems",
@@ -1292,7 +1269,6 @@
       "href": "/systems#live-studio-os"
     },
     {
-      "no": "024",
       "slug": "keepsake",
       "title": "Keepsake",
       "discipline": "Systems",
@@ -1305,7 +1281,6 @@
       "href": "/systems#keepsake"
     },
     {
-      "no": "025",
       "slug": "equipment-loan-system",
       "title": "Equipment inventory and loan system",
       "discipline": "Systems",
@@ -1318,7 +1293,6 @@
       "href": "/systems#equipment-register"
     },
     {
-      "no": "026",
       "slug": "podcast-studio-build",
       "title": "Podcast studio build",
       "discipline": "Production",
