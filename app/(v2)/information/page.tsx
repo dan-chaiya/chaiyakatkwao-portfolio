@@ -2,6 +2,7 @@ import Link from "next/link";
 import Header from "@/components/v2/Header";
 import Clock from "@/components/v2/Clock";
 import Picture from "@/components/v2/Picture";
+import { EXHIBITIONS } from "@/data/exhibitions";
 import { portrait, works } from "@/data/works";
 import { INSTAGRAM_URL, pageMetadata } from "@/lib/seo";
 
@@ -10,13 +11,6 @@ export const metadata = pageMetadata({
   description: "Chaiya Katkwao, photographer, artist and producer in Bangkok. Credits, exhibitions and contact.",
   path: "/information",
 });
-
-// From _curation.md (brief, Information).
-const EXHIBITIONS = [
-  { year: "2025", title: "ID", place: "Red Dog Gallery, Chiang Mai" },
-  { year: "2023", title: "กิ่ง ก้าน ใบ", place: "Faculty of Fine Arts, CMU" },
-  { year: "2021", title: "FUIYOH", place: "CMU Art Center, Chiang Mai" },
-];
 
 export default function InformationPage() {
   const credits = works.filter((w) => w.credit);
@@ -49,7 +43,7 @@ export default function InformationPage() {
                 <li key={e.title}>
                   <span className="v2-mono">{e.year}</span>
                   <span>
-                    {e.title}, {e.place}
+                    <span lang={e.lang}>{e.title}</span>, {e.place}
                   </span>
                 </li>
               ))}
@@ -72,6 +66,10 @@ export default function InformationPage() {
               </li>
               <li>
                 <Link href="/cv">CV</Link>
+              </li>
+              {/* The only way in since the v1 nav went (2026-10-29); the page says it is an AI. */}
+              <li>
+                <Link href="/chat">Ask the AI assistant</Link>
               </li>
             </ul>
           </section>

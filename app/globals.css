@@ -1,446 +1,61 @@
 @import "tailwindcss";
 
-/* === COLOUR — TWO THEMES, ONE SET OF NAMES ==========================================
-   Brutalist neutrals, 2026-09-23: #F0F0F0 / #EAEAEA paper and #111111 / #1C1C1C /
-   #222222 ink, each theme using the other's values as its ink. Light is the default
-   (:root); Dark is <html data-theme="dark">, set before the first paint by the script
-   in app/layout.tsx from the visitor's pick (components/ThemeToggle.tsx, lib/theme.ts).
-   Components only ever name a token, so every page follows the switch.
-
-   Every name means the same role in both themes: `warm` is the heading ink,
-   grey-200/300 the reading greys, grey-700 and border-muted hairlines, surface-chat
-   the chat ground. The text greys keep their slight warmth (hue 60-80) on neutral
-   grounds, and each one is measured to 4.5:1 or better on bg, surface and
-   surface-elevated of its own theme.
-
-   Plain custom properties, not @theme tokens: the site reads every colour through
-   var() (inline styles, arbitrary values like text-[var(--color-warm)]) and never as
-   a named Tailwind utility, and the `@theme inline` block they used to sit in bakes
-   values in at build time, where a theme cannot reach them. */
-:root {
-  color-scheme: light;
-
-  --color-bg:               #F0F0F0;
-  --color-surface:          #EAEAEA;
-  --color-surface-elevated: #E4E4E4;
-  --color-surface-hover:    #DEDEDE;
-
-  --color-text:             #111111;
-  --color-text-muted:       #5F5A55; /* 5.98:1 on bg, 5.36:1 on surface-elevated */
-  --color-text-dim:         #A8A29B; /* structural marks and disabled controls only */
-  --color-text-inverse:     #F0F0F0;
-
-  --color-border-faint:     rgba(17, 17, 17, 0.07); /* header, footer, mobile menu rows */
-  --color-border:           rgba(17, 17, 17, 0.09);
-  --color-border-strong:    rgba(17, 17, 17, 0.22);
-
-  --color-grey-100: #111111;
-  --color-grey-200: #1C1C1C;
-  --color-grey-300: #3D3A37;
-  --color-grey-400: #57524D;
-  --color-grey-500: #67625C; /* the lightest text grey: 5.30:1 on bg, 4.75:1 on surface-elevated */
-  --color-grey-600: #BDB8B1;
-  --color-grey-700: #D3D0CA;
-  --color-grey-800: #E2E0DC;
-  --color-grey-900: #EAEAEA;
-
-  --color-warm:         #111111;
-  --color-surface-chat: #EAEAEA;
-  --color-surface-dark: #E4E4E4;
-  --color-border-muted: #D6D6D6;
-
-  --color-focus-ring:       rgba(17, 17, 17, 0.55);
-  --color-selection-bg:     #111111;
-  --color-selection-text:   #F0F0F0;
-
-  /* The amber, deepened for paper: the 11px "Available" badge is set in it, and it
-     needs 4.5:1 there (4.87:1 on bg). /systems' oklch(58%) measures 4.13:1 here. */
-  --color-accent:     oklch(54% 0.19 35);
-  --color-accent-dim: oklch(54% 0.19 35 / 0.3);
-}
-
-/* Screen only: on paper every page is Light, so a print or PDF made in Dark still
-   comes out ink on white. Under color-scheme: dark Chrome also paints the sheet's
-   page margins #121212, which framed the CV's white page in black. */
-@media screen {
-  :root[data-theme="dark"] {
-    color-scheme: dark;
-
-    --color-bg:               #111111;
-    --color-surface:          #1C1C1C;
-    --color-surface-elevated: #222222;
-    --color-surface-hover:    #2A2A2A;
-
-    --color-text:             #F0F0F0;
-    --color-text-muted:       #958F89; /* was #8B857F on #000; raised for 4.98:1 on #222222 */
-    --color-text-dim:         #4A4744;
-    --color-text-inverse:     #111111;
-
-    --color-border-faint:     rgba(240, 240, 240, 0.07);
-    --color-border:           rgba(240, 240, 240, 0.09);
-    --color-border-strong:    rgba(240, 240, 240, 0.22);
-
-    --color-grey-100: #F0F0F0;
-    --color-grey-200: #EAEAEA;
-    --color-grey-300: #C8C4BC;
-    --color-grey-400: #9A9087;
-    --color-grey-500: #8F8983; /* was #827C75 on #000; raised for 4.60:1 on #222222 */
-    --color-grey-600: #3D3A37;
-    --color-grey-700: #2A2826;
-    --color-grey-800: #1A1816;
-    --color-grey-900: #0D0B0A;
-
-    --color-warm:         #F0F0F0;
-    --color-surface-chat: #1C1C1C;
-    --color-surface-dark: #222222;
-    --color-border-muted: #2A2A2A;
-
-    --color-focus-ring:       rgba(240, 240, 240, 0.55);
-    --color-selection-bg:     #F0F0F0;
-    --color-selection-text:   #111111;
-
-    --color-accent:     oklch(72% 0.18 35);
-    --color-accent-dim: oklch(72% 0.18 35 / 0.3);
-  }
-}
-
-/* Thai rides behind every Latin face. next/font loads the Latin faces as *-latin
-   (app/layout.tsx); these rebuild the names the rest of the site uses, with Noto Sans
-   Thai second. Neither Latin face has Thai glyphs, so Thai characters fall through to
-   Noto. One stack per face, so a component that writes var(--font-archivo) inline gets
-   Thai for free. Since 2026-10-28 the body and label names both point at Inter: the
-   names stay so the 100+ references across the site keep working unchanged. */
-:root {
-  --font-archivo:        var(--font-inter-latin), var(--font-noto-sans-thai);
-  --font-archivo-black:  var(--font-archivo-black-latin), var(--font-noto-sans-thai);
-  --font-jetbrains-mono: var(--font-inter-latin), var(--font-noto-sans-thai);
-}
+/* The site-wide base, under app/(v2)/v2.css, which carries the design: tokens, type and
+   every component (DESIGN.md). Since the last v1 page left on 2026-10-29 this file only
+   resets, sets the ground, and keeps what applies to every page. The v1 tokens, theme
+   switch and utility classes it used to hold are in git history before that date. */
 
 @theme inline {
-  /* === TYPOGRAPHY === */
-  --font-display: var(--font-archivo-black);
-  --font-body:    var(--font-archivo);
-  --font-mono:    var(--font-jetbrains-mono);
-  --font-heading: var(--font-archivo-black);
-
-  /* === MOTION === */
-  /* The signature curve from lib/motion.ts (EASE.out), as the Tailwind token, so every
-     `ease-out` utility and every `var(--ease-out)` in an inline style is the same curve.
-     Tailwind's own --ease-out is a soft (0, 0, 0.2, 1); this replaces it. */
+  /* The signature curve as Tailwind's ease-out (YouTubeEmbed's play mark uses it). */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* This reset MUST stay inside @layer base. Tailwind v4 emits its utilities in
    @layer utilities, and unlayered CSS beats layered CSS in the cascade no matter
-   the specificity — so an unlayered `* { margin: 0; padding: 0 }` silently kills
-   every p-*, m-*, gap-* utility in the project. It did exactly that until
-   2026-08-29. Do not un-layer it. */
+   the specificity, so an unlayered `* { margin: 0; padding: 0 }` silently kills
+   every p-*, m-*, gap-* utility. It did exactly that until 2026-08-29. */
 @layer base {
   * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
-  /* The browser's own placeholder is the text colour at half strength: 3.4:1 on the
-     chat box, under the 4.5:1 every other text grey meets. text-muted is 5.6:1 on
-     surface-chat in Light and 5.3:1 in Dark. */
-  ::placeholder {
-    color: var(--color-text-muted);
-    opacity: 1;
-  }
 }
 
-/* The sticky header takes real space in flow, so a 100svh hero stacked under it
-   overflows the viewport by exactly this much and pushes its own bottom row
-   (name, disciplines, slideshow controls) below the fold. Anything sizing itself
-   to "the rest of the screen" subtracts this. */
-:root { --header-h: 58px; }
-@media (max-width: 1023px) { :root { --header-h: 72px; } }
-
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-archivo), system-ui, sans-serif;
-  font-size: 1.0625rem; /* 17px, the reading size (audit 2026-09-08 §4.1). Was a 16–18px clamp. */
-  line-height: 1.55;
+  background: #fbfbfb;
+  color: #111111;
+  font-family: var(--font-inter-latin), var(--font-noto-sans-thai), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
 ::selection {
-  background-color: var(--color-selection-bg);
-  color: var(--color-selection-text);
+  background-color: #111111;
+  color: #fbfbfb;
 }
 
-/* Scrollbar: thin, but a thumb a mouse can hold. Until 2026-10-04 it was 1px wide in
-   Chrome and Safari, a line nobody could grab. The thumb is a text grey so it reads
-   at 3:1 or better on the ground in both themes (WCAG 1.4.11). Chrome and Firefox take
-   the standard properties; Safari only reads the ::-webkit-scrollbar rules. */
+/* Scrollbar: thin, but a thumb a mouse can hold, in ink at 3:1 or better (WCAG 1.4.11).
+   Chrome and Firefox take the standard properties; Safari only the ::-webkit- rules. */
 html {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-grey-500) transparent;
+  scrollbar-color: rgb(17 17 17 / 0.64) transparent;
 }
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--color-grey-500); border: 2px solid var(--color-bg); }
+::-webkit-scrollbar-thumb { background: rgb(17 17 17 / 0.64); border: 2px solid #fbfbfb; }
 
-*:focus-visible {
-  outline: 1px solid var(--color-focus-ring);
-  outline-offset: 3px;
-}
-
-/* Layout shell. The same 32px edge as every page's px-8, so the footer and the home
-   page's About and Contact rows line up with the logo, the hero and the page titles.
-   Until 2026-10-04 it was a centred 1280px box with 24px gutters: an 8px step on
-   phones and a 48px step on wide screens. */
-.section-shell {
-  width: 100%;
-  padding-inline: 2rem;
-}
-
-/* Bauhaus architectural rule — 0.5px visual weight via opacity */
-.bauhaus-rule {
-  border-top: 1px solid var(--color-border);
-}
-
-.text-balance {
-  text-wrap: balance;
-}
-
-/* ── 12-COLUMN BAUHAUS GRID ──────────────────────────
-   All gutter values are multiples of 8px.
-   The 0.5px rules align to column edges exactly.
-   ─────────────────────────────────────────────────── */
-.grid-12 {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 0;               /* gaps expressed via padding, not grid-gap */
-  column-gap: 24px;     /* 3 × 8px */
-}
-
-/* Masonry grid for art gallery — natural aspect ratios, no cropping */
-.masonry {
-  columns: 1;
-  column-gap: 16px; /* B5: raised from 3px so gallery sets no longer merge */
-}
-@media (min-width: 640px)  { .masonry { columns: 2; } }
-@media (min-width: 1024px) { .masonry { columns: 3; } }
-
-.masonry-item {
-  break-inside: avoid;
-  display: block;
-  margin-bottom: 16px; /* B5: raised from 3px */
-}
-
-/* The chat input suppresses its own outline so the container border reads as the
-   field edge; the container therefore has to carry the focus state itself. */
-.chat-field:focus-within {
-  outline: 1px solid var(--color-focus-ring);
-  outline-offset: 2px;
-}
-
-/* Image tiles that open the lightbox. These are real <button>s so the work is
-   reachable from the keyboard; this strips the UA button chrome so they look
-   exactly like the plain image tiles they replaced. Focus stays visible via the
-   global *:focus-visible ring. */
-.gallery-tile {
-  appearance: none;
-  background: none;
-  border: 0;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  text-align: left;
-}
-
-/* Natural AR image — never crops */
-.img-natural {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Label — the system's label infrastructure. Set in Inter since 2026-10-28 (the class
-   keeps its old name). Inter's figures are proportional by default; labels carry
-   counters, years and indexes, so they take the tabular figures the mono face had. */
-.mono-label, .font-mono { font-variant-numeric: tabular-nums; }
-.mono-label {
-  font-family: var(--font-jetbrains-mono), sans-serif;
-  font-size: 11px;        /* B2: raised from 9px so labels are legible */
-  font-weight: 500;       /* B2: 500 per type scale */
-  letter-spacing: 0.18em; /* B2: eased from 0.25em at the larger size */
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  line-height: 1;
-}
-
-/* The theme switch (components/ThemeToggle.tsx): one dot, half ink and half paper,
-   in an ink ring. The ink half sits on the left in Light and turns to the right in
-   Dark, so the dot shows which side you are on without a word. Read from
-   <html data-theme> here, not from React state, so it is right from the first frame.
-   No accent: amber stays the active page's underline. */
-.theme-toggle {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  background: transparent;
-  cursor: pointer;
-}
-/* 44px to the finger, 14px to the eye. */
-.theme-toggle::after {
-  content: "";
-  position: absolute;
-  inset: -7px;
-}
-.theme-dot {
-  display: block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1.5px solid var(--color-text);
-  background: linear-gradient(90deg, var(--color-text) 50%, transparent 50%);
-  transition: transform 420ms var(--ease-out);
-}
-.theme-toggle:hover .theme-dot { transform: scale(1.18); }
-:root[data-theme="dark"] .theme-dot { transform: rotate(180deg); }
-:root[data-theme="dark"] .theme-toggle:hover .theme-dot { transform: rotate(180deg) scale(1.18); }
-
-/* The same rule for the small text links (the CK mark, the header and footer links,
-   "← Commercial", "Full Profile →"): 44px to the finger, the label's own size to the
-   eye. An invisible box at least 44 × 44, centred on the link; layout does not move.
-   Every link that carries it has at least 28px of clear space to its neighbours, so
-   two boxes never overlap. */
-.tap-target {
-  position: relative;
-}
-.tap-target::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: max(100%, 44px);
-  height: max(100%, 44px);
-  transform: translate(-50%, -50%);
-}
-
-/* The theme change itself (fadeToTheme in ThemeToggle.tsx). The colour tokens are
-   registered as colours so the browser can animate them; while <html> carries
-   .theme-fading, the tokens fade from one theme's values to the other's over 450ms,
-   slow in and slow out, and every element on the page follows them, because every
-   colour on the site is read through a token. One fade at the root drives the whole
-   page, so the ground, the text and the rules shift together, nothing ripples, and
-   photographs and videos are never touched. Each element's own transitions are off
-   for the length of the fade so none of them chases the moving tokens; the dot keeps
-   its own so it still turns. Long enough to adjust to, short enough not to wait on;
-   200ms under reduced motion (no travel, just a quicker fade).
-   (Tried and dropped on 2026-09-27: a view-transition cross-fade, which laid a frozen
-   picture of the old page over the live one and showed every video twice; and a
-   colour transition on every element, which Chrome kept restarting on some text.) */
-@property --color-bg { syntax: "<color>"; inherits: true; initial-value: #F0F0F0; }
-@property --color-surface { syntax: "<color>"; inherits: true; initial-value: #EAEAEA; }
-@property --color-surface-elevated { syntax: "<color>"; inherits: true; initial-value: #E4E4E4; }
-@property --color-surface-hover { syntax: "<color>"; inherits: true; initial-value: #DEDEDE; }
-@property --color-text { syntax: "<color>"; inherits: true; initial-value: #111111; }
-@property --color-text-muted { syntax: "<color>"; inherits: true; initial-value: #5F5A55; }
-@property --color-text-dim { syntax: "<color>"; inherits: true; initial-value: #A8A29B; }
-@property --color-text-inverse { syntax: "<color>"; inherits: true; initial-value: #F0F0F0; }
-@property --color-border-faint { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.07); }
-@property --color-border { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.09); }
-@property --color-border-strong { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.22); }
-@property --color-grey-100 { syntax: "<color>"; inherits: true; initial-value: #111111; }
-@property --color-grey-200 { syntax: "<color>"; inherits: true; initial-value: #1C1C1C; }
-@property --color-grey-300 { syntax: "<color>"; inherits: true; initial-value: #3D3A37; }
-@property --color-grey-400 { syntax: "<color>"; inherits: true; initial-value: #57524D; }
-@property --color-grey-500 { syntax: "<color>"; inherits: true; initial-value: #67625C; }
-@property --color-grey-600 { syntax: "<color>"; inherits: true; initial-value: #BDB8B1; }
-@property --color-grey-700 { syntax: "<color>"; inherits: true; initial-value: #D3D0CA; }
-@property --color-grey-800 { syntax: "<color>"; inherits: true; initial-value: #E2E0DC; }
-@property --color-grey-900 { syntax: "<color>"; inherits: true; initial-value: #EAEAEA; }
-@property --color-warm { syntax: "<color>"; inherits: true; initial-value: #111111; }
-@property --color-surface-chat { syntax: "<color>"; inherits: true; initial-value: #EAEAEA; }
-@property --color-surface-dark { syntax: "<color>"; inherits: true; initial-value: #E4E4E4; }
-@property --color-border-muted { syntax: "<color>"; inherits: true; initial-value: #D6D6D6; }
-@property --color-focus-ring { syntax: "<color>"; inherits: true; initial-value: rgba(17, 17, 17, 0.55); }
-@property --color-selection-bg { syntax: "<color>"; inherits: true; initial-value: #111111; }
-@property --color-selection-text { syntax: "<color>"; inherits: true; initial-value: #F0F0F0; }
-@property --color-accent { syntax: "<color>"; inherits: true; initial-value: oklch(54% 0.19 35); }
-@property --color-accent-dim { syntax: "<color>"; inherits: true; initial-value: oklch(54% 0.19 35 / 0.3); }
-
-html.theme-fading {
-  transition-property: --color-bg, --color-surface, --color-surface-elevated, --color-surface-hover, --color-text, --color-text-muted, --color-text-dim, --color-text-inverse, --color-border-faint, --color-border, --color-border-strong, --color-grey-100, --color-grey-200, --color-grey-300, --color-grey-400, --color-grey-500, --color-grey-600, --color-grey-700, --color-grey-800, --color-grey-900, --color-warm, --color-surface-chat, --color-surface-dark, --color-border-muted, --color-focus-ring, --color-selection-bg, --color-selection-text, --color-accent, --color-accent-dim !important;
-  transition-duration: 450ms !important;
-  transition-timing-function: cubic-bezier(0.45, 0, 0.55, 1) !important;
-  transition-delay: 0s !important;
-}
-html.theme-fading *:not(.theme-dot),
-html.theme-fading *::before,
-html.theme-fading *::after {
-  transition: none !important;
-}
-@media (prefers-reduced-motion: reduce) {
-  html.theme-fading { transition-duration: 200ms !important; }
-}
-
-/* Reading text. Three sizes carry every sentence on the site; everything smaller
-   is a label. Archivo 400 only: weight 300 is retired, it read as whispering under
-   the display heads. Prose is grey-200 so it has presence beside the mono labels;
-   grey 400/500 stay for data and captions. Named copy-* so they never collide
-   with Tailwind's text-* utilities. */
-.copy-lead {
-  font-family: var(--font-archivo), system-ui, sans-serif;
-  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
-  font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: 0;
-  color: var(--color-grey-200);
-}
-.copy-body {
-  font-family: var(--font-archivo), system-ui, sans-serif;
-  font-size: 1.0625rem;
-  font-weight: 400;
-  line-height: 1.55;
-  letter-spacing: 0;
-  color: var(--color-grey-200);
-}
-.copy-small {
-  font-family: var(--font-archivo), system-ui, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-  color: var(--color-grey-300);
-}
-
-/* Display weight, set once. Archivo Black ships a single cut, and next/font declares
-   it at 400. Every display head asks for 800 on purpose: with no heavier face to
-   match, the browser synthesizes bold on top of Black, and that dense faux-bold is
-   the site's heading voice (2026-09-08). The rule covers every h1/h2 and every
-   `.font-heading` element, so an Archivo Black span or link cannot fall back to the
-   lighter native cut; heads styled inline set fontWeight: 800 for the same reason. */
-h1, h2, .font-heading { font-weight: 800; }
-
-/* No widows (2026-10-04): a reading line never ends on one word, and a head breaks
-   into even lines. Both are progressive: browsers without them wrap as before. */
-.copy-lead, .copy-body, .copy-small { text-wrap: pretty; }
+/* No widows in heads; progressive, browsers without it wrap as before. */
 h1, h2 { text-wrap: balance; }
 
-/* Reduced motion is a request for less movement, not for no feedback. Killing
-   every duration to 0.01ms removes hover, focus and state changes users still
-   need — and an infinite animation clamped to 0.01ms flashes rather than stops.
-   So: drop travel and looping, keep short colour/opacity transitions. */
+/* Reduced motion is a request for less movement, not for no feedback. Killing every
+   duration to 0.01ms removes hover, focus and state changes users still need, and an
+   infinite animation clamped to 0.01ms flashes rather than stops. So: drop travel and
+   looping, keep short colour and opacity transitions. */
 @media (prefers-reduced-motion: reduce) {
-  /* Looping and decorative animation stops outright. */
   *, *::before, *::after {
     animation-iteration-count: 1 !important;
-  }
-
-  /* Movement stops; colour and opacity feedback survives at a short duration. */
-  *, *::before, *::after {
     transition-duration: 120ms !important;
     transition-property: color, background-color, border-color, opacity, outline-color !important;
     animation-duration: 1ms !important;

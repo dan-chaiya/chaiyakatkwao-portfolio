@@ -4,7 +4,7 @@ import { coverOf, hero, works } from "@/data/works";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Chaiya Katkwao — Photography, Art, Production, Systems",
+  title: "Chaiya Katkwao · Photography, Art, Production, Systems",
   description: "Archive of photography, art, production and systems work by Chaiya Katkwao, Bangkok.",
   path: "/",
   absoluteTitle: true,

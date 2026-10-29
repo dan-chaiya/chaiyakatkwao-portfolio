@@ -142,7 +142,9 @@ function Diagram() {
     </g>
   );
   return (
-    <figure className="v2-sys__figure">
+    // On phones the diagram scrolls sideways inside the figure, so the figure takes focus
+    // (arrow keys scroll it) and says what it is (axe scrollable-region-focusable).
+    <figure className="v2-sys__figure" tabIndex={0} aria-label="Diagram: how the app is put together; scrolls sideways on small screens">
       <svg className="v2-dg" viewBox="-1 -1 1282 422" role="img" aria-labelledby="dg-title dg-desc">
         <title id="dg-title">How the app is put together</title>
         <desc id="dg-desc">A staff device opens the web app by URL. The app writes rows to a Google Sheet and reads that sheet back for history and statistics. The sheet feeds a report centre, which sends a monthly PDF or CSV to management.</desc>

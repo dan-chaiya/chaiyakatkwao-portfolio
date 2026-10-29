@@ -96,13 +96,13 @@ export default function IndexView({ works }: { works: Work[] }) {
         {hoverCover && <Picture frame={hoverCover} alt="" sizes="220px" />}
       </div>
 
-      <nav className="v2-filter" aria-label="Filter by discipline">
+      <div role="group" className="v2-filter" aria-label="Filter by discipline">
         {(["All", ...DISCIPLINES] as Filter[]).map((d) => (
           <button key={d} type="button" aria-pressed={filter === d} onClick={() => setFilter(d)}>
             {d}
           </button>
         ))}
-      </nav>
+      </div>
     </main>
   );
 }

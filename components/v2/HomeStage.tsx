@@ -5,6 +5,7 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Picture from "@/components/v2/Picture";
+import SmoothScroll from "@/components/v2/SmoothScroll";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 import { DISCIPLINES, type ImageFrame } from "@/data/works";
 
@@ -70,6 +71,9 @@ export default function HomeStage({ hero, column }: { hero: ImageFrame; column: 
 
   return (
     <main id="main-content">
+      {/* Lenis and GSAP only here, where the scroll drives the stage; every other page
+          scrolls natively and doesn't load them (audit 2026-10-29). */}
+      <SmoothScroll />
       <section className="v2-hero" aria-label="Chaiya Katkwao">
         <div className="v2-hero__frame">
           <Picture frame={hero} alt="Self-portrait: a mirrored figure between the red gates of a temple" sizes="100vw" priority className="v2-hero__img" />
