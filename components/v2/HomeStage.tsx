@@ -77,7 +77,11 @@ export default function HomeStage({ hero, column }: { hero: ImageFrame; column: 
       <section className="v2-hero" aria-label="Chaiya Katkwao">
         <div className="v2-hero__frame">
           <Picture frame={hero} alt="Self-portrait: a mirrored figure between the red gates of a temple" sizes="100vw" priority className="v2-hero__img" />
-          <h1 className="v2-hero__name">Chaiya Katkwao&nbsp;©</h1>
+          <div className="v2-hero__title">
+            <h1 className="v2-hero__name">Chaiya Katkwao&nbsp;©</h1>
+            {/* The first screen says what he does; before, only the name was on it. */}
+            <p className="v2-hero__role">Photographer, artist and producer, Bangkok</p>
+          </div>
         </div>
         {/* On paper, under the photo: on it, "Art" and "Production" fell to 3.6:1 (audit 2026-10-29). */}
         <p className="v2-hero__disc">
@@ -95,7 +99,7 @@ export default function HomeStage({ hero, column }: { hero: ImageFrame; column: 
           <div ref={columnRef} className="v2-stage__column">
             {column.map((item) => (
               <Link key={item.slug} href={`/work/${item.slug}`} className="v2-stage__item">
-                <Picture frame={item.frame} alt={item.title} sizes="140px" />
+                <Picture frame={item.frame} alt={item.title} sizes="(max-width: 767px) 42vw, 20vw" />
                 <span className="v2-mono">{item.no}</span>
               </Link>
             ))}

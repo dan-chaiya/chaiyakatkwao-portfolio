@@ -34,6 +34,14 @@ export default function IndexView({ works }: { works: Work[] }) {
     <main id="main-content" className="v2-index">
       <div className="v2-index__table" onPointerMove={move} onPointerLeave={() => setHover(null)}>
         <h1 className="v2-visually-hidden">Index</h1>
+        {/* Above the table, in its column: as a fixed bar it sat over the Year column and the field. */}
+        <div role="group" className="v2-filter" aria-label="Filter by discipline">
+          {(["All", ...DISCIPLINES] as Filter[]).map((d) => (
+            <button key={d} type="button" aria-pressed={filter === d} onClick={() => setFilter(d)}>
+              {d}
+            </button>
+          ))}
+        </div>
         <table>
           <thead>
             <tr>
@@ -94,14 +102,6 @@ export default function IndexView({ works }: { works: Work[] }) {
 
       <div ref={previewRef} className={`v2-index__preview${hoverCover ? " is-on" : ""}`} aria-hidden="true">
         {hoverCover && <Picture frame={hoverCover} alt="" sizes="220px" />}
-      </div>
-
-      <div role="group" className="v2-filter" aria-label="Filter by discipline">
-        {(["All", ...DISCIPLINES] as Filter[]).map((d) => (
-          <button key={d} type="button" aria-pressed={filter === d} onClick={() => setFilter(d)}>
-            {d}
-          </button>
-        ))}
       </div>
     </main>
   );

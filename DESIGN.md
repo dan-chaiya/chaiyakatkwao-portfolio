@@ -111,7 +111,7 @@ The system rejects colour in the interface (gradients, accents, tints), template
 The palette is correct rather than decorative: two values and the alphas between them.
 
 ### Neutral
-- **Paper** (`#FBFBFB`, `--paper`): every page ground, the Home bio pill, the Index filter bar and the viewer's Info panel. Also the `body` ground behind v2 pages.
+- **Paper** (`#FBFBFB`, `--paper`): every page ground, the Home bio pill and the viewer's Info panel. Also the `body` ground behind v2 pages.
 - **Ink** (`#111111`, `--ink`): all primary text, rules under /systems case titles, diagram strokes, and the inverted Index row on hover or focus.
 - **Ink, soft** (`rgb(17 17 17 / 0.64)`, `--ink-soft`, composites to `#656565`, 5.6:1 on paper): table text in the Index, credit labels, section heads, captions, the inactive filter buttons.
 - **Rule** (`rgb(17 17 17 / 0.16)`, `--rule`, about `#D6D6D6`): 1px table and list rules, the Info panel frame.
@@ -148,7 +148,7 @@ The palette is correct rather than decorative: two values and the alphas between
 
 ## 4. Elevation
 
-Flat. No shadows anywhere. Layers are told apart by ground alone: the Home bio pill, the Index filter bar and the viewer's Info panel sit on paper over whatever passes under them, and the Info panel adds a 1px `--rule` frame because it is the only element that opens over a photograph.
+Flat. No shadows anywhere. Layers are told apart by ground alone: the Home bio pill and the viewer's Info panel sit on paper over whatever passes under them, and the Info panel adds a 1px `--rule` frame because it is the only element that opens over a photograph.
 
 ### Named Rules
 **The Paper-Patch Rule.** When chrome has to sit over moving work, give it a paper ground, not a blur, a shadow or a scrim.
@@ -167,15 +167,15 @@ Small, typed, unboxed. Every interactive element is a real `<a>` or `<button>` w
 - Focus: 1px ink outline at 3px offset everywhere except the header (see The Blend Rule).
 
 ### Home
-- **Hero:** one photograph, `object-fit: cover`, filling 100svh less one paper line, the name (14px Inter 500, in paper) centred on it. The four disciplines sit on that paper line in ink, spread edge to edge. The name is the only text that sits on a photograph anywhere: 6.0:1 against the median of the photo behind it at 1440 and 5.3:1 at 390, dipping to 4.5:1 and 4.1:1 over its brightest tenth (2026-10-29). Recheck if the hero photo changes. The disciplines moved off the photo on 2026-10-29, where "Art" and "Production" measured 3.6:1.
-- **Stage:** the fitted name, held by `position: sticky` for the length of the run (`--run`, set from the column height), while the column of one cover per work (140px wide, 96px on phones, its number under each) rises through the centre on a GSAP scrub. Transform only. The bio pill ("Photographer, artist and producer. Bangkok, Thailand.") sits on paper at the bottom. Under reduced motion the column is a plain list under the name.
+- **Hero:** one photograph, `object-fit: cover`, filling 100svh less one paper line, the name (14px Inter 500, in paper) centred on it, with the plain line "Photographer, artist and producer, Bangkok" (14px Inter 400) under it, so the first screen says what he does (added 2026-10-29; before, only the name did). The four disciplines sit on that paper line in ink, spread edge to edge. The name and that line are the only text on a photograph anywhere. The line measured 5.5:1 against the median of the photo behind it at 1440 and 5.6:1 at 390, 4.3:1 and 3.7:1 over its brightest tenth, level with the name on a phone. The name: 6.0:1 against the median of the photo behind it at 1440 and 5.3:1 at 390, dipping to 4.5:1 and 4.1:1 over its brightest tenth (2026-10-29). Recheck if the hero photo changes. The disciplines moved off the photo on 2026-10-29, where "Art" and "Production" measured 3.6:1.
+- **Stage:** the fitted name, held by `position: sticky` for the length of the run (`--run`, set from the column height), while the column of one cover per work (20vw wide with 32px between, 42vw and 24px on phones, its number under each; widened from 140px/96px on 2026-10-29 so the work can be judged, which made the run about 12 screens instead of 8) rises through the centre on a GSAP scrub. Transform only. The bio pill ("Photographer, artist and producer. Bangkok, Thailand.") sits on paper at the bottom. Under reduced motion the column is a plain list under the name.
 
 ### Index
 - **Order, agency style:** client and professional work first, newest first; then personal work; art last. The list is `ORDER` in `data/works.ts`, and the numbers follow it, so 001 is always the first row. Home's column and the Information credits use the same order.
 - A real `<table>` (No., Title, Discipline, Year) in `--ink-soft`, rules in `--rule`, in a sticky left column (44%). A linked row inverts to ink on hover or focus, and the whole row is the link.
 - Right of it (56%), the image field: one cover per line at widths and offsets cycled from a fixed list, so it reads as placed, not gridded. Hidden on phones.
 - A 220px preview follows the pointer over linked rows (transform only, 120ms opacity).
-- The filter (All and the four disciplines) is a paper bar fixed at the bottom centre; the current one is ink and underlined (`aria-pressed`).
+- The filter (All and the four disciplines) sits above the table, in its column (moved there on 2026-10-29: as a paper bar fixed at the bottom centre it covered the Year column and the image field); the current one is ink and underlined (`aria-pressed`).
 
 ### Project viewer
 - One frame at a time, `object-fit: contain`, its height cycled from 54–80svh so frame sizes change step to step, and never taller than the stage (`--stage-h`).
@@ -218,7 +218,7 @@ Small, typed, unboxed. Every interactive element is a real `<a>` or `<button>` w
 
 ### Don't:
 - **Don't** add colour to the interface: no accent, no gradient, no tinted grey.
-- **Don't** print text over the work. The one exception is the name on the Home photograph, which must hold 4.5:1 against what is behind it.
+- **Don't** print text over the work. The one exception is the name and the line under it on the Home photograph, which must hold 4.5:1 against the median of what is behind them.
 - **Don't** add radius, shadows, blur or cards.
 - **Don't** use a fourth family, or set a sentence in Archivo or Plex.
 - **Don't** set figures as a big number over a small label (the hero-metric template). Figures are a ruled list at reading size.

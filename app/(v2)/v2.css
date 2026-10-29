@@ -61,10 +61,12 @@
 .v2-hero__frame { position: relative; min-height: 0; overflow: hidden; background: var(--ink); }
 .v2-hero__frame picture { display: block; height: 100%; }
 .v2-hero__img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.v2-hero__name {
-  position: absolute; inset: 0; display: grid; place-items: center; margin: 0;
-  color: var(--paper); font-size: 14px; font-weight: 500;
+.v2-hero__title {
+  position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 4px;
+  color: var(--paper); font-size: 14px; text-align: center;
 }
+.v2-hero__name { margin: 0; font-size: inherit; font-weight: 500; }
+.v2-hero__role { margin: 0; }
 .v2-hero__disc {
   margin: 0; padding: 14px var(--gutter);
   display: flex; justify-content: space-between; font-weight: 500;
@@ -79,8 +81,8 @@
   line-height: 0.82; letter-spacing: -0.01em;
 }
 .v2-stage__column {
-  position: absolute; left: 50%; top: 0; z-index: 2; width: 140px; margin-left: -70px;
-  display: flex; flex-direction: column; gap: 16px; will-change: transform;
+  position: absolute; left: 50%; top: 0; z-index: 2; width: 20vw; margin-left: -10vw;
+  display: flex; flex-direction: column; gap: 32px; will-change: transform;
 }
 .v2-stage__item { display: block; }
 .v2-stage__item img { width: 100%; height: auto; display: block; }
@@ -127,10 +129,7 @@
 .v2-index__preview.is-on { opacity: 1; }
 .v2-index__preview img { width: 100%; height: auto; display: block; }
 
-.v2-filter {
-  position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 20;
-  display: flex; gap: 14px; background: var(--paper); padding: 6px 12px;
-}
+.v2-filter { display: flex; gap: 14px; margin: 0 0 20px; padding-left: 6px; }
 .v2-filter button { color: var(--ink-soft); }
 .v2-filter button[aria-pressed="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 
@@ -359,13 +358,13 @@
   .v2-header__right { grid-column: 2; grid-row: 1; }
   .v2-hero__disc { font-size: 12px; }
 
-  .v2-stage__column { width: 96px; margin-left: -48px; }
+  .v2-stage__column { width: 42vw; margin-left: -21vw; gap: 24px; }
   .v2-stage__bio { white-space: normal; width: max-content; max-width: calc(100% - 32px); }
 
   .v2-index { display: block; }
   .v2-index__table { position: static; height: auto; overflow: visible; padding-top: 84px; }
   .v2-index__disc, .v2-index__field, .v2-index__preview { display: none; }
-  .v2-filter { width: max-content; max-width: calc(100% - 16px); gap: 10px; font-size: 12px; overflow-x: auto; }
+  .v2-filter { gap: 10px; font-size: 12px; overflow-x: auto; }
 
   .v2-viewer { --stage-top: 76px; --stage-bottom: 200px; } /* under the two-row header */
   .v2-viewer__hit { display: none; } /* swipe instead */
