@@ -1,10 +1,10 @@
 ---
 name: Chaiya Katkwao Archive
 description: An artist's archive in paper and ink, where the photographs carry all the colour.
-# v2, since 2026-10-29. Source of truth: app/(v2)/v2.css (tokens on .v2). The v1 system
-# (Paper/Ink themes, Archivo Black, Cue Light) now governs only /chat; its spec is
-# legacy/DESIGN-v1.md. Grey is ink at reduced alpha, never a third colour: the hex values
-# below are what the alphas composite to on paper.
+# v2, since 2026-10-29, on every page. Source of truth: app/(v2)/v2.css (tokens on .v2);
+# app/globals.css only resets and sets the ground. The v1 system (Paper/Ink themes,
+# Archivo Black, Cue Light) is retired; its spec is in git history. Grey is ink at reduced
+# alpha, never a third colour: the hex values below are what the alphas composite to.
 colors:
   paper: "#FBFBFB"
   ink: "#111111"
@@ -135,7 +135,7 @@ The palette is correct rather than decorative: two values and the alphas between
 ### Hierarchy
 - **Name** (Archivo 850, wdth 62, uppercase, 0.82 line-height): Home stage only, fitted to the stage width in JS (`HomeStage`, measured at 100px and scaled; refitted on resize and when fonts load).
 - **Display** (Archivo 850, wdth 62, uppercase, `clamp(44px, 8vw, 120px)`, 0.9): /systems case titles.
-- **Statement** (Inter 400, `clamp(22px, 2.4vw, 34px)`, 1.15, max 22ch): the opening sentence of Information, /systems and the 404 (`.v2-info__bio`).
+- **Statement** (Inter 400, `clamp(22px, 2.4vw, 34px)`, 1.15, max 22ch): the opening sentence of Information, /systems, the chat and the 404 (`.v2-info__bio`).
 - **Lede** (Inter 400, `clamp(18px, 1.8vw, 24px)`, 1.25, max 34ch): the line under each /systems title.
 - **Reading** (Inter 400, 14px, 1.5, max 62ch): work statements in the Info panel and /systems body copy (/systems runs it at 13px).
 - **Body** (Inter 400, 13px, 1.4): the whole interface: header, Index, credits, lists, captions. Weight 500 for the header and the viewer title.
@@ -189,7 +189,10 @@ Small, typed, unboxed. Every interactive element is a real `<a>` or `<button>` w
 
 ### CV
 - The same content as before, set in v2: the name in the Display step over the role (Lede step) and an underlined "Print / Save PDF", the contact lines right-aligned, then a 1px ink rule. Summary at reading size, then two columns: Experience (company in 500, role, period in Plex, bullets with an inline `•` so each stays with its job in a parsed PDF) and a side column of ruled lists for Education, Exhibitions, Skills, Brands and Languages.
-- Prints on one A4 sheet (`@page` in the page, print rules in v2.css): document sizes in pt, no header, no print control, ink on white. Check the page count after any copy change.
+- Prints on one A4 sheet (`@page` in the page, print rules in v2.css) at about 10pt for body text, 28pt for the name, no header, no print control, ink on white. Chrome lays a printed page out at its own width (about 700px), so the tablet and phone rules are `@media screen` only, or the printed CV would take the phone layout. After any copy change run `node scripts/check-cv-print.mjs` against a running build: one page, with about 10mm to spare (Safari sets the same text a little longer).
+
+### Chat
+- `/chat`: an AI assistant answering in Chaiya's voice, and saying so. Left, a 280px column: the statement "An AI assistant that answers in Chaiya's voice.", the note that answers can be wrong with the email for briefs, and "Start over". Right, the transcript as ruled entries ("You" / "Assistant" in `--ink-soft`, the text at reading size with its line breaks), the suggestions as underlined questions, and the field: 16px Inter (iOS zooms anything smaller) in a 1px `--ink-soft` frame (3:1 for a control's edge; `--rule` is not enough), "Send" as an underlined word. One screen high (`100dvh`, so the field stays above a phone's keyboard). Errors keep the question: "Try again" or the email.
 
 ### Systems
 - Per case: "Case n / 3" in Plex, the Display title, the lede, its figures as a ruled list at reading size (number in Plex, words in Inter, like the credits on Information), then Role, Problem, What I built, Constraints and Outcome in two columns, an ink-line diagram (1.5px strokes, SVG with `<title>` and `<desc>`) and before/after tables with a `<caption>`. Cases are separated by a 1px ink rule.
@@ -207,7 +210,8 @@ Small, typed, unboxed. Every interactive element is a real `<a>` or `<button>` w
 - **Do** give every photo its size and aspect ratio before it loads; CLS is 0.000 on every route and should stay there.
 - **Do** hold things with `position: sticky` and move them with transforms. A GSAP `pin` counted as a layout shift on every visit (CLS 0.63–1.0 until 2026-10-29).
 - **Do** give anything that moves for more than five seconds a stop control, and start nothing that loops under reduced motion.
-- **Do** branch on `usePrefersReducedMotion()`, never framer-motion's `useReducedMotion()`, which breaks hydration.
+- **Do** branch on `usePrefersReducedMotion()` (hydration-safe) for anything that moves.
+- **Do** keep Lenis and GSAP on Home only, where the scroll drives the stage; every other page scrolls natively.
 - **Do** cap any frame at the stage (`--stage-h`) as well as at its own svh height.
 - **Do** keep reading lines at 62ch or less.
 

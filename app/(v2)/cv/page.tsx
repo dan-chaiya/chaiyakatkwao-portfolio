@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/v2/Header";
 import PrintButton from "@/components/v2/PrintButton";
 import { pageMetadata } from "@/lib/seo";
+import { EXHIBITIONS } from "@/data/exhibitions";
 import { liveStudio as L } from "@/data/live-studio";
 
 // The CV in the v2 system (2026-10-29): the shared header, the name in the condensed
@@ -37,7 +38,7 @@ const experience = [
       "Produces TikTok live commerce for 10 brands, including Nestlé, Colgate, Guess, Fitflop and Dutchmil Delivery, with several rooms live at once",
       "Designs the lighting and camera setup for each brand brief, so the crew can rebuild it for the next session without him",
       "Wrote the studio's standard camera and stream settings, the shutdown checklist and an equipment guide for each room",
-      `Built Live Studio OS with the CEO: a Google Apps Script web app the team opens every day for equipment checks, fault logs and the monthly report; 20+ releases. Migrated the 501-item register into it; ${L.gear} items tracked today, including ${L.cameras} cameras, ${L.switchers} switchers, ${L.lights} LED lights and ${L.pcs} PCs`,
+      `Built Live Studio OS: a Google Apps Script web app the team opens every day for equipment checks, fault logs and the monthly report; 20+ releases. Migrated the 501-item register into it; ${L.gear} items tracked today, including ${L.cameras} cameras, ${L.switchers} switchers, ${L.lights} LED lights and ${L.pcs} PCs`,
       `Logged ${L.faultsLogged} equipment faults in ${L.faultWindow} and resolved all ${L.faultsResolved}`,
     ],
   },
@@ -63,11 +64,6 @@ const experience = [
       "Assistant photographer on Khun Chang Khian, a documentary portrait series in Chiang Mai (2023–2024)",
     ],
   },
-];
-
-const exhibitions = [
-  { title: "Woven Memories, Red Dog Gallery, Chiang\u00a0Mai", year: "2025" },
-  { title: "Fuiyoh, CMU Art Centre, Chiang\u00a0Mai", year: "2021" },
 ];
 
 // Grouped the way a live-production job ad is written, so the tools it searches for
@@ -96,7 +92,7 @@ export default function CVPage() {
   return (
     <>
       {/* One A4 sheet when printed; scoped to this page by living in it. */}
-      <style>{`@page { size: A4 portrait; margin: 11mm 13mm; }`}</style>
+      <style>{`@page { size: A4 portrait; margin: 10mm 13mm; }`}</style>
       <Header />
       <main id="main-content" className="v2-cv">
         <header className="v2-cv__head">
@@ -158,10 +154,12 @@ export default function CVPage() {
             <section aria-labelledby="cv-exhibitions">
               <h2 id="cv-exhibitions">Exhibitions</h2>
               <ul className="v2-info__list">
-                {exhibitions.map((ex) => (
+                {EXHIBITIONS.map((ex) => (
                   <li key={ex.title}>
                     <span className="v2-mono">{ex.year}</span>
-                    <span>{ex.title}</span>
+                    <span>
+                      <span lang={ex.lang}>{ex.title}</span>, {ex.place}
+                    </span>
                   </li>
                 ))}
               </ul>

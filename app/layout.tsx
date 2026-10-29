@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Archivo_Black, IBM_Plex_Mono, Inter, Noto_Sans_Thai } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, Inter, Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
 import {
   absoluteUrl,
@@ -13,15 +13,11 @@ import {
   SITE_URL,
   TITLE_TEMPLATE,
 } from "@/lib/seo";
-import { THEME_INIT_SCRIPT } from "@/lib/theme";
 
-// The two Latin faces load under *-latin names. globals.css rebuilds --font-archivo,
-// --font-archivo-black and --font-jetbrains-mono from them with Noto Sans Thai behind
-// each, so every existing var(--font-*) reference sets Thai without knowing about it.
-// Since 2026-10-28 Inter sets all body text and every small label (CK's call: easier
-// to read than Archivo and JetBrains Mono at small sizes); Archivo Black keeps the
-// legacy headlines. v2 (2026-10-29, font set A) adds Archivo with the width axis for
-// the condensed name, and IBM Plex Mono for its metadata.
+// The faces load under *-latin names; app/(v2)/v2.css builds its three stacks from them
+// (--ui, --display, --mono) with Noto Sans Thai behind the Latin ones. Archivo with the
+// width axis sets the condensed name and case titles, Inter everything read, IBM Plex
+// Mono the numbers (v2, 2026-10-29, font set A). Archivo Black left with the last v1 page.
 const archivo = Archivo({
   variable: "--font-archivo-latin",
   subsets: ["latin"],
@@ -43,19 +39,9 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-// Archivo Black serves only the legacy /chat page since v2, so it doesn't
-// preload: on v2 pages it would compete with the fonts the page uses.
-const archivoBlack = Archivo_Black({
-  variable: "--font-archivo-black-latin",
-  subsets: ["latin"],
-  weight: ["400"],
-  display: "swap",
-  preload: false,
-});
-
-// Thai companion to Archivo, not a third voice (DESIGN.md §3). Variable, so a Thai
-// headline gets a real 800 beside the synthesized Archivo Black. preload: false because
-// the site is English today: the Thai file downloads only when a Thai character renders.
+// Thai companion to the Latin faces, not another voice. preload: false because the site
+// is mostly English: the Thai file downloads only when a Thai character renders (the
+// exhibition กิ่ง ก้าน ใบ, for one).
 const notoSansThai = Noto_Sans_Thai({
   variable: "--font-noto-sans-thai",
   subsets: ["thai"],
@@ -125,20 +111,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     ],
   };
 
-  // suppressHydrationWarning: the theme script below writes data-theme onto <html>
-  // before React hydrates, so the server's <html> and the browser's differ by exactly
-  // that attribute. It covers <html>'s own attributes only, not the tree inside.
+  // One theme since v2 (paper and ink), so no theme script: a Dark saved by a v1 visit
+  // in localStorage no longer reaches the page.
   return (
-    <html
-      lang="en"
-      className={`${archivo.variable} ${inter.variable} ${archivoBlack.variable} ${plexMono.variable} ${notoSansThai.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${archivo.variable} ${inter.variable} ${plexMono.variable} ${notoSansThai.variable}`}>
       <head>
-        {/* A plain inline script, not next/script: beforeInteractive would queue it
-            behind Next's runtime, after the first paint, and a saved Dark would
-            flash Light on every load. */}
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLd(structuredData) }}

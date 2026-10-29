@@ -211,13 +211,33 @@ P2s 1–5 from the list above, at CK's go. Same build-and-measure method.
 
 Also, at CK's request: **Untitled (James Tattoo) is withdrawn.** It's removed from `works.json` (26 works, renumbered with no gap), its 2.4 MB of images are deleted, `/work/untitled-james-tattoo` redirects to `/works`, and `import-assets.mjs` withdraws curation 07 so a re-import keeps it out.
 
-Still open: the /systems diagram's scroll box on phones (`scrollable-region-focusable`), /chat (second design system, logo label mismatch), GSAP/Lenis on every page, the em dash in the Home title, the filter in a `<nav>`. The hero name over the photo measures 6.0:1 (1440) and 5.3:1 (390) against the median behind it, dipping to 4.5 and 4.1 over its brightest tenth.
+Still open after this pass: see the third pass below. The hero name over the photo measures 6.0:1 (1440) and 5.3:1 (390) against the median behind it, dipping to 4.5 and 4.1 over its brightest tenth.
 
 Older working files were removed in the same branch: v1 plans 001–010, the 4 Oct audit, the copy and animation audits, FRONTEND_SPEC.md, PORTFOLIO_UI_IMPLEMENTATION.md, portfolio-qa.sh, the brainstorm state, the v1 design sidecar, unserved v1 pages, dead v1 components and data, and v1 media nothing serves or imports (about 285 MB). Everything is recoverable from git history.
 
 ## /cv moved into v2 (2026-10-29)
 
 At CK's request, so Information no longer hands visitors to the old site. `app/(legacy)/cv` became `app/(v2)/cv`: the v2 header, the name in the Display step, and the CV as ruled lists, with its words unchanged. It still prints on one A4 page (checked with Chromium's PDF output). axe: nothing beyond the known header false positive, at 390 and 1440. The old Footer, PageTransition and PrintButton had no other users and are removed. Only /chat keeps the v1 look.
+
+## Third pass: every page on v2 (2026-10-29)
+
+At CK's request ("CV must fit in one A4 page and look readable. Ad The Top Agency is okay but not the CEO. Fix everything").
+
+| Item | Before | After |
+|---|---|---|
+| CV print | 9.2pt body; and in Chrome's real print layout (≈700px wide) the phone rules applied: one column, **2 pages** | 9.7–10pt body, 28pt name, two columns, **1 A4 page with 9 mm to spare**; tablet/phone rules are `@media screen` only; `scripts/check-cv-print.mjs` measures it |
+| "with the CEO" | on the CV and in the chat's prompt | removed from both; Ad The Top Agency stays |
+| Exhibitions | CV: Woven Memories 2025, Fuiyoh 2021; Information: ID 2025, กิ่ง ก้าน ใบ 2023, FUIYOH 2021 | one list, `data/exhibitions.ts` (the curation brief's), used by Information and the CV; the chat's prompt matches |
+| /chat | the last v1 page (old nav, Archivo Black, theme switch); nothing in v2 linked to it | v2 header and type, ruled transcript, replies keep line breaks; linked from Information. Focus now returns to the field after a reply (it didn't: the field was disabled while it streamed) |
+| v1 shell | Navigation, ThemeToggle, MotionProvider, lib/motion, lib/theme and its script, Archivo Black, framer-motion, a 448-line globals.css | removed; globals.css is a 60-line base. A visitor's saved v1 Dark no longer sets `color-scheme: dark` on v2 pages. Pixel diff against the pre-change build: identical on every page not meant to change |
+| /systems diagram on phones | scroll box not keyboard-reachable (axe, serious) | focusable, labelled |
+| Lenis + GSAP | on every page | Home only |
+| Home title | em dash | middle dot, like every other title |
+| Index filter | a `<nav>` | a labelled group |
+
+Checks on the production build: lint, typecheck, build; axe on 10 routes × 2 widths: **0 violations** (the header's blend false positive aside); CLS 0.000–0.001 everywhere; 0 of 153 viewer frames collide at six sizes; 18 chat checks against a stubbed API (stream, line breaks, 429 with wait time, retry without duplicating, 500, start over, focus, phone layout); phone layout width 390 on every route; CV one A4 page.
+
+Not changed, needs CK: the Index order (agencies first in PRODUCT.md, but the Index opens on three art series).
 
 ## Recommended order
 

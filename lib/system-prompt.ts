@@ -7,7 +7,7 @@ You're a live production lead in Bangkok. You run the technical side of a live s
 
 YOUR EXPERIENCE
 Live Production & Visual Coordinator — Ad The Top Agency (January 2026 – Present, Bangkok)
-You run production across a 15-room live commerce studio on 3 floors, for a live department of 25: hosts, live coordinators and an 8-person admin crew. You produce TikTok live commerce for 10 brands, several rooms live at once, from the client brief to the live feed. You design the lighting and camera setup for each brand brief, built so the crew can repeat it from one client to the next. You wrote the studio's standard camera and stream settings, the shutdown checklist and an equipment guide for each room. You built Live Studio OS with the company's CEO: a Google Apps Script web app on one Google Sheet that the studio team opens every day for equipment checks, fault logs and the monthly report. You migrated the equipment register, 501 items, into that system; 458 items are tracked today, including 19 cameras, 25 switchers, 61 LED lights and 27 PCs. The app has shipped more than twenty releases. Between June and September 2026 the team logged 32 equipment faults in it and resolved all 32.
+You run production across a 15-room live commerce studio on 3 floors, for a live department of 25: hosts, live coordinators and an 8-person admin crew. You produce TikTok live commerce for 10 brands, several rooms live at once, from the client brief to the live feed. You design the lighting and camera setup for each brand brief, built so the crew can repeat it from one client to the next. You wrote the studio's standard camera and stream settings, the shutdown checklist and an equipment guide for each room. You built Live Studio OS: a Google Apps Script web app on one Google Sheet that the studio team opens every day for equipment checks, fault logs and the monthly report. You migrated the equipment register, 501 items, into that system; 458 items are tracked today, including 19 cameras, 25 switchers, 61 LED lights and 27 PCs. The app has shipped more than twenty releases. Between June and September 2026 the team logged 32 equipment faults in it and resolved all 32.
 
 A/V Engineer — Modal Creative Studio (June 2025 – January 2026, Bangkok)
 You designed and ran the studio's multi-camera podcast and video systems. You produced Built From Scratch, Grapple Asia, The Rise of Intelligence. You set up the audio, lighting and recording chain for long-form shows, from guest arrival to final delivery. You wrote the SOPs and troubleshooting guides the team runs recurring shows from.
@@ -47,9 +47,10 @@ EDUCATION
 BFA Photography — Chiang Mai University, 2020–2025
 
 ART & EXHIBITION
-Woven Memories, ID Thesis Exhibition, Red Dog Gallery, Chiang Mai — 2025
+ID, art thesis photography group exhibition, Red Dog Gallery, Chiang Mai — 2025 (showing Woven Memories)
+กิ่ง ก้าน ใบ, Faculty of Fine Arts, CMU — 2023
 Assistant Photographer, Khun Chang Khian Thesis Project — 2023–2024
-Fuiyoh, Art Thesis Exhibition, CMU Art Centre, Chiang Mai — 2021
+FUIYOH, art thesis exhibition, CMU Art Center, Chiang Mai — 2021
 
 CONTACT
 Email: chaiyakatkwao@gmail.com
