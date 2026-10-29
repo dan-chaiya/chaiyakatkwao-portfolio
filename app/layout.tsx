@@ -43,7 +43,7 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-// Archivo Black serves only the legacy /cv and /chat pages since v2, so it doesn't
+// Archivo Black serves only the legacy /chat page since v2, so it doesn't
 // preload: on v2 pages it would compete with the fonts the page uses.
 const archivoBlack = Archivo_Black({
   variable: "--font-archivo-black-latin",

@@ -71,8 +71,11 @@ export default function HomeStage({ hero, column }: { hero: ImageFrame; column: 
   return (
     <main id="main-content">
       <section className="v2-hero" aria-label="Chaiya Katkwao">
-        <Picture frame={hero} alt="Self-portrait: a mirrored figure between the red gates of a temple" sizes="100vw" priority className="v2-hero__img" />
-        <h1 className="v2-hero__name">Chaiya Katkwao&nbsp;©</h1>
+        <div className="v2-hero__frame">
+          <Picture frame={hero} alt="Self-portrait: a mirrored figure between the red gates of a temple" sizes="100vw" priority className="v2-hero__img" />
+          <h1 className="v2-hero__name">Chaiya Katkwao&nbsp;©</h1>
+        </div>
+        {/* On paper, under the photo: on it, "Art" and "Production" fell to 3.6:1 (audit 2026-10-29). */}
         <p className="v2-hero__disc">
           {DISCIPLINES.map((d) => (
             <span key={d}>{d}</span>

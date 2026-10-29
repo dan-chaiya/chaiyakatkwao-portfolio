@@ -196,6 +196,29 @@ axe on 20 runs after the fixes: no new violations; the remaining ones are the P2
 v2 from the code; the v1 spec moved to `legacy/DESIGN-v1.md`, since /cv and /chat still follow it. PRODUCT.md is
 rewritten from CK's answers (agencies first, art second; the v2 hero stays; quiet, exact, archival).
 
+## Fixed in the second pass (2026-10-29)
+
+P2s 1–5 from the list above, at CK's go. Same build-and-measure method.
+
+| Finding | Before | After | Change |
+|---|---|---|---|
+| Viewer thumbnails | 800px files for a 44px strip: Untitled 2.1 MB of images, Live commerce 1.07 MB | 208 KB and 138 KB; 168 thumbnails at about 3 KB each | `scripts/thumbs.mjs` (called by `import-assets.mjs`) writes `-thumb.webp`, 132px tall, for every image frame and video poster |
+| Viewer steps waited on the network | each step fetched a full-size frame | 14–64 ms to a loaded frame with every image request slowed by 400 ms | frames i±1 preloaded with React's `preload()`, same `srcset`/`sizes` as the `<picture>` (`srcSetOf` exported from `Picture.tsx`) |
+| Hero labels on the photo | "Art" and "Production" 3.6:1 | ink on a paper line under the photo | `HomeStage.tsx`, `v2.css`: the hero is the photo plus one paper row |
+| Alt text | "Woven memories, 3 of 12" | a description for each of the 142 frames | `data/frame-alt.json` (hand-kept, keyed by `src`): 50 carried from v1 by image fingerprint, 92 written by looking at each frame; read through `altOf()` in `data/works.ts` |
+| Hero-metric row on /systems | 56px numbers over grey labels | a ruled list at reading size, words unchanged | `systems/page.tsx`, `v2.css` |
+| Phone tap targets | header links 16px tall, CV 18×16, Info 23×18 | 32px-tall hit boxes, at least 44px wide (filter: word plus most of the gap); none overlap | `v2.css`: `::after` hit boxes; header phone rows and contact lines 14px apart |
+
+Also, at CK's request: **Untitled (James Tattoo) is withdrawn.** It's removed from `works.json` (26 works, renumbered with no gap), its 2.4 MB of images are deleted, `/work/untitled-james-tattoo` redirects to `/works`, and `import-assets.mjs` withdraws curation 07 so a re-import keeps it out.
+
+Still open: the /systems diagram's scroll box on phones (`scrollable-region-focusable`), /chat (second design system, logo label mismatch), GSAP/Lenis on every page, the em dash in the Home title, the filter in a `<nav>`. The hero name over the photo measures 6.0:1 (1440) and 5.3:1 (390) against the median behind it, dipping to 4.5 and 4.1 over its brightest tenth.
+
+Older working files were removed in the same branch: v1 plans 001–010, the 4 Oct audit, the copy and animation audits, FRONTEND_SPEC.md, PORTFOLIO_UI_IMPLEMENTATION.md, portfolio-qa.sh, the brainstorm state, the v1 design sidecar, unserved v1 pages, dead v1 components and data, and v1 media nothing serves or imports (about 285 MB). Everything is recoverable from git history.
+
+## /cv moved into v2 (2026-10-29)
+
+At CK's request, so Information no longer hands visitors to the old site. `app/(legacy)/cv` became `app/(v2)/cv`: the v2 header, the name in the Display step, and the CV as ruled lists, with its words unchanged. It still prints on one A4 page (checked with Chromium's PDF output). axe: nothing beyond the known header false positive, at 390 and 1440. The old Footer, PageTransition and PrintButton had no other users and are removed. Only /chat keeps the v1 look.
+
 ## Recommended order
 
 1. **[P1, process] `teach` then `document`**: rewrite PRODUCT.md and DESIGN.md for v2 so every later command aims at v2.

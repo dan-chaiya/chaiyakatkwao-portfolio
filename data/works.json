@@ -321,67 +321,6 @@
     },
     {
       "no": "007",
-      "slug": "untitled-james-tattoo",
-      "title": "Untitled (James Tattoo)",
-      "discipline": "Photography",
-      "year": "2020",
-      "credit": "",
-      "exhibited": "",
-      "statement": "This project delves into the soul of work, capturing the rhythm of human endeavor through intimate portraits and atmospheric moments. Each image reveals a deeper narrative, where the essence of individuals is intertwined with the spaces they inhabit, offering a poetic reflection on the beauty of labor and the quiet connection between people and their craft.",
-      "maxEdge": 2400,
-      "frames": [
-        {
-          "type": "image",
-          "src": "/v2/untitled-james-tattoo/01",
-          "w": 2400,
-          "h": 1600
-        },
-        {
-          "type": "image",
-          "src": "/v2/untitled-james-tattoo/02",
-          "w": 2400,
-          "h": 1600
-        },
-        {
-          "type": "image",
-          "src": "/v2/untitled-james-tattoo/03",
-          "w": 2400,
-          "h": 1600
-        },
-        {
-          "type": "image",
-          "src": "/v2/untitled-james-tattoo/04",
-          "w": 2400,
-          "h": 1600
-        },
-        {
-          "type": "image",
-          "src": "/v2/untitled-james-tattoo/05",
-          "w": 2400,
-          "h": 1600
-        },
-        {
-          "type": "image",
-          "src": "/v2/untitled-james-tattoo/06",
-          "w": 2400,
-          "h": 1600
-        },
-        {
-          "type": "image",
-          "src": "/v2/untitled-james-tattoo/07",
-          "w": 2400,
-          "h": 1600
-        },
-        {
-          "type": "image",
-          "src": "/v2/untitled-james-tattoo/08",
-          "w": 2400,
-          "h": 1600
-        }
-      ]
-    },
-    {
-      "no": "008",
       "slug": "beauty-or-nature",
       "title": "Beauty or Nature",
       "discipline": "Photography",
@@ -418,7 +357,7 @@
       ]
     },
     {
-      "no": "009",
+      "no": "008",
       "slug": "vacation-time",
       "title": "Vacation time",
       "discipline": "Photography",
@@ -455,7 +394,7 @@
       ]
     },
     {
-      "no": "010",
+      "no": "009",
       "slug": "yeeeeee",
       "title": "YEEEEEE",
       "discipline": "Photography",
@@ -498,7 +437,7 @@
       ]
     },
     {
-      "no": "011",
+      "no": "010",
       "slug": "work-life-balance",
       "title": "Work-life balance",
       "discipline": "Photography",
@@ -535,7 +474,7 @@
       ]
     },
     {
-      "no": "012",
+      "no": "011",
       "slug": "commission-2022",
       "title": "Commission (textile set)",
       "discipline": "Photography",
@@ -578,7 +517,7 @@
       ]
     },
     {
-      "no": "013",
+      "no": "012",
       "slug": "portraits",
       "title": "Portraits",
       "discipline": "Photography",
@@ -633,7 +572,7 @@
       ]
     },
     {
-      "no": "014",
+      "no": "013",
       "slug": "cmdw-2024",
       "title": "CMDW 2024",
       "discipline": "Photography",
@@ -712,7 +651,7 @@
       ]
     },
     {
-      "no": "015",
+      "no": "014",
       "slug": "commission-2024-silk",
       "title": "Commission (silk set)",
       "discipline": "Photography",
@@ -779,7 +718,7 @@
       ]
     },
     {
-      "no": "016",
+      "no": "015",
       "slug": "sculpture",
       "title": "Sculpture",
       "discipline": "Photography",
@@ -798,7 +737,7 @@
       ]
     },
     {
-      "no": "017",
+      "no": "016",
       "slug": "self",
       "title": "Self",
       "discipline": "Art",
@@ -835,7 +774,7 @@
       ]
     },
     {
-      "no": "018",
+      "no": "017",
       "slug": "podcast-studio",
       "title": "Podcast studio",
       "discipline": "Production",
@@ -891,7 +830,7 @@
       ]
     },
     {
-      "no": "019",
+      "no": "018",
       "slug": "the101-writers",
       "title": "10/10 Influential Writers of CMU",
       "discipline": "Photography",
@@ -928,7 +867,7 @@
       ]
     },
     {
-      "no": "020",
+      "no": "019",
       "slug": "live-commerce",
       "title": "Live commerce studio",
       "discipline": "Production",
@@ -1115,7 +1054,7 @@
       ]
     },
     {
-      "no": "021",
+      "no": "020",
       "slug": "knack-factory",
       "title": "Knack Factory",
       "discipline": "Photography",
@@ -1170,7 +1109,7 @@
       ]
     },
     {
-      "no": "022",
+      "no": "021",
       "slug": "bakao",
       "title": "BAKAO",
       "discipline": "Photography",
@@ -1219,7 +1158,7 @@
       ]
     },
     {
-      "no": "023",
+      "no": "022",
       "slug": "untitled",
       "title": "Untitled",
       "discipline": "Art",
@@ -1340,7 +1279,7 @@
       ]
     },
     {
-      "no": "024",
+      "no": "023",
       "slug": "live-studio-os",
       "title": "Live Studio OS",
       "discipline": "Systems",
@@ -1353,7 +1292,7 @@
       "href": "/systems#live-studio-os"
     },
     {
-      "no": "025",
+      "no": "024",
       "slug": "keepsake",
       "title": "Keepsake",
       "discipline": "Systems",
@@ -1366,7 +1305,7 @@
       "href": "/systems#keepsake"
     },
     {
-      "no": "026",
+      "no": "025",
       "slug": "equipment-loan-system",
       "title": "Equipment inventory and loan system",
       "discipline": "Systems",
@@ -1379,7 +1318,7 @@
       "href": "/systems#equipment-register"
     },
     {
-      "no": "027",
+      "no": "026",
       "slug": "podcast-studio-build",
       "title": "Podcast studio build",
       "discipline": "Production",

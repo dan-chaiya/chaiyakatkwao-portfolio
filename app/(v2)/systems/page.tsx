@@ -193,14 +193,16 @@ export default function SystemsPage() {
             </h2>
             <p className="v2-sys__lede">{c.lede}</p>
 
-            <dl className="v2-sys__stats">
+            {/* A ruled list at reading size, like the credits on Information. Not big numbers
+                over small labels: that is the hero-metric template (audit 2026-10-29). */}
+            <ul className="v2-info__list v2-sys__facts">
               {c.stats.map(([num, label]) => (
-                <div key={label}>
-                  <dt className="v2-mono">{num}</dt>
-                  <dd>{label}</dd>
-                </div>
+                <li key={label}>
+                  <span className="v2-mono">{num}</span>
+                  <span>{label}</span>
+                </li>
               ))}
-            </dl>
+            </ul>
 
             <div className="v2-sys__body">
               {c.sections.map(([head, paras]) => (

@@ -10,13 +10,17 @@ type Props = {
   style?: React.CSSProperties;
 };
 
+/** The srcset Picture uses for one format; also what a preload must name to hit the same file. */
+export function srcSetOf(frame: ImageFrame, fmt: "avif" | "webp") {
+  const thumbW = Math.round((frame.w * 800) / Math.max(frame.w, frame.h));
+  return thumbW < frame.w ? `${frame.src}-800.${fmt} ${thumbW}w, ${frame.src}.${fmt} ${frame.w}w` : `${frame.src}.${fmt} ${frame.w}w`;
+}
+
 // A plain <picture> over the AVIF + WebP pairs scripts/import-assets.mjs writes, at
 // two widths each. Not next/image: the files are already sized and encoded, so a
 // second optimisation pass would only add work and Vercel image quota.
 export default function Picture({ frame, alt, sizes, priority = false, className, style }: Props) {
-  const thumbW = Math.round((frame.w * 800) / Math.max(frame.w, frame.h));
-  const srcSet = (fmt: string) =>
-    thumbW < frame.w ? `${frame.src}-800.${fmt} ${thumbW}w, ${frame.src}.${fmt} ${frame.w}w` : `${frame.src}.${fmt} ${frame.w}w`;
+  const srcSet = (fmt: "avif" | "webp") => srcSetOf(frame, fmt);
 
   return (
     <picture>

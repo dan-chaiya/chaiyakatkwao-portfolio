@@ -2,7 +2,7 @@
 name: Chaiya Katkwao Archive
 description: An artist's archive in paper and ink, where the photographs carry all the colour.
 # v2, since 2026-10-29. Source of truth: app/(v2)/v2.css (tokens on .v2). The v1 system
-# (Paper/Ink themes, Archivo Black, Cue Light) now governs only /cv and /chat; its spec is
+# (Paper/Ink themes, Archivo Black, Cue Light) now governs only /chat; its spec is
 # legacy/DESIGN-v1.md. Grey is ink at reduced alpha, never a third colour: the hex values
 # below are what the alphas composite to on paper.
 colors:
@@ -163,10 +163,11 @@ Small, typed, unboxed. Every interactive element is a real `<a>` or `<button>` w
 
 ### Links and focus
 - Links inherit ink, no underline at rest, underline at 3px offset on hover. Contact links on Information and the toggles stay underlined at rest because they are the only actions there.
+- **Hit boxes:** header links, contact links, the Info and Play toggles and the Index filter carry an invisible `::after` box, 32px tall and at least 44px wide (the filter's is its word plus the gap), centred on the label, which keeps its size. Rows of them sit 32px apart or more so boxes never overlap: the header's two phone rows are 14px apart, the contact list's lines 14px.
 - Focus: 1px ink outline at 3px offset everywhere except the header (see The Blend Rule).
 
 ### Home
-- **Hero:** one photograph, `object-fit: cover`, 100svh, the name (14px Inter 500) centred and the four disciplines spread along the bottom in paper. This is the only place text sits on a photograph, and it must hold 4.5:1 there: "Art" and "Production" currently measure 3.6:1 (audit 2026-10-29, open).
+- **Hero:** one photograph, `object-fit: cover`, filling 100svh less one paper line, the name (14px Inter 500, in paper) centred on it. The four disciplines sit on that paper line in ink, spread edge to edge. The name is the only text that sits on a photograph anywhere: 6.0:1 against the median of the photo behind it at 1440 and 5.3:1 at 390, dipping to 4.5:1 and 4.1:1 over its brightest tenth (2026-10-29). Recheck if the hero photo changes. The disciplines moved off the photo on 2026-10-29, where "Art" and "Production" measured 3.6:1.
 - **Stage:** the fitted name, held by `position: sticky` for the length of the run (`--run`, set from the column height), while the column of one cover per work (140px wide, 96px on phones, its number under each) rises through the centre on a GSAP scrub. Transform only. The bio pill ("Photographer, artist and producer. Bangkok, Thailand.") sits on paper at the bottom. Under reduced motion the column is a plain list under the name.
 
 ### Index
@@ -178,7 +179,7 @@ Small, typed, unboxed. Every interactive element is a real `<a>` or `<button>` w
 ### Project viewer
 - One frame at a time, `object-fit: contain`, its height cycled from 54–80svh so frame sizes change step to step, and never taller than the stage (`--stage-h`).
 - **Credits lane:** at 1100px and up the credits (number, title, Role, Exhibited, Year, Info) keep a 280px lane at the left and the stage starts after it; below 1100 they sit under the stage. They never print over the work.
-- **Navigation:** invisible half-stage buttons (w-resize / e-resize cursors) on desktop, swipe on phones, arrow keys, one frame per wheel gesture, and a thumbnail strip at the bottom (32% opacity, full when current or hovered).
+- **Navigation:** invisible half-stage buttons (w-resize / e-resize cursors) on desktop, swipe on phones, arrow keys, one frame per wheel gesture, and a thumbnail strip at the bottom (32% opacity, full when current or hovered). The strip loads `-thumb.webp` files, 132px tall and about 3 KB each, written by `scripts/thumbs.mjs`; the frames either side of the current one are preloaded with the same `srcset` and `sizes`, so a step shows at once.
 - **Video:** muted loops start only without reduced motion, and always carry a Play/Pause text button under the frame (WCAG 2.2.2).
 - **Info:** the work statement in a paper panel with a 1px `--rule` frame, bottom right, toggled by an underlined "Info"/"Close" button (`aria-expanded`).
 - Frames fade in over 260ms with `animation-fill-mode: backwards`, never `both`: a lasting fill keeps the frame a stacking context and traps video and YouTube under the hit areas.
@@ -186,11 +187,16 @@ Small, typed, unboxed. Every interactive element is a real `<a>` or `<button>` w
 ### Information
 - Statement, then Credits, Exhibitions and Contact as ruled two-column lists (year in Plex, 6.5em; entry in Inter). The portrait sits sticky in the right column at 0.8fr; on phones it comes first.
 
+### CV
+- The same content as before, set in v2: the name in the Display step over the role (Lede step) and an underlined "Print / Save PDF", the contact lines right-aligned, then a 1px ink rule. Summary at reading size, then two columns: Experience (company in 500, role, period in Plex, bullets with an inline `•` so each stays with its job in a parsed PDF) and a side column of ruled lists for Education, Exhibitions, Skills, Brands and Languages.
+- Prints on one A4 sheet (`@page` in the page, print rules in v2.css): document sizes in pt, no header, no print control, ink on white. Check the page count after any copy change.
+
 ### Systems
-- Per case: "Case n / 3" in Plex, the Display title, the lede, four figures, then Role, Problem, What I built, Constraints and Outcome in two columns, an ink-line diagram (1.5px strokes, SVG with `<title>` and `<desc>`) and before/after tables with a `<caption>`. Cases are separated by a 1px ink rule.
+- Per case: "Case n / 3" in Plex, the Display title, the lede, its figures as a ruled list at reading size (number in Plex, words in Inter, like the credits on Information), then Role, Problem, What I built, Constraints and Outcome in two columns, an ink-line diagram (1.5px strokes, SVG with `<title>` and `<desc>`) and before/after tables with a `<caption>`. Cases are separated by a 1px ink rule.
 
 ### Photos
 - `components/v2/Picture.tsx`: a plain `<picture>` over AVIF and WebP at two widths (800 and full), written by `scripts/import-assets.mjs`. Not `next/image`: the files are already sized. Every picture declares `width`, `height` and an explicit `aspect-ratio`, so nothing moves when it loads; only the first frame or the hero loads eager with `fetchpriority="high"`.
+- **Alt text** says what is in the frame, like a museum caption: no SEO words, no photographer's name. Viewer frames take theirs from `data/frame-alt.json` (hand-kept, keyed by the frame's `src`, so a re-import doesn't wipe it); Home and the Index field use the work's title or nothing, because there the image is a link to the work. A new frame gets its description when it is added.
 
 ## 6. Do's and Don'ts
 
@@ -207,10 +213,10 @@ Small, typed, unboxed. Every interactive element is a real `<a>` or `<button>` w
 
 ### Don't:
 - **Don't** add colour to the interface: no accent, no gradient, no tinted grey.
-- **Don't** print text over the work outside the Home hero, and never below 4.5:1 there.
+- **Don't** print text over the work. The one exception is the name on the Home photograph, which must hold 4.5:1 against what is behind it.
 - **Don't** add radius, shadows, blur or cards.
 - **Don't** use a fourth family, or set a sentence in Archivo or Plex.
-- **Don't** set figures as a big number over a small label (the hero-metric template). The /systems figures still do this (audit 2026-10-29, open).
+- **Don't** set figures as a big number over a small label (the hero-metric template). Figures are a ruled list at reading size.
 - **Don't** use `animation-fill-mode: both` (or `forwards`) on anything that holds clickable layers.
 - **Don't** use bounce or elastic easing; scrubbed motion is linear to the scroll, fades are linear and under 300ms.
 - **Don't** use em dashes in copy.

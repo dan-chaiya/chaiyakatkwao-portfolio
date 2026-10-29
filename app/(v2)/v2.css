@@ -29,6 +29,16 @@ body:has(.v2)::after { display: none; }
 .v2 :focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
 .v2 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 
+/* Small links and toggles get an invisible hit box: 32px tall, at least 44px wide, centred
+   on the label, which keeps its size. They were 16–18px tall on phones (audit 2026-10-29).
+   Rows of them sit 32px apart or more, so neighbouring boxes don't overlap. */
+.v2-header a, .v2-info__contact a, .v2-cv__contact a, .v2-cv__print, .v2-viewer__toggle, .v2-viewer__play, .v2-filter button { position: relative; }
+.v2-header a::after, .v2-info__contact a::after, .v2-cv__contact a::after, .v2-cv__print::after, .v2-viewer__toggle::after, .v2-viewer__play::after, .v2-filter button::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: 32px; transform: translate(-50%, -50%);
+}
+/* The filter words sit 10–14px apart: their boxes take the word plus most of the gap, so they never overlap. */
+.v2-filter button::after { width: calc(100% + 8px); }
+
 .v2-mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }
 .v2-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .v2-skip { position: absolute; left: var(--gutter); top: -40px; z-index: 50; background: var(--ink); color: var(--paper); padding: 6px 10px; }
@@ -50,15 +60,18 @@ body:has(.v2)::after { display: none; }
 
 /* ------------------------------------------------------------ home */
 
-.v2-hero { position: relative; height: 100svh; overflow: hidden; background: var(--ink); }
+/* The photo takes the screen less one paper line, where the disciplines sit in ink. */
+.v2-hero { height: 100svh; display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+.v2-hero__frame { position: relative; min-height: 0; overflow: hidden; background: var(--ink); }
+.v2-hero__frame picture { display: block; height: 100%; }
 .v2-hero__img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .v2-hero__name {
   position: absolute; inset: 0; display: grid; place-items: center; margin: 0;
   color: var(--paper); font-size: 14px; font-weight: 500;
 }
 .v2-hero__disc {
-  position: absolute; inset: auto var(--gutter) 20px; margin: 0;
-  display: flex; justify-content: space-between; color: var(--paper); font-weight: 500;
+  margin: 0; padding: 14px var(--gutter);
+  display: flex; justify-content: space-between; font-weight: 500;
 }
 
 /* The section is the scroll run (--run, set by HomeStage); the hold sticks for all of it. */
@@ -188,7 +201,7 @@ body:has(.v2)::after { display: none; }
 .v2-info__list { list-style: none; margin: 0; padding: 0; }
 .v2-info__list li { display: grid; grid-template-columns: 6.5em 1fr; gap: 12px; padding: 6px 0; border-top: 1px solid var(--rule); }
 .v2-info__list li:last-child { border-bottom: 1px solid var(--rule); }
-.v2-info__contact { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.v2-info__contact { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
 .v2-info__contact a { text-decoration: underline; text-underline-offset: 3px; }
 /* width: 100% — with align-self: start the figure shrank to the photo, which has no width
    until it loads, so on phones the text below jumped when it arrived (CLS 0.46). */
@@ -208,10 +221,7 @@ body:has(.v2)::after { display: none; }
   font-size: clamp(44px, 8vw, 120px); line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase; margin: 0 0 20px;
 }
 .v2-sys__lede { font-size: clamp(18px, 1.8vw, 24px); line-height: 1.25; max-width: 34ch; margin: 0 0 48px; }
-.v2-sys__stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 0 0 56px; }
-.v2-sys__stats div { border-top: 1px solid var(--rule); padding-top: 10px; }
-.v2-sys__stats dt { font-size: clamp(32px, 4vw, 56px); line-height: 1; margin-bottom: 8px; }
-.v2-sys__stats dd { margin: 0; color: var(--ink-soft); }
+.v2-sys__facts { max-width: 640px; margin: 0 0 56px; }
 .v2-sys__body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 48px; max-width: 1100px; }
 .v2-sys__body h3 { font-size: 13px; font-weight: 400; color: var(--ink-soft); margin: 0 0 6px; }
 .v2-sys__body p { margin: 0 0 10px; max-width: 62ch; line-height: 1.5; }
@@ -229,6 +239,67 @@ body:has(.v2)::after { display: none; }
 .v2-sys__table tbody th { width: 28%; }
 .v2-sys__table tr:last-child > * { border-bottom: 1px solid var(--rule); }
 
+/* ------------------------------------------------------------ cv */
+
+.v2-cv { padding: 96px var(--gutter); max-width: 1100px; }
+.v2-cv__head {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px 48px;
+  padding-bottom: 24px; margin-bottom: 40px; border-bottom: 1px solid var(--ink);
+}
+.v2-cv__name {
+  margin: 0; font-family: var(--display); font-weight: 850; font-variation-settings: "wdth" 62;
+  font-size: clamp(44px, 8vw, 120px); line-height: 0.9; letter-spacing: -0.01em; text-transform: uppercase;
+}
+.v2-cv__role { margin: 12px 0 0; font-size: clamp(18px, 1.8vw, 24px); line-height: 1.25; }
+.v2-cv__tools { margin: 16px 0 0; }
+.v2-cv__print { text-decoration: underline; text-underline-offset: 3px; }
+.v2-cv__contact { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; text-align: right; }
+.v2-cv section { margin-bottom: 40px; }
+.v2-cv h2 { font-size: 13px; font-weight: 400; color: var(--ink-soft); margin: 0 0 8px; }
+.v2-cv__summary, .v2-cv__text { margin: 0; max-width: 62ch; font-size: 14px; line-height: 1.5; }
+.v2-cv__cols { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 0 48px; }
+.v2-cv__job { padding: 10px 0 14px; border-top: 1px solid var(--rule); font-size: 14px; line-height: 1.5; }
+.v2-cv__job:last-child { border-bottom: 1px solid var(--rule); }
+.v2-cv__job p { margin: 0; }
+.v2-cv__org { font-weight: 500; }
+.v2-cv__meta { color: var(--ink-soft); }
+.v2-cv__points { list-style: none; margin: 8px 0 0; padding: 0; max-width: 62ch; }
+/* The marker is inline text, so each bullet stays with its job in a parsed PDF. */
+.v2-cv__points li { padding-left: 14px; text-indent: -14px; }
+.v2-cv__points li + li { margin-top: 4px; }
+.v2-cv__points li::before { content: "•"; display: inline-block; width: 14px; text-indent: 0; color: var(--ink-soft); }
+.v2-cv__langs li { grid-template-columns: 1fr; }
+.v2-cv__skills { margin: 0; }
+.v2-cv__skills div { padding: 6px 0; border-top: 1px solid var(--rule); }
+.v2-cv__skills div:last-child { border-bottom: 1px solid var(--rule); }
+.v2-cv__skills dt { color: var(--ink-soft); }
+.v2-cv__skills dd { margin: 0; }
+.v2-cv__foot { margin: 0; color: var(--ink-soft); }
+
+/* One A4 sheet: document sizes, no site chrome, ink on white. */
+@media print {
+  body:has(.v2-cv), .v2:has(.v2-cv) { background: #fff; min-height: 0; }
+  .v2:has(.v2-cv) .v2-header, .v2:has(.v2-cv) .v2-skip, .v2-cv__tools, .v2-cv__foot { display: none !important; }
+  .v2-cv { padding: 0; max-width: none; color: #111; }
+  .v2-cv__head { padding-bottom: 3mm; margin-bottom: 4mm; border-bottom-width: 1pt; gap: 4mm 8mm; }
+  .v2-cv__name { font-size: 30pt; }
+  .v2-cv__role { margin-top: 1.5mm; font-size: 11pt; }
+  .v2-cv__contact { gap: 0.6mm; font-size: 9pt; text-align: right; }
+  .v2-cv section { margin-bottom: 4mm; }
+  .v2-cv h2 { margin-bottom: 1.2mm; font-size: 8.5pt; color: #555; }
+  .v2-cv__summary, .v2-cv__text { max-width: none; font-size: 9.5pt; line-height: 1.4; }
+  .v2-cv__cols { grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); gap: 0 8mm; }
+  .v2-cv__job { padding: 1.6mm 0 2.2mm; font-size: 9.2pt; line-height: 1.38; break-inside: avoid; }
+  .v2-cv__meta { color: #555; }
+  .v2-cv__points { max-width: none; margin-top: 1mm; }
+  .v2-cv__points li { padding-left: 3.4mm; text-indent: -3.4mm; }
+  .v2-cv__points li::before { width: 3.4mm; }
+  .v2-cv__points li + li { margin-top: 0.5mm; }
+  .v2-cv .v2-info__list li { padding: 1mm 0; font-size: 9pt; }
+  .v2-cv__skills div { padding: 1mm 0; font-size: 9pt; line-height: 1.38; }
+  .v2-cv .v2-mono { font-size: 8.5pt; }
+}
+
 /* ------------------------------------------------------------ tablet */
 
 /* Below 1100 a credits lane would leave the work too narrow: the credits go under it. */
@@ -242,7 +313,7 @@ body:has(.v2)::after { display: none; }
 
 @media (max-width: 767px) {
   .v2 { --gutter: 16px; }
-  .v2-header { grid-template-columns: 1fr auto; row-gap: 2px; }
+  .v2-header { grid-template-columns: 1fr auto; row-gap: 14px; }
   .v2-header__nav { grid-column: 1; grid-row: 2; text-align: left; }
   .v2-header__right { grid-column: 2; grid-row: 1; }
   .v2-hero__disc { font-size: 12px; }
@@ -255,14 +326,13 @@ body:has(.v2)::after { display: none; }
   .v2-index__disc, .v2-index__field, .v2-index__preview { display: none; }
   .v2-filter { width: max-content; max-width: calc(100% - 16px); gap: 10px; font-size: 12px; overflow-x: auto; }
 
-  .v2-viewer { --stage-top: 64px; --stage-bottom: 200px; }
+  .v2-viewer { --stage-top: 76px; --stage-bottom: 200px; } /* under the two-row header */
   .v2-viewer__hit { display: none; } /* swipe instead */
   .v2-viewer__strip img { height: 36px; }
 
   .v2-sys { padding-top: 84px; }
   .v2-sys__intro { margin-bottom: 64px; }
   .v2-sys__case { margin-bottom: 80px; }
-  .v2-sys__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px; }
   .v2-sys__body { grid-template-columns: 1fr; gap: 24px; }
   /* The diagram keeps a readable size and scrolls inside its own box; the page doesn't. */
   .v2-sys__figure { overflow-x: auto; }
@@ -272,6 +342,11 @@ body:has(.v2)::after { display: none; }
   .v2-viewer__info { bottom: 76px; }
 
   .v2-info { display: flex; flex-direction: column-reverse; padding-top: 84px; gap: 32px; }
+
+  .v2-cv { padding-top: 84px; }
+  .v2-cv__head { align-items: flex-start; }
+  .v2-cv__contact { text-align: left; }
+  .v2-cv__cols { grid-template-columns: 1fr; }
   .v2-info__portrait { position: static; }
 }
 

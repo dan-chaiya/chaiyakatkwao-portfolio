@@ -202,8 +202,9 @@ const curation = parseCuration(await readFile(path.join(NEW, "_curation.md"), "u
 if (curation.length !== 19) throw new Error(`expected 19 works in _curation.md, parsed ${curation.length}`);
 
 const works = [];
-// Works Dan withdrew after seeing them on the site (curation number). 16 cream set: 29 Oct 2026.
-const WITHDRAWN = new Set(["16"]);
+// Works Dan withdrew after seeing them on the site (curation number). 16 cream set and
+// 07 Untitled (James Tattoo): 29 Oct 2026.
+const WITHDRAWN = new Set(["07", "16"]);
 
 for (const w of curation) {
   if (WITHDRAWN.has(w.no)) continue;
@@ -276,3 +277,6 @@ const imageCount = (w) => w.frames.filter((f) => f.type === "image").length;
 console.log(works.map((w) => `${w.no} ${w.slug.padEnd(24)} ${w.discipline.padEnd(11)} ${w.year.padEnd(9)} ${imageCount(w)} img ${w.frames.length - imageCount(w)} other`).join("\n"));
 console.log(`\n${shipped.length} files in public/v2, ${over.length} over 600 KB${over.length ? ": " + over.join(", ") : ""}`);
 if (over.length) process.exitCode = 1;
+
+// The viewer strip's thumbnails, from the -800 files just written.
+await import("./thumbs.mjs");
