@@ -2,7 +2,7 @@
 name: Chaiya Katkwao Archive
 description: An artist's archive in paper and ink, where the photographs carry all the colour.
 # v2, since 2026-10-29. Source of truth: app/(v2)/v2.css (tokens on .v2). The v1 system
-# (Paper/Ink themes, Archivo Black, Cue Light) now governs only /cv and /chat; its spec is
+# (Paper/Ink themes, Archivo Black, Cue Light) now governs only /chat; its spec is
 # legacy/DESIGN-v1.md. Grey is ink at reduced alpha, never a third colour: the hex values
 # below are what the alphas composite to on paper.
 colors:
@@ -186,6 +186,10 @@ Small, typed, unboxed. Every interactive element is a real `<a>` or `<button>` w
 
 ### Information
 - Statement, then Credits, Exhibitions and Contact as ruled two-column lists (year in Plex, 6.5em; entry in Inter). The portrait sits sticky in the right column at 0.8fr; on phones it comes first.
+
+### CV
+- The same content as before, set in v2: the name in the Display step over the role (Lede step) and an underlined "Print / Save PDF", the contact lines right-aligned, then a 1px ink rule. Summary at reading size, then two columns: Experience (company in 500, role, period in Plex, bullets with an inline `•` so each stays with its job in a parsed PDF) and a side column of ruled lists for Education, Exhibitions, Skills, Brands and Languages.
+- Prints on one A4 sheet (`@page` in the page, print rules in v2.css): document sizes in pt, no header, no print control, ink on white. Check the page count after any copy change.
 
 ### Systems
 - Per case: "Case n / 3" in Plex, the Display title, the lede, its figures as a ruled list at reading size (number in Plex, words in Inter, like the credits on Information), then Role, Problem, What I built, Constraints and Outcome in two columns, an ink-line diagram (1.5px strokes, SVG with `<title>` and `<desc>`) and before/after tables with a `<caption>`. Cases are separated by a 1px ink rule.

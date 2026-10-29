@@ -211,9 +211,13 @@ P2s 1–5 from the list above, at CK's go. Same build-and-measure method.
 
 Also, at CK's request: **Untitled (James Tattoo) is withdrawn.** It's removed from `works.json` (26 works, renumbered with no gap), its 2.4 MB of images are deleted, `/work/untitled-james-tattoo` redirects to `/works`, and `import-assets.mjs` withdraws curation 07 so a re-import keeps it out.
 
-Still open: the /systems diagram's scroll box on phones (`scrollable-region-focusable`), /cv and /chat (second design system, logo label mismatch), GSAP/Lenis on every page, the em dash in the Home title, the filter in a `<nav>`. The hero name over the photo measures 6.0:1 (1440) and 5.3:1 (390) against the median behind it, dipping to 4.5 and 4.1 over its brightest tenth.
+Still open: the /systems diagram's scroll box on phones (`scrollable-region-focusable`), /chat (second design system, logo label mismatch), GSAP/Lenis on every page, the em dash in the Home title, the filter in a `<nav>`. The hero name over the photo measures 6.0:1 (1440) and 5.3:1 (390) against the median behind it, dipping to 4.5 and 4.1 over its brightest tenth.
 
 Older working files were removed in the same branch: v1 plans 001–010, the 4 Oct audit, the copy and animation audits, FRONTEND_SPEC.md, PORTFOLIO_UI_IMPLEMENTATION.md, portfolio-qa.sh, the brainstorm state, the v1 design sidecar, unserved v1 pages, dead v1 components and data, and v1 media nothing serves or imports (about 285 MB). Everything is recoverable from git history.
+
+## /cv moved into v2 (2026-10-29)
+
+At CK's request, so Information no longer hands visitors to the old site. `app/(legacy)/cv` became `app/(v2)/cv`: the v2 header, the name in the Display step, and the CV as ruled lists, with its words unchanged. It still prints on one A4 page (checked with Chromium's PDF output). axe: nothing beyond the known header false positive, at 390 and 1440. The old Footer, PageTransition and PrintButton had no other users and are removed. Only /chat keeps the v1 look.
 
 ## Recommended order
 
