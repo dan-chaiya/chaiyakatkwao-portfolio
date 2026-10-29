@@ -3,6 +3,7 @@
 // picks in that script; re-run the script instead of editing the JSON by hand.
 
 import raw from "./works.json";
+import frameAlt from "./frame-alt.json";
 
 export const DISCIPLINES = ["Photography", "Art", "Production", "Systems"] as const;
 export type Discipline = (typeof DISCIPLINES)[number];
@@ -51,3 +52,7 @@ export const linkOf = (w: Work) => (hasPage(w) ? `/work/${w.slug}` : w.href);
 export const getWork = (slug: string) => works.find((w) => w.slug === slug);
 
 export const coverOf = (w: Work) => w.frames.find((f): f is ImageFrame => f.type === "image");
+
+/** What is in the frame, written like a museum caption. frame-alt.json is hand-kept (not
+ *  written by import-assets), keyed by the frame's src; re-key it if a frame moves. */
+export const altOf = (frame: ImageFrame): string | undefined => (frameAlt as Record<string, string>)[frame.src];

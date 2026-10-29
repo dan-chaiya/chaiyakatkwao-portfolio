@@ -16,6 +16,8 @@ const nextConfig = {
       { source: "/commercial", destination: "/works", permanent: true },
       // KOL Casting Lookbook was taken off the site on 2026-10-05; before the catch-all below.
       { source: "/commercial/kol-casting-lookbook", destination: "/works", permanent: true },
+      // Untitled (James Tattoo) was withdrawn on 2026-10-29; its v2 page existed for a day.
+      { source: "/work/untitled-james-tattoo", destination: "/works", permanent: true },
       { source: "/commercial/:slug", destination: "/work/:slug", permanent: true },
       { source: "/gallery", destination: "/works", permanent: true },
       { source: "/about", destination: "/information", permanent: true },
@@ -23,7 +25,7 @@ const nextConfig = {
   },
   // v2 (2026-10-29): /systems is a Next page again (app/(v2)/systems), written from
   // the redacted draft. The old static copy synced from ~/Projects/management-portfolio
-  // by its ./sync-to-parent.sh now sits in legacy/public/systems, unserved: it names the
+  // by its ./sync-to-parent.sh was removed from the repo on 2026-10-29: it names the
   // company, so don't run that sync into public/ again.
 };
 

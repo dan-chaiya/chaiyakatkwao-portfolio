@@ -1,29 +1,33 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { preload } from "react-dom";
 import Header from "@/components/v2/Header";
-import Picture from "@/components/v2/Picture";
+import Picture, { srcSetOf } from "@/components/v2/Picture";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
-import type { Frame, VideoFrame, Work } from "@/data/works";
+import { altOf, type Frame, type ImageFrame, type VideoFrame, type Work } from "@/data/works";
 
 const pad = (n: number) => String(n).padStart(3, "0");
 
 // Heights cycle so the frame size changes from one image to the next.
 const HEIGHTS = [74, 58, 68, 80, 54, 64];
 
+const sizesOf = (frame: ImageFrame, index: number) =>
+  `(max-width: 768px) 100vw, ${Math.round((HEIGHTS[index % HEIGHTS.length] * frame.w) / frame.h)}vh`;
+
 function FrameView({ frame, work, index }: { frame: Frame; work: Work; index: number }) {
   // Never taller than the stage (--stage-h, v2.css), or a tall frame runs into the
   // credits and the strip on tablets and short laptops.
   const maxH = `min(${HEIGHTS[index % HEIGHTS.length]}svh, var(--stage-h))`;
   const maxW = `min(88vw, ${work.maxEdge}px)`;
-  const label = `${work.title}, ${index + 1} of ${work.frames.length}`;
 
   if (frame.type === "image") {
     return (
       <Picture
         frame={frame}
-        alt={label}
-        sizes={`(max-width: 768px) 100vw, ${Math.round((HEIGHTS[index % HEIGHTS.length] * frame.w) / frame.h)}vh`}
+        // The counter in the header already says which frame this is; the alt says what is in it.
+        alt={altOf(frame) ?? `${work.title}, ${index + 1} of ${work.frames.length}`}
+        sizes={sizesOf(frame, index)}
         priority={index === 0}
         className="v2-viewer__media"
         style={{ maxHeight: maxH, maxWidth: maxW }}
@@ -87,9 +91,10 @@ function LoopingVideo({ frame, style }: { frame: VideoFrame; style: React.CSSPro
   );
 }
 
+// 132px-tall thumbnails from scripts/thumbs.mjs (about 3 KB each; the -800 files were ~110 KB).
 function thumbOf(frame: Frame) {
-  if (frame.type === "image") return `${frame.src}-800.webp`;
-  if (frame.type === "video") return frame.poster;
+  if (frame.type === "image") return `${frame.src}-thumb.webp`;
+  if (frame.type === "video") return frame.poster.replace(/\.jpg$/, "-thumb.webp");
   return `https://i.ytimg.com/vi/${frame.id}/default.jpg`;
 }
 
@@ -121,6 +126,18 @@ export default function Viewer({ work }: { work: Work }) {
       window.removeEventListener("wheel", onWheel);
     };
   }, [go]);
+
+  // Fetch the frames either side ahead, with the srcset and sizes the <picture> will use,
+  // so a step shows at once instead of waiting on the network. AVIF only: the <picture>
+  // serves AVIF wherever it decodes, and a browser that can't skips a preload typed
+  // image/avif instead of fetching it, so it only loses the head start.
+  useEffect(() => {
+    for (const n of [i + 1, i - 1]) {
+      const f = work.frames[n];
+      if (f?.type !== "image") continue;
+      preload(`${f.src}.avif`, { as: "image", type: "image/avif", imageSrcSet: srcSetOf(f, "avif"), imageSizes: sizesOf(f, n) });
+    }
+  }, [i, work]);
 
   const frame = work.frames[i];
 
