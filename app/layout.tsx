@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Inter, Noto_Sans_Thai } from "next/font/google";
+import { Archivo, Archivo_Black, IBM_Plex_Mono, Inter, Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
-import MotionProvider from "@/components/MotionProvider";
 import {
   absoluteUrl,
   DEFAULT_DESCRIPTION,
@@ -22,7 +20,15 @@ import { THEME_INIT_SCRIPT } from "@/lib/theme";
 // each, so every existing var(--font-*) reference sets Thai without knowing about it.
 // Since 2026-10-28 Inter sets all body text and every small label (CK's call: easier
 // to read than Archivo and JetBrains Mono at small sizes); Archivo Black keeps the
-// headlines.
+// legacy headlines. v2 (2026-10-29, font set A) adds Archivo with the width axis for
+// the condensed name, and IBM Plex Mono for its metadata.
+const archivo = Archivo({
+  variable: "--font-archivo-latin",
+  subsets: ["latin"],
+  axes: ["wdth"],
+  display: "swap",
+});
+
 const inter = Inter({
   variable: "--font-inter-latin",
   subsets: ["latin"],
@@ -30,11 +36,21 @@ const inter = Inter({
   display: "swap",
 });
 
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono-latin",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
+
+// Archivo Black serves only the legacy /cv and /chat pages since v2, so it doesn't
+// preload: on v2 pages it would compete with the fonts the page uses.
 const archivoBlack = Archivo_Black({
   variable: "--font-archivo-black-latin",
   subsets: ["latin"],
   weight: ["400"],
   display: "swap",
+  preload: false,
 });
 
 // Thai companion to Archivo, not a third voice (DESIGN.md §3). Variable, so a Thai
@@ -115,7 +131,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${archivoBlack.variable} ${notoSansThai.variable}`}
+      className={`${archivo.variable} ${inter.variable} ${archivoBlack.variable} ${plexMono.variable} ${notoSansThai.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -128,12 +144,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{ __html: jsonLd(structuredData) }}
         />
       </head>
-      <body>
-        <MotionProvider>
-          <Navigation />
-          {children}
-        </MotionProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

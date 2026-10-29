@@ -9,26 +9,22 @@ const nextConfig = {
   // Parent folder also has a package-lock.json; pin tracing to this app root.
   outputFileTracingRoot: path.join(__dirname),
   async redirects() {
+    // v2 (2026-10-29): the old pages fold into Index (/works — Next serves /index as the home page), project pages and Information.
+    // Case-study slugs carried over unchanged, so /commercial/:slug maps one to one.
     return [
-      { source: "/work", destination: "/commercial", permanent: true },
-      // KOL Casting Lookbook was taken off the site on 2026-10-05.
-      { source: "/commercial/kol-casting-lookbook", destination: "/commercial", permanent: true },
+      { source: "/work", destination: "/works", permanent: true },
+      { source: "/commercial", destination: "/works", permanent: true },
+      // KOL Casting Lookbook was taken off the site on 2026-10-05; before the catch-all below.
+      { source: "/commercial/kol-casting-lookbook", destination: "/works", permanent: true },
+      { source: "/commercial/:slug", destination: "/work/:slug", permanent: true },
+      { source: "/gallery", destination: "/works", permanent: true },
+      { source: "/about", destination: "/information", permanent: true },
     ];
   },
-  async rewrites() {
-    return [
-      // The management portfolio ("The Day Shift") is a static site that lives
-      // in its own repo at ~/Projects/management-portfolio and is copied into
-      // public/systems/ by that repo's ./sync-to-parent.sh. It is plain HTML,
-      // not a Next route, so it is served rather than rendered.
-      //
-      // Only /systems is mapped. A request for /systems/ is redirected to
-      // /systems first by Next's default trailingSlash: false, and lands here.
-      // The page's asset paths are absolute (/systems/styles.css, not
-      // styles.css) precisely so both URL forms resolve identically.
-      { source: "/systems", destination: "/systems/index.html" },
-    ];
-  },
+  // v2 (2026-10-29): /systems is a Next page again (app/(v2)/systems), written from
+  // the redacted draft. The old static copy synced from ~/Projects/management-portfolio
+  // by its ./sync-to-parent.sh now sits in legacy/public/systems, unserved: it names the
+  // company, so don't run that sync into public/ again.
 };
 
 export default nextConfig;

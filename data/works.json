@@ -1,0 +1,1394 @@
+{
+  "generatedAt": "2026-10-29T07:13:57.248Z",
+  "hero": {
+    "type": "image",
+    "src": "/v2/home/hero",
+    "w": 2400,
+    "h": 1921
+  },
+  "portrait": {
+    "type": "image",
+    "src": "/v2/information/portrait",
+    "w": 1920,
+    "h": 2400
+  },
+  "works": [
+    {
+      "no": "001",
+      "slug": "woven-memories",
+      "title": "Woven memories",
+      "discipline": "Art",
+      "year": "2024",
+      "credit": "Photographer / Artist",
+      "exhibited": "\"ID\" Art Thesis Photography Group Exhibition, Red Dog Gallery, Chiang Mai, 2025",
+      "statement": "Inspired by traces of diverse memories from my time growing up in a textile factory, this work explores the relationships between people and places. Through photography, I convey the richness of those memories, expressing personal experiences and emotions with immediacy and clarity.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/01",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/02",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/03",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/04",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/05",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/06",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/07",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/08",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/09",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/10",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/11",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/woven-memories/12",
+          "w": 2400,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "no": "002",
+      "slug": "nattachai",
+      "title": "Nattachai",
+      "discipline": "Art",
+      "year": "2021",
+      "credit": "",
+      "exhibited": "\"FUIYOH\" Art Thesis Photography Group Exhibition, CMU Art Center, Chiang Mai, 2021",
+      "statement": "This project unravels the intricate layers of my friend \"Earth,\" capturing fleeting moments that reflect the complexity of human existence. By weaving fashion photography into the narrative, each image becomes a striking exploration of identity, fusing style and substance to evoke a deep, multifaceted portrayal of individuality and the nuanced beauty of being human.",
+      "maxEdge": 1800,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/nattachai/01",
+          "w": 1200,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/nattachai/02",
+          "w": 1800,
+          "h": 1200
+        },
+        {
+          "type": "image",
+          "src": "/v2/nattachai/03",
+          "w": 1200,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/nattachai/04",
+          "w": 1200,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/nattachai/05",
+          "w": 1200,
+          "h": 1800
+        }
+      ]
+    },
+    {
+      "no": "003",
+      "slug": "nowhere",
+      "title": "Nowhere",
+      "discipline": "Art",
+      "year": "2023",
+      "credit": "",
+      "exhibited": "",
+      "statement": "This experimental project seeks to capture the lingering essence of abandoned spaces, once alive with the movements of people. Through a thoughtful exploration of these deserted places, the work reflects on the traces of life that remain in their absence.",
+      "maxEdge": 1800,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/nowhere/01",
+          "w": 1440,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/nowhere/02",
+          "w": 1440,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/nowhere/03",
+          "w": 1440,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/nowhere/04",
+          "w": 1440,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/nowhere/05",
+          "w": 1440,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/nowhere/06",
+          "w": 1440,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/nowhere/07",
+          "w": 1440,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/nowhere/08",
+          "w": 1440,
+          "h": 1800
+        }
+      ]
+    },
+    {
+      "no": "004",
+      "slug": "khun-chang-khian",
+      "title": "Khun Chang Khian",
+      "discipline": "Photography",
+      "year": "2023–2024",
+      "credit": "Assistant Photographer, thesis project \"Khun Chang Khian\"",
+      "exhibited": "",
+      "statement": "This project explores the modern life of mountain villagers, highlighting the interactions and influence of outsiders within their community. Through a contemporary lens, it captures the evolving dynamics between tradition and external participation, offering insight into the blending of cultures.",
+      "maxEdge": 1800,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/khun-chang-khian/01",
+          "w": 1350,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/khun-chang-khian/02",
+          "w": 1350,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/khun-chang-khian/03",
+          "w": 1350,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/khun-chang-khian/04",
+          "w": 1350,
+          "h": 1800
+        }
+      ]
+    },
+    {
+      "no": "005",
+      "slug": "afterparty",
+      "title": "Afterparty",
+      "discipline": "Photography",
+      "year": "2023",
+      "credit": "",
+      "exhibited": "",
+      "statement": "This project immerses itself in the chaotic pulse of nightlife, capturing the raw, unguarded moments of drunkenness in the club. Each frame freezes a fleeting expression of abandon, revealing the vulnerability and uninhibited energy that surface in the haze of the night.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/afterparty/01",
+          "w": 2400,
+          "h": 1605
+        },
+        {
+          "type": "image",
+          "src": "/v2/afterparty/02",
+          "w": 1605,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/afterparty/03",
+          "w": 1800,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "006",
+      "slug": "diarys-human-life",
+      "title": "Diary's human life",
+      "discipline": "Photography",
+      "year": "2023",
+      "credit": "",
+      "exhibited": "",
+      "statement": "This project captures the quiet beauty in the lives of ordinary people, focusing on the subtle, intimate moments that define their daily routines. It offers a reflection on the simple yet profound experiences that shape their existence.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/diarys-human-life/01",
+          "w": 2400,
+          "h": 1603
+        },
+        {
+          "type": "image",
+          "src": "/v2/diarys-human-life/02",
+          "w": 2400,
+          "h": 1603
+        },
+        {
+          "type": "image",
+          "src": "/v2/diarys-human-life/03",
+          "w": 2400,
+          "h": 1603
+        },
+        {
+          "type": "image",
+          "src": "/v2/diarys-human-life/04",
+          "w": 2400,
+          "h": 1603
+        },
+        {
+          "type": "image",
+          "src": "/v2/diarys-human-life/05",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/diarys-human-life/06",
+          "w": 2400,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "no": "007",
+      "slug": "untitled-james-tattoo",
+      "title": "Untitled (James Tattoo)",
+      "discipline": "Photography",
+      "year": "2020",
+      "credit": "",
+      "exhibited": "",
+      "statement": "This project delves into the soul of work, capturing the rhythm of human endeavor through intimate portraits and atmospheric moments. Each image reveals a deeper narrative, where the essence of individuals is intertwined with the spaces they inhabit, offering a poetic reflection on the beauty of labor and the quiet connection between people and their craft.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/untitled-james-tattoo/01",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled-james-tattoo/02",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled-james-tattoo/03",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled-james-tattoo/04",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled-james-tattoo/05",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled-james-tattoo/06",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled-james-tattoo/07",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled-james-tattoo/08",
+          "w": 2400,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "no": "008",
+      "slug": "beauty-or-nature",
+      "title": "Beauty or Nature",
+      "discipline": "Photography",
+      "year": "2023",
+      "credit": "",
+      "exhibited": "",
+      "statement": "Explores the delicate connection between natural elements and human beauty. By blending portrait and fashion photography, the series uses creative facial and body compositions to examine the influence of nature on physical aesthetics.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/beauty-or-nature/01",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/beauty-or-nature/02",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/beauty-or-nature/03",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/beauty-or-nature/04",
+          "w": 1600,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "009",
+      "slug": "vacation-time",
+      "title": "Vacation time",
+      "discipline": "Photography",
+      "year": "2023",
+      "credit": "",
+      "exhibited": "\"กิ่ง ก้าน ใบ\" Photographic Art Group Exhibition, Faculty of Fine Arts, CMU, 2023",
+      "statement": "Explores the concept of vacation through the lens of fashion and lifestyle photography — relaxed yet stylish moments of leisure, blending the carefree essence of travel with striking fashion elements.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/vacation-time/01",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/vacation-time/02",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/vacation-time/03",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/vacation-time/04",
+          "w": 1600,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "010",
+      "slug": "yeeeeee",
+      "title": "YEEEEEE",
+      "discipline": "Photography",
+      "year": "2023",
+      "credit": "",
+      "exhibited": "",
+      "statement": "Explores the lifestyle identity of a girl, merging documentary and street fashion photography. Through candid moments and stylized fashion, the series reveals the interplay between her personal style and everyday life.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/yeeeeee/01",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/yeeeeee/02",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/yeeeeee/03",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/yeeeeee/04",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/yeeeeee/05",
+          "w": 2400,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "no": "011",
+      "slug": "work-life-balance",
+      "title": "Work-life balance",
+      "discipline": "Photography",
+      "year": "2023",
+      "credit": "",
+      "exhibited": "",
+      "statement": "A fashion set that merges the contrasting worlds of office and party lifestyles, highlighting the balance between professional and social identities.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/work-life-balance/01",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/work-life-balance/02",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/work-life-balance/03",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/work-life-balance/04",
+          "w": 1920,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "012",
+      "slug": "commission-2022",
+      "title": "Commission (textile set)",
+      "discipline": "Photography",
+      "year": "2022",
+      "credit": "Fashion Photography Set, commissioned by a young Thai artist, Chiang Mai",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/commission-2022/01",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2022/02",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2022/03",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2022/04",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2022/05",
+          "w": 1600,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "013",
+      "slug": "portraits",
+      "title": "Portraits",
+      "discipline": "Photography",
+      "year": "2020–2024",
+      "credit": "",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/portraits/01",
+          "w": 2400,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/portraits/02",
+          "w": 2400,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/portraits/03",
+          "w": 2400,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/portraits/04",
+          "w": 2400,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/portraits/05",
+          "w": 2400,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/portraits/06",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/portraits/07",
+          "w": 2400,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "014",
+      "slug": "cmdw-2024",
+      "title": "CMDW 2024",
+      "discipline": "Photography",
+      "year": "2024",
+      "credit": "Fashion & Jewelry Photography, Chiang Mai Design Week 2024 by TCDC",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/cmdw-2024/01",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/cmdw-2024/02",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/cmdw-2024/03",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/cmdw-2024/04",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/cmdw-2024/05",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/cmdw-2024/06",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/cmdw-2024/07",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/cmdw-2024/08",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/cmdw-2024/09",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/cmdw-2024/10",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/cmdw-2024/11",
+          "w": 1920,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "015",
+      "slug": "commission-2024-silk",
+      "title": "Commission (silk set)",
+      "discipline": "Photography",
+      "year": "2024",
+      "credit": "Fashion Photography Set, commissioned",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/commission-2024-silk/01",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2024-silk/02",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2024-silk/03",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2024-silk/04",
+          "w": 2400,
+          "h": 1920
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2024-silk/05",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2024-silk/06",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2024-silk/07",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2024-silk/08",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/commission-2024-silk/09",
+          "w": 1920,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "016",
+      "slug": "sculpture",
+      "title": "Sculpture",
+      "discipline": "Photography",
+      "year": "2023",
+      "credit": "Sculpture Photography, commissioned by an American artist, Chiang Mai",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/sculpture/01",
+          "w": 1920,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "017",
+      "slug": "self",
+      "title": "Self",
+      "discipline": "Art",
+      "year": "2020–2024",
+      "credit": "",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/self/01",
+          "w": 2399,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/self/02",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/self/03",
+          "w": 2400,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/self/04",
+          "w": 1920,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "018",
+      "slug": "podcast-studio",
+      "title": "Podcast studio",
+      "discipline": "Production",
+      "year": "2025",
+      "credit": "Studio build and production, Modal Creative Studio, Bangkok",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/podcast-studio/01",
+          "w": 2400,
+          "h": 1347
+        },
+        {
+          "type": "image",
+          "src": "/v2/podcast-studio/02",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/podcast-studio/03",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "youtube",
+          "id": "XbYJ8nF8X8M",
+          "title": "The Art of Music and Business — Dr. Paye"
+        },
+        {
+          "type": "youtube",
+          "id": "jv4YtosznsQ",
+          "title": "Navigating Global Jiu-Jitsu — Kieran Kichuk"
+        },
+        {
+          "type": "youtube",
+          "id": "eL6XtPuvpJs",
+          "title": "ChatGPT: จาก AI Chatbot สู่ AI Platform ของโลก"
+        },
+        {
+          "type": "youtube",
+          "id": "Nv1eOGsYhGk",
+          "title": "Préparation du meilleur bodybuilder français — Yann Letranchant"
+        },
+        {
+          "type": "youtube",
+          "id": "swJAnw13zR4",
+          "title": "Banking in Thailand for Foreigners"
+        }
+      ]
+    },
+    {
+      "no": "019",
+      "slug": "the101-writers",
+      "title": "10/10 Influential Writers of CMU",
+      "discipline": "Photography",
+      "year": "2023",
+      "credit": "Commissioned Photographer, the101.World Magazine, 2023",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/the101-writers/01",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/the101-writers/02",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/the101-writers/03",
+          "w": 2400,
+          "h": 1594
+        },
+        {
+          "type": "image",
+          "src": "/v2/the101-writers/04",
+          "w": 2400,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "no": "020",
+      "slug": "live-commerce",
+      "title": "Live commerce studio",
+      "discipline": "Production",
+      "year": "2026",
+      "credit": "Live Production & Visual Coordinator, Bangkok",
+      "exhibited": "",
+      "statement": "Live commerce broadcasts for Nestlé, Guess, Fitflop, Sunnies, Rojukiss, Dutchie Milk and others.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "video",
+          "poster": "/videos/motion/live-fitflop-may.poster.jpg",
+          "sources": [
+            {
+              "src": "/videos/motion/live-fitflop-may.webm",
+              "type": "video/webm"
+            },
+            {
+              "src": "/videos/motion/live-fitflop-may.mp4",
+              "type": "video/mp4"
+            }
+          ],
+          "w": 608,
+          "h": 1080,
+          "alt": "Live commerce production — Fitflop"
+        },
+        {
+          "type": "video",
+          "poster": "/videos/motion/live-guess.poster.jpg",
+          "sources": [
+            {
+              "src": "/videos/motion/live-guess.webm",
+              "type": "video/webm"
+            },
+            {
+              "src": "/videos/motion/live-guess.mp4",
+              "type": "video/mp4"
+            }
+          ],
+          "w": 608,
+          "h": 1080,
+          "alt": "Live commerce production — Guess"
+        },
+        {
+          "type": "video",
+          "poster": "/videos/motion/live-sunnies.poster.jpg",
+          "sources": [
+            {
+              "src": "/videos/motion/live-sunnies.webm",
+              "type": "video/webm"
+            },
+            {
+              "src": "/videos/motion/live-sunnies.mp4",
+              "type": "video/mp4"
+            }
+          ],
+          "w": 608,
+          "h": 1080,
+          "alt": "Live commerce production — Sunnies"
+        },
+        {
+          "type": "video",
+          "poster": "/videos/motion/live-nestle.poster.jpg",
+          "sources": [
+            {
+              "src": "/videos/motion/live-nestle.webm",
+              "type": "video/webm"
+            },
+            {
+              "src": "/videos/motion/live-nestle.mp4",
+              "type": "video/mp4"
+            }
+          ],
+          "w": 608,
+          "h": 1080,
+          "alt": "Live commerce production — Nestlé"
+        },
+        {
+          "type": "video",
+          "poster": "/videos/motion/live-rojukiss-may.poster.jpg",
+          "sources": [
+            {
+              "src": "/videos/motion/live-rojukiss-may.webm",
+              "type": "video/webm"
+            },
+            {
+              "src": "/videos/motion/live-rojukiss-may.mp4",
+              "type": "video/mp4"
+            }
+          ],
+          "w": 608,
+          "h": 1080,
+          "alt": "Live commerce production — Rojukiss"
+        },
+        {
+          "type": "video",
+          "poster": "/videos/motion/live-dutchmil-may.poster.jpg",
+          "sources": [
+            {
+              "src": "/videos/motion/live-dutchmil-may.webm",
+              "type": "video/webm"
+            },
+            {
+              "src": "/videos/motion/live-dutchmil-may.mp4",
+              "type": "video/mp4"
+            }
+          ],
+          "w": 608,
+          "h": 1080,
+          "alt": "Live commerce production — Dutchie Milk"
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/01",
+          "w": 720,
+          "h": 1278
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/02",
+          "w": 720,
+          "h": 1280
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/03",
+          "w": 720,
+          "h": 1278
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/04",
+          "w": 720,
+          "h": 1278
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/05",
+          "w": 720,
+          "h": 1276
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/06",
+          "w": 720,
+          "h": 1276
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/07",
+          "w": 720,
+          "h": 1280
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/08",
+          "w": 720,
+          "h": 1280
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/09",
+          "w": 720,
+          "h": 1280
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/10",
+          "w": 720,
+          "h": 1278
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/11",
+          "w": 720,
+          "h": 1278
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/12",
+          "w": 720,
+          "h": 1278
+        }
+      ]
+    },
+    {
+      "no": "021",
+      "slug": "knack-factory",
+      "title": "Knack Factory",
+      "discipline": "Photography",
+      "year": "2024",
+      "credit": "Photographer",
+      "exhibited": "",
+      "statement": "Documenting the senior thesis runway of Suan Sunandha Rajabhat University's graduating fashion class.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/knack-factory/01",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/knack-factory/02",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/knack-factory/03",
+          "w": 1600,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/knack-factory/04",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/knack-factory/05",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/knack-factory/06",
+          "w": 1920,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/knack-factory/07",
+          "w": 1920,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "022",
+      "slug": "bakao",
+      "title": "BAKAO",
+      "discipline": "Photography",
+      "year": "2024",
+      "credit": "Photographer and art direction",
+      "exhibited": "",
+      "statement": "Fashion photography and art direction for an emerging Thai clothing label.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/bakao/01",
+          "w": 1799,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/bakao/02",
+          "w": 1799,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/bakao/03",
+          "w": 1799,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/bakao/04",
+          "w": 1800,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/bakao/05",
+          "w": 1800,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/bakao/06",
+          "w": 1800,
+          "h": 2400
+        }
+      ]
+    },
+    {
+      "no": "023",
+      "slug": "untitled",
+      "title": "Untitled",
+      "discipline": "Art",
+      "year": "2024",
+      "credit": "",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/untitled/01",
+          "w": 1800,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/02",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/03",
+          "w": 2400,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/04",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/05",
+          "w": 2400,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/06",
+          "w": 2400,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/07",
+          "w": 2400,
+          "h": 1800
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/08",
+          "w": 1800,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/09",
+          "w": 1800,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/10",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/11",
+          "w": 1608,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/12",
+          "w": 2400,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/13",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/14",
+          "w": 2400,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/15",
+          "w": 1800,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/16",
+          "w": 2400,
+          "h": 1600
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/17",
+          "w": 2400,
+          "h": 2400
+        },
+        {
+          "type": "image",
+          "src": "/v2/untitled/18",
+          "w": 2400,
+          "h": 1608
+        }
+      ]
+    },
+    {
+      "no": "024",
+      "slug": "live-studio-os",
+      "title": "Live Studio OS",
+      "discipline": "Systems",
+      "year": "2026",
+      "credit": "Studio operations web app",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [],
+      "href": "/systems#live-studio-os"
+    },
+    {
+      "no": "025",
+      "slug": "keepsake",
+      "title": "Keepsake",
+      "discipline": "Systems",
+      "year": "2026",
+      "credit": "Private two-person archive",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [],
+      "href": "/systems#keepsake"
+    },
+    {
+      "no": "026",
+      "slug": "equipment-loan-system",
+      "title": "Equipment inventory and loan system",
+      "discipline": "Systems",
+      "year": "",
+      "credit": "",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": [],
+      "href": "/systems#equipment-register"
+    },
+    {
+      "no": "027",
+      "slug": "podcast-studio-build",
+      "title": "Podcast studio build",
+      "discipline": "Production",
+      "year": "2026",
+      "credit": "Freelance",
+      "exhibited": "",
+      "statement": "",
+      "maxEdge": 2400,
+      "frames": []
+    }
+  ]
+}
