@@ -32,7 +32,9 @@ export default function Picture({ frame, alt, sizes, priority = false, className
         fetchPriority={priority ? "high" : undefined}
         decoding="async"
         className={className}
-        style={style}
+        // Explicit ratio: the width/height attributes alone didn't reserve the box inside
+        // <picture> (Lighthouse measured a 0.46 layout shift on Information, 2026-10-29).
+        style={{ aspectRatio: `${frame.w} / ${frame.h}`, ...style }}
       />
     </picture>
   );
