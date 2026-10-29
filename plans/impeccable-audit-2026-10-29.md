@@ -194,7 +194,7 @@ The four P1s, plus one bug found while fixing them. Measured on the production b
 
 axe on 20 runs after the fixes: no new violations; the remaining ones are the P2s above. DESIGN.md is rewritten for
 v2 from the code; the v1 spec moved to `legacy/DESIGN-v1.md`, since /cv and /chat still follow it. PRODUCT.md is
-unchanged: it needs CK's answers (`teach`).
+rewritten from CK's answers (agencies first, art second; the v2 hero stays; quiet, exact, archival).
 
 ## Recommended order
 
