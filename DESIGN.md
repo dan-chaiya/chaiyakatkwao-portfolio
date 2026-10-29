@@ -93,7 +93,7 @@ components:
 
 **Creative North Star: "The Catalogue Raisonné"**
 
-The site is a numbered catalogue of one person's work, in the manner of an artist's catalogue raisonné: every work has a number (001–027), a title, a discipline, a year, a role and, where it applies, where it was shown. The catalogue is paper and ink. All the colour on screen belongs to the photographs, and the interface around them is set like the typed entries under plates in a book.
+The site is a numbered catalogue of one person's work, in the manner of an artist's catalogue raisonné: every work has a number (001–026), a title, a discipline, a year, a role and, where it applies, where it was shown. The catalogue is paper and ink. All the colour on screen belongs to the photographs, and the interface around them is set like the typed entries under plates in a book.
 
 Most of the time the chrome stays small: 13px Inter, 12px Plex Mono numbers, hairline rules. The one loud gesture is the name: Archivo condensed to a 62 width at 850 weight, fitted edge to edge, with the work running up through it on Home. Everything else steps back so the frame sizes, which change from one image to the next, read as placement rather than a grid.
 
@@ -171,6 +171,7 @@ Small, typed, unboxed. Every interactive element is a real `<a>` or `<button>` w
 - **Stage:** the fitted name, held by `position: sticky` for the length of the run (`--run`, set from the column height), while the column of one cover per work (140px wide, 96px on phones, its number under each) rises through the centre on a GSAP scrub. Transform only. The bio pill ("Photographer, artist and producer. Bangkok, Thailand.") sits on paper at the bottom. Under reduced motion the column is a plain list under the name.
 
 ### Index
+- **Order, agency style:** client and professional work first, newest first; then personal work; art last. The list is `ORDER` in `data/works.ts`, and the numbers follow it, so 001 is always the first row. Home's column and the Information credits use the same order.
 - A real `<table>` (No., Title, Discipline, Year) in `--ink-soft`, rules in `--rule`, in a sticky left column (44%). A linked row inverts to ink on hover or focus, and the whole row is the link.
 - Right of it (56%), the image field: one cover per line at widths and offsets cycled from a fixed list, so it reads as placed, not gridded. Hidden on phones.
 - A 220px preview follows the pointer over linked rows (transform only, 120ms opacity).

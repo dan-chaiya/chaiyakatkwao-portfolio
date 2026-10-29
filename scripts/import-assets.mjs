@@ -223,7 +223,6 @@ for (const w of curation) {
   if (w.no === "19") for (const ep of PODCAST_EPISODES) frames.push({ type: "youtube", ...ep });
 
   works.push({
-    no: "", // numbered after the list is complete, below
     slug: w.folder.slice(3),
     title: w.title,
     discipline: w.discipline,
@@ -242,7 +241,6 @@ for (const row of EXTRA_ROWS) {
     ...(row.sources ? await encodeAll(row.slug, row.sources) : []),
   ];
   works.push({
-    no: "",
     slug: row.slug,
     title: row.title,
     discipline: row.discipline,
@@ -256,8 +254,7 @@ for (const row of EXTRA_ROWS) {
   });
 }
 
-// Index numbers run 001… in display order with no gaps, so a withdrawn work leaves none.
-works.forEach((w, i) => (w.no = String(i + 1).padStart(3, "0")));
+// Display order and the 001… numbers are set in data/works.ts (ORDER), not here.
 
 // Home hero and the Information portrait.
 const hero = await encode(path.join(NEW, "00-hero/01.jpg"), path.join(OUT, "home"), "hero", FULL);
@@ -274,7 +271,7 @@ const fs = await import("node:fs");
 const shipped = fs.readdirSync(OUT, { recursive: true }).filter((f) => /\.(avif|webp)$/.test(f));
 const over = shipped.filter((f) => fs.statSync(path.join(OUT, f)).size > MAX_BYTES);
 const imageCount = (w) => w.frames.filter((f) => f.type === "image").length;
-console.log(works.map((w) => `${w.no} ${w.slug.padEnd(24)} ${w.discipline.padEnd(11)} ${w.year.padEnd(9)} ${imageCount(w)} img ${w.frames.length - imageCount(w)} other`).join("\n"));
+console.log(works.map((w) => `${w.slug.padEnd(24)} ${w.discipline.padEnd(11)} ${w.year.padEnd(9)} ${imageCount(w)} img ${w.frames.length - imageCount(w)} other`).join("\n"));
 console.log(`\n${shipped.length} files in public/v2, ${over.length} over 600 KB${over.length ? ": " + over.join(", ") : ""}`);
 if (over.length) process.exitCode = 1;
 

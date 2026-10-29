@@ -46,7 +46,9 @@ Without the rate limiter a production build refuses chat requests on purpose.
 **Add or change a work.** Put the originals in `New/` (never committed) and the text in
 `New/_curation.md`, set the frames in `PICKS` in `scripts/import-assets.mjs`, then run
 `node scripts/import-assets.mjs`. It writes the images to `public/v2/`, the strip thumbnails
-and `data/works.json`. Then add a description for each new frame to `data/frame-alt.json`.
+and `data/works.json`. Then add a description for each new frame to `data/frame-alt.json`,
+and put the work's slug where it belongs in `ORDER` in `data/works.ts` (the Index order and
+the numbers; a work left out goes last).
 To take a work down, add its curation number to `WITHDRAWN` in the same script and redirect
 its URL in `next.config.mjs`.
 
