@@ -180,6 +180,22 @@ can't compute `mix-blend-mode`; white text under difference renders #040404 on #
 A real iPhone, a screen reader, 200% zoom, and the YouTube frames (`i.ytimg.com` is blocked from the audit
 sandbox, so `/work/podcast-studio`'s console errors are environmental).
 
+## Fixed on this branch (2026-10-29)
+
+The four P1s, plus one bug found while fixing them. Measured on the production build with the same probes.
+
+| Finding | Before | After | Change |
+|---|---|---|---|
+| Home layout shift while scrolling | CLS 0.625 (1440), 1.001 (390) | 0.000, 0.001 (the clock ticking) | `HomeStage.tsx`: `position: sticky` hold inside a section as tall as the run; GSAP keeps only the column's `y` scrub, no pin |
+| Credits over the work | 19–20 of the first 6 frames per work at 1280–1440 | 0 of 161 frames at 390×844, 768×1024, 1024×768, 1280×720, 1440×900, 1920×1080 | `v2.css`: 280px credits lane at ≥1100, credits under the stage below; every frame capped at `--stage-h`; YouTube sized to the stage both ways |
+| Video loops with no pause | autoplay, no control, also under reduced motion | Play/Pause button (26×24); under reduced motion it waits on the poster | `Viewer.tsx`: `LoopingVideo`, no `autoPlay` attribute, `play()` from an effect |
+| Header focus ring | ink ring, ≈1.1:1 on paper | ink on paper, inverse over the hero | `v2.css`: `--blend` token; `.v2-header :focus-visible { outline-color: var(--blend) }` |
+| **New:** YouTube frames unclickable on desktop | a click on `/work/podcast-studio`'s embeds hit "Next frame" | the embed's play button is on top | `v2.css`: the frame fade's fill `both` → `backwards`; a lasting fill kept the frame a stacking context under the z-index 1 hit areas |
+
+axe on 20 runs after the fixes: no new violations; the remaining ones are the P2s above. DESIGN.md is rewritten for
+v2 from the code; the v1 spec moved to `legacy/DESIGN-v1.md`, since /cv and /chat still follow it. PRODUCT.md is
+unchanged: it needs CK's answers (`teach`).
+
 ## Recommended order
 
 1. **[P1, process] `teach` then `document`**: rewrite PRODUCT.md and DESIGN.md for v2 so every later command aims at v2.

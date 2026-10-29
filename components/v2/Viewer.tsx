@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Header from "@/components/v2/Header";
 import Picture from "@/components/v2/Picture";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
-import type { Frame, Work } from "@/data/works";
+import type { Frame, VideoFrame, Work } from "@/data/works";
 
 const pad = (n: number) => String(n).padStart(3, "0");
 
@@ -12,7 +12,9 @@ const pad = (n: number) => String(n).padStart(3, "0");
 const HEIGHTS = [74, 58, 68, 80, 54, 64];
 
 function FrameView({ frame, work, index }: { frame: Frame; work: Work; index: number }) {
-  const maxH = `${HEIGHTS[index % HEIGHTS.length]}svh`;
+  // Never taller than the stage (--stage-h, v2.css), or a tall frame runs into the
+  // credits and the strip on tablets and short laptops.
+  const maxH = `min(${HEIGHTS[index % HEIGHTS.length]}svh, var(--stage-h))`;
   const maxW = `min(88vw, ${work.maxEdge}px)`;
   const label = `${work.title}, ${index + 1} of ${work.frames.length}`;
 
@@ -29,28 +31,58 @@ function FrameView({ frame, work, index }: { frame: Frame; work: Work; index: nu
     );
   }
   if (frame.type === "video") {
-    return (
-      <video
-        key={frame.poster}
-        className="v2-viewer__media"
-        style={{ maxHeight: maxH, maxWidth: maxW, aspectRatio: `${frame.w} / ${frame.h}` }}
-        poster={frame.poster}
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-label={frame.alt}
-      >
-        {frame.sources.map((s) => (
-          <source key={s.src} src={s.src} type={s.type} />
-        ))}
-      </video>
-    );
+    // 28px under the video is the Play/Pause line.
+    const videoH = `min(${HEIGHTS[index % HEIGHTS.length]}svh, var(--stage-h) - 28px)`;
+    return <LoopingVideo key={frame.poster} frame={frame} style={{ maxHeight: videoH, maxWidth: maxW, aspectRatio: `${frame.w} / ${frame.h}` }} />;
   }
   return (
     <div className="v2-viewer__youtube">
       <YouTubeEmbed id={frame.id} title={frame.title} />
       <p className="v2-viewer__caption">{frame.title}</p>
+    </div>
+  );
+}
+
+// A loop runs past five seconds, so it gets a stop control (WCAG 2.2.2), and under
+// reduced motion it waits on its poster until asked. No autoPlay attribute: it would
+// start before the effect could check the setting.
+function LoopingVideo({ frame, style }: { frame: VideoFrame; style: React.CSSProperties }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    ref.current?.play().catch(() => {});
+  }, []);
+
+  const toggle = () => {
+    const v = ref.current;
+    if (!v) return;
+    if (v.paused) v.play().catch(() => {});
+    else v.pause();
+  };
+
+  return (
+    <div className="v2-viewer__video">
+      <video
+        ref={ref}
+        className="v2-viewer__media"
+        style={style}
+        poster={frame.poster}
+        muted
+        loop
+        playsInline
+        aria-label={frame.alt}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+      >
+        {frame.sources.map((s) => (
+          <source key={s.src} src={s.src} type={s.type} />
+        ))}
+      </video>
+      <button type="button" className="v2-viewer__play" onClick={toggle}>
+        {playing ? "Pause" : "Play"}
+      </button>
     </div>
   );
 }

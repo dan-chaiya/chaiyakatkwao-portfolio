@@ -1,348 +1,216 @@
 ---
-name: Chaiya Katkwao Portfolio
-description: A production-floor portfolio for a Bangkok creative producer, in two themes, Paper (the default) and Ink.
-# Paper, the default theme. Ink is `colors-dark` below. Both live in app/globals.css, which is
-# the source of truth; components read every colour as var(--color-<key>).
+name: Chaiya Katkwao Archive
+description: An artist's archive in paper and ink, where the photographs carry all the colour.
+# v2, since 2026-10-29. Source of truth: app/(v2)/v2.css (tokens on .v2). The v1 system
+# (Paper/Ink themes, Archivo Black, Cue Light) now governs only /cv and /chat; its spec is
+# legacy/DESIGN-v1.md. Grey is ink at reduced alpha, never a third colour: the hex values
+# below are what the alphas composite to on paper.
 colors:
-  bg: "#F0F0F0"
-  surface: "#EAEAEA"
-  surface-elevated: "#E4E4E4"
-  surface-hover: "#DEDEDE"
-  text: "#111111"
-  warm: "#111111"
-  grey-200: "#1C1C1C"
-  grey-300: "#3D3A37"
-  grey-400: "#57524D"
-  text-muted: "#5F5A55"
-  grey-500: "#67625C"
-  text-dim: "#A8A29B"
-  grey-600: "#BDB8B1"
-  grey-700: "#D3D0CA"
-  border-muted: "#D6D6D6"
-  border-faint: "rgba(17, 17, 17, 0.07)"
-  border: "rgba(17, 17, 17, 0.09)"
-  border-strong: "rgba(17, 17, 17, 0.22)"
-  text-inverse: "#F0F0F0"
-  accent: "oklch(54% 0.19 35)"
-  accent-dim: "oklch(54% 0.19 35 / 0.3)"
-  focus-ring: "rgba(17, 17, 17, 0.55)"
-colors-dark:
-  bg: "#111111"
-  surface: "#1C1C1C"
-  surface-elevated: "#222222"
-  surface-hover: "#2A2A2A"
-  text: "#F0F0F0"
-  warm: "#F0F0F0"
-  grey-200: "#EAEAEA"
-  grey-300: "#C8C4BC"
-  grey-400: "#9A9087"
-  text-muted: "#958F89"
-  grey-500: "#8F8983"
-  text-dim: "#4A4744"
-  grey-600: "#3D3A37"
-  grey-700: "#2A2826"
-  border-muted: "#2A2A2A"
-  border-faint: "rgba(240, 240, 240, 0.07)"
-  border: "rgba(240, 240, 240, 0.09)"
-  border-strong: "rgba(240, 240, 240, 0.22)"
-  text-inverse: "#111111"
-  accent: "oklch(72% 0.18 35)"
-  accent-dim: "oklch(72% 0.18 35 / 0.3)"
-  focus-ring: "rgba(240, 240, 240, 0.55)"
+  paper: "#FBFBFB"
+  ink: "#111111"
+  ink-soft: "#656565"
+  rule: "#D6D6D6"
+  blend: "#FFFFFF"
 typography:
+  name:
+    fontFamily: "Archivo, Noto Sans Thai, sans-serif"
+    fontSize: "fitted to the stage width (about 9vw)"
+    fontWeight: 850
+    lineHeight: 0.82
+    letterSpacing: "-0.01em"
+    fontVariation: "'wdth' 62"
   display:
-    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
-    fontSize: "clamp(2.5rem, 8vw, 7rem)"
-    fontWeight: 800
+    fontFamily: "Archivo, Noto Sans Thai, sans-serif"
+    fontSize: "clamp(44px, 8vw, 120px)"
+    fontWeight: 850
     lineHeight: 0.9
-    letterSpacing: "-0.02em"
-  display-s:
-    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
-    fontSize: "clamp(2.5rem, 6vw, 5.5rem)"
-    fontWeight: 800
-    lineHeight: 0.9
-    letterSpacing: "-0.02em"
-  feature:
-    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
-    fontSize: "clamp(1.75rem, 4vw, 3.5rem)"
-    fontWeight: 800
-    lineHeight: 0.9
-    letterSpacing: "-0.03em"
-  roll:
-    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
-    fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)"
-    fontWeight: 800
-    lineHeight: 1.05
-    letterSpacing: "-0.02em"
-  headline:
-    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
-    fontSize: "clamp(1.2rem, 2.5vw, 2rem)"
-    fontWeight: 800
-    lineHeight: 0.95
-    letterSpacing: "-0.02em"
-  title:
-    fontFamily: "Archivo Black, Noto Sans Thai, sans-serif"
-    fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)"
-    fontWeight: 800
-    lineHeight: 1
-    letterSpacing: "-0.02em"
-  lead:
-    fontFamily: "Inter, Noto Sans Thai, sans-serif"
-    fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)"
+    letterSpacing: "-0.01em"
+    fontVariation: "'wdth' 62"
+  statement:
+    fontFamily: "Inter, Noto Sans Thai, system-ui, sans-serif"
+    fontSize: "clamp(22px, 2.4vw, 34px)"
     fontWeight: 400
-    lineHeight: 1.4
-  body:
-    fontFamily: "Inter, Noto Sans Thai, sans-serif"
-    fontSize: "17px"
+    lineHeight: 1.15
+  lede:
+    fontFamily: "Inter, Noto Sans Thai, system-ui, sans-serif"
+    fontSize: "clamp(18px, 1.8vw, 24px)"
     fontWeight: 400
-    lineHeight: 1.55
-  body-sm:
-    fontFamily: "Inter, Noto Sans Thai, sans-serif"
+    lineHeight: 1.25
+  reading:
+    fontFamily: "Inter, Noto Sans Thai, system-ui, sans-serif"
     fontSize: "14px"
     fontWeight: 400
     lineHeight: 1.5
+  body:
+    fontFamily: "Inter, Noto Sans Thai, system-ui, sans-serif"
+    fontSize: "13px"
+    fontWeight: 400
+    lineHeight: 1.4
   label:
-    fontFamily: "Inter, Noto Sans Thai, sans-serif"
-    fontSize: "11px"
-    fontWeight: 500
-    lineHeight: 1
-    letterSpacing: "0.18em"
-  label-wide:
-    fontFamily: "Inter, Noto Sans Thai, sans-serif"
-    fontSize: "11px"
-    fontWeight: 500
-    lineHeight: 1
-    letterSpacing: "0.3em"
+    fontFamily: "IBM Plex Mono, ui-monospace, monospace"
+    fontSize: "12px"
+    fontWeight: 400
+    letterSpacing: "0.02em"
+    fontFeature: "tnum"
 rounded:
   none: "0px"
-  full: "9999px"
 spacing:
-  xs: "4px"
-  sm: "8px"
-  md: "16px"
-  lg: "24px"
-  page: "32px"
-  xl: "64px"
-  section: "80px"
+  gutter: "24px"
+  gutter-phone: "16px"
+  page-top: "96px"
+  page-top-phone: "84px"
+  credits: "280px"
 components:
-  nav-link:
-    textColor: "{colors.grey-300}"
-    typography: "{typography.label}"
-  nav-link-hover:
-    textColor: "{colors.text}"
-  nav-link-active:
-    textColor: "{colors.text}"
-  nav-link-active-underline:
-    backgroundColor: "{colors.accent}"
-    height: "1px"
-  button-primary:
-    textColor: "{colors.text}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "18px 20px"
-  button-primary-hover:
-    backgroundColor: "{colors.text}"
-    textColor: "{colors.text-inverse}"
-  button-secondary:
-    textColor: "{colors.text-muted}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "18px 20px"
-  button-secondary-hover:
-    textColor: "{colors.text}"
-  control-square:
-    textColor: "{colors.grey-200}"
-    rounded: "{rounded.none}"
-    size: "44px"
-  tag:
-    textColor: "{colors.grey-400}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "4px 8px"
-  input-chat:
-    backgroundColor: "transparent"
-    textColor: "{colors.warm}"
-    rounded: "{rounded.none}"
-    padding: "14px 16px"
-  theme-toggle:
-    textColor: "{colors.text}"
-    rounded: "{rounded.full}"
-    size: "14px"
+  header:
+    textColor: "{colors.blend}"
+    typography: "{typography.body}"
+    padding: "18px 24px"
+  link:
+    textColor: "{colors.ink}"
+    typography: "{typography.body}"
+  index-row-hover:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.paper}"
+  filter-button:
+    textColor: "{colors.ink-soft}"
+    typography: "{typography.body}"
+  filter-button-pressed:
+    textColor: "{colors.ink}"
+  pill:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    padding: "6px 10px"
+  info-panel:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    padding: "12px 14px"
+    width: "420px"
 ---
 
-# Design System: Chaiya Katkwao Portfolio
+# Design System: Chaiya Katkwao Archive
 
 ## 1. Overview
 
-**Creative North Star: "The Production Floor"**
+**Creative North Star: "The Catalogue Raisonné"**
 
-This portfolio does not perform; it works. It is built the way a production is built: structure first, and everything else earns its place. The shell is a neutral grey room in two lights, Paper by day and Ink after dark, neutral the way a cyclorama wall or a blackout drape is neutral. It holds the work without comment. PRODUCT.md puts it plainly: "The portfolio doesn't try hard; it simply is."
+The site is a numbered catalogue of one person's work, in the manner of an artist's catalogue raisonné: every work has a number (001–027), a title, a discipline, a year, a role and, where it applies, where it was shown. The catalogue is paper and ink. All the colour on screen belongs to the photographs, and the interface around them is set like the typed entries under plates in a book.
 
-Everything the visitor reads as information is labelled like gear on a studio floor: a small uppercase mono tag, a number, a hairline. Everything the visitor looks at is the work itself, at full contrast, never dimmed, never cropped behind text. One warm colour, the Cue Light, appears only where something is live: the page you are on, the person who is available. Motion is calibrated rather than decorative: content is visible at rest, and the only entrances are a short page fade and the hero's cross-fade between slides.
+Most of the time the chrome stays small: 13px Inter, 12px Plex Mono numbers, hairline rules. The one loud gesture is the name: Archivo condensed to a 62 width at 850 weight, fitted edge to edge, with the work running up through it on Home. Everything else steps back so the frame sizes, which change from one image to the next, read as placement rather than a grid.
 
-The system rejects, by name, the three anti-references in PRODUCT.md: colourful or expressive-colour portfolios (gradients, vibrant accents, neon), generic photographer templates (centred hero, soft sans, pastel tones), and over-animated, "look at me" UI that competes with the work.
+The system rejects colour in the interface (gradients, accents, tints), templated portfolio grids of same-sized cards, and motion that performs for its own sake. Motion here either moves the work (the Home column, the frame fade) or does nothing.
 
 **Key Characteristics:**
-- Two themes from five brutalist neutrals: Paper (`#F0F0F0`, the default) and Ink (`#111111`), each using the other as its ink.
-- One accent, the Cue Light (hue 35), on about 1% of any screen.
-- Two families: Archivo Black for headlines; Inter for body text and every label (since 2026-10-28, replacing Archivo and JetBrains Mono).
-- Flat: depth from tonal steps and 1px hairlines, never shadows.
-- Square: no radius anywhere except the two dots (theme switch, Available).
-- One left edge: 32px on every page and every section.
-- Motion is sparse and exponential-ease only; nothing pulses, bounces or loops for show.
+- Two colours: paper `#FBFBFB` and ink `#111111`. Greys are ink at 64% (text) and 16% (rules).
+- Three families with fixed jobs: Archivo condensed for the name and big titles, Inter for everything read, Plex Mono for numbers.
+- Square, flat, unboxed: no radius, no shadow, no cards.
+- One header everywhere, drawn in difference blend so it reads over paper and photographs alike.
+- One gutter: 24px (16px on phones) on every page.
 
-## 2. Colors: The Paper & Ink Palette
+## 2. Colors: Paper and Ink
 
-Five neutrals and one cue: the palette does not try to be beautiful, it tries to be correct.
-
-### Primary
-- **Cue Light** (`oklch(54% 0.19 35)` on Paper, `oklch(72% 0.18 35)` on Ink): the amber of a cue light backstage, lit only when it is your turn. The 1px underline under the current nav link, the Commercial view toggle and the Systems link on About; the year on a hovered Commercial list row; the "Available for projects" line and its still dot on the Home contact strip (a plain mono line, no pill, since 4 October 2026). It is deeper on Paper because that line is 11px text and needs 4.5:1 there (4.87:1).
-- **Cue Light, dimmed** (the same hue at 30%): the badge's hairline border, so the frame never competes with its text.
+The palette is correct rather than decorative: two values and the alphas between them.
 
 ### Neutral
+- **Paper** (`#FBFBFB`, `--paper`): every page ground, the Home bio pill, the Index filter bar and the viewer's Info panel. Also the `body` ground behind v2 pages.
+- **Ink** (`#111111`, `--ink`): all primary text, rules under /systems case titles, diagram strokes, and the inverted Index row on hover or focus.
+- **Ink, soft** (`rgb(17 17 17 / 0.64)`, `--ink-soft`, composites to `#656565`, 5.6:1 on paper): table text in the Index, credit labels, section heads, captions, the inactive filter buttons.
+- **Rule** (`rgb(17 17 17 / 0.16)`, `--rule`, about `#D6D6D6`): 1px table and list rules, the Info panel frame.
+- **Blend** (`#FFFFFF`, `--blend`): what the header draws in. Under `mix-blend-mode: difference` it lands as ink (`#040404`) on paper and as the inverse over a photograph.
 
-Values are Paper / Ink; the token name is what components read.
+### Named Rules
+**The Images-Carry-Colour Rule.** No hue in the interface, ever. If something needs to stand out, use ink at full strength, an underline or an inversion, not a colour.
 
-- **Paper / Ink ground** (#F0F0F0 / #111111): `bg`, the page ground in each theme.
-- **Surface steps** (#EAEAEA, #E4E4E4, #DEDEDE / #1C1C1C, #222222, #2A2A2A): `surface`, `surface-elevated`, `surface-hover`, each a step toward the middle grey.
-- **Ink** (#111111 / #F0F0F0): `text` and `warm`, primary text and heading ink.
-- **Reading grey** (#1C1C1C / #EAEAEA): `grey-200`, lead and body copy.
-- **Small-text grey** (#3D3A37 / #C8C4BC): `grey-300`, small copy and nav links at rest.
-- **Data greys** (#57524D, #5F5A55, #67625C / #9A9087, #958F89, #8F8983): `grey-400`, `text-muted`, `grey-500`, for labels, captions, years and indices.
-- **Structural marks** (#A8A29B, #BDB8B1 / #4A4744, #3D3A37): `text-dim`, `grey-600`, for disabled controls; never text.
-- **Hairlines** (#D3D0CA, #D6D6D6 / #2A2826, #2A2A2A): `grey-700`, `border-muted`, for the chat field and tag frames.
-- **Lines** (rgba(17, 17, 17, 0.07 / 0.09 / 0.22) on Paper, the same in #F0F0F0 on Ink): `border-faint`, `border`, `border-strong`, for header, section and button rules.
-- **Focus ring** (rgba(17, 17, 17, 0.55) / rgba(240, 240, 240, 0.55)): `focus-ring`, a 1px outline at 3px offset.
+**The Alpha-Not-Grey Rule.** A new grey is ink at an alpha, named as a token on `.v2`. It must measure 4.5:1 on paper if it sets text; 0.64 is the floor in use.
 
-Every text grey measures 4.5:1 or better on the ground, surface and elevated surface of its own theme; the lowest on the site is 4.87:1 on Paper (the Available badge) and 5.45:1 on Ink. axe found no contrast failure in either theme on 4 October 2026.
-
-**Paper is the default.** A first visit, a browser that blocks storage and a page without JavaScript all get Paper. A visitor's pick is saved in `localStorage` under `theme` and set as `<html data-theme>` by an inline script in `<head>` before the first paint (`lib/theme.ts`), so a saved Ink never flashes Paper. **Ink is screen-only**: its block sits in `@media screen`, so a printed or saved page always comes out ink on paper. A theme change fades the colour tokens themselves over 450ms (they are registered with `@property`), so the whole page shifts as one; photographs and video are never touched.
-
-**The One Cue Rule.** The Cue Light covers 10% of a screen at most, and in practice about 1%. If something glows amber, it is live or it is you. If it starts competing, it has been overused.
-
-**The Pure Ground, Warm Ink Rule.** Grounds, surfaces and the primary ink are pure neutral (zero chroma) in both themes. The warmth lives only in the text greys and hairlines, at hue 62°–89° and chroma 0.006–0.012. Never introduce a cool grey; the sister site at `/systems` follows the same curve.
-
-**The Name-a-Token Rule.** Components read every colour as `var(--color-*)`, never a hex, so both themes follow automatically. A one-off tint is `color-mix(in srgb, var(--color-text) 7%, transparent)`. The only literals are the black and white that sit on photographs (the YouTube veil and play mark), because they belong to the image, not the page. A new token must also join the `@property` list in `globals.css`, or it will cut instead of fading.
+**The Blend Rule.** Anything inside `.v2-header` (text, focus rings, icons) draws in `--blend`, never `--ink`: an ink ring under difference blend composites to `#EAEAEA`, about 1.1:1 on paper (audit 2026-10-29).
 
 ## 3. Typography
 
-**Display Font:** Archivo Black (with Noto Sans Thai, then sans-serif)
-**Body Font:** Inter 400–800 (with Noto Sans Thai, then system-ui)
-**Label Font:** Inter 500, uppercase, tracked, tabular figures (with Noto Sans Thai, then sans-serif). The CSS names `--font-jetbrains-mono`, `.mono-label` and `font-mono` are kept and point at Inter.
+**Display Font:** Archivo, variable, `wdth` 62 at weight 850, uppercase (with Noto Sans Thai, then sans-serif)
+**Body Font:** Inter 400 and 500 (with Noto Sans Thai, then system-ui)
+**Label/Mono Font:** IBM Plex Mono 400, tabular figures
 
-**Character:** Archivo Black is structural, set tight (-0.02em to -0.03em) on a 0.88–0.95 line-height, so a headline reads as a built object. It ships as one cut and every head asks for 800, so the browser synthesizes bold on top of Black: that dense faux-bold is the heading voice, and it is deliberate. Inter carries the whole information layer in small tracked capitals, chosen for legibility at 11px.
+**Character:** a condensed grotesque shouting the name over a quiet book face and typewriter numbers. The contrast is the point: one gesture at full volume, everything else at catalogue-entry size.
 
 ### Hierarchy
-- **Display** (Archivo Black, 800, 0.9 line-height, -0.02em): `clamp(2.5rem, 8vw, 7rem)`. Page titles (Commercial, Gallery, About, CV, 404).
-- **Display S** (Archivo Black, 800, 0.9 line-height, -0.02em to -0.03em): `clamp(2.5rem, 6vw, 5.5rem)`. Case-study titles, the contact strips, the "Next" project.
-- **Feature** (Archivo Black, 800, 0.9 line-height, -0.03em): `clamp(1.75rem, 4vw, 3.5rem)`. The featured project caption and the chat name.
-- **Roll** (Archivo Black, 800, 1.05 line-height, -0.02em): `clamp(1.5rem, 3.5vw, 2.75rem)`. The About client and service rolls.
-- **Headline** (Archivo Black, 800, 0.95 line-height, -0.02em): `clamp(1.2rem, 2.5vw, 2rem)`. Section and project titles, Commercial list rows.
-- **Title** (Archivo Black, 800, 1 line-height, -0.02em): `clamp(1.25rem, 1.6vw, 1.5rem)`. The hero's one-line name, `Chaiya Katkwao.`
-- **Lead** (Inter, 400, 1.4 line-height, grey-200): `clamp(1.25rem, 1.6vw, 1.5rem)`. Bios, positioning lines, project descriptions (`.copy-lead`).
-- **Body** (Inter, 400, 17px, 1.55 line-height, grey-200): everything that is read (`.copy-body`, and `body` itself), capped at 52–75ch.
-- **Small** (Inter, 400, 14px, 1.5 line-height, grey-300): captions and list cells (`.copy-small`).
-- **Label** (Inter, 500, 11px, 0.18em, uppercase, text-muted): nav, footer, tags, years, indices, counters (`.mono-label`).
-- **Label wide** (Inter, 500, 11px, 0.28–0.35em, uppercase): eyebrows and section markers.
+- **Name** (Archivo 850, wdth 62, uppercase, 0.82 line-height): Home stage only, fitted to the stage width in JS (`HomeStage`, measured at 100px and scaled; refitted on resize and when fonts load).
+- **Display** (Archivo 850, wdth 62, uppercase, `clamp(44px, 8vw, 120px)`, 0.9): /systems case titles.
+- **Statement** (Inter 400, `clamp(22px, 2.4vw, 34px)`, 1.15, max 22ch): the opening sentence of Information, /systems and the 404 (`.v2-info__bio`).
+- **Lede** (Inter 400, `clamp(18px, 1.8vw, 24px)`, 1.25, max 34ch): the line under each /systems title.
+- **Reading** (Inter 400, 14px, 1.5, max 62ch): work statements in the Info panel and /systems body copy (/systems runs it at 13px).
+- **Body** (Inter 400, 13px, 1.4): the whole interface: header, Index, credits, lists, captions. Weight 500 for the header and the viewer title.
+- **Label** (Plex Mono 400, 12px, 0.02em, tabular): work numbers, years, the clock, frame counters, "Case 1 / 3", /systems figures.
 
-**Thai.** Noto Sans Thai sits second in every stack (`--font-archivo`, `--font-archivo-black`, `--font-jetbrains-mono`), so Latin always sets in Archivo and only Thai characters reach Noto. It loads only when a Thai character renders. Mark Thai passages `lang="th"`. Labels stay English.
+### Named Rules
+**The Three-Jobs Rule.** Archivo shouts, Inter reads, Plex counts. A number that identifies (a work number, a year, a time) is Plex Mono; a sentence is Inter; Archivo only ever sets a name or a case title, in capitals.
 
-**The Two-Family Rule.** Archivo Black heads, Inter reads and labels. If something is information (an index, a year, a role, a counter, a caption), it is an Inter label: uppercase, tracked, tabular figures; if it is read, it is Inter in sentence case. No third family: Noto Sans Thai is the Thai script, never a choice for Latin.
-
-**The 11px Floor Rule.** No text below 11px on screen, and nothing below 8.5pt in print.
-
-**The Scale Rule.** At least 1.25 between adjacent reading steps. Flat scales read as indecision.
-
-**The Six Heads Rule.** Every Archivo Black head uses one of the six clamps above (plus the mobile menu's own `clamp(2rem, min(10vw, 9svh), 5rem)`). A new page picks a step; it never invents a seventh size. Until 4 October 2026 there were thirteen.
+**The No-Em-Dash Rule.** Copy uses commas, colons, parentheses, and en dashes for ranges (`2023–2024`). An em dash appears only as the null in an empty year cell.
 
 ## 4. Elevation
 
-Flat. There are no box shadows anywhere. Depth comes from tonal steps that move toward the middle grey (ground → surface → elevated: `#F0F0F0 → #EAEAEA → #E4E4E4` on Paper, `#111111 → #1C1C1C → #222222` on Ink) and from 1px hairlines in the `border-*` tokens. The lightbox isolates the work with the page ground at 97%, the only intentional semi-transparency.
+Flat. No shadows anywhere. Layers are told apart by ground alone: the Home bio pill, the Index filter bar and the viewer's Info panel sit on paper over whatever passes under them, and the Info panel adds a 1px `--rule` frame because it is the only element that opens over a photograph.
 
-**The Flat-By-Default Rule.** If something needs to feel raised, use the next surface step, never a shadow.
-
-**The One-Blur Rule.** `backdrop-blur-sm` appears once, on the lightbox's "Swipe or use arrows" pill (over the ground at 85%), so its text stays readable over any photograph. It is a functional accommodation, not a motif.
+### Named Rules
+**The Paper-Patch Rule.** When chrome has to sit over moving work, give it a paper ground, not a blur, a shadow or a scrim.
 
 ## 5. Components
 
-Labelled like gear: flat, square, named in mono, and answering instantly. No decoration, no radius, no shadow. Every hover is a CSS `hover:` variant (Tailwind applies it only where a pointer can hover), never `onMouseEnter`, so a tap on a phone never leaves anything stuck.
+Small, typed, unboxed. Every interactive element is a real `<a>` or `<button>` with the UA chrome stripped (`.v2 button` resets font, colour, border and padding).
 
-### Buttons
-- **Shape:** square (`0px`), 1px border, label typography (11px mono, uppercase, 0.14em).
-- **Primary** (the email CTA): ink text in a `border-strong` frame, `18px 20px`. Hover inverts to ink ground and `text-inverse` text over 250ms.
-- **Secondary** ("Print / Save PDF →"): `text-muted` in a `border` frame. Hover lifts the text to ink and the frame to `border-strong`.
-- **One primary per decision.** The Home contact strip has one box, the email; the CV under it is a quiet text link ("Or read the CV →"), not a second box of equal weight.
-- **Control square** (lightbox close, prev and next; hero pause): 44 × 44 (48 for the lightbox arrows), inline SVG glyph, no icon library. In the lightbox the glyph is `grey-200` in a `grey-500` frame; hover takes the glyph to ink, the frame to `grey-300` and adds a 10% ink wash; disabled is `text-dim` on `grey-600`. The hero's pause square is ink at 86% in an ink frame at 28%.
-- **Image tiles are buttons.** Anything that opens the lightbox is a real `<button class="gallery-tile">` (UA chrome stripped). Never a `div` with an `onClick`: that kept the gallery from the keyboard until 29 August and the case studies until 4 October 2026.
+### Header
+- Fixed, three columns: name at left ("Chaiya Katkwao", home), nav in the centre ("Index, Information", comma-separated), and at right the Bangkok clock (`HH:MM GMT+07:00`, Plex) or, in the viewer, the frame counter (`001 of 012`, `aria-live`). On phones the nav drops to a second row.
+- `mix-blend-mode: difference` in `--blend`, 18px × gutter padding, no ground. Focus ring: 1px `--blend` at 3px offset.
 
-### Chips
-- **Tags:** mono label in `grey-400`, 1px `border-muted` frame, `4px 8px`, square. Information, not actions: they do not respond to the pointer.
-- **Chat suggestions:** 11px mono at 0.08em in `grey-300`, 1px `border-muted` frame, `8px 14px`; hover takes the text to ink and the frame to `grey-500`. One row that swipes sideways on phones.
+### Links and focus
+- Links inherit ink, no underline at rest, underline at 3px offset on hover. Contact links on Information and the toggles stay underlined at rest because they are the only actions there.
+- Focus: 1px ink outline at 3px offset everywhere except the header (see The Blend Rule).
 
-### Cards / Containers
-- There are no cards. Work sits directly on the ground; sections are separated by `border` hairlines and 80px of vertical space.
-- The home triptych is three image links in a 1px-gap grid, each photograph clean and its title under it in flow (Title step, "Gallery →"), never over it. No index numbers: the order means nothing.
-- Under the Home bio, the **Selected clients** roll (`data/clients.ts`, shared with About) is the producer proof an agency scans for; it replaced a list of disciplines that repeated About and the CV.
-- Production scale comes from `data/live-studio.ts` (counted from the Live Studio OS sheet; aggregates only, never names, phones or prices): a sentence under the Home bio, the Team / Studio / Gear / System credits on the /commercial Live Commerce section, and the live slides' captions. Never as a row of big numbers with small labels: that is the banned hero-metric template.
-- The Home client roll is one run of names in the Lead step, not ruled rows.
-- A case study's meta column leads with **Client**, then Role, Year, Discipline; it ends on the next project's title beside its cover.
+### Home
+- **Hero:** one photograph, `object-fit: cover`, 100svh, the name (14px Inter 500) centred and the four disciplines spread along the bottom in paper. This is the only place text sits on a photograph, and it must hold 4.5:1 there: "Art" and "Production" currently measure 3.6:1 (audit 2026-10-29, open).
+- **Stage:** the fitted name, held by `position: sticky` for the length of the run (`--run`, set from the column height), while the column of one cover per work (140px wide, 96px on phones, its number under each) rises through the centre on a GSAP scrub. Transform only. The bio pill ("Photographer, artist and producer. Bangkok, Thailand.") sits on paper at the bottom. Under reduced motion the column is a plain list under the name.
 
-### Inputs / Fields
-- **Chat field:** transparent, 16px Archivo in ink, inside a 1px `grey-700` frame, square. 16px is a floor: iOS zooms into anything smaller.
-- **Focus:** the frame carries the ring (`:focus-within`, 1px `focus-ring`, 2px offset), because the input suppresses its own outline.
-- **Placeholder:** `text-muted` at full opacity (5.67:1), never the browser's half-strength default.
+### Index
+- A real `<table>` (No., Title, Discipline, Year) in `--ink-soft`, rules in `--rule`, in a sticky left column (44%). A linked row inverts to ink on hover or focus, and the whole row is the link.
+- Right of it (56%), the image field: one cover per line at widths and offsets cycled from a fixed list, so it reads as placed, not gridded. Hidden on phones.
+- A 220px preview follows the pointer over linked rows (transform only, 120ms opacity).
+- The filter (All and the four disciplines) is a paper bar fixed at the bottom centre; the current one is ink and underlined (`aria-pressed`).
 
-### Navigation
-- **Header:** `sticky top-0`, opaque on the page ground, 1px `border-faint` below, 58px tall (72px under 1024px). The CK mark at left (Archivo Black 800 at 1.15rem, its own size, not a ramp step) is the only way home (accessible name "Chaiya Katkwao, home").
-- **Links:** 0.8rem mono (the nav's own label size, one step above the 11px label), uppercase, 0.18em, `grey-300` at rest, ink on hover (180ms). The current page carries `aria-current="page"` and a 1px Cue Light underline.
-- **Small links get 44px to the finger** through `.tap-target`, an invisible centred box; the label keeps its own size.
-- **Mobile menu:** a full-screen overlay on the page ground with no modal chrome. Links are Archivo Black 800 at `clamp(2rem, min(10vw, 9svh), 5rem)`, uppercase, separated by `border-faint` hairlines, staggered in at 0.05s over 0.3s. The overlay scrolls itself and centres with auto margins, so a phone turned sideways still reaches every link. Escape closes; Tab loops through the links and the close button.
+### Project viewer
+- One frame at a time, `object-fit: contain`, its height cycled from 54–80svh so frame sizes change step to step, and never taller than the stage (`--stage-h`).
+- **Credits lane:** at 1100px and up the credits (number, title, Role, Exhibited, Year, Info) keep a 280px lane at the left and the stage starts after it; below 1100 they sit under the stage. They never print over the work.
+- **Navigation:** invisible half-stage buttons (w-resize / e-resize cursors) on desktop, swipe on phones, arrow keys, one frame per wheel gesture, and a thumbnail strip at the bottom (32% opacity, full when current or hovered).
+- **Video:** muted loops start only without reduced motion, and always carry a Play/Pause text button under the frame (WCAG 2.2.2).
+- **Info:** the work statement in a paper panel with a 1px `--rule` frame, bottom right, toggled by an underlined "Info"/"Close" button (`aria-expanded`).
+- Frames fade in over 260ms with `animation-fill-mode: backwards`, never `both`: a lasting fill keeps the frame a stacking context and traps video and YouTube under the hit areas.
 
-### Theme Switch (Signature Component)
-One 14px dot in a 1.5px ink ring, half ink and half clear. The ink half sits left on Paper and turns right on Ink (420ms, the signature curve); it grows 18% on hover. 44px to the finger, no words, no accent. Its side is decided in CSS from `<html data-theme>`, so it is right from the first frame; its label names the action ("Switch to dark theme").
+### Information
+- Statement, then Credits, Exhibitions and Contact as ruled two-column lists (year in Plex, 6.5em; entry in Inter). The portrait sits sticky in the right column at 0.8fr; on phones it comes first.
 
-### Hero Stage (Signature Component)
-Three rows inside `100svh` minus the header: the name line with "Creative Producer, Bangkok" beside it, the stage, and the caption row with the controls. The strongest editorial work comes first: Knack Factory and BAKAO as three-frame sets (portrait frames side by side on screens 640px and wider, the first frame alone on phones), then Fitflop, Modal Creative Studio and Nestlé, the art series last. The caption names the client and role of the slide on screen ("Knack Factory · Photographer, 2024"). A live-commerce sale stream led for one deploy on 4 October 2026 and read as retail operations rather than "stylish"; it stays in the rotation, not at the front. The KOL Casting Lookbook held the second slot until 5 October 2026, when it came off the site for not holding up beside the rest of the work; BAKAO took its place. Each slide is the original work, `object-contain` on the page ground, at full contrast: no scrim, no gradient, no blur. Slides cross-fade over 1200ms, 300ms when the visitor picks one, a hard cut under reduced motion. Controls: a 44px pause square (WCAG 2.2.2) and one 16px bar per slide inside a 24 × 44 button (WCAG 2.5.8), active in ink and the rest at 34%; on phones a `01 / 06` counter replaces the bars.
-
-### Lightbox (Signature Component)
-The gallery viewer, keyboard-native and in the page's theme. The photo is `next/image` at `sizes="100vw"`, `object-fit: contain`, capped at `100dvh` minus the chrome, swipeable, with a spring arrival (damping 30, stiffness 250); the photos either side are fetched ahead so a step shows at once. Never a plain `<img>` of the original: opening Knack Factory and stepping three times once fetched 29.6 MB, and now fetches under 1 MB. The counter is `aria-live` and reads the photo's description. Focus moves in on open, is trapped inside, and returns to the tile on close.
-
-### Footer
-A 1px `border-faint` rule, 24px above and below, inside `.section-shell` (full width, 32px sides). Mono labels in `text-muted`, ink on hover, links 28px apart. `/systems` is a plain `<a>` because it is a static file, not a route.
+### Systems
+- Per case: "Case n / 3" in Plex, the Display title, the lede, four figures, then Role, Problem, What I built, Constraints and Outcome in two columns, an ink-line diagram (1.5px strokes, SVG with `<title>` and `<desc>`) and before/after tables with a `<caption>`. Cases are separated by a 1px ink rule.
 
 ### Photos
-Every photo has a size and a description. `photoSize(src)` and `photoAlt(src)` in `lib/photos.ts` read `data/image-sizes.json` (written by `node scripts/image-sizes.mjs`; re-run after adding a photo) and `data/alt-text.json`. The size goes to `next/image` as `width`/`height`, so the page reserves the box and never jumps; never `width={0} height={0}`. The alt says what is in the frame, like a museum caption: no SEO tag, no photographer's name.
+- `components/v2/Picture.tsx`: a plain `<picture>` over AVIF and WebP at two widths (800 and full), written by `scripts/import-assets.mjs`. Not `next/image`: the files are already sized. Every picture declares `width`, `height` and an explicit `aspect-ratio`, so nothing moves when it loads; only the first frame or the hero loads eager with `fetchpriority="high"`.
 
 ## 6. Do's and Don'ts
 
 ### Do:
-- **Do** keep the Cue Light at 10% of a screen at most; about 1% is normal.
-- **Do** name a token, never a colour: `var(--color-*)`, and `color-mix()` for a tint.
-- **Do** keep every text colour at 4.5:1 or better; `text-dim` and `grey-600` are structural marks, not text.
-- **Do** set every small uppercase label as an Inter label (`.mono-label`, or `font-mono font-medium text-[11px]`; both names point at Inter).
-- **Do** keep one left edge: 32px on every page and every section (`px-8`, `.section-shell`).
-- **Do** use tonal surface steps for depth, never shadows.
-- **Do** use the signature curve `cubic-bezier(0.16, 1, 0.3, 1)` (`var(--ease-out)`) for motion; the page fade is 250ms, hovers 180–250ms.
-- **Do** respect `prefers-reduced-motion` by removing travel and looping, not feedback: colour and opacity transitions stay at 120ms. Branch on `usePrefersReducedMotion()`, never framer-motion's `useReducedMotion()`, which breaks hydration.
-- **Do** give anything that moves for more than five seconds a stop control (WCAG 2.2.2).
-- **Do** give every target at least 24 × 24, and small text links 44px through `.tap-target`.
-- **Do** cap reading lines at 65–75ch.
-- **Do** keep the scrollbar thin but holdable (8px in Safari, `scrollbar-width: thin` elsewhere) with a text-grey thumb.
+- **Do** keep the interface in paper and ink; let the photographs carry every colour.
+- **Do** keep one gutter (24px, 16px on phones) on every page.
+- **Do** draw anything in the header in `--blend`.
+- **Do** give every photo its size and aspect ratio before it loads; CLS is 0.000 on every route and should stay there.
+- **Do** hold things with `position: sticky` and move them with transforms. A GSAP `pin` counted as a layout shift on every visit (CLS 0.63–1.0 until 2026-10-29).
+- **Do** give anything that moves for more than five seconds a stop control, and start nothing that loops under reduced motion.
+- **Do** branch on `usePrefersReducedMotion()`, never framer-motion's `useReducedMotion()`, which breaks hydration.
+- **Do** cap any frame at the stage (`--stage-h`) as well as at its own svh height.
+- **Do** keep reading lines at 62ch or less.
 
 ### Don't:
-- **Don't** build a colourful or expressive-colour portfolio: no gradients, no vibrant accents beyond the single Cue Light, no neon.
-- **Don't** build a generic photographer portfolio template: no centred hero, no soft sans, no pastel tones.
-- **Don't** build over-animated, "look at me" UI that competes with the work. If an animation is about the UI, it has failed.
-- **Don't** layer anything over the work in the hero or the featured project: no scrim, no gradient band, no text on the photograph.
-- **Don't** use `border-left` or `border-right` greater than 1px as a coloured stripe.
-- **Don't** use gradient text (`background-clip: text`).
-- **Don't** add glassmorphism; the one backdrop-blur is the lightbox pill and it is at its limit.
-- **Don't** add shadows, radii (beyond the two dots) or a third typeface.
-- **Don't** pulse anything: the Available dot is still, and there is no grain overlay.
-- **Don't** let the chat pass for Chaiya. It answers in his voice, and says on screen and in its first line that it is an AI assistant built from his CV, with email as the route for anything that matters.
-- **Don't** spread the slash headline (`Chaiya / Katkwao.`): it is a signature on one page, the CV name. The Home contact strip says "Send the brief." since 4 October 2026.
-- **Don't** use em dashes in copy: commas, colons, parentheses, and en dashes for ranges (`2022–Present`). Quoted titles keep their own punctuation.
-- **Don't** use bounce or elastic easing.
-- **Don't** hover with `onMouseEnter`; use CSS `hover:`.
-- **Don't** zoom images on hover. Zooming crops the work; a tile answers with a wash or a colour change instead.
-- **Don't** number things whose order means nothing (tiles, client rolls, service lists).
+- **Don't** add colour to the interface: no accent, no gradient, no tinted grey.
+- **Don't** print text over the work outside the Home hero, and never below 4.5:1 there.
+- **Don't** add radius, shadows, blur or cards.
+- **Don't** use a fourth family, or set a sentence in Archivo or Plex.
+- **Don't** set figures as a big number over a small label (the hero-metric template). The /systems figures still do this (audit 2026-10-29, open).
+- **Don't** use `animation-fill-mode: both` (or `forwards`) on anything that holds clickable layers.
+- **Don't** use bounce or elastic easing; scrubbed motion is linear to the scroll, fades are linear and under 300ms.
+- **Don't** use em dashes in copy.
