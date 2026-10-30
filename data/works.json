@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T07:13:57.248Z",
+  "generatedAt": "2026-10-30T06:30:08.722Z",
   "hero": {
     "type": "image",
     "src": "/v2/home/hero",
@@ -855,7 +855,7 @@
       "year": "2026",
       "credit": "Live Production & Visual Coordinator, Bangkok",
       "exhibited": "",
-      "statement": "Live commerce broadcasts for Nestlé, Guess, Fitflop, Sunnies, Rojukiss, Dutchie Milk and others.",
+      "statement": "Live commerce broadcasts for Nestlé, Guess, Fitflop, Calvin Klein, Dutch Mill, Jung Saem Mool, Misty Mynx, Sunnies, Rojukiss and others.",
       "maxEdge": 2400,
       "frames": [
         {
@@ -1031,6 +1031,90 @@
           "src": "/v2/live-commerce/12",
           "w": 720,
           "h": 1278
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/13",
+          "w": 1080,
+          "h": 1032
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/14",
+          "w": 1080,
+          "h": 1030
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/15",
+          "w": 1080,
+          "h": 1062
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/16",
+          "w": 1080,
+          "h": 986
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/17",
+          "w": 1080,
+          "h": 986
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/18",
+          "w": 1080,
+          "h": 1032
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/19",
+          "w": 1080,
+          "h": 1065
+        },
+        {
+          "type": "image",
+          "src": "/v2/live-commerce/20",
+          "w": 540,
+          "h": 450
+        }
+      ]
+    },
+    {
+      "slug": "logitech-g",
+      "title": "Logitech G stage live",
+      "discipline": "Production",
+      "year": "2026",
+      "credit": "Producer",
+      "exhibited": "",
+      "statement": "A stage live for Logitech G at Aiman Studio. I ran the production and coordinated the client, PM, studio and CG team through to wrap.",
+      "maxEdge": 2400,
+      "frames": [
+        {
+          "type": "image",
+          "src": "/v2/logitech-g/01",
+          "w": 2000,
+          "h": 1500
+        },
+        {
+          "type": "image",
+          "src": "/v2/logitech-g/02",
+          "w": 2000,
+          "h": 1500
+        },
+        {
+          "type": "image",
+          "src": "/v2/logitech-g/03",
+          "w": 2000,
+          "h": 1500
+        },
+        {
+          "type": "image",
+          "src": "/v2/logitech-g/04",
+          "w": 2000,
+          "h": 1500
         }
       ]
     },

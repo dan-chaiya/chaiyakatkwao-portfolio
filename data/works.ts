@@ -46,6 +46,7 @@ const data = raw as unknown as { hero: ImageFrame; portrait: ImageFrame; works: 
 const ORDER = [
   // Client and professional work
   "live-commerce",
+  "logitech-g",
   "podcast-studio-build",
   "live-studio-os",
   "equipment-loan-system",

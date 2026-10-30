@@ -67,10 +67,18 @@ const EXTRA_ROWS = [
   {
     slug: "live-commerce", title: "Live commerce studio", discipline: "Production", year: "2026",
     credit: "Live Production & Visual Coordinator, Bangkok",
-    statement: "Live commerce broadcasts for Nestlé, Guess, Fitflop, Sunnies, Rojukiss, Dutchie Milk and others.",
+    statement: "Live commerce broadcasts for Nestlé, Guess, Fitflop, Calvin Klein, Dutch Mill, Jung Saem Mool, Misty Mynx, Sunnies, Rojukiss and others.",
     videos: "live-commerce",
+    // New frames go on the end so frame-alt.json's numbered keys stay put.
     sources: pub(...["nestle", "guess", "fitflop", "sunnies", "rojukiss", "dutchmil", "colgate-may", "shop-at-nestle-may",
-      "fn-dairies-may", "dmd-live", "her-hyness", "tokfashion"].map((n) => `images/live-posters/${n}.jpg`)),
+      "fn-dairies-may", "dmd-live", "her-hyness", "tokfashion", "fitflop-kambum-hosts", "fitflop-kambum", "fitflop-milky",
+      "dutchmil-new", "dutchmil-new-close", "calvin-klein", "misty-mynx", "jung-saem-mool"].map((n) => `images/live-posters/${n}.jpg`)),
+  },
+  {
+    slug: "logitech-g", title: "Logitech G stage live", discipline: "Production", year: "2026",
+    credit: "Producer",
+    statement: "A stage live for Logitech G at Aiman Studio. I ran the production and coordinated the client, PM, studio and CG team through to wrap.",
+    sources: pub(...["01", "02", "03", "04"].map((n) => `images/logitech-g/${n}.jpg`)),
   },
   {
     slug: "knack-factory", title: "Knack Factory", discipline: "Photography", year: "2024",
