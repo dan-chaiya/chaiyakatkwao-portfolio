@@ -135,6 +135,9 @@ function parseCuration(md) {
 // CONFIRM lines render without the unconfirmed detail (brief, Content rules).
 function cleanCredit(w) {
   if (w.no === "13") return ""; // that credit belongs to the the101 row, split out below
+  // Dan, 17 Nov 2026: an in-house A/V Engineer at Modal, who built nothing there.
+  // _curation.md still says "Studio build and production"; this wins until it is fixed.
+  if (w.no === "19") return "A/V Engineer, Modal Creative Studio, Bangkok";
   // "(full-time role, ended)" is a note to the builder, not a public credit.
   return w.credit.replace(/ \(source folder "[^"]+"\)$/, "").replace(/ \(full-time role, ended\)$/, "");
 }

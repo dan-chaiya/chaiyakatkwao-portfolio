@@ -11,17 +11,17 @@ Branch `claude/project-thread-vni4fx`, file `data/case-notes.ts`. Answered by Da
 | 3 | Naming Modal, BAKAO, the three shows | They are okay | Kept as written |
 | 4 | BAKAO model release, Knack Factory designers' consent | Yes | Kept as written |
 
-## Still inaccurate elsewhere on the site (proposed, not changed)
+## Modal lines fixed elsewhere on the site
 
-Three live lines still claim a build or design role at Modal. They sit outside this draft, so I left them for Dan's yes.
+Dan said "fix them all" on 17 Nov 2026. All three are changed on this branch.
 
-| Where | Now | Proposed |
+| Where | Was | Now |
 |---|---|---|
 | Podcast studio credit (`data/works.json` line 765, from `New/_curation.md`) | Studio build and production, Modal Creative Studio, Bangkok | A/V Engineer, Modal Creative Studio, Bangkok |
 | CV, Modal first point (`app/(v2)/cv/page.tsx` line 51) | Designed and ran the studio's multi-camera podcast set… | Ran the studio's multi-camera podcast set… |
 | /chat profile (`lib/system-prompt.ts`) | "You designed and ran…"; "Studio design and live production systems"; "Creative Producer / AV Engineer"; "The job was to build a machine…" | "You ran…"; "Live production for an ongoing slate…"; "A/V Engineer"; drop the build line |
 
-The credit should also change in `New/_curation.md`, or the next run of `scripts/import-assets.mjs` writes the old line back.
+`New/_curation.md` is not in the repo, so `cleanCredit()` in `scripts/import-assets.mjs` now forces the new credit for work 19. Correct `_curation.md` on Dan's machine when convenient, then the override can go.
 
 ## Not drafted, on purpose
 
