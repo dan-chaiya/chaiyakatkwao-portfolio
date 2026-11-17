@@ -168,6 +168,11 @@
   max-height: 50svh; overflow-y: auto;
 }
 .v2-viewer__info p { margin: 0; font-size: 14px; line-height: 1.5; }
+.v2-viewer__info p + p { margin-top: 8px; }
+/* Brief-to-handover notes: a catalogue entry's fields, set like the credits' dt. */
+.v2-viewer__note { margin-top: 14px; }
+.v2-viewer__info > .v2-viewer__note:first-child { margin-top: 0; }
+.v2-viewer__note h2 { margin: 0 0 4px; font-weight: 400; color: var(--ink-soft); }
 
 .v2-viewer__strip {
   position: absolute; left: 0; right: 0; bottom: 18px; z-index: 3;

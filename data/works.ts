@@ -4,6 +4,7 @@
 
 import raw from "./works.json";
 import frameAlt from "./frame-alt.json";
+import { caseNotes, type CaseNote } from "./case-notes";
 
 export const DISCIPLINES = ["Photography", "Art", "Production", "Systems"] as const;
 export type Discipline = (typeof DISCIPLINES)[number];
@@ -35,6 +36,8 @@ export type Work = {
   frames: Frame[];
   /** Text-only rows that live elsewhere on the site (Systems → /systems#case). */
   href?: string;
+  /** Brief-to-handover notes from case-notes.ts, shown in the Info panel. */
+  notes?: CaseNote[];
 };
 
 const data = raw as unknown as { hero: ImageFrame; portrait: ImageFrame; works: Omit<Work, "no">[] };
@@ -83,7 +86,7 @@ export const portrait = data.portrait;
 /** Numbers run 001… in display order with no gaps, so a withdrawn work leaves none. */
 export const works: Work[] = [...data.works]
   .sort((a, b) => rank(a.slug) - rank(b.slug))
-  .map((w, i) => ({ ...w, no: String(i + 1).padStart(3, "0") }));
+  .map((w, i) => ({ ...w, no: String(i + 1).padStart(3, "0"), ...(caseNotes[w.slug] ? { notes: caseNotes[w.slug] } : {}) }));
 
 /** Text-only rows (no frames yet) have no project page. */
 export const hasPage = (w: Work) => w.frames.length > 0;

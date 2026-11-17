@@ -140,6 +140,7 @@ export default function Viewer({ work }: { work: Work }) {
   }, [i, work]);
 
   const frame = work.frames[i];
+  const hasInfo = Boolean(work.statement || work.notes?.length);
 
   return (
     <>
@@ -189,16 +190,24 @@ export default function Viewer({ work }: { work: Work }) {
               </>
             )}
           </dl>
-          {work.statement && (
+          {hasInfo && (
             <button type="button" className="v2-viewer__toggle" aria-expanded={info} aria-controls="work-info" onClick={() => setInfo((v) => !v)}>
               {info ? "Close" : "Info"}
             </button>
           )}
         </aside>
 
-        {work.statement && (
+        {hasInfo && (
           <div id="work-info" className="v2-viewer__info" hidden={!info}>
-            <p>{work.statement}</p>
+            {work.statement && <p>{work.statement}</p>}
+            {work.notes?.map(([head, paras]) => (
+              <section key={head} className="v2-viewer__note">
+                <h2 className="v2-mono">{head}</h2>
+                {paras.map((t) => (
+                  <p key={t}>{t}</p>
+                ))}
+              </section>
+            ))}
           </div>
         )}
 
