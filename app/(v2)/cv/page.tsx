@@ -48,7 +48,7 @@ const experience = [
     location: "Bangkok",
     period: "Jun 2025–Jan 2026",
     points: [
-      "Designed and ran the studio's multi-camera podcast set: camera switching, audio routing, lighting and recording",
+      "Ran the studio's multi-camera podcast set: camera switching, audio routing, lighting and recording",
       "Produced three long-form shows, Built From Scratch, Grapple Asia and The Rise of Intelligence, from guest coordination to final delivery",
       "Wrote the SOPs and troubleshooting guides the team runs recurring shows from",
     ],
