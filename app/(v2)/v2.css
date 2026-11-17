@@ -196,6 +196,10 @@
 .v2-info__list { list-style: none; margin: 0; padding: 0; }
 .v2-info__list li { display: grid; grid-template-columns: 6.5em 1fr; gap: 12px; padding: 6px 0; border-top: 1px solid var(--rule); }
 .v2-info__list li:last-child { border-bottom: 1px solid var(--rule); }
+.v2-info__service-title { font-weight: 500; }
+.v2-info__service-summary { display: block; color: var(--ink-soft); margin-top: 2px; max-width: 62ch; }
+.v2-info__note { margin: 10px 0 0; color: var(--ink-soft); max-width: 62ch; }
+.v2-info h2#services { scroll-margin-top: 72px; }
 .v2-info__contact { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
 .v2-info__contact a { text-decoration: underline; text-underline-offset: 3px; }
 /* width: 100% — with align-self: start the figure shrank to the photo, which has no width

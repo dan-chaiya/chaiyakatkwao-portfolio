@@ -3,12 +3,13 @@ import Header from "@/components/v2/Header";
 import Clock from "@/components/v2/Clock";
 import Picture from "@/components/v2/Picture";
 import { EXHIBITIONS } from "@/data/exhibitions";
+import { SERVICES, SERVICES_TERMS } from "@/data/services";
 import { portrait, works } from "@/data/works";
 import { INSTAGRAM_URL, pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Information",
-  description: "Chaiya Katkwao, photographer, artist and producer in Bangkok. Credits, exhibitions and contact.",
+  description: "Chaiya Katkwao, photographer, artist and producer in Bangkok. Credits, exhibitions, services and contact.",
   path: "/information",
 });
 
@@ -48,6 +49,23 @@ export default function InformationPage() {
                 </li>
               ))}
             </ul>
+          </section>
+
+          {/* Freelance Creative Producer work, set like the lists above it: numbered, terse, no prices. */}
+          <section aria-labelledby="services">
+            <h2 id="services">Services</h2>
+            <ul className="v2-info__list v2-info__services">
+              {SERVICES.map((s) => (
+                <li key={s.number}>
+                  <span className="v2-mono">{s.number}</span>
+                  <span>
+                    <span className="v2-info__service-title">{s.title}</span>, {s.terms.toLowerCase()}
+                    <span className="v2-info__service-summary">{s.summary}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="v2-info__note">{SERVICES_TERMS}</p>
           </section>
 
           <section aria-labelledby="contact">
