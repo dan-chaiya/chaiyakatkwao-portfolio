@@ -62,3 +62,8 @@ next-env.d.ts
 
 # originals for scripts/import-assets.mjs: large, private, never committed
 /New
+
+# Local working files, never committed
+/systems-page-redacted.md
+/capture-references.mjs
+/references/
