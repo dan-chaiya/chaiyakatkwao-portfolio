@@ -39,8 +39,11 @@ function FrameView({ frame, work, index }: { frame: Frame; work: Work; index: nu
     const videoH = `min(${HEIGHTS[index % HEIGHTS.length]}svh, var(--stage-h) - 28px)`;
     return <LoopingVideo key={frame.poster} frame={frame} style={{ maxHeight: videoH, maxWidth: maxW, aspectRatio: `${frame.w} / ${frame.h}` }} />;
   }
+  // Sized like a photograph: the same height step and the same caps, as 16:9 with its
+  // caption line (30px) underneath. Without a width of its own it shrank to ~260px.
+  const ytW = `min(100%, ${work.maxEdge}px, (${maxH} - 30px) * 16 / 9)`;
   return (
-    <div className="v2-viewer__youtube">
+    <div className="v2-viewer__youtube" style={{ width: ytW }}>
       <YouTubeEmbed id={frame.id} title={frame.title} />
       <p className="v2-viewer__caption">{frame.title}</p>
     </div>
@@ -140,6 +143,7 @@ export default function Viewer({ work }: { work: Work }) {
   }, [i, work]);
 
   const frame = work.frames[i];
+  const hasInfo = Boolean(work.statement || work.notes?.length);
 
   return (
     <>
@@ -189,16 +193,24 @@ export default function Viewer({ work }: { work: Work }) {
               </>
             )}
           </dl>
-          {work.statement && (
+          {hasInfo && (
             <button type="button" className="v2-viewer__toggle" aria-expanded={info} aria-controls="work-info" onClick={() => setInfo((v) => !v)}>
               {info ? "Close" : "Info"}
             </button>
           )}
         </aside>
 
-        {work.statement && (
+        {hasInfo && (
           <div id="work-info" className="v2-viewer__info" hidden={!info}>
-            <p>{work.statement}</p>
+            {work.statement && <p>{work.statement}</p>}
+            {work.notes?.map(([head, paras]) => (
+              <section key={head} className="v2-viewer__note">
+                <h2 className="v2-mono">{head}</h2>
+                {paras.map((t) => (
+                  <p key={t}>{t}</p>
+                ))}
+              </section>
+            ))}
           </div>
         )}
 

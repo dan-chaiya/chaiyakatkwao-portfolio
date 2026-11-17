@@ -146,7 +146,8 @@
 .v2-viewer__frame { display: grid; place-items: center; animation: v2-fade 260ms linear backwards; }
 .v2-viewer__media { display: block; width: auto; height: auto; object-fit: contain; }
 /* 16:9 plus the caption line (about 30px) has to fit the stage both ways. */
-.v2-viewer__youtube { width: min(100%, 1100px, (var(--stage-h) - 30px) * 16 / 9); }
+/* The frame spans the stage so the embed's width (set in Viewer) has something to be a share of. */
+.v2-viewer__frame:has(> .v2-viewer__youtube) { width: 100%; }
 .v2-viewer__caption { margin: 8px 0 0; color: var(--ink-soft); }
 .v2-viewer__hit { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 1; }
 .v2-viewer__hit--prev { left: 0; cursor: w-resize; }
@@ -168,6 +169,11 @@
   max-height: 50svh; overflow-y: auto;
 }
 .v2-viewer__info p { margin: 0; font-size: 14px; line-height: 1.5; }
+.v2-viewer__info p + p { margin-top: 8px; }
+/* Brief-to-handover notes: a catalogue entry's fields, set like the credits' dt. */
+.v2-viewer__note { margin-top: 14px; }
+.v2-viewer__info > .v2-viewer__note:first-child { margin-top: 0; }
+.v2-viewer__note h2 { margin: 0 0 4px; font-weight: 400; color: var(--ink-soft); }
 
 .v2-viewer__strip {
   position: absolute; left: 0; right: 0; bottom: 18px; z-index: 3;
