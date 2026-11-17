@@ -85,8 +85,8 @@ const CASES: Case[] = [
       ["Role", ["Sole designer and developer. Private commission, two users."]],
       ["Problem", ["Two people wanted a single shared record of their life together that would outlive whatever platform held it. Consumer apps make that record someone else’s asset, and none of them promise you can get it back intact."]],
       ["What I built", ["A private two-person archive: entries with photographs, tags and colour labels, a timeline, and an on-this-day view. One page, installed to the home screen. Cloudflare Workers with D1 and R2, behind Access allow-listing exactly two addresses."]],
-      ["Constraints", ["One of the two users is non-technical and had to manage on his own Android handset without instruction. Exactly one runtime dependency was permitted. The backup was not allowed to sit with the same vendor as the data."]],
-      ["Outcome", ["Deployed August 2026 with a nightly backup to a different vendor and a thirty-day retention sweep. The acceptance test was not a passing suite; it was the non-technical user creating a memory unassisted, on his own phone. He did."]],
+      ["Constraints", ["One of the two users is non-technical and had to manage on their own Android handset without instruction. Exactly one runtime dependency was permitted. The backup was not allowed to sit with the same vendor as the data."]],
+      ["Outcome", ["Deployed August 2026 with a nightly backup to a different vendor and a thirty-day retention sweep. The acceptance test was not a passing suite; it was the non-technical user creating a memory unassisted, on their own phone. They did."]],
     ],
     tables: [
       {
